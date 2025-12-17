@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Ticket, Briefcase, Calendar, MapPin, Sparkles, Star } from "lucide-react";
+import { ArrowRight, Ticket, Briefcase, Calendar, Sparkles, Star, Users, MapPin } from "lucide-react";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { Spotlight } from "@/components/ui/spotlight";
 import { GridPattern } from "@/components/ui/grid-pattern";
+import { SparklesText } from "@/components/ui/sparkles-text";
 
 const eventImages = [
   {
@@ -58,9 +59,268 @@ function FloatingSparkle({ delay, x, y }: { delay: number; x: string; y: string 
   );
 }
 
-export function LandingHero() {
+// Animation variants for mobile hero
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+    },
+  },
+};
+
+const imageContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const imageVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 40 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+    },
+  },
+};
+
+// ============================================
+// MOBILE HERO - Simpler, cleaner design
+// ============================================
+function MobileHero() {
+  const stats = [
+    { value: '10K+', label: 'Attendees', icon: <Users className="h-4 w-4 text-orange-500" /> },
+    { value: 'March 15-16', label: 'Next Event', icon: <Calendar className="h-4 w-4 text-orange-500" /> },
+    { value: 'Cyprus', label: 'Location', icon: <MapPin className="h-4 w-4 text-orange-500" /> },
+  ];
+
   return (
-    <section className="relative min-h-screen w-full overflow-x-hidden overflow-y-hidden md:overflow-y-visible bg-zinc-50">
+    <section className="relative w-full overflow-hidden bg-zinc-50 py-8 pt-20 md:hidden">
+      {/* Background Effects */}
+      <Spotlight className="z-10" fill="#f97316" />
+      <GridPattern
+        className="absolute inset-0 z-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,white,transparent_80%)]"
+        width={50}
+        height={50}
+        numSquares={40}
+        maxOpacity={0.15}
+      />
+      
+      {/* Glow Effects */}
+      <div className="absolute -left-20 top-20 h-[300px] w-[300px] rounded-full bg-orange-300/30 blur-[100px]" />
+      <div className="absolute -right-20 bottom-20 h-[300px] w-[300px] rounded-full bg-rose-300/30 blur-[100px]" />
+
+      {/* Subtle sparkles for mobile */}
+      <FloatingSparkle delay={0} x="15%" y="15%" />
+      <FloatingSparkle delay={1} x="85%" y="20%" />
+
+      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Text Content */}
+        <motion.div
+          className="flex flex-col items-center text-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
+              <Sparkles className="h-4 w-4" />
+              <span>Cyprus Event Experiences</span>
+            </div>
+          </motion.div>
+
+          {/* Title with rotating word */}
+          <motion.div variants={itemVariants}>
+            <h1 className="text-3xl font-bold tracking-tight leading-tight text-slate-900 sm:text-4xl">
+              <span className="flex w-full items-baseline justify-center whitespace-nowrap">
+                <span className="shrink-0">Create&nbsp;</span>
+                {/* Reserve space so only the rotating word animates */}
+                <span className="inline-flex min-w-[9ch] items-baseline justify-start overflow-visible">
+                  <TextRotate
+                    texts={["Legendary", "Memorable", "Spectacular", "Fantastic"]}
+                    mainClassName="inline-flex items-baseline justify-start whitespace-nowrap [&>div]:overflow-visible"
+                    elementLevelClassName="bg-gradient-to-r from-orange-500 via-rose-500 to-red-500 bg-clip-text text-transparent"
+                    staggerDuration={0.03}
+                    staggerFrom="last"
+                    rotationInterval={2500}
+                    transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  />
+                </span>
+              </span>
+              <span className="block mt-1">Moments</span>
+            </h1>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.p 
+            className="mt-4 max-w-lg text-base text-slate-600"
+            variants={itemVariants}
+          >
+            From electrifying Planitario nights to epic student adventures, 
+            we transform your vision into extraordinary experiences across Cyprus.
+          </motion.p>
+
+          {/* Event Info Badge */}
+          <motion.div variants={itemVariants} className="mt-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 backdrop-blur-sm px-3 py-1.5 text-xs shadow-lg">
+              <span className="text-slate-500">Next Event</span>
+              <div className="h-3 w-px bg-slate-200" />
+              <span className="font-semibold text-slate-900">Planetarium Cyprus</span>
+            </div>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div 
+            className="mt-6 flex flex-col gap-3 w-full max-w-xs"
+            variants={itemVariants}
+          >
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3.5 text-base font-semibold text-white shadow-xl shadow-orange-500/25"
+            >
+              <Ticket className="h-5 w-5" />
+              <span>Get Tickets</span>
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-900 bg-white px-6 py-3.5 text-base font-semibold text-slate-900"
+            >
+              <Briefcase className="h-5 w-5" />
+              <span>Business with Us</span>
+            </motion.button>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div 
+            className="mt-8 flex flex-wrap justify-center gap-6"
+            variants={itemVariants}
+          >
+            {stats.map((stat, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-100 to-rose-100">
+                  {stat.icon}
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-slate-900">{stat.value}</p>
+                  <p className="text-xs text-slate-500">{stat.label}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Image Collage */}
+        <motion.div
+          className="relative mt-8 h-[320px] w-full"
+          variants={imageContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {/* Main center image */}
+          <motion.div
+            className="absolute left-1/2 top-0 -translate-x-1/2"
+            variants={imageVariants}
+          >
+            <motion.div
+              className="relative h-44 w-44 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl shadow-slate-300/50"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+            >
+              <img 
+                src={eventImages[0].url} 
+                alt={eventImages[0].alt}
+                className="h-full w-full rounded-xl object-cover" 
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Left image */}
+          <motion.div
+            className="absolute left-2 top-20"
+            variants={imageVariants}
+          >
+            <motion.div
+              className="relative h-36 w-36 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl shadow-slate-300/50"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
+            >
+              <img 
+                src={eventImages[2].url} 
+                alt={eventImages[2].alt}
+                className="h-full w-full rounded-xl object-cover" 
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Right image */}
+          <motion.div
+            className="absolute right-2 top-16"
+            variants={imageVariants}
+          >
+            <motion.div
+              className="relative h-40 w-40 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl shadow-slate-300/50"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, delay: 1 }}
+            >
+              <img 
+                src={eventImages[3].url} 
+                alt={eventImages[3].alt}
+                className="h-full w-full rounded-xl object-cover" 
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Decorative shapes */}
+          <motion.div
+            className="absolute -top-2 right-1/4 h-12 w-12 rounded-full bg-gradient-to-br from-orange-300/60 to-amber-200/60"
+            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          />
+          <motion.div
+            className="absolute bottom-8 left-1/4 h-8 w-8 rounded-xl bg-gradient-to-br from-rose-300/60 to-pink-200/60"
+            animate={{ rotate: [0, 90, 180, 270, 360] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================
+// DESKTOP HERO - Fancy parallax floating images
+// ============================================
+function DesktopHero() {
+  return (
+    <section className="relative hidden md:block min-h-screen w-full overflow-x-hidden overflow-y-visible bg-zinc-50">
       {/* Spotlight effect */}
       <Spotlight className="z-10" fill="#f97316" />
       
@@ -78,25 +338,27 @@ export function LandingHero() {
       <div className="absolute -right-20 bottom-20 h-[500px] w-[500px] rounded-full bg-rose-300/30 blur-[120px]" />
       <div className="absolute left-1/3 top-1/2 h-[400px] w-[400px] rounded-full bg-amber-200/20 blur-[100px]" />
 
-      {/* Floating sparkles */}
-      <FloatingSparkle delay={0} x="10%" y="20%" />
-      <FloatingSparkle delay={0.5} x="25%" y="35%" />
-      <FloatingSparkle delay={1} x="15%" y="60%" />
-      <FloatingSparkle delay={1.5} x="85%" y="25%" />
-      <FloatingSparkle delay={2} x="75%" y="55%" />
-      <FloatingSparkle delay={2.5} x="90%" y="70%" />
+      {/* Floating sparkles - hidden on mobile, shown on desktop */}
+      <div className="hidden md:block">
+        <FloatingSparkle delay={0} x="10%" y="20%" />
+        <FloatingSparkle delay={0.5} x="25%" y="35%" />
+        <FloatingSparkle delay={1} x="15%" y="60%" />
+        <FloatingSparkle delay={1.5} x="85%" y="25%" />
+        <FloatingSparkle delay={2} x="75%" y="55%" />
+        <FloatingSparkle delay={2.5} x="90%" y="70%" />
+      </div>
 
       {/* Parallax floating images */}
       <Floating sensitivity={-0.5} className="h-full z-20">
         {/* Top left - small */}
         <FloatingElement
           depth={0.5}
-          className="hidden sm:block top-[22%] left-[2%] md:top-[26%] md:left-[5%]"
+          className="top-[26%] left-[5%]"
         >
           <motion.img
             src={eventImages[0].url}
             alt={eventImages[0].alt}
-            className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
+            className="w-28 h-28 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -106,12 +368,12 @@ export function LandingHero() {
         {/* Top left - larger */}
         <FloatingElement
           depth={1}
-          className="top-[10%] left-[6%] sm:top-[8%] sm:left-[10%] md:top-[12%] md:left-[12%]"
+          className="top-[12%] left-[12%]"
         >
           <motion.img
             src={eventImages[1].url}
             alt={eventImages[1].alt}
-            className="w-28 h-20 sm:w-40 sm:h-32 md:w-52 md:h-40 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
+            className="w-52 h-40 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
@@ -121,12 +383,12 @@ export function LandingHero() {
         {/* Bottom left - large square */}
         <FloatingElement
           depth={2}
-          className="top-[80%] left-[-14%] sm:top-[72%] sm:left-[3%] md:top-[68%] md:left-[6%]"
+          className="top-[68%] left-[6%]"
         >
           <motion.img
             src={eventImages[2].url}
             alt={eventImages[2].alt}
-            className="w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
+            className="w-56 h-56 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
@@ -136,12 +398,12 @@ export function LandingHero() {
         {/* Top right - medium */}
         <FloatingElement
           depth={1.5}
-          className="top-[10%] left-[68%] sm:top-[8%] sm:left-[75%] md:top-[10%] md:left-[78%]"
+          className="top-[10%] left-[78%]"
         >
           <motion.img
             src={eventImages[3].url}
             alt={eventImages[3].alt}
-            className="w-28 h-22 sm:w-44 sm:h-36 md:w-56 md:h-44 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
+            className="w-56 h-44 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}
@@ -151,12 +413,12 @@ export function LandingHero() {
         {/* Right middle - small */}
         <FloatingElement
           depth={0.8}
-          className="hidden md:block top-[46%] left-[85%] md:top-[44%] md:left-[88%]"
+          className="top-[44%] left-[88%]"
         >
           <motion.img
             src={eventImages[4].url}
             alt={eventImages[4].alt}
-            className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
+            className="w-32 h-32 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.3 }}
@@ -166,12 +428,12 @@ export function LandingHero() {
         {/* Bottom right - large */}
         <FloatingElement
           depth={1.2}
-          className="top-[78%] left-[72%] sm:top-[70%] sm:left-[72%] md:top-[65%] md:left-[75%]"
+          className="top-[65%] left-[75%]"
         >
           <motion.img
             src={eventImages[5].url}
             alt={eventImages[5].alt}
-            className="w-32 h-32 sm:w-52 sm:h-52 md:w-64 md:h-64 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
+            className="w-64 h-64 object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-200 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5 }}
@@ -180,7 +442,7 @@ export function LandingHero() {
       </Floating>
 
       {/* Main content */}
-      <div className="relative z-30 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pointer-events-none pt-16 md:pt-20">
+      <div className="relative z-30 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pointer-events-none pt-20">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -201,7 +463,7 @@ export function LandingHero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-center"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.12] text-slate-900">
+          <h1 className="text-5xl lg:text-6xl font-bold tracking-tight leading-[1.12] text-slate-900">
             <span className="flex w-full items-baseline justify-center whitespace-nowrap translate-x-1">
               <span className="shrink-0">Create&nbsp;</span>
               {/* Reserve space so only the rotating word animates (Create stays put) */}
@@ -218,13 +480,13 @@ export function LandingHero() {
               </span>
             </span>
           </h1>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mt-1">
+          <h1 className="text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mt-1">
             Moments
           </h1>
         </motion.div>
 
         <motion.p
-          className="mt-6 md:mt-8 max-w-2xl text-center text-base sm:text-lg md:text-xl text-slate-600"
+          className="mt-8 max-w-2xl text-center text-lg md:text-xl text-slate-600"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -254,7 +516,7 @@ export function LandingHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
+          className="mt-12 flex flex-row items-center gap-4 pointer-events-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -283,5 +545,17 @@ export function LandingHero() {
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent z-40" />
     </section>
+  );
+}
+
+// ============================================
+// MAIN EXPORT - Combines both heroes
+// ============================================
+export function LandingHero() {
+  return (
+    <>
+      <MobileHero />
+      <DesktopHero />
+    </>
   );
 }
