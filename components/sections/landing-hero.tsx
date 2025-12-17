@@ -106,210 +106,114 @@ const imageVariants = {
 };
 
 // ============================================
-// MOBILE HERO - Simpler, cleaner design
+// MOBILE HERO - Ultra simple, no heavy animations
 // ============================================
 function MobileHero() {
-  const stats = [
-    { value: '10K+', label: 'Attendees', icon: <Users className="h-4 w-4 text-orange-500" /> },
-    { value: 'March 15-16', label: 'Next Event', icon: <Calendar className="h-4 w-4 text-orange-500" /> },
-    { value: 'Cyprus', label: 'Location', icon: <MapPin className="h-4 w-4 text-orange-500" /> },
-  ];
-
   return (
-    <section className="relative w-full overflow-hidden bg-zinc-50 py-8 pt-20 md:hidden">
-      {/* Background Effects */}
-      <Spotlight className="z-10" fill="#f97316" />
-      <GridPattern
-        className="absolute inset-0 z-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,white,transparent_80%)]"
-        width={50}
-        height={50}
-        numSquares={40}
-        maxOpacity={0.15}
-      />
+    <section className="relative w-full overflow-hidden bg-zinc-50 pb-8 pt-24 md:hidden">
+      {/* Simple gradient background - no animated patterns */}
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-50/50 via-zinc-50 to-zinc-50" />
       
-      {/* Glow Effects */}
-      <div className="absolute -left-20 top-20 h-[300px] w-[300px] rounded-full bg-orange-300/30 blur-[100px]" />
-      <div className="absolute -right-20 bottom-20 h-[300px] w-[300px] rounded-full bg-rose-300/30 blur-[100px]" />
+      {/* Static glow effects - no animations */}
+      <div className="absolute -left-32 top-0 h-64 w-64 rounded-full bg-orange-200/40 blur-3xl" />
+      <div className="absolute -right-32 top-32 h-64 w-64 rounded-full bg-rose-200/40 blur-3xl" />
 
-      {/* Subtle sparkles for mobile */}
-      <FloatingSparkle delay={0} x="15%" y="15%" />
-      <FloatingSparkle delay={1} x="85%" y="20%" />
+      <div className="relative z-20 mx-auto max-w-lg px-5">
+        {/* Badge */}
+        <div className="mb-5 flex justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-3 py-1.5 text-xs font-medium text-orange-600 shadow-sm">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>Cyprus Event Experiences</span>
+          </div>
+        </div>
 
-      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Text Content */}
-        <motion.div
-          className="flex flex-col items-center text-center"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {/* Badge */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
-              <Sparkles className="h-4 w-4" />
-              <span>Cyprus Event Experiences</span>
-            </div>
-          </motion.div>
-
-          {/* Title with rotating word */}
-          <motion.div variants={itemVariants}>
-            <h1 className="text-3xl font-bold tracking-tight leading-tight text-slate-900 sm:text-4xl">
-              <span className="flex w-full items-baseline justify-center whitespace-nowrap">
-                <span className="shrink-0">Create&nbsp;</span>
-                {/* Reserve space so only the rotating word animates */}
-                <span className="inline-flex min-w-[9ch] items-baseline justify-start overflow-visible">
-                  <TextRotate
-                    texts={["Legendary", "Memorable", "Spectacular", "Fantastic"]}
-                    mainClassName="inline-flex items-baseline justify-start whitespace-nowrap [&>div]:overflow-visible"
-                    elementLevelClassName="bg-gradient-to-r from-orange-500 via-rose-500 to-red-500 bg-clip-text text-transparent"
-                    staggerDuration={0.03}
-                    staggerFrom="last"
-                    rotationInterval={2500}
-                    transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                  />
-                </span>
+        {/* Title with rotating word */}
+        <div className="text-center">
+          <h1 className="text-[1.75rem] font-bold tracking-tight leading-tight text-slate-900">
+            <span className="flex w-full items-baseline justify-center whitespace-nowrap">
+              <span className="shrink-0">Create&nbsp;</span>
+              <span className="inline-flex min-w-[8ch] items-baseline justify-start overflow-visible">
+                <TextRotate
+                  texts={["Legendary", "Memorable", "Spectacular", "Fantastic"]}
+                  mainClassName="inline-flex items-baseline justify-start whitespace-nowrap [&>div]:overflow-visible"
+                  elementLevelClassName="bg-gradient-to-r from-orange-500 via-rose-500 to-red-500 bg-clip-text text-transparent"
+                  staggerDuration={0.02}
+                  staggerFrom="last"
+                  rotationInterval={3000}
+                  transition={{ type: "spring", damping: 35, stiffness: 300 }}
+                />
               </span>
-              <span className="block mt-1">Moments</span>
-            </h1>
-          </motion.div>
+            </span>
+            <span className="block">Moments</span>
+          </h1>
+        </div>
 
-          {/* Subtitle */}
-          <motion.p 
-            className="mt-4 max-w-lg text-base text-slate-600"
-            variants={itemVariants}
-          >
-            From electrifying Planitario nights to epic student adventures, 
-            we transform your vision into extraordinary experiences across Cyprus.
-          </motion.p>
+        {/* Subtitle */}
+        <p className="mt-4 text-center text-sm text-slate-600 leading-relaxed">
+          From electrifying Planitario nights to epic student adventures, 
+          we transform your vision into extraordinary experiences.
+        </p>
 
-          {/* Event Info Badge */}
-          <motion.div variants={itemVariants} className="mt-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 backdrop-blur-sm px-3 py-1.5 text-xs shadow-lg">
-              <span className="text-slate-500">Next Event</span>
-              <div className="h-3 w-px bg-slate-200" />
-              <span className="font-semibold text-slate-900">Planetarium Cyprus</span>
-            </div>
-          </motion.div>
+        {/* Event Info Badge */}
+        <div className="mt-4 flex justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs shadow-sm">
+            <Calendar className="h-3.5 w-3.5 text-orange-500" />
+            <span className="text-slate-500">Next:</span>
+            <span className="font-semibold text-slate-900">Planetarium Cyprus</span>
+            <span className="text-slate-400">•</span>
+            <span className="text-slate-600">March 15-16</span>
+          </div>
+        </div>
 
-          {/* CTA Buttons */}
-          <motion.div 
-            className="mt-6 flex flex-col gap-3 w-full max-w-xs"
-            variants={itemVariants}
-          >
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3.5 text-base font-semibold text-white shadow-xl shadow-orange-500/25"
-            >
-              <Ticket className="h-5 w-5" />
-              <span>Get Tickets</span>
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-900 bg-white px-6 py-3.5 text-base font-semibold text-slate-900"
-            >
-              <Briefcase className="h-5 w-5" />
-              <span>Business with Us</span>
-            </motion.button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div 
-            className="mt-8 flex flex-wrap justify-center gap-6"
-            variants={itemVariants}
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-100 to-rose-100">
-                  {stat.icon}
-                </div>
-                <div className="text-left">
-                  <p className="text-sm font-bold text-slate-900">{stat.value}</p>
-                  <p className="text-xs text-slate-500">{stat.label}</p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Image Collage */}
-        <motion.div
-          className="relative mt-8 h-[320px] w-full"
-          variants={imageContainerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {/* Main center image */}
-          <motion.div
-            className="absolute left-1/2 top-0 -translate-x-1/2"
-            variants={imageVariants}
-          >
-            <motion.div
-              className="relative h-44 w-44 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl shadow-slate-300/50"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
+        {/* Single Featured Image - NO ANIMATIONS */}
+        <div className="mt-6 flex justify-center">
+          <div className="relative">
+            <div className="overflow-hidden rounded-2xl bg-white p-1.5 shadow-xl shadow-slate-200/60">
               <img 
                 src={eventImages[0].url} 
                 alt={eventImages[0].alt}
-                className="h-full w-full rounded-xl object-cover" 
+                className="h-44 w-72 rounded-xl object-cover"
               />
-            </motion.div>
-          </motion.div>
+            </div>
+            {/* Small accent badge on image */}
+            <div className="absolute -bottom-2 -right-2 flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-medium shadow-lg">
+              <MapPin className="h-3 w-3 text-orange-500" />
+              <span className="text-slate-700">Cyprus</span>
+            </div>
+          </div>
+        </div>
 
-          {/* Left image */}
-          <motion.div
-            className="absolute left-2 top-20"
-            variants={imageVariants}
-          >
-            <motion.div
-              className="relative h-36 w-36 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl shadow-slate-300/50"
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
-            >
-              <img 
-                src={eventImages[2].url} 
-                alt={eventImages[2].alt}
-                className="h-full w-full rounded-xl object-cover" 
-              />
-            </motion.div>
-          </motion.div>
+        {/* CTA Buttons */}
+        <div className="mt-6 flex flex-col gap-2.5">
+          <button className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 active:scale-[0.98] transition-transform">
+            <Ticket className="h-4 w-4" />
+            <span>Get Tickets</span>
+            <ArrowRight className="h-4 w-4" />
+          </button>
 
-          {/* Right image */}
-          <motion.div
-            className="absolute right-2 top-16"
-            variants={imageVariants}
-          >
-            <motion.div
-              className="relative h-40 w-40 overflow-hidden rounded-2xl bg-white p-1.5 shadow-2xl shadow-slate-300/50"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4.5, repeat: Infinity, delay: 1 }}
-            >
-              <img 
-                src={eventImages[3].url} 
-                alt={eventImages[3].alt}
-                className="h-full w-full rounded-xl object-cover" 
-              />
-            </motion.div>
-          </motion.div>
+          <button className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-800 bg-white px-6 py-3 text-sm font-semibold text-slate-800 active:scale-[0.98] transition-transform">
+            <Briefcase className="h-4 w-4" />
+            <span>Business with Us</span>
+          </button>
+        </div>
 
-          {/* Decorative shapes */}
-          <motion.div
-            className="absolute -top-2 right-1/4 h-12 w-12 rounded-full bg-gradient-to-br from-orange-300/60 to-amber-200/60"
-            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute bottom-8 left-1/4 h-8 w-8 rounded-xl bg-gradient-to-br from-rose-300/60 to-pink-200/60"
-            animate={{ rotate: [0, 90, 180, 270, 360] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          />
-        </motion.div>
+        {/* Simple Stats Row */}
+        <div className="mt-8 flex justify-center gap-6">
+          <div className="text-center">
+            <p className="text-lg font-bold text-slate-900">10K+</p>
+            <p className="text-xs text-slate-500">Attendees</p>
+          </div>
+          <div className="h-10 w-px bg-slate-200" />
+          <div className="text-center">
+            <p className="text-lg font-bold text-slate-900">50+</p>
+            <p className="text-xs text-slate-500">Events</p>
+          </div>
+          <div className="h-10 w-px bg-slate-200" />
+          <div className="text-center">
+            <p className="text-lg font-bold text-slate-900">5★</p>
+            <p className="text-xs text-slate-500">Rating</p>
+          </div>
+        </div>
       </div>
     </section>
   );
