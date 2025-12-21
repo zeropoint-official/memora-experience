@@ -172,8 +172,8 @@ export function AboutSection() {
             className="text-base sm:text-lg text-slate-600 leading-relaxed"
           >
             Born from a love for bringing people together, Memora Experience is Cyprus's 
-            premier event company. From the electric energy of Planitario nights to 
-            unforgettable student adventures across Europe, we turn your wildest visions 
+            premier event company. From legendary Kratiki Ekthesi nights to 
+            unforgettable adventures across the island, we turn your wildest visions 
             into reality.
           </motion.p>
         </div>
@@ -232,8 +232,8 @@ export function AboutSection() {
         </motion.div>
 
         {/* Story Section */}
-        <motion.div variants={itemVariants} className="mt-20 lg:mt-24">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+        <motion.div variants={itemVariants} className="mt-16 lg:mt-24">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
             {/* Image Collage */}
             <motion.div
               variants={itemVariants}
@@ -243,33 +243,33 @@ export function AboutSection() {
                 {/* Main image */}
                 <div className="relative overflow-hidden rounded-3xl shadow-2xl shadow-slate-200/60">
                   <img
-                    src="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
+                    src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
                     alt="Memora Experience Event"
-                    className="w-full h-72 sm:h-80 lg:h-96 object-cover"
+                    className="w-full h-64 sm:h-80 lg:h-96 object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   
                   {/* Floating badge */}
-                  <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-sm px-4 py-2 shadow-lg">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500">
-                      <Zap className="h-4 w-4 text-white" />
+                  <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg">
+                    <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500">
+                      <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Featured Event</p>
-                      <p className="text-sm font-semibold text-slate-900">Planitario Cyprus</p>
+                      <p className="text-[10px] sm:text-xs text-slate-500">Cyprus Events</p>
+                      <p className="text-xs sm:text-sm font-semibold text-slate-900">Memora Experience</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Secondary image - floating */}
+                {/* Secondary image - floating - hidden on mobile to prevent overlap */}
                 <motion.div
                   variants={itemVariants}
-                  className="absolute -bottom-6 -right-4 sm:-right-8 w-36 sm:w-44 overflow-hidden rounded-2xl border-4 border-white shadow-xl"
+                  className="hidden sm:block absolute -bottom-6 -right-8 w-44 overflow-hidden rounded-2xl border-4 border-white shadow-xl"
                 >
                   <img
-                    src="/Content/planitatio/Cyprus Planetarium Lobby.jpg"
+                    src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400&h=300&fit=crop"
                     alt="Event atmosphere"
-                    className="h-24 sm:h-28 w-full object-cover"
+                    className="h-28 w-full object-cover"
                   />
                 </motion.div>
 
@@ -288,9 +288,8 @@ export function AboutSection() {
               <p className="mb-6 text-slate-600 leading-relaxed">
                 What started as a passion project among friends has grown into Cyprus's 
                 most exciting event experience company. We believe every gathering—whether 
-                it's a wild night under the stars at Planitario, a life-changing student 
-                trip to Barcelona, or a polished corporate conference—deserves to be 
-                nothing short of extraordinary.
+                it's a legendary night at Kratiki Ekthesi, an epic boat party in Ayia Napa, 
+                or a Troodos mountain adventure—deserves to be nothing short of extraordinary.
               </p>
               <p className="mb-8 text-slate-600 leading-relaxed">
                 Our team combines local expertise with international flair, connecting 

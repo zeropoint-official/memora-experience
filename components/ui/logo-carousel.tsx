@@ -42,7 +42,7 @@ export function LogoCarousel({
       <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
       <motion.div
-        className="flex items-center gap-16"
+        className="flex items-center gap-8 sm:gap-12 md:gap-16"
         animate={{
           x: direction === "left" ? [0, -100 * logos.length + "%"] : [-100 * logos.length + "%", 0],
         }}
@@ -101,7 +101,7 @@ export function LogoCarouselCSS({
       <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
       <div
-        className="flex items-center gap-16 w-max"
+        className="flex items-center gap-8 sm:gap-12 md:gap-16 w-max"
         style={{
           animation: `scroll-${direction} ${speed}s linear infinite`,
           animationPlayState: isHovered ? "paused" : "running",

@@ -110,9 +110,10 @@ export function CTASection() {
         {/* Headline */}
         <motion.h2
           variants={itemVariants}
-          className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight"
+          className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight"
         >
-          Let's Create Your Next
+          <span className="hidden sm:inline">Let's Create Your Next</span>
+          <span className="sm:hidden">Create Your Next</span>
           <br />
           <span className="relative inline-block">
             Unforgettable Memory
