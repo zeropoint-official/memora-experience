@@ -83,6 +83,36 @@ const stats = [
   },
 ];
 
+// Animation variants for staggered effects
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
+};
+
+const statVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
+};
+
 
 export function AboutSection() {
   const sectionRef = useRef(null);
@@ -109,13 +139,16 @@ export function AboutSection() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+      >
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
+            variants={itemVariants}
             className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-medium text-orange-600"
           >
             <Sparkles className="h-4 w-4" />
@@ -123,9 +156,7 @@ export function AboutSection() {
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            variants={itemVariants}
             className="mb-5 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl"
           >
             Crafting{" "}
@@ -137,9 +168,7 @@ export function AboutSection() {
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            variants={itemVariants}
             className="text-base sm:text-lg text-slate-600 leading-relaxed"
           >
             Born from a love for bringing people together, Memora Experience is Cyprus's 
@@ -151,9 +180,7 @@ export function AboutSection() {
 
         {/* Stats - Mobile Compact Card */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          variants={itemVariants}
           className="mt-10 md:hidden"
         >
           <div className="relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-4 shadow-lg shadow-slate-100/50">
@@ -175,17 +202,13 @@ export function AboutSection() {
 
         {/* Stats Grid - Desktop */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          variants={containerVariants}
           className="mt-14 hidden md:grid grid-cols-2 gap-6 lg:grid-cols-4"
         >
-          {stats.map((stat, index) => (
+          {stats.map((stat) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+              variants={statVariants}
               className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-6 shadow-lg shadow-slate-100/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-100/50 hover:border-orange-200"
             >
               {/* Icon */}
@@ -209,13 +232,11 @@ export function AboutSection() {
         </motion.div>
 
         {/* Story Section */}
-        <div className="mt-20 lg:mt-24">
+        <motion.div variants={itemVariants} className="mt-20 lg:mt-24">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             {/* Image Collage */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              variants={itemVariants}
               className="relative"
             >
               <div className="relative mx-auto max-w-lg lg:max-w-none">
@@ -242,9 +263,7 @@ export function AboutSection() {
 
                 {/* Secondary image - floating */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.6 }}
+                  variants={itemVariants}
                   className="absolute -bottom-6 -right-4 sm:-right-8 w-36 sm:w-44 overflow-hidden rounded-2xl border-4 border-white shadow-xl"
                 >
                   <img
@@ -261,9 +280,7 @@ export function AboutSection() {
 
             {/* Content */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              variants={itemVariants}
             >
               <h3 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">
                 Our Story
@@ -302,9 +319,9 @@ export function AboutSection() {
               </div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

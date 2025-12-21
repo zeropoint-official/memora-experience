@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { Header1 } from "@/components/ui/header";
+import { Footer } from "@/components/ui/footer";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -30,11 +31,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-white" style={{ colorScheme: 'light' }}>
       <body
-        className={`${spaceGrotesk.variable} ${dmSans.variable} font-sans antialiased bg-white`}
-        style={{ backgroundColor: '#ffffff' }}
+        className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased bg-white`}
+        style={{ 
+          backgroundColor: '#ffffff',
+          fontFamily: 'var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif'
+        }}
       >
         <Header1 />
         {children}
+        <Footer />
       </body>
     </html>
   );
