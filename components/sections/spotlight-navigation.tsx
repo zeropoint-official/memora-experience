@@ -90,7 +90,7 @@ function PlanitarioHeroCard() {
       <a href="/planitario" className="block group">
         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
           {/* Background Image */}
-          <div className="relative h-[45vh] min-h-[280px] max-h-[400px] sm:h-[55vh] sm:min-h-[380px] sm:max-h-[550px] md:h-[50vh]">
+          <div className="relative h-[50vh] min-h-[320px] max-h-[450px] sm:h-[55vh] sm:min-h-[380px] sm:max-h-[550px] md:h-[50vh]">
             <img
               src="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
               alt="Cyprus Planetarium"
@@ -172,51 +172,51 @@ function PlanitarioHeroCard() {
                 <CountdownTimer targetDate={eventDate} />
               </motion.div>
 
-              {/* Title & Description */}
+              {/* Title */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.6 }}
               >
-                <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 tracking-tight">
+                <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3 tracking-tight">
                   Planitario
                   <span className="bg-gradient-to-r from-purple-300 to-cyan-300 bg-clip-text text-transparent">
                     {" "}
                     2025
                   </span>
                 </h3>
-                <p className="text-white/70 text-xs sm:text-base max-w-md leading-relaxed hidden sm:block">
-                  Journey through the cosmos at Cyprus's most immersive
-                  planetarium experience. A night of wonder awaits.
-                </p>
               </motion.div>
 
-              {/* Meta & CTA */}
+              {/* Date & Location - Stacked below title */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.65 }}
+                className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/80"
+              >
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">March 15-16, 2025</span>
+                  <span className="sm:hidden">Mar 15-16</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Nicosia, Cyprus</span>
+                  <span className="sm:hidden">Cyprus</span>
+                </span>
+              </motion.div>
+
+              {/* CTA Button - Below date/location */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.7 }}
-                className="flex flex-row items-center justify-between gap-3 sm:gap-4 pt-1 sm:pt-2"
+                className="pt-2 sm:pt-3"
               >
-                <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/60">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="hidden sm:inline">March 15-16, 2025</span>
-                    <span className="sm:hidden">Mar 15-16</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
-                    <span className="hidden sm:inline">Nicosia, Cyprus</span>
-                    <span className="sm:hidden">Cyprus</span>
-                  </span>
-                </div>
-
-                <div>
-                  <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-white px-4 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-semibold text-slate-900 shadow-xl transition-all group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-purple-500/25">
-                    Get Tickets
-                    <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-slate-900 shadow-xl transition-all group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-purple-500/25">
+                  Get Tickets
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
               </motion.div>
             </div>
           </div>
@@ -249,8 +249,8 @@ function CarouselCard({
   badge,
 }: CarouselCardProps) {
   return (
-    <a href={href} className="block group flex-shrink-0 w-[85vw] sm:w-[340px]">
-      <div className="relative overflow-hidden rounded-2xl h-[280px] sm:h-[320px]">
+    <a href={href} className="block group flex-shrink-0 w-[75vw] sm:w-[300px]">
+      <div className="relative overflow-hidden rounded-xl h-[200px] sm:h-[240px]">
         {/* Background Image */}
         <img
           src={image}
@@ -263,16 +263,16 @@ function CarouselCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-between p-5">
+        <div className="absolute inset-0 flex flex-col justify-between p-4">
           {/* Top */}
           <div className="flex items-start justify-between">
             <div
-              className={`flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm shadow-lg`}
+              className={`flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm shadow-lg`}
             >
-              <Icon className="h-6 w-6 text-white" />
+              <Icon className="h-5 w-5 text-white" />
             </div>
             {badge && (
-              <span className="rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-xs font-medium text-white border border-white/20">
+              <span className="rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-1 text-[11px] font-medium text-white border border-white/20">
                 {badge}
               </span>
             )}
@@ -280,13 +280,13 @@ function CarouselCard({
 
           {/* Bottom */}
           <div>
-            <h4 className="text-2xl font-bold text-white mb-2">{title}</h4>
-            <p className="text-white/80 text-sm leading-relaxed mb-4 line-clamp-2">
+            <h4 className="text-lg font-bold text-white mb-1">{title}</h4>
+            <p className="text-white/80 text-xs leading-relaxed mb-2 line-clamp-2">
               {description}
             </p>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:gap-3 transition-all">
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-white group-hover:gap-2 transition-all">
               Explore
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </div>
         </div>
