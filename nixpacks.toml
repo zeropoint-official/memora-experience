@@ -9,3 +9,4 @@ cmds = ["pnpm run build"]
 
 [start]
 cmd = "pnpm run start"
+

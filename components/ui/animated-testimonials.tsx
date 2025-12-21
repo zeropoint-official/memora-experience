@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
+import { LogoCarouselCSS, Logo } from "@/components/ui/logo-carousel"
 import { Quote, Star } from "lucide-react"
 import { motion, useAnimation, useInView } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
@@ -23,6 +24,7 @@ export interface AnimatedTestimonialsProps {
   testimonials?: Testimonial[]
   autoRotateInterval?: number
   trustedCompanies?: string[]
+  trustedLogos?: Logo[]
   trustedCompaniesTitle?: string
   className?: string
 }
@@ -34,6 +36,7 @@ export function AnimatedTestimonials({
   testimonials = [],
   autoRotateInterval = 6000,
   trustedCompanies = [],
+  trustedLogos = [],
   trustedCompaniesTitle = "Trusted by developers from companies worldwide",
   className,
 }: AnimatedTestimonialsProps) {
@@ -199,21 +202,32 @@ export function AnimatedTestimonials({
         </motion.div>
 
         {/* Logo cloud */}
-        {trustedCompanies.length > 0 && (
+        {(trustedLogos.length > 0 || trustedCompanies.length > 0) && (
           <motion.div variants={itemVariants} initial="hidden" animate={controls} className="mt-24 text-center">
             <h3 className="text-sm font-medium text-slate-500 mb-8 uppercase tracking-wider">{trustedCompaniesTitle}</h3>
-            <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
-              {trustedCompanies.map((company) => (
-                <div key={company} className="text-2xl font-bold text-slate-300 hover:text-orange-500 transition-colors cursor-default">
-                  {company}
-                </div>
-              ))}
-            </div>
+            
+            {trustedLogos.length > 0 ? (
+              <LogoCarouselCSS 
+                logos={trustedLogos} 
+                speed={25} 
+                direction="left" 
+                pauseOnHover={true}
+              />
+            ) : (
+              <div className="flex flex-wrap justify-center gap-x-12 gap-y-6">
+                {trustedCompanies.map((company) => (
+                  <div key={company} className="text-2xl font-bold text-slate-300 hover:text-orange-500 transition-colors cursor-default">
+                    {company}
+                  </div>
+                ))}
+              </div>
+            )}
           </motion.div>
         )}
       </div>
     </section>
   )
 }
+
 
 

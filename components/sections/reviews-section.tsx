@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { Logo } from "@/components/ui/logo-carousel";
 
 const testimonials = [
   {
@@ -55,12 +56,14 @@ const testimonials = [
   },
 ];
 
-const trustedPartners = [
-  "University of Cyprus",
-  "Frederick University",
-  "European University",
-  "KPMG Cyprus",
-  "Hilton Nicosia",
+const trustedLogos: Logo[] = [
+  { src: "/Content/logos/Red Bull Energy Logo.png", alt: "Red Bull" },
+  { src: "/Content/logos/Shell Logo.png", alt: "Shell" },
+  { src: "/Content/logos/images_logos_Client1.png", alt: "Client 1" },
+  { src: "/Content/logos/images_logos_Client2.png", alt: "Client 2" },
+  { src: "/Content/logos/images_logos_Client3.png", alt: "Client 3" },
+  { src: "/Content/logos/images_logos_Client11.png", alt: "Client 11" },
+  { src: "/Content/logos/images_logos_Client12.png", alt: "Client 12" },
 ];
 
 export function ReviewsSection() {
@@ -71,10 +74,11 @@ export function ReviewsSection() {
       badgeText="500+ 5-Star Reviews"
       testimonials={testimonials}
       autoRotateInterval={5000}
-      trustedCompanies={trustedPartners}
-      trustedCompaniesTitle="Trusted by universities and businesses across Cyprus"
+      trustedLogos={trustedLogos}
+      trustedCompaniesTitle="Trusted by leading brands and businesses"
     />
   );
 }
+
 
 

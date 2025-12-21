@@ -1,17 +1,15 @@
-import { HeroV3Collage } from "@/components/sections/hero-v3-collage";
-import { ServicesTimeline } from "@/components/sections/services-timeline";
+import { LandingHero } from "@/components/sections/landing-hero";
+import { SpotlightNavigation } from "@/components/sections/spotlight-navigation";
 import { ReviewsSection } from "@/components/sections/reviews-section";
-import { EventsSection } from "@/components/sections/events-section";
-import { PastEventsSection } from "@/components/sections/past-events-section";
+import { LandingServices } from "@/components/sections/landing-services";
 
 export default function Home() {
   return (
     <main>
-      <HeroV3Collage />
-      <ServicesTimeline />
+      <LandingHero />
+      <SpotlightNavigation />
       <ReviewsSection />
-      <EventsSection />
-      <PastEventsSection />
+      <LandingServices />
     </main>
   );
 }
