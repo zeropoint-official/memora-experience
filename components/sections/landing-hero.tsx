@@ -114,12 +114,12 @@ function MobileHero() {
   const [ticketsRemaining, setTicketsRemaining] = useState(127);
   const [direction, setDirection] = useState(0);
 
-  // Auto-rotate carousel
+  // Auto-rotate carousel - slower for better mobile UX
   useEffect(() => {
     const interval = setInterval(() => {
       setDirection(1);
       setCurrentImageIndex((prev) => (prev + 1) % eventImages.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -170,23 +170,18 @@ function MobileHero() {
     },
   };
 
+  // Simplified fade-only transition for better mobile performance
   const imageVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
+    enter: () => ({
       opacity: 0,
-      scale: 0.9,
     }),
     center: {
-      x: 0,
       opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4, ease: "easeOut" as const },
+      transition: { duration: 0.3, ease: "easeOut" as const },
     },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
+    exit: () => ({
       opacity: 0,
-      scale: 0.9,
-      transition: { duration: 0.4, ease: "easeOut" as const },
+      transition: { duration: 0.2, ease: "easeOut" as const },
     }),
   };
 
@@ -260,21 +255,22 @@ function MobileHero() {
         {/* ENHANCEMENT 4: Swipeable Image Carousel */}
         <motion.div variants={itemVariants} className="mt-6">
           <div className="relative">
-            {/* Carousel Container */}
+            {/* Carousel Container - Optimized for mobile performance */}
             <div className="relative overflow-hidden rounded-2xl bg-white p-1.5 shadow-xl shadow-slate-200/60">
-              <AnimatePresence initial={false} custom={direction} mode="popLayout">
-                <motion.img
-                  key={currentImageIndex}
-                  src={eventImages[currentImageIndex].url}
-                  alt={eventImages[currentImageIndex].alt}
-                  custom={direction}
-                  variants={imageVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="h-44 w-full rounded-xl object-cover"
-                />
-              </AnimatePresence>
+              <div className="relative h-44 w-full">
+                <AnimatePresence initial={false} mode="sync">
+                  <motion.img
+                    key={currentImageIndex}
+                    src={eventImages[currentImageIndex].url}
+                    alt={eventImages[currentImageIndex].alt}
+                    variants={imageVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    className="absolute inset-0 h-44 w-full rounded-xl object-cover"
+                  />
+                </AnimatePresence>
+              </div>
               
               {/* Navigation arrows inside image */}
               <button 
@@ -322,12 +318,7 @@ function MobileHero() {
         >
           <div className="inline-flex items-center gap-3 rounded-full border border-orange-200 bg-gradient-to-r from-orange-50 to-rose-50 px-4 py-2 text-sm shadow-sm">
             <div className="flex items-center gap-1.5">
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <Flame className="h-4 w-4 text-orange-500" />
-              </motion.div>
+              <Flame className="h-4 w-4 text-orange-500" />
               <span className="font-semibold text-orange-600">Hot!</span>
             </div>
             <div className="h-4 w-px bg-orange-200" />
@@ -346,26 +337,19 @@ function MobileHero() {
           </div>
         </motion.div>
 
-        {/* Live attendee avatars */}
+        {/* Live attendee avatars - Simplified for performance */}
         <motion.div variants={itemVariants} className="mt-3 flex justify-center">
           <div className="flex items-center gap-2">
             <div className="flex -space-x-2">
               {[1, 2, 3, 4, 5].map((i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 + i * 0.1 }}
                   className="h-7 w-7 rounded-full border-2 border-white bg-gradient-to-br from-orange-300 to-rose-400 shadow-sm"
                 />
               ))}
             </div>
             <div className="flex items-center gap-1 text-xs text-slate-500">
-              <motion.span
-                animate={{ opacity: [1, 0.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="h-2 w-2 rounded-full bg-green-500"
-              />
+              <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
               <span>247 people viewing</span>
             </div>
           </div>
