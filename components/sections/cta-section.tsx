@@ -141,11 +141,9 @@ export function CTASection() {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-lg sm:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed"
+          className="text-sm sm:text-base text-white/80 mb-10 max-w-xl mx-auto leading-relaxed"
         >
-          From legendary Kratiki Ekthesi nights to epic boat parties in Ayia Napa, 
-          join thousands who've discovered Cyprus's most unforgettable experiences. 
-          Your next adventure is just one click away.
+          Join thousands discovering Cyprus's most unforgettable experiences.
         </motion.p>
 
         {/* CTA Buttons */}

@@ -11,7 +11,6 @@ import {
   Facebook,
   Youtube,
   ArrowUpRight,
-  Heart,
 } from "lucide-react";
 
 const footerLinks = {
@@ -251,8 +250,8 @@ export function Footer() {
             <p className="text-sm text-slate-500">
               © {new Date().getFullYear()} Memora Experience. All rights reserved.
             </p>
-            <p className="flex items-center gap-1.5 text-sm text-slate-500">
-              Made with <Heart className="h-4 w-4 text-rose-500 fill-rose-500" /> in Cyprus
+            <p className="text-sm text-slate-500">
+              Made by Zeropoint Labs
             </p>
           </motion.div>
         </motion.div>
