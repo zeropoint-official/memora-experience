@@ -147,8 +147,12 @@ function Header1() {
                 {/* Logo - Center on desktop, Left on mobile */}
                 <div className="flex lg:justify-center flex-1 lg:flex-none">
                     <Link href="/" className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-orange-500" />
-                        <p className="font-bold text-xl text-slate-900">Memora Experience</p>
+                        <Sparkles className={`h-5 w-5 transition-colors duration-300 lg:text-orange-500 ${
+                            scrolled ? "text-orange-500" : "text-orange-400"
+                        }`} />
+                        <p className={`font-bold text-xl transition-colors duration-300 lg:text-slate-900 ${
+                            scrolled ? "text-slate-900" : "text-white"
+                        }`}>Memora Experience</p>
                     </Link>
                 </div>
                 
@@ -172,7 +176,11 @@ function Header1() {
                         variant="ghost" 
                         size="icon"
                         onClick={() => setOpen(!isOpen)} 
-                        className="text-slate-700 hover:bg-white/50 h-10 w-10"
+                        className={`transition-colors duration-300 h-10 w-10 ${
+                            scrolled 
+                                ? "text-slate-700 hover:bg-white/50" 
+                                : "text-white hover:bg-white/10"
+                        }`}
                     >
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </Button>

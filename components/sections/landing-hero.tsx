@@ -1,12 +1,17 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Ticket, Briefcase, Calendar, Sparkles, Star, Users, MapPin, Flame, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Ticket, Briefcase, Calendar, Sparkles, Star, Users, MapPin, Flame, ChevronLeft, ChevronRight, Zap, Heart, Play } from "lucide-react";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { Spotlight } from "@/components/ui/spotlight";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { SparklesText } from "@/components/ui/sparkles-text";
+import { MagicCard } from "@/components/ui/magic-card";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { Ripple } from "@/components/ui/ripple";
 import { useState, useEffect, useCallback } from "react";
 
 const eventImages = [
@@ -107,290 +112,285 @@ const imageVariants = {
 };
 
 // ============================================
-// MOBILE HERO - Enhanced with full-bleed image, animations, carousel
+// MOBILE HERO - Video Background with White Grid Transition
 // ============================================
 function MobileHero() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [ticketsRemaining, setTicketsRemaining] = useState(127);
-  const [direction, setDirection] = useState(0);
-
-  // Auto-rotate carousel - slower for better mobile UX
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDirection(1);
-      setCurrentImageIndex((prev) => (prev + 1) % eventImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Simulate tickets selling (social proof urgency)
   useEffect(() => {
     const interval = setInterval(() => {
       setTicketsRemaining((prev) => {
-        if (prev <= 50) return 127; // Reset for demo
+        if (prev <= 50) return 127;
         return prev - Math.floor(Math.random() * 3 + 1);
       });
     }, 8000);
     return () => clearInterval(interval);
   }, []);
 
-  const goToSlide = useCallback((index: number) => {
-    setDirection(index > currentImageIndex ? 1 : -1);
-    setCurrentImageIndex(index);
-  }, [currentImageIndex]);
-
-  const nextSlide = useCallback(() => {
-    setDirection(1);
-    setCurrentImageIndex((prev) => (prev + 1) % eventImages.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setDirection(-1);
-    setCurrentImageIndex((prev) => (prev - 1 + eventImages.length) % eventImages.length);
-  }, []);
-
-  // Staggered animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" as const },
-    },
-  };
-
-  // Simplified fade-only transition for better mobile performance
-  const imageVariants = {
-    enter: () => ({
-      opacity: 0,
-    }),
-    center: {
-      opacity: 1,
-      transition: { duration: 0.3, ease: "easeOut" as const },
-    },
-    exit: () => ({
-      opacity: 0,
-      transition: { duration: 0.2, ease: "easeOut" as const },
-    }),
-  };
-
   return (
-    <section className="relative w-full overflow-hidden bg-zinc-50 pb-8 pt-24 md:hidden">
-      {/* Original gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-orange-50/50 via-zinc-50 to-zinc-50" />
-      
-      {/* Static glow effects */}
-      <div className="absolute -left-32 top-0 h-64 w-64 rounded-full bg-orange-200/40 blur-3xl" />
-      <div className="absolute -right-32 top-32 h-64 w-64 rounded-full bg-rose-200/40 blur-3xl" />
-
-      {/* Main content with staggered animations */}
-      <motion.div 
-        className="relative z-20 mx-auto max-w-lg px-5"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* ENHANCEMENT 2: Animated Badge */}
-        <motion.div variants={itemVariants} className="mb-5 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-3 py-1.5 text-xs font-medium text-orange-600 shadow-sm">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Cyprus Event Experiences</span>
-          </div>
-        </motion.div>
-
-        {/* ENHANCEMENT 2: Animated Title */}
-        <motion.div variants={itemVariants} className="text-center">
-          <h1 className="text-[1.75rem] font-bold tracking-tight leading-tight text-slate-900">
-            <span className="flex w-full items-baseline justify-center whitespace-nowrap">
-              <span className="shrink-0">Create&nbsp;</span>
-              <span className="inline-flex min-w-[8ch] items-baseline justify-start overflow-visible">
-                <TextRotate
-                  texts={["Legendary", "Memorable", "Spectacular", "Fantastic"]}
-                  mainClassName="inline-flex items-baseline justify-start whitespace-nowrap [&>div]:overflow-visible"
-                  elementLevelClassName="bg-gradient-to-r from-orange-500 via-rose-500 to-red-500 bg-clip-text text-transparent"
-                  staggerDuration={0.02}
-                  staggerFrom="last"
-                  rotationInterval={3000}
-                  transition={{ type: "spring", damping: 35, stiffness: 300 }}
-                />
-              </span>
-            </span>
-            <span className="block">Moments</span>
-          </h1>
-        </motion.div>
-
-        {/* ENHANCEMENT 2: Animated Subtitle */}
-        <motion.p 
-          variants={itemVariants}
-          className="mt-4 text-center text-sm text-slate-600 leading-relaxed"
+    <section className="relative w-full overflow-hidden md:hidden">
+      {/* ============================================ */}
+      {/* PART 1: FULL-SCREEN VIDEO HERO */}
+      {/* ============================================ */}
+      <div className="relative h-[70vh] w-full overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
         >
-          From electrifying Planitario nights to epic student adventures, 
-          we transform your vision into extraordinary experiences.
-        </motion.p>
+          <source src="/Content/1226.mp4" type="video/mp4" />
+        </video>
 
-        {/* ENHANCEMENT 2: Animated Event Info Badge */}
-        <motion.div variants={itemVariants} className="mt-4 flex justify-center">
-          <div className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-2 shadow-sm">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500">
-              <Calendar className="h-4 w-4 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[11px] text-slate-500 leading-tight">Next Event</span>
-              <span className="text-sm font-semibold text-slate-900 leading-tight">Planitario • Mar 15-16</span>
-            </div>
-          </div>
-        </motion.div>
+        {/* Dark overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+        
+        {/* Subtle vignette effect */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
 
-        {/* ENHANCEMENT 4: Swipeable Image Carousel */}
-        <motion.div variants={itemVariants} className="mt-6">
-          <div className="relative">
-            {/* Carousel Container - Optimized for mobile performance */}
-            <div className="relative overflow-hidden rounded-2xl bg-white p-1.5 shadow-xl shadow-slate-200/60">
-              <div className="relative h-44 w-full">
-                <AnimatePresence initial={false} mode="sync">
-                  <motion.img
-                    key={currentImageIndex}
-                    src={eventImages[currentImageIndex].url}
-                    alt={eventImages[currentImageIndex].alt}
-                    variants={imageVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className="absolute inset-0 h-44 w-full rounded-xl object-cover"
+        {/* Hero Content Overlay */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-between px-5 pt-20 pb-8">
+          {/* Top: Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex justify-center"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 shadow-xl">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+              </span>
+              <span className="text-xs font-semibold text-white">Cyprus Event Experiences</span>
+            </div>
+          </motion.div>
+
+          {/* Center: Main Title */}
+          <div className="flex-1 flex flex-col items-center justify-center -mt-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-center"
+            >
+              <h1 className="text-[2.5rem] font-black tracking-tight leading-[0.95] text-white drop-shadow-2xl">
+                <span className="block">Create</span>
+                <span className="relative inline-block my-1">
+                  <TextRotate
+                    texts={["Legendary", "Memorable", "Spectacular", "Fantastic"]}
+                    mainClassName="inline-flex items-baseline justify-center whitespace-nowrap"
+                    elementLevelClassName="bg-gradient-to-r from-orange-300 via-rose-300 to-amber-200 bg-clip-text text-transparent drop-shadow-lg"
+                    staggerDuration={0.02}
+                    staggerFrom="last"
+                    rotationInterval={3000}
+                    transition={{ type: "spring", damping: 35, stiffness: 300 }}
                   />
-                </AnimatePresence>
+                </span>
+                <span className="block">Moments</span>
+              </h1>
+            </motion.div>
+
+            {/* Event Info Pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="mt-5"
+            >
+              <div className="inline-flex items-center gap-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 shadow-xl">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg">
+                  <Calendar className="h-4 w-4 text-white" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] text-white/70 uppercase tracking-wider font-medium">Next Event</span>
+                  <span className="text-sm font-bold text-white">Planitario • Mar 15-16</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Bottom: Social Proof */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="flex flex-col items-center gap-4"
+          >
+            {/* Live viewers */}
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {["from-orange-400 to-amber-400", "from-rose-400 to-pink-400", "from-violet-400 to-purple-400"].map((gradient, i) => (
+                  <motion.div
+                    key={i}
+                    className={`h-7 w-7 rounded-full border-2 border-white/30 bg-gradient-to-br ${gradient} shadow-lg`}
+                    initial={{ opacity: 0, scale: 0.5, x: -5 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ delay: 0.8 + i * 0.1 }}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-white/80 font-medium">247 people viewing now</span>
+            </div>
+
+            {/* Scroll indicator */}
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-1 mt-2"
+            >
+              <ChevronLeft className="h-5 w-5 text-white/60 rotate-[-90deg]" />
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Curved transition to white section */}
+        <div className="absolute -bottom-1 left-0 right-0">
+          <svg 
+            viewBox="0 0 1440 120" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+            preserveAspectRatio="none"
+          >
+            <path 
+              d="M0 120L0 60C240 20 480 0 720 0C960 0 1200 20 1440 60L1440 120L0 120Z" 
+              fill="white"
+            />
+          </svg>
+        </div>
+      </div>
+
+      {/* ============================================ */}
+      {/* PART 2: WHITE SECTION WITH GRID */}
+      {/* ============================================ */}
+      <div className="relative bg-white">
+        {/* Subtle dot pattern background */}
+        <div 
+          className="absolute inset-0 opacity-[0.4]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.07) 1px, transparent 0)`,
+            backgroundSize: '20px 20px'
+          }}
+        />
+
+        {/* Content container */}
+        <div className="relative z-10 px-5 pt-6 pb-10">
+          
+          {/* ===== URGENCY BANNER ===== */}
+          <BlurFade delay={0.1} yOffset={8}>
+            <div className="relative mx-auto max-w-sm overflow-hidden rounded-2xl bg-gradient-to-r from-orange-50 via-white to-rose-50 border border-orange-100 shadow-lg shadow-orange-100/50">
+              <div className="relative p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg shadow-orange-500/30"
+                    >
+                      <Flame className="h-5 w-5 text-white" />
+                    </motion.div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Selling fast</p>
+                      <p className="text-sm font-bold text-slate-900">
+                        Only{" "}
+                        <motion.span
+                          key={ticketsRemaining}
+                          initial={{ scale: 1.3, color: "#ea580c" }}
+                          animate={{ scale: 1, color: "#ea580c" }}
+                          className="inline-block"
+                        >
+                          {ticketsRemaining}
+                        </motion.span>
+                        {" "}tickets left!
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5 rounded-full bg-green-50 border border-green-200 px-3 py-1.5">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                    </span>
+                    <span className="text-[10px] font-bold text-green-700">LIVE</span>
+                  </div>
+                </div>
+              </div>
+              {/* Animated border accent */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 via-rose-500 to-orange-400" />
+            </div>
+          </BlurFade>
+
+          {/* ===== CTA BUTTONS ===== */}
+          <BlurFade delay={0.2} yOffset={8}>
+            <div className="mt-5 flex flex-col gap-3 mx-auto max-w-sm">
+              <ShimmerButton
+                className="w-full rounded-2xl py-4 text-base shadow-xl shadow-orange-500/25"
+                shimmerColor="#ffffff"
+                shimmerDuration="2s"
+              >
+                <Ticket className="h-5 w-5" />
+                <span className="font-bold">Get Tickets Now</span>
+                <ArrowRight className="h-5 w-5" />
+              </ShimmerButton>
+
+              <motion.button 
+                whileTap={{ scale: 0.98 }}
+                className="w-full rounded-2xl border-2 border-slate-900 bg-white px-6 py-3.5 text-sm font-bold text-slate-900 transition-all active:scale-[0.98]"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <Briefcase className="h-4 w-4" />
+                  <span>Partner With Us</span>
+                </span>
+              </motion.button>
+            </div>
+          </BlurFade>
+
+          {/* ===== STATS GRID ===== */}
+          <BlurFade delay={0.3} yOffset={8}>
+            <div className="mt-8 mx-auto max-w-sm">
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { value: "10K+", label: "Guests", icon: Users, gradient: "from-orange-500 to-amber-500", bg: "bg-orange-50" },
+                  { value: "50+", label: "Events", icon: Sparkles, gradient: "from-rose-500 to-pink-500", bg: "bg-rose-50" },
+                  { value: "5.0", label: "Rating", icon: Star, gradient: "from-violet-500 to-purple-500", bg: "bg-violet-50" },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + index * 0.1 }}
+                    className={`rounded-2xl ${stat.bg} border border-slate-100 p-4 text-center shadow-sm`}
+                  >
+                    <div className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} shadow-md`}>
+                      <stat.icon className="h-5 w-5 text-white" />
+                    </div>
+                    <p className="text-xl font-bold text-slate-900">{stat.value}</p>
+                    <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                      {stat.label}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </BlurFade>
+
+          {/* ===== TRUST FOOTER ===== */}
+          <BlurFade delay={0.5} yOffset={4}>
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <div className="flex items-center gap-2">
+                <Heart className="h-4 w-4 text-rose-500 fill-rose-500" />
+                <span className="text-xs font-medium text-slate-500">Trusted by 10,000+ event-goers across Cyprus</span>
               </div>
               
-              {/* Navigation arrows inside image */}
-              <button 
-                onClick={prevSlide}
-                className="absolute left-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm text-slate-700 shadow-md active:scale-95 transition-transform"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button 
-                onClick={nextSlide}
-                className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm text-slate-700 shadow-md active:scale-95 transition-transform"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
+              {/* Subtle decorative line */}
+              <div className="w-16 h-1 rounded-full bg-gradient-to-r from-orange-200 via-rose-200 to-orange-200" />
             </div>
-            
-            {/* Small accent badge on image */}
-            <div className="absolute -bottom-2 -right-2 flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs font-medium shadow-lg">
-              <MapPin className="h-3 w-3 text-orange-500" />
-              <span className="text-slate-700">Cyprus</span>
-            </div>
-          </div>
-          
-          {/* Carousel Dots */}
-          <div className="mt-4 flex justify-center gap-2">
-            {eventImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentImageIndex === index 
-                    ? "w-6 bg-gradient-to-r from-orange-500 to-rose-500" 
-                    : "w-2 bg-slate-200"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ENHANCEMENT 3: Social Proof - Tickets Remaining Counter */}
-        <motion.div 
-          variants={itemVariants}
-          className="mt-5 flex justify-center"
-        >
-          <div className="inline-flex items-center gap-3 rounded-full border border-orange-200 bg-gradient-to-r from-orange-50 to-rose-50 px-4 py-2 text-sm shadow-sm">
-            <div className="flex items-center gap-1.5">
-              <Flame className="h-4 w-4 text-orange-500" />
-              <span className="font-semibold text-orange-600">Hot!</span>
-            </div>
-            <div className="h-4 w-px bg-orange-200" />
-            <div className="flex items-center gap-1.5">
-              <span className="text-slate-600">Only</span>
-              <motion.span 
-                key={ticketsRemaining}
-                initial={{ scale: 1.3, color: "#ea580c" }}
-                animate={{ scale: 1, color: "#0f172a" }}
-                className="font-bold text-slate-900"
-              >
-                {ticketsRemaining}
-              </motion.span>
-              <span className="text-slate-600">tickets left</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Live attendee avatars - Simplified for performance */}
-        <motion.div variants={itemVariants} className="mt-3 flex justify-center">
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="h-7 w-7 rounded-full border-2 border-white bg-gradient-to-br from-orange-300 to-rose-400 shadow-sm"
-                />
-              ))}
-            </div>
-            <div className="flex items-center gap-1 text-xs text-slate-500">
-              <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-              <span>247 people viewing</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA Buttons */}
-        <motion.div variants={itemVariants} className="mt-5 flex flex-col gap-2.5">
-          <motion.button 
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-orange-500/25"
-          >
-            <Ticket className="h-4 w-4" />
-            <span>Get Tickets</span>
-            <ArrowRight className="h-4 w-4" />
-          </motion.button>
-
-          <motion.button 
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-800 bg-white px-6 py-3 text-sm font-semibold text-slate-800"
-          >
-            <Briefcase className="h-4 w-4" />
-            <span>Business with Us</span>
-          </motion.button>
-        </motion.div>
-
-        {/* Mini Stats Row */}
-        <motion.div variants={itemVariants} className="mt-6 flex justify-center gap-8">
-          <div className="text-center">
-            <p className="text-lg font-bold text-slate-900">10K+</p>
-            <p className="text-[10px] uppercase tracking-wider text-slate-400">Attendees</p>
-          </div>
-          <div className="text-center">
-            <p className="text-lg font-bold text-slate-900">50+</p>
-            <p className="text-[10px] uppercase tracking-wider text-slate-400">Events</p>
-          </div>
-          <div className="text-center">
-            <p className="text-lg font-bold text-slate-900">5.0</p>
-            <p className="text-[10px] uppercase tracking-wider text-slate-400">Rating</p>
-          </div>
-        </motion.div>
-      </motion.div>
+          </BlurFade>
+        </div>
+      </div>
     </section>
   );
 }
