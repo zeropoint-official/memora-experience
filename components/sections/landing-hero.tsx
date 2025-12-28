@@ -12,7 +12,7 @@ import { BorderBeam } from "@/components/ui/border-beam";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Ripple } from "@/components/ui/ripple";
-import { useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 const eventImages = [
   {
@@ -116,6 +116,7 @@ const imageVariants = {
 // ============================================
 function MobileHero() {
   const [ticketsRemaining, setTicketsRemaining] = useState(127);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // Simulate tickets selling (social proof urgency)
   useEffect(() => {
@@ -128,24 +129,52 @@ function MobileHero() {
     return () => clearInterval(interval);
   }, []);
 
+  // iOS Safari sometimes ignores autoplay on initial render unless we explicitly call play()
+  // (even when muted + playsInline are set).
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Ensure muted/inline playback is applied as early as possible
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {
+        // Autoplay can still be blocked by the browser; poster will remain visible in that case.
+      });
+    }
+  }, []);
+
   return (
     <section className="relative w-full overflow-hidden md:hidden">
       {/* ============================================ */}
       {/* PART 1: FULL-SCREEN VIDEO HERO */}
       {/* ============================================ */}
-      <div className="relative h-[70vh] w-full overflow-hidden">
+      <div className="relative h-[72svh] w-full overflow-hidden">
         {/* Video Background */}
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
           poster="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
           className="absolute inset-0 h-full w-full object-cover"
           style={{ objectFit: "cover" }}
         >
-          <source src="/Content/1226.mp4" type="video/mp4" />
+          {/* Prefer the new background video; fall back gracefully for broader device support */}
+          <source src="/backround-video.webm" type="video/webm" />
+          <source src="/background-video.webm" type="video/webm" />
+          <source src="/bg-video.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay gradient */}
@@ -155,7 +184,13 @@ function MobileHero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
 
         {/* Hero Content Overlay */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-between px-5 pt-20 pb-8">
+        <div
+          className="absolute inset-0 z-10 flex flex-col justify-between px-4"
+          style={{
+            paddingTop: "calc(env(safe-area-inset-top) + 4.5rem)",
+            paddingBottom: "calc(env(safe-area-inset-bottom) + 1.5rem)",
+          }}
+        >
           {/* Top: Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -173,14 +208,14 @@ function MobileHero() {
           </motion.div>
 
           {/* Center: Main Title */}
-          <div className="flex-1 flex flex-col items-center justify-center -mt-8">
+          <div className="flex flex-1 flex-col items-center justify-center -mt-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="text-[2.5rem] font-black tracking-tight leading-[0.95] text-white drop-shadow-2xl">
+              <h1 className="text-[2.25rem] sm:text-[2.6rem] font-black tracking-tight leading-[0.98] text-white drop-shadow-2xl">
                 <span className="block">Create</span>
                 <span className="relative inline-block my-1">
                   <TextRotate
@@ -202,7 +237,7 @@ function MobileHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="mt-5"
+              className="mt-4"
             >
               <div className="inline-flex items-center gap-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 shadow-xl">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg">
@@ -221,7 +256,7 @@ function MobileHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-col items-center gap-4"
+            className="flex flex-col items-center gap-3"
           >
             {/* Live viewers */}
             <div className="flex items-center gap-3">
@@ -236,14 +271,14 @@ function MobileHero() {
                   />
                 ))}
               </div>
-              <span className="text-xs text-white/80 font-medium">247 people viewing now</span>
+              <span className="text-[11px] text-white/80 font-medium">247 people viewing now</span>
             </div>
 
             {/* Scroll indicator */}
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-1 mt-2"
+              className="flex flex-col items-center gap-1 mt-1"
             >
               <ChevronLeft className="h-5 w-5 text-white/60 rotate-[-90deg]" />
             </motion.div>
