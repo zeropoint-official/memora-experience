@@ -140,7 +140,10 @@ function MobileHero() {
           muted
           loop
           playsInline
+          preload="auto"
+          poster="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
           className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectFit: "cover" }}
         >
           <source src="/Content/1226.mp4" type="video/mp4" />
         </video>
