@@ -73,6 +73,7 @@ function Header1() {
 
     // Pages with dark hero sections that need white text
     const darkHeroPages = [
+        "/",
         "/events/kratiki-ekthesi",
         "/events/planitario",
         // Add other dark hero pages here

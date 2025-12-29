@@ -445,7 +445,7 @@ function EventSection({
   return (
     <section
       ref={ref}
-      className={`relative py-16 sm:py-20 ${
+      className={`relative py-12 sm:py-16 md:py-20 ${
         section.id === "past" ? "bg-slate-900" : ""
       }`}
     >
@@ -520,7 +520,7 @@ export default function EventsPage() {
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-zinc-50">
       {/* Hero Section */}
-      <section className="relative z-10 overflow-hidden bg-zinc-50 pb-8 pt-32 sm:pb-16 sm:pt-40">
+      <section className="relative z-10 overflow-hidden bg-zinc-50 pb-6 pt-24 sm:pb-8 sm:pt-32 md:pb-16 md:pt-40">
         {/* Background Elements */}
         <GridPattern
           className="absolute inset-0 z-0 opacity-30 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
@@ -550,7 +550,7 @@ export default function EventsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+              className="mb-4 sm:mb-6 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 px-2"
             >
               Discover{" "}
               <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-orange-600 bg-clip-text text-transparent">
@@ -565,7 +565,7 @@ export default function EventsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mx-auto max-w-2xl text-lg text-slate-600"
+              className="mx-auto max-w-2xl px-4 text-base sm:text-lg text-slate-600"
             >
               From legendary nights at Planitario to unforgettable student
               adventures and prestigious business events, find your next
@@ -577,18 +577,34 @@ export default function EventsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-8 flex flex-wrap items-center justify-center gap-3"
+              className="mt-6 sm:mt-8"
             >
-              {sections.map((section) => (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className={`inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:shadow-md hover:ring-slate-300`}
-                >
-                  <section.icon className="h-4 w-4" />
-                  {section.title}
-                </a>
-              ))}
+              {/* Mobile: Horizontal Scroll */}
+              <div className="flex sm:hidden gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+                {sections.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className="inline-flex flex-shrink-0 items-center gap-1.5 rounded-full bg-white px-3 py-2 text-xs font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all active:shadow-md active:ring-slate-300"
+                  >
+                    <section.icon className="h-3.5 w-3.5" />
+                    {section.title}
+                  </a>
+                ))}
+              </div>
+              {/* Desktop: Centered Wrap */}
+              <div className="hidden sm:flex flex-wrap items-center justify-center gap-3">
+                {sections.map((section) => (
+                  <a
+                    key={section.id}
+                    href={`#${section.id}`}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition-all hover:shadow-md hover:ring-slate-300"
+                  >
+                    <section.icon className="h-4 w-4" />
+                    {section.title}
+                  </a>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
@@ -619,7 +635,7 @@ export default function EventsPage() {
       </div>
 
       {/* CTA Section */}
-      <section className="relative z-10 border-t border-slate-200 bg-white py-16">
+      <section className="relative z-10 border-t border-slate-200 bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -635,17 +651,17 @@ export default function EventsPage() {
               We&apos;re always creating new experiences. Get in touch with our
               team and let us help you find or create the perfect event.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-orange-500/25 transition-all hover:shadow-2xl"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-orange-500/25 transition-all active:scale-95 sm:hover:shadow-2xl"
               >
                 Contact Us
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a
                 href="/"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-8 py-4 text-lg font-medium text-slate-900 transition-all hover:border-orange-300"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-200 bg-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-slate-900 transition-all active:scale-95 sm:hover:border-orange-300"
               >
                 Back to Home
               </a>

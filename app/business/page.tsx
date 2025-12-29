@@ -255,13 +255,13 @@ function FAQItem({
     <div className="border-b border-slate-200 last:border-0">
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-orange-600"
+        className="flex w-full items-center justify-between py-3 sm:py-4 md:py-5 text-left transition-colors active:text-orange-600 sm:hover:text-orange-600"
       >
-        <span className="pr-4 text-lg font-semibold text-slate-900">
+        <span className="pr-3 sm:pr-4 text-base sm:text-lg font-semibold text-slate-900">
           {question}
         </span>
         <ChevronDown
-          className={`h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
+          className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -275,7 +275,7 @@ function FAQItem({
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-5 leading-relaxed text-slate-600">{answer}</p>
+            <p className="pb-3 sm:pb-4 md:pb-5 text-sm sm:text-base leading-relaxed text-slate-600">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -382,7 +382,7 @@ export default function BusinessPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
+              className="mb-4 sm:mb-6 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white px-2"
             >
               Partner With Cyprus&apos;s
               <span className="block bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">
@@ -395,7 +395,7 @@ export default function BusinessPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mx-auto mb-12 max-w-3xl text-lg text-slate-300 sm:text-xl"
+              className="mx-auto mb-8 sm:mb-12 max-w-3xl px-4 text-base sm:text-lg md:text-xl text-slate-300"
             >
               Join forces with Memora Experience and connect your brand with
               hundreds of thousands of engaged attendees across Cyprus&apos;s
@@ -407,16 +407,16 @@ export default function BusinessPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-12 grid grid-cols-2 gap-6 sm:grid-cols-4"
+              className="mb-8 sm:mb-12 grid grid-cols-2 gap-3 sm:gap-6 sm:grid-cols-4"
             >
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                  className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur-sm"
                 >
-                  <stat.icon className="mx-auto mb-3 h-8 w-8 text-orange-400" />
-                  <p className="text-3xl font-bold text-white">{stat.value}</p>
-                  <p className="text-sm text-slate-400">{stat.label}</p>
+                  <stat.icon className="mx-auto mb-2 sm:mb-3 h-6 w-6 sm:h-8 sm:w-8 text-orange-400" />
+                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-slate-400">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
@@ -442,7 +442,7 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* WHY PARTNER WITH US SECTION */}
       {/* ============================================ */}
-      <section ref={whyRef} className="relative overflow-hidden bg-zinc-50 py-20 sm:py-28">
+      <section ref={whyRef} className="relative overflow-hidden bg-zinc-50 py-12 sm:py-20 md:py-28">
         <div className="absolute -right-40 top-40 h-[400px] w-[400px] rounded-full bg-orange-200/40 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -523,7 +523,7 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* PARTNERSHIP TYPES SECTION */}
       {/* ============================================ */}
-      <section ref={typesRef} className="relative bg-white py-20 sm:py-28">
+      <section ref={typesRef} className="relative bg-white py-12 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -553,24 +553,24 @@ export default function BusinessPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isTypesInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+                className="group rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
               >
                 <div
-                  className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${type.color} shadow-lg`}
+                  className={`mb-3 sm:mb-4 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br ${type.color} shadow-lg`}
                 >
-                  <type.icon className="h-6 w-6 text-white" />
+                  <type.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <h3 className="mb-2 text-xl font-bold text-slate-900">
+                <h3 className="mb-2 text-lg sm:text-xl font-bold text-slate-900">
                   {type.title}
                 </h3>
-                <p className="mb-4 text-slate-600">{type.description}</p>
-                <ul className="space-y-2">
+                <p className="mb-3 sm:mb-4 text-sm sm:text-base text-slate-600">{type.description}</p>
+                <ul className="space-y-1.5 sm:space-y-2">
                   {type.benefits.map((benefit, i) => (
                     <li
                       key={i}
-                      className="flex items-center gap-2 text-sm text-slate-600"
+                      className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-600"
                     >
-                      <CheckCircle className="h-4 w-4 text-orange-500" />
+                      <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 text-orange-500" />
                       {benefit}
                     </li>
                   ))}
@@ -586,7 +586,7 @@ export default function BusinessPage() {
       {/* ============================================ */}
       <section
         ref={eventsRef}
-        className="relative overflow-hidden bg-slate-900 py-20 sm:py-28"
+        className="relative overflow-hidden bg-slate-900 py-12 sm:py-20 md:py-28"
       >
         <div className="absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-orange-500/10 blur-[120px]" />
 
@@ -657,7 +657,7 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* TESTIMONIALS SECTION */}
       {/* ============================================ */}
-      <section ref={testimonialsRef} className="relative bg-zinc-50 py-20 sm:py-28">
+      <section ref={testimonialsRef} className="relative bg-zinc-50 py-12 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -714,7 +714,7 @@ export default function BusinessPage() {
       <section
         id="inquiry"
         ref={formRef}
-        className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-rose-500 to-orange-600 py-20 sm:py-28"
+        className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-rose-500 to-orange-600 py-12 sm:py-20 md:py-28"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -776,9 +776,9 @@ export default function BusinessPage() {
                   e.preventDefault();
                   setFormSubmitted(true);
                 }}
-                className="rounded-2xl bg-white p-6 shadow-2xl sm:p-8"
+                className="rounded-xl sm:rounded-2xl bg-white p-4 sm:p-6 md:p-8 shadow-2xl"
               >
-                <div className="grid gap-6 sm:grid-cols-2">
+                <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
                   {/* Full Name */}
                   <div>
                     <label className="mb-2 block text-sm font-medium text-slate-700">
@@ -790,7 +790,7 @@ export default function BusinessPage() {
                         type="text"
                         required
                         placeholder="John Smith"
-                        className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                       />
                     </div>
                   </div>
@@ -806,7 +806,7 @@ export default function BusinessPage() {
                         type="text"
                         required
                         placeholder="Your Company Ltd"
-                        className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                       />
                     </div>
                   </div>
@@ -822,7 +822,7 @@ export default function BusinessPage() {
                         type="email"
                         required
                         placeholder="john@company.com"
-                        className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                       />
                     </div>
                   </div>
@@ -837,7 +837,7 @@ export default function BusinessPage() {
                       <input
                         type="tel"
                         placeholder="+357 99 123 456"
-                        className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                       />
                     </div>
                   </div>
@@ -849,7 +849,7 @@ export default function BusinessPage() {
                     </label>
                     <select
                       required
-                      className="w-full appearance-none rounded-xl border border-slate-300 bg-white py-3 pl-4 pr-10 text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                      className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                     >
                       <option value="">Select an event</option>
                       <option value="kratiki-ekthesi">
@@ -873,7 +873,7 @@ export default function BusinessPage() {
                     </label>
                     <select
                       required
-                      className="w-full appearance-none rounded-xl border border-slate-300 bg-white py-3 pl-4 pr-10 text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                      className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                     >
                       <option value="">Select partnership type</option>
                       <option value="sponsor">Event Sponsor</option>
@@ -915,7 +915,7 @@ export default function BusinessPage() {
                         required
                         rows={4}
                         placeholder="Tell us about your company, partnership goals, and what you hope to achieve..."
-                        className="w-full resize-none rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full resize-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                       />
                     </div>
                   </div>
@@ -924,10 +924,10 @@ export default function BusinessPage() {
                   <div className="sm:col-span-2">
                     <button
                       type="submit"
-                      className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 py-4 text-lg font-semibold text-white shadow-lg shadow-orange-500/25 transition-all hover:shadow-xl hover:shadow-orange-500/30"
+                      className="group flex w-full items-center justify-center gap-2 rounded-lg sm:rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-lg shadow-orange-500/25 transition-all active:scale-95 sm:hover:shadow-xl sm:hover:shadow-orange-500/30"
                     >
                       Submit Partnership Inquiry
-                      <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
                     </button>
                   </div>
                 </div>
@@ -940,7 +940,7 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* FAQ SECTION */}
       {/* ============================================ */}
-      <section ref={faqRef} className="relative bg-white py-20 sm:py-28">
+      <section ref={faqRef} className="relative bg-white py-12 sm:py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div

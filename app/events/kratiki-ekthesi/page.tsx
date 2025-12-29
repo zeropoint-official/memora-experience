@@ -60,7 +60,7 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
   }, [targetDate]);
 
   return (
-    <div className="flex items-center gap-3 sm:gap-4">
+    <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
       {[
         { value: timeLeft.days, label: "Days" },
         { value: timeLeft.hours, label: "Hours" },
@@ -68,10 +68,10 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
         { value: timeLeft.seconds, label: "Sec" },
       ].map((item, i) => (
         <div key={i} className="flex flex-col items-center">
-          <div className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm font-mono text-2xl sm:text-3xl font-bold text-white shadow-lg">
+          <div className="flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 items-center justify-center rounded-lg sm:rounded-xl bg-white/20 backdrop-blur-sm font-mono text-lg sm:text-2xl md:text-3xl font-bold text-white shadow-lg">
             {String(item.value).padStart(2, "0")}
           </div>
-          <span className="mt-2 text-xs text-white/70 font-medium uppercase tracking-wide">
+          <span className="mt-1.5 sm:mt-2 text-[10px] sm:text-xs text-white/70 font-medium uppercase tracking-wide">
             {item.label}
           </span>
         </div>
@@ -321,16 +321,16 @@ export default function KratikiEkthesiPage() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 pt-20 sm:px-6 lg:px-8">
+        <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 pt-16 sm:pt-20 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-lg"
+              className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-lg"
             >
-              <Sparkles className="h-4 w-4" />
+              <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
               Cyprus State Fair 2026
             </motion.div>
 
@@ -339,7 +339,7 @@ export default function KratikiEkthesiPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6 text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl"
+              className="mb-4 sm:mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white"
             >
               Kratiki Ekthesi
               <span className="block bg-gradient-to-r from-orange-300 to-rose-300 bg-clip-text text-transparent">
@@ -352,7 +352,7 @@ export default function KratikiEkthesiPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8 text-lg text-white/80 sm:text-xl"
+              className="mb-6 sm:mb-8 px-2 text-base sm:text-lg md:text-xl text-white/80"
             >
               The biggest exhibition event of the year. Six days of
               entertainment, discovery, and unforgettable experiences.
@@ -363,18 +363,18 @@ export default function KratikiEkthesiPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-10 flex flex-col items-center gap-3 text-white/90 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6"
+              className="mb-6 sm:mb-10 flex flex-col items-center gap-2 sm:gap-3 text-white/90 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6"
             >
-              <span className="flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-orange-400" />
+              <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
                 <span className="font-medium">May 20-25, 2026</span>
               </span>
-              <span className="flex items-center gap-2">
-                <MapPin className="h-5 w-5 text-orange-400" />
+              <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
                 <span className="font-medium">Nicosia Fairgrounds, Cyprus</span>
               </span>
-              <span className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-orange-400" />
+              <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
                 <span className="font-medium">10:00 AM - 11:00 PM</span>
               </span>
             </motion.div>
@@ -384,9 +384,9 @@ export default function KratikiEkthesiPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-10 flex flex-col items-center"
+              className="mb-6 sm:mb-10 flex flex-col items-center"
             >
-              <p className="mb-4 text-sm uppercase tracking-wider text-white/60">
+              <p className="mb-3 sm:mb-4 text-xs sm:text-sm uppercase tracking-wider text-white/60">
                 Event starts in
               </p>
               <div className="flex justify-center">
@@ -399,21 +399,21 @@ export default function KratikiEkthesiPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+              className="flex flex-col items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto sm:flex-row sm:justify-center"
             >
               <a
                 href="#tickets"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-orange-500/30 transition-all hover:shadow-2xl hover:scale-105"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-orange-500/30 transition-all hover:shadow-2xl active:scale-95 sm:hover:scale-105"
               >
-                <Ticket className="h-5 w-5" />
+                <Ticket className="h-4 w-4 sm:h-5 sm:w-5" />
                 Get Tickets
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href="#partner"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-8 py-4 text-lg font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-white backdrop-blur-sm transition-all active:scale-95 sm:hover:bg-white/20"
               >
-                <Handshake className="h-5 w-5" />
+                <Handshake className="h-4 w-4 sm:h-5 sm:w-5" />
                 Become a Partner
               </a>
             </motion.div>
@@ -441,7 +441,7 @@ export default function KratikiEkthesiPage() {
       {/* ============================================ */}
       {/* EVENT INFO SECTION */}
       {/* ============================================ */}
-      <section ref={infoRef} className="relative overflow-hidden bg-zinc-50 py-20 sm:py-28">
+      <section ref={infoRef} className="relative overflow-hidden bg-zinc-50 py-12 sm:py-20 md:py-28">
         {/* Background */}
         <GridPattern
           className="absolute inset-0 z-0 opacity-30 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
@@ -506,7 +506,7 @@ export default function KratikiEkthesiPage() {
       {/* ============================================ */}
       {/* PHOTO GALLERY SECTION */}
       {/* ============================================ */}
-      <section ref={galleryRef} className="relative bg-white py-20 sm:py-28">
+      <section ref={galleryRef} className="relative bg-white py-12 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -556,7 +556,7 @@ export default function KratikiEkthesiPage() {
       <section
         id="schedule"
         ref={scheduleRef}
-        className="relative overflow-hidden bg-slate-900 py-20 sm:py-28"
+        className="relative overflow-hidden bg-slate-900 py-12 sm:py-20 md:py-28"
       >
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
@@ -647,7 +647,7 @@ export default function KratikiEkthesiPage() {
       <section
         id="tickets"
         ref={ticketsRef}
-        className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-rose-500 to-orange-600 py-20 sm:py-28"
+        className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-rose-500 to-orange-600 py-12 sm:py-20 md:py-28"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -770,7 +770,7 @@ export default function KratikiEkthesiPage() {
       <section
         id="partner"
         ref={partnerRef}
-        className="relative overflow-hidden bg-white py-20 sm:py-28"
+        className="relative overflow-hidden bg-white py-12 sm:py-20 md:py-28"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -986,7 +986,7 @@ export default function KratikiEkthesiPage() {
       {/* ============================================ */}
       {/* FAQ SECTION */}
       {/* ============================================ */}
-      <section ref={faqRef} className="relative bg-zinc-50 py-20 sm:py-28">
+      <section ref={faqRef} className="relative bg-zinc-50 py-12 sm:py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
