@@ -12,6 +12,7 @@ import {
 import { Menu, MoveRight, X, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Header1() {
     const navigationItems = [
@@ -68,6 +69,17 @@ function Header1() {
 
     const [isOpen, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+
+    // Pages with dark hero sections that need white text
+    const darkHeroPages = [
+        "/events/kratiki-ekthesi",
+        "/events/planitario",
+        // Add other dark hero pages here
+    ];
+    
+    const hasDarkHero = darkHeroPages.some(page => pathname?.startsWith(page));
+    const shouldShowWhiteText = !scrolled && hasDarkHero;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -96,14 +108,22 @@ function Header1() {
                                     {item.href ? (
                                         <Link href={item.href} legacyBehavior passHref>
                                             <NavigationMenuLink>
-                                                <Button variant="ghost" className="text-slate-700 hover:text-orange-600 hover:bg-white/50">
+                                                <Button variant="ghost" className={`transition-colors duration-300 ${
+                                                    shouldShowWhiteText
+                                                        ? "text-white hover:text-orange-300 hover:bg-white/10" 
+                                                        : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
+                                                }`}>
                                                     {item.title}
                                                 </Button>
                                             </NavigationMenuLink>
                                         </Link>
                                     ) : (
                                         <>
-                                            <NavigationMenuTrigger className="font-medium text-sm text-slate-700 hover:text-orange-600 hover:bg-white/50 data-[state=open]:bg-white/50 data-[state=open]:text-orange-600 bg-transparent border-0 shadow-none">
+                                            <NavigationMenuTrigger className={`font-medium text-sm transition-colors duration-300 bg-transparent border-0 shadow-none ${
+                                                shouldShowWhiteText
+                                                    ? "text-white hover:text-orange-300 hover:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-orange-300" 
+                                                    : "text-slate-700 hover:text-orange-600 hover:bg-white/50 data-[state=open]:bg-white/50 data-[state=open]:text-orange-600"
+                                            }`}>
                                                 {item.title}
                                             </NavigationMenuTrigger>
                                             <NavigationMenuContent className="!w-[450px] p-4 bg-white border border-slate-200 shadow-xl">
@@ -147,22 +167,30 @@ function Header1() {
                 {/* Logo - Center on desktop, Left on mobile */}
                 <div className="flex lg:justify-center flex-1 lg:flex-none">
                     <Link href="/" className="flex items-center gap-2">
-                        <Sparkles className={`h-5 w-5 transition-colors duration-300 lg:text-orange-500 ${
-                            scrolled ? "text-orange-500" : "text-orange-400"
-                        }`} />
-                        <p className={`font-bold text-xl transition-colors duration-300 lg:text-slate-900 ${
-                            scrolled ? "text-slate-900" : "text-white"
+                        <Sparkles className="h-5 w-5 text-orange-500 transition-colors duration-300" />
+                        <p className={`font-bold text-xl transition-colors duration-300 ${
+                            shouldShowWhiteText ? "text-white" : "text-slate-900"
                         }`}>Memora Experience</p>
                     </Link>
                 </div>
                 
                 {/* Desktop Actions - Right (hidden on mobile) */}
                 <div className="hidden lg:flex justify-end w-full gap-3">
-                    <Button variant="ghost" className="text-slate-700 hover:text-orange-600 hover:bg-white/50">
+                    <Button variant="ghost" className={`transition-colors duration-300 ${
+                        shouldShowWhiteText
+                            ? "text-white hover:text-orange-300 hover:bg-white/10" 
+                            : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
+                    }`}>
                         Contact Us
                     </Button>
-                    <div className="border-r border-slate-300/50"></div>
-                    <Button variant="outline" className="border-slate-300 bg-white/80 backdrop-blur-sm text-slate-700 hover:bg-white hover:border-orange-300 hover:text-orange-600">
+                    <div className={`transition-colors duration-300 ${
+                        shouldShowWhiteText ? "border-r border-white/30" : "border-r border-slate-300/50"
+                    }`}></div>
+                    <Button variant="outline" className={`transition-all duration-300 ${
+                        shouldShowWhiteText
+                            ? "border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/50" 
+                            : "border-slate-300 bg-white/80 backdrop-blur-sm text-slate-700 hover:bg-white hover:border-orange-300 hover:text-orange-600"
+                    }`}>
                         Sign in
                     </Button>
                     <Button className="bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0 shadow-lg shadow-orange-500/25">
@@ -177,9 +205,9 @@ function Header1() {
                         size="icon"
                         onClick={() => setOpen(!isOpen)} 
                         className={`transition-colors duration-300 h-10 w-10 ${
-                            scrolled 
-                                ? "text-slate-700 hover:bg-white/50" 
-                                : "text-white hover:bg-white/10"
+                            shouldShowWhiteText
+                                ? "text-white hover:bg-white/10" 
+                                : "text-slate-700 hover:bg-white/50"
                         }`}
                     >
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
