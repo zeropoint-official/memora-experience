@@ -251,36 +251,20 @@ function MobileHero() {
             </motion.div>
           </div>
 
-          {/* Bottom: Social Proof - better spacing */}
+          {/* Bottom: Scroll indicator only */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-col items-center gap-4 pb-2"
+            className="flex flex-col items-center pb-16"
           >
-            {/* Live viewers */}
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {["from-orange-400 to-amber-400", "from-rose-400 to-pink-400", "from-violet-400 to-purple-400"].map((gradient, i) => (
-                  <motion.div
-                    key={i}
-                    className={`h-8 w-8 rounded-full border-2 border-white/40 bg-gradient-to-br ${gradient} shadow-lg`}
-                    initial={{ opacity: 0, scale: 0.5, x: -5 }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    transition={{ delay: 0.8 + i * 0.1 }}
-                  />
-                ))}
-              </div>
-              <span className="text-[12px] text-white/85 font-medium">247 people viewing now</span>
-            </div>
-
-            {/* Scroll indicator */}
             <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center"
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-1"
             >
-              <ChevronLeft className="h-6 w-6 text-white/50 rotate-[-90deg]" />
+              <span className="text-[11px] text-white/60 font-medium tracking-wide">Scroll</span>
+              <ChevronLeft className="h-5 w-5 text-white/50 rotate-[-90deg]" />
             </motion.div>
           </motion.div>
         </div>
