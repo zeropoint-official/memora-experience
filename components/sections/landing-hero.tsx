@@ -155,7 +155,7 @@ function MobileHero() {
       {/* ============================================ */}
       {/* PART 1: FULL-SCREEN VIDEO HERO */}
       {/* ============================================ */}
-      <div className="relative h-[72svh] w-full overflow-hidden">
+      <div className="relative min-h-[85svh] w-full overflow-hidden">
         {/* Video Background */}
         <video
           ref={videoRef}
@@ -178,46 +178,46 @@ function MobileHero() {
         </video>
 
         {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60" />
         
         {/* Subtle vignette effect */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.25)_100%)]" />
 
         {/* Hero Content Overlay */}
         <div
-          className="absolute inset-0 z-10 flex flex-col justify-between px-4"
+          className="absolute inset-0 z-10 flex flex-col px-5"
           style={{
-            paddingTop: "calc(env(safe-area-inset-top) + 4.5rem)",
-            paddingBottom: "calc(env(safe-area-inset-bottom) + 1.5rem)",
+            paddingTop: "calc(env(safe-area-inset-top) + 6rem)",
+            paddingBottom: "calc(env(safe-area-inset-bottom) + 2.5rem)",
           }}
         >
-          {/* Top: Badge */}
+          {/* Top: Badge - with proper spacing */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex justify-center"
+            className="flex justify-center pt-2"
           >
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 shadow-xl">
-              <span className="relative flex h-2 w-2">
+            <div className="inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 px-5 py-2.5 shadow-2xl">
+              <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-400" />
               </span>
-              <span className="text-xs font-semibold text-white">Cyprus Event Experiences</span>
+              <span className="text-[13px] font-semibold text-white/95 tracking-wide">Cyprus Event Experiences</span>
             </div>
           </motion.div>
 
-          {/* Center: Main Title */}
-          <div className="flex flex-1 flex-col items-center justify-center -mt-6">
+          {/* Center: Main Title - properly centered with balanced spacing */}
+          <div className="flex flex-1 flex-col items-center justify-center py-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="text-[2.25rem] sm:text-[2.6rem] font-black tracking-tight leading-[0.98] text-white drop-shadow-2xl">
+              <h1 className="text-[2.5rem] sm:text-[2.75rem] font-black tracking-tight leading-[1.05] text-white drop-shadow-2xl">
                 <span className="block">Create</span>
-                <span className="relative inline-block my-1">
+                <span className="relative inline-block my-2">
                   <TextRotate
                     texts={["Legendary", "Memorable", "Spectacular", "Fantastic"]}
                     mainClassName="inline-flex items-baseline justify-center whitespace-nowrap"
@@ -232,31 +232,31 @@ function MobileHero() {
               </h1>
             </motion.div>
 
-            {/* Event Info Pill */}
+            {/* Event Info Pill - more breathing room */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="mt-4"
+              className="mt-6"
             >
-              <div className="inline-flex items-center gap-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 shadow-xl">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg">
-                  <Calendar className="h-4 w-4 text-white" />
+              <div className="inline-flex items-center gap-3 rounded-2xl bg-white/12 backdrop-blur-xl border border-white/20 px-5 py-3 shadow-2xl">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg">
+                  <Calendar className="h-5 w-5 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] text-white/70 uppercase tracking-wider font-medium">Next Event</span>
-                  <span className="text-sm font-bold text-white">Planitario • Mar 15-16</span>
+                  <span className="text-[11px] text-white/70 uppercase tracking-wider font-medium">Next Event</span>
+                  <span className="text-[15px] font-bold text-white">Planitario • Mar 15-16</span>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* Bottom: Social Proof */}
+          {/* Bottom: Social Proof - better spacing */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-col items-center gap-3"
+            className="flex flex-col items-center gap-4 pb-2"
           >
             {/* Live viewers */}
             <div className="flex items-center gap-3">
@@ -264,23 +264,23 @@ function MobileHero() {
                 {["from-orange-400 to-amber-400", "from-rose-400 to-pink-400", "from-violet-400 to-purple-400"].map((gradient, i) => (
                   <motion.div
                     key={i}
-                    className={`h-7 w-7 rounded-full border-2 border-white/30 bg-gradient-to-br ${gradient} shadow-lg`}
+                    className={`h-8 w-8 rounded-full border-2 border-white/40 bg-gradient-to-br ${gradient} shadow-lg`}
                     initial={{ opacity: 0, scale: 0.5, x: -5 }}
                     animate={{ opacity: 1, scale: 1, x: 0 }}
                     transition={{ delay: 0.8 + i * 0.1 }}
                   />
                 ))}
               </div>
-              <span className="text-[11px] text-white/80 font-medium">247 people viewing now</span>
+              <span className="text-[12px] text-white/85 font-medium">247 people viewing now</span>
             </div>
 
             {/* Scroll indicator */}
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-1 mt-1"
+              className="flex flex-col items-center"
             >
-              <ChevronLeft className="h-5 w-5 text-white/60 rotate-[-90deg]" />
+              <ChevronLeft className="h-6 w-6 text-white/50 rotate-[-90deg]" />
             </motion.div>
           </motion.div>
         </div>
