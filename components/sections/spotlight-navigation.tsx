@@ -82,9 +82,9 @@ function PlanitarioHeroCard() {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      initial={{ opacity: 0, filter: "blur(10px)" }}
+      animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className="relative w-full"
     >
       <a href="/planitario" className="block group">
@@ -161,9 +161,9 @@ function PlanitarioHeroCard() {
             <div className="space-y-2 sm:space-y-4">
               {/* Countdown - Hidden on very small screens */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.5 }}
+                initial={{ opacity: 0, filter: "blur(8px)" }}
+                animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+                transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
                 className="hidden xs:block"
               >
                 <p className="text-[10px] sm:text-sm text-white/60 mb-1 sm:mb-2 font-medium tracking-wide uppercase">
@@ -174,9 +174,9 @@ function PlanitarioHeroCard() {
 
               {/* Title */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.6 }}
+                initial={{ opacity: 0, filter: "blur(8px)" }}
+                animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+                transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
               >
                 <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3 tracking-tight">
                   Planitario
@@ -189,9 +189,9 @@ function PlanitarioHeroCard() {
 
               {/* Date & Location - Stacked below title */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.65 }}
+                initial={{ opacity: 0, filter: "blur(8px)" }}
+                animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+                transition={{ delay: 0.65, duration: 0.5, ease: "easeOut" }}
                 className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/80"
               >
                 <span className="flex items-center gap-1.5">
@@ -208,9 +208,9 @@ function PlanitarioHeroCard() {
 
               {/* CTA Button - Below date/location */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.7 }}
+                initial={{ opacity: 0, filter: "blur(8px)" }}
+                animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+                transition={{ delay: 0.7, duration: 0.5, ease: "easeOut" }}
                 className="pt-2 sm:pt-3"
               >
                 <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold text-slate-900 shadow-xl transition-all group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-cyan-500 group-hover:text-white group-hover:shadow-purple-500/25">
@@ -372,9 +372,9 @@ function NavigationCarousel() {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.2 }}
+      initial={{ opacity: 0, filter: "blur(10px)" }}
+      animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
       className="relative"
     >
       {/* Section Label */}
@@ -475,9 +475,9 @@ function QuickLinks() {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.4 }}
+      initial={{ opacity: 0, filter: "blur(10px)" }}
+      animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+      transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
     >
       {/* Section Label */}
       <h3 className="text-lg font-semibold text-slate-900 mb-4 px-1">
@@ -490,9 +490,9 @@ function QuickLinks() {
           <motion.a
             key={index}
             href={link.href}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.5 + index * 0.1 }}
+            initial={{ opacity: 0, filter: "blur(8px)" }}
+            animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
+            transition={{ delay: 0.5 + index * 0.1, duration: 0.5, ease: "easeOut" }}
             className={`group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 text-center transition-all hover:border-slate-300 hover:shadow-lg ${link.bgHover}`}
           >
             <div
@@ -529,10 +529,10 @@ export function SpotlightNavigation() {
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Section Header - More compact on mobile */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-4 sm:mb-8 flex items-center gap-2 sm:gap-3"
         >
           <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg">

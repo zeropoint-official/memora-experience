@@ -78,12 +78,13 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, filter: "blur(8px)" },
   visible: {
     opacity: 1,
-    y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.6,
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
@@ -100,13 +101,13 @@ const imageContainerVariants = {
 };
 
 const imageVariants = {
-  hidden: { opacity: 0, scale: 0.8, y: 40 },
+  hidden: { opacity: 0, filter: "blur(10px)" },
   visible: {
     opacity: 1,
-    scale: 1,
-    y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.7,
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
 };
@@ -193,9 +194,9 @@ function MobileHero() {
         >
           {/* Top: Badge - with proper spacing */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            initial={{ opacity: 0, filter: "blur(8px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
             className="flex justify-center pt-2"
           >
             <div className="inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 px-5 py-2.5 shadow-2xl">
@@ -210,9 +211,9 @@ function MobileHero() {
           {/* Center: Main Title - properly centered with balanced spacing */}
           <div className="flex flex-1 flex-col items-center justify-center py-8">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              initial={{ opacity: 0, filter: "blur(10px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
               className="text-center"
             >
               <h1 className="text-[2.5rem] sm:text-[2.75rem] font-black tracking-tight leading-[1.05] text-white drop-shadow-2xl">
@@ -234,9 +235,9 @@ function MobileHero() {
 
             {/* Event Info Pill - more breathing room */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              initial={{ opacity: 0, filter: "blur(8px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
               className="mt-6"
             >
               <div className="inline-flex items-center gap-3 rounded-2xl bg-white/12 backdrop-blur-xl border border-white/20 px-5 py-3 shadow-2xl">
@@ -381,9 +382,9 @@ function MobileHero() {
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
+                    initial={{ opacity: 0, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                    transition={{ delay: 0.4 + index * 0.1, duration: 0.5, ease: "easeOut" }}
                     className={`rounded-2xl ${stat.bg} border border-slate-100 p-4 text-center shadow-sm`}
                   >
                     <div className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} shadow-md`}>
@@ -547,9 +548,9 @@ function DesktopHero() {
       <div className="relative z-30 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pointer-events-none pt-20">
         {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, filter: "blur(8px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-6 pointer-events-auto"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
@@ -560,9 +561,9 @@ function DesktopHero() {
 
         {/* Title with rotating word */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          initial={{ opacity: 0, filter: "blur(10px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="text-center"
         >
           <h1 className="text-5xl lg:text-6xl font-bold tracking-tight leading-[1.12] text-slate-900">
@@ -589,9 +590,9 @@ function DesktopHero() {
 
         <motion.p
           className="mt-8 max-w-2xl text-center text-lg md:text-xl text-slate-600"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          initial={{ opacity: 0, filter: "blur(8px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
         >
           From electrifying Planitario nights to epic student adventures, 
           we transform your vision into extraordinary experiences across Cyprus.
@@ -599,9 +600,9 @@ function DesktopHero() {
 
         {/* Event info badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          initial={{ opacity: 0, filter: "blur(8px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
           className="mt-6 pointer-events-auto"
         >
           <div className="inline-flex items-center gap-3 rounded-full border border-orange-200 bg-white/80 backdrop-blur-sm px-4 py-2 text-sm shadow-lg">
@@ -619,9 +620,9 @@ function DesktopHero() {
         {/* CTA Buttons */}
         <motion.div
           className="mt-12 flex flex-row items-center gap-4 pointer-events-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          initial={{ opacity: 0, filter: "blur(8px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
         >
           <motion.button
             whileHover={{ scale: 1.05 }}

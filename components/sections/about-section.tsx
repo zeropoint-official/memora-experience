@@ -96,19 +96,19 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, filter: "blur(8px)" },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
+    filter: "blur(0px)",
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
 
 const statVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, filter: "blur(8px)" },
   visible: {
     opacity: 1,
-    scale: 1,
+    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
   },
 };
