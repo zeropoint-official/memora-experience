@@ -30,7 +30,6 @@ interface Event {
   themeColor: string;
   badge?: string;
   featured?: boolean;
-  emoji: string;
 }
 
 // ============================================
@@ -50,7 +49,6 @@ const eventsData: Event[] = [
     themeColor: "25 95% 50%",
     badge: "Featured",
     featured: true,
-    emoji: "🚀",
   },
   {
     id: "kratiki-ekthesi-2026",
@@ -63,7 +61,6 @@ const eventsData: Event[] = [
     href: "/events/kratiki-ekthesi",
     themeColor: "340 80% 45%",
     badge: "Annual",
-    emoji: "🎪",
   },
   {
     id: "summer-festival-2026",
@@ -76,7 +73,6 @@ const eventsData: Event[] = [
     href: "/events/summer-festival",
     themeColor: "200 80% 45%",
     badge: "Beach Party",
-    emoji: "🎉",
   },
 
   // STUDENT TRIPS
@@ -91,7 +87,6 @@ const eventsData: Event[] = [
     href: "/events/barcelona",
     themeColor: "340 80% 45%",
     badge: "5 Days",
-    emoji: "🇪🇸",
   },
   {
     id: "rome-trip-2026",
@@ -104,7 +99,6 @@ const eventsData: Event[] = [
     href: "/events/rome",
     themeColor: "25 90% 45%",
     badge: "6 Days",
-    emoji: "🇮🇹",
   },
   {
     id: "paris-trip-2026",
@@ -117,7 +111,6 @@ const eventsData: Event[] = [
     href: "/events/paris",
     themeColor: "220 80% 45%",
     badge: "6 Days",
-    emoji: "🇫🇷",
   },
 
   // BUSINESS EVENTS
@@ -132,7 +125,6 @@ const eventsData: Event[] = [
     href: "/events/tech-summit",
     themeColor: "220 80% 50%",
     badge: "Conference",
-    emoji: "💼",
   },
   {
     id: "corporate-retreat-2026",
@@ -145,7 +137,6 @@ const eventsData: Event[] = [
     href: "/events/corporate-retreat",
     themeColor: "160 70% 40%",
     badge: "Team Building",
-    emoji: "🏢",
   },
   {
     id: "business-expo-2026",
@@ -158,7 +149,6 @@ const eventsData: Event[] = [
     href: "/events/business-expo",
     themeColor: "25 85% 50%",
     badge: "B2B",
-    emoji: "📊",
   },
 
   // PAST EVENTS
@@ -173,7 +163,6 @@ const eventsData: Event[] = [
     href: "https://planetarium.memora-experience.com",
     themeColor: "260 70% 50%",
     badge: "Sold Out",
-    emoji: "✨",
   },
   {
     id: "winter-gala-2024",
@@ -186,7 +175,6 @@ const eventsData: Event[] = [
     href: "/events/winter-gala-2024",
     themeColor: "200 60% 40%",
     badge: "Completed",
-    emoji: "❄️",
   },
   {
     id: "amsterdam-trip-2024",
@@ -199,7 +187,6 @@ const eventsData: Event[] = [
     href: "/events/amsterdam-2024",
     themeColor: "25 80% 45%",
     badge: "Completed",
-    emoji: "🇳🇱",
   },
 ];
 
@@ -294,9 +281,6 @@ function EventCard({ event, index }: { event: Event; index: number }) {
               </span>
             </div>
           )}
-
-          {/* Emoji */}
-          <div className="absolute right-4 top-4 text-2xl">{event.emoji}</div>
         </div>
 
         {/* Content */}
@@ -388,7 +372,6 @@ function FeaturedEventCard({ event }: { event: Event }) {
               <Sparkles className="h-4 w-4" />
               Featured Event
             </span>
-            <span className="text-3xl">{event.emoji}</span>
           </div>
 
           {/* Bottom */}
