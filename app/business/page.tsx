@@ -582,133 +582,6 @@ export default function BusinessPage() {
       </section>
 
       {/* ============================================ */}
-      {/* OUR EVENTS SECTION */}
-      {/* ============================================ */}
-      <section
-        ref={eventsRef}
-        className="relative overflow-hidden bg-slate-900 py-12 sm:py-20 md:py-28"
-      >
-        <div className="absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-orange-500/10 blur-[120px]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isEventsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="mb-12 text-center"
-          >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
-              <Calendar className="h-4 w-4" />
-              Available Events
-            </span>
-            <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">
-              Events Open for Partnership
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
-              Choose from our portfolio of high-impact events
-            </p>
-          </motion.div>
-
-          {/* Event Cards */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {eventsForPartnership.map((event, index) => (
-              <motion.a
-                key={event.id}
-                href={event.href}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isEventsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm transition-all hover:-translate-y-1 hover:bg-white/10"
-              >
-                <div className="relative h-40 overflow-hidden">
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">
-                      {event.attendance} expected
-                    </span>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="mb-2 font-bold text-white">{event.title}</h3>
-                  <div className="space-y-1 text-sm text-slate-400">
-                    <p className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      {event.date}
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4" />
-                      {event.location}
-                    </p>
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* TESTIMONIALS SECTION */}
-      {/* ============================================ */}
-      <section ref={testimonialsRef} className="relative bg-zinc-50 py-12 sm:py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isTestimonialsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="mb-12 text-center"
-          >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
-              <Quote className="h-4 w-4" />
-              Partner Stories
-            </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl">
-              What Our Partners Say
-            </h2>
-          </motion.div>
-
-          {/* Testimonial Cards */}
-          <div className="grid gap-8 md:grid-cols-3">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isTestimonialsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-              >
-                <Quote className="mb-4 h-8 w-8 text-orange-200" />
-                <p className="mb-6 text-slate-600 italic">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-lg font-bold text-white">
-                    {testimonial.author.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-slate-900">
-                      {testimonial.author}
-                    </p>
-                    <p className="text-sm text-slate-500">
-                      {testimonial.role}, {testimonial.company}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
       {/* PARTNERSHIP INQUIRY FORM */}
       {/* ============================================ */}
       <section
@@ -845,13 +718,12 @@ export default function BusinessPage() {
                   {/* Event Selection */}
                   <div>
                     <label className="mb-2 block text-sm font-medium text-slate-700">
-                      Interested Event *
+                      Interested Event <span className="text-slate-400 font-normal">(optional)</span>
                     </label>
                     <select
-                      required
                       className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
                     >
-                      <option value="">Select an event</option>
+                      <option value="">Select an event (optional)</option>
                       <option value="kratiki-ekthesi">
                         Kratiki Ekthesi 2026
                       </option>
@@ -863,6 +735,7 @@ export default function BusinessPage() {
                       <option value="corporate">Corporate Events</option>
                       <option value="multiple">Multiple Events</option>
                       <option value="other">Other / Not Sure</option>
+                      <option value="none">Not specified</option>
                     </select>
                   </div>
 
@@ -934,6 +807,133 @@ export default function BusinessPage() {
               </form>
             )}
           </motion.div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* OUR EVENTS SECTION */}
+      {/* ============================================ */}
+      <section
+        ref={eventsRef}
+        className="relative overflow-hidden bg-slate-900 py-12 sm:py-20 md:py-28"
+      >
+        <div className="absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-orange-500/10 blur-[120px]" />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isEventsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="mb-12 text-center"
+          >
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
+              <Calendar className="h-4 w-4" />
+              Available Events
+            </span>
+            <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">
+              Events Open for Partnership
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+              Choose from our portfolio of high-impact events
+            </p>
+          </motion.div>
+
+          {/* Event Cards */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {eventsForPartnership.map((event, index) => (
+              <motion.a
+                key={event.id}
+                href={event.href}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isEventsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm transition-all hover:-translate-y-1 hover:bg-white/10"
+              >
+                <div className="relative h-40 overflow-hidden">
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">
+                      {event.attendance} expected
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="mb-2 font-bold text-white">{event.title}</h3>
+                  <div className="space-y-1 text-sm text-slate-400">
+                    <p className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      {event.date}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4" />
+                      {event.location}
+                    </p>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================ */}
+      {/* TESTIMONIALS SECTION */}
+      {/* ============================================ */}
+      <section ref={testimonialsRef} className="relative bg-zinc-50 py-12 sm:py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isTestimonialsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="mb-12 text-center"
+          >
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
+              <Quote className="h-4 w-4" />
+              Partner Stories
+            </span>
+            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl">
+              What Our Partners Say
+            </h2>
+          </motion.div>
+
+          {/* Testimonial Cards */}
+          <div className="grid gap-8 md:grid-cols-3">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isTestimonialsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              >
+                <Quote className="mb-4 h-8 w-8 text-orange-200" />
+                <p className="mb-6 text-slate-600 italic">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-lg font-bold text-white">
+                    {testimonial.author.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {testimonial.author}
+                    </p>
+                    <p className="text-sm text-slate-500">
+                      {testimonial.role}, {testimonial.company}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -13,6 +13,7 @@ import { Menu, MoveRight, X, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 function Header1() {
     const navigationItems = [
@@ -63,12 +64,17 @@ function Header1() {
                     title: "Corporate Events",
                     href: "/services/corporate",
                 },
+                {
+                    title: "Business with Us",
+                    href: "/business",
+                },
             ],
         },
     ];
 
     const [isOpen, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
     const pathname = usePathname();
 
     // Pages with dark hero sections that need white text
@@ -80,15 +86,31 @@ function Header1() {
     ];
     
     const hasDarkHero = darkHeroPages.some(page => pathname?.startsWith(page));
-    const shouldShowWhiteText = !scrolled && hasDarkHero;
+    const isHomePage = pathname === "/";
+    
+    // On desktop homepage, always show black text (light background)
+    // On mobile homepage, show white text when at top (dark video background)
+    // On other dark hero pages, show white text when at top
+    const shouldShowWhiteText = !scrolled && hasDarkHero && !(isHomePage && isDesktop);
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
 
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 768); // md breakpoint
+        };
+
+        // Check initial size
+        handleResize();
+
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
     
     return (
@@ -177,26 +199,43 @@ function Header1() {
                 
                 {/* Desktop Actions - Right (hidden on mobile) */}
                 <div className="hidden lg:flex justify-end w-full gap-3">
-                    <Button variant="ghost" className={`transition-colors duration-300 ${
-                        shouldShowWhiteText
-                            ? "text-white hover:text-orange-300 hover:bg-white/10" 
-                            : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
-                    }`}>
-                        Contact Us
-                    </Button>
+                    <Link href="/contact">
+                        <Button variant="ghost" className={`transition-colors duration-300 ${
+                            shouldShowWhiteText
+                                ? "text-white hover:text-orange-300 hover:bg-white/10" 
+                                : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
+                        }`}>
+                            Contact Us
+                        </Button>
+                    </Link>
                     <div className={`transition-colors duration-300 ${
                         shouldShowWhiteText ? "border-r border-white/30" : "border-r border-slate-300/50"
                     }`}></div>
-                    <Button variant="outline" className={`transition-all duration-300 ${
-                        shouldShowWhiteText
-                            ? "border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/50" 
-                            : "border-slate-300 bg-white/80 backdrop-blur-sm text-slate-700 hover:bg-white hover:border-orange-300 hover:text-orange-600"
-                    }`}>
-                        Sign in
-                    </Button>
-                    <Button className="bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0 shadow-lg shadow-orange-500/25">
-                        Get Started
-                    </Button>
+                    <SignedOut>
+                        <SignInButton mode="modal">
+                            <Button variant="outline" className={`transition-all duration-300 ${
+                                shouldShowWhiteText
+                                    ? "border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/50" 
+                                    : "border-slate-300 bg-white/80 backdrop-blur-sm text-slate-700 hover:bg-white hover:border-orange-300 hover:text-orange-600"
+                            }`}>
+                                Sign in
+                            </Button>
+                        </SignInButton>
+                        <SignUpButton mode="modal">
+                            <Button className="bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0 shadow-lg shadow-orange-500/25">
+                                Get Started
+                            </Button>
+                        </SignUpButton>
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton 
+                            appearance={{
+                                elements: {
+                                    avatarBox: "h-9 w-9",
+                                },
+                            }}
+                        />
+                    </SignedIn>
                 </div>
                 
                 {/* Mobile Menu Button - Only visible on mobile */}
@@ -253,12 +292,34 @@ function Header1() {
                             </div>
                         ))}
                         <div className="flex flex-col gap-3 pt-4 border-t border-slate-200">
-                            <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
-                                Sign in
-                            </Button>
-                            <Button className="w-full bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0">
-                                Get Started
-                            </Button>
+                            <Link href="/contact" onClick={() => setOpen(false)}>
+                                <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
+                                    Contact Us
+                                </Button>
+                            </Link>
+                            <SignedOut>
+                                <SignInButton mode="modal">
+                                    <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
+                                        Sign in
+                                    </Button>
+                                </SignInButton>
+                                <SignUpButton mode="modal">
+                                    <Button className="w-full bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0">
+                                        Get Started
+                                    </Button>
+                                </SignUpButton>
+                            </SignedOut>
+                            <SignedIn>
+                                <div className="flex justify-center">
+                                    <UserButton 
+                                        appearance={{
+                                            elements: {
+                                                avatarBox: "h-10 w-10",
+                                            },
+                                        }}
+                                    />
+                                </div>
+                            </SignedIn>
                         </div>
                     </div>
                 </div>

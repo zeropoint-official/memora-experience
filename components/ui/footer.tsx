@@ -26,6 +26,7 @@ const footerLinks = {
     { name: "Venue Sourcing", href: "/services/venues" },
     { name: "Vendor Coordination", href: "/services/vendors" },
     { name: "Corporate Solutions", href: "/services/corporate" },
+    { name: "Business with Us", href: "/business" },
   ],
   company: [
     { name: "About Us", href: "/about" },

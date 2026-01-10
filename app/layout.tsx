@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { Header1 } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
@@ -29,18 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-white" style={{ colorScheme: 'light' }}>
-      <body
-        className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased bg-white`}
-        style={{ 
-          backgroundColor: '#ffffff',
-          fontFamily: 'var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif'
-        }}
-      >
-        <Header1 />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="bg-white" style={{ colorScheme: 'light' }}>
+        <body
+          className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased bg-white`}
+          style={{ 
+            backgroundColor: '#ffffff',
+            fontFamily: 'var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif'
+          }}
+        >
+          <Header1 />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

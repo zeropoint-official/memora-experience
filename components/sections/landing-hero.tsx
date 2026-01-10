@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Ticket, Briefcase, Calendar, Sparkles, Star, Users, MapPin, Flame, ChevronLeft, ChevronRight, Zap, Heart, Play } from "lucide-react";
+import Link from "next/link";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { Spotlight } from "@/components/ui/spotlight";
@@ -359,15 +360,17 @@ function MobileHero() {
                 <ArrowRight className="h-5 w-5" />
               </ShimmerButton>
 
-              <motion.button 
-                whileTap={{ scale: 0.98 }}
-                className="w-full rounded-2xl border-2 border-slate-900 bg-white px-6 py-3.5 text-sm font-bold text-slate-900 transition-all active:scale-[0.98]"
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <Briefcase className="h-4 w-4" />
-                  <span>Partner With Us</span>
-                </span>
-              </motion.button>
+              <Link href="/business">
+                <motion.button 
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full rounded-2xl border-2 border-slate-900 bg-white px-6 py-3.5 text-sm font-bold text-slate-900 transition-all active:scale-[0.98]"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    <Briefcase className="h-4 w-4" />
+                    <span>Partner With Us</span>
+                  </span>
+                </motion.button>
+              </Link>
             </div>
           </BlurFade>
 
@@ -634,14 +637,16 @@ function DesktopHero() {
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </motion.button>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group inline-flex items-center gap-2 rounded-full border-2 border-slate-900 bg-white px-8 py-4 text-lg font-semibold text-slate-900 transition-all hover:bg-slate-900 hover:text-white"
-          >
-            <Briefcase className="h-5 w-5" />
-            <span>Business with Us</span>
-          </motion.button>
+          <Link href="/business">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group inline-flex items-center gap-2 rounded-full border-2 border-slate-900 bg-white px-8 py-4 text-lg font-semibold text-slate-900 transition-all hover:bg-slate-900 hover:text-white"
+            >
+              <Briefcase className="h-5 w-5" />
+              <span>Business with Us</span>
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
 

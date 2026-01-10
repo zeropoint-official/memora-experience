@@ -103,7 +103,7 @@ export function HeroV5Minimal() {
               { label: "Planitario", href: "#" },
               { label: "Student Trips", href: "#" },
               { label: "Business Expos", href: "#" },
-              { label: "Contact", href: "#" },
+              { label: "Contact", href: "/contact" },
             ].map((link, i) => (
               <motion.a
                 key={i}
@@ -140,6 +140,7 @@ export function HeroV5Minimal() {
     </section>
   );
 }
+
 
 
 
