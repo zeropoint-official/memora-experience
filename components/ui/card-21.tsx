@@ -26,6 +26,8 @@ const DestinationCard = React.forwardRef<HTMLDivElement, DestinationCardProps>(
       >
         <a
           href={href}
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
           className="relative block w-full h-full rounded-2xl overflow-hidden shadow-lg 
                      transition-all duration-500 ease-in-out 
                      group-hover:scale-105 group-hover:shadow-[0_0_60px_-15px_hsl(var(--theme-color)/0.6)]"

@@ -19,6 +19,137 @@ import {
 } from "lucide-react";
 
 // ============================================
+// SHARED STATE: Track active card for scroll hover
+// ============================================
+const activeCardState = {
+  activeId: null as string | null,
+  setActive: (id: string | null) => {
+    if (activeCardState.activeId !== id) {
+      activeCardState.activeId = id;
+      activeCardState.listeners.forEach(listener => listener(id));
+    }
+  },
+  listeners: new Set<(id: string | null) => void>(),
+  subscribe: (listener: (id: string | null) => void) => {
+    activeCardState.listeners.add(listener);
+    return () => activeCardState.listeners.delete(listener);
+  },
+  findMostCenteredCard: (): string | null => {
+    const allCards = document.querySelectorAll<HTMLElement>('[data-card-id]');
+    if (allCards.length === 0) return null;
+
+    const windowHeight = window.innerHeight;
+    const centerY = windowHeight / 2;
+    let mostCenteredCard: HTMLElement | null = null;
+    let minDistance = Infinity;
+
+    Array.from(allCards).forEach((card: HTMLElement) => {
+      const rect = card.getBoundingClientRect();
+      // Card must be visible and in viewport
+      if (rect.top < windowHeight && rect.bottom > 0 && rect.left < window.innerWidth && rect.right > 0) {
+        const cardCenterY = rect.top + rect.height / 2;
+        const distanceFromCenter = Math.abs(cardCenterY - centerY);
+        
+        // Prefer cards that are more centered (within 60% of viewport height)
+        if (distanceFromCenter < minDistance && rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2) {
+          minDistance = distanceFromCenter;
+          mostCenteredCard = card;
+        }
+      }
+    });
+
+    if (!mostCenteredCard) return null;
+    const cardId = (mostCenteredCard as HTMLElement).getAttribute('data-card-id');
+    return cardId;
+  },
+};
+
+// ============================================
+// HOOK: Scroll-based hover effect for mobile
+// ============================================
+function useScrollHover(cardId: string) {
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    // Subscribe to active card changes
+    const unsubscribe = activeCardState.subscribe((activeId) => {
+      setIsHovered(activeId === cardId);
+    });
+
+    const updateActiveCard = () => {
+      const mostCentered = activeCardState.findMostCenteredCard();
+      activeCardState.setActive(mostCentered);
+    };
+
+    const handleScroll = () => {
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+
+      // Update immediately during scroll
+      updateActiveCard();
+
+      // After scroll stops, do a final check
+      scrollTimeoutRef.current = setTimeout(() => {
+        updateActiveCard();
+      }, 150);
+    };
+
+    // Use Intersection Observer for more accurate detection
+    const observer = new IntersectionObserver(
+      () => {
+        updateActiveCard();
+      },
+      {
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: "-15% 0px -15% 0px", // Only trigger when in center 70% of viewport
+      }
+    );
+
+    // Only enable on mobile
+    const isMobile = window.innerWidth < 640;
+    
+    if (isMobile) {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      observer.observe(card);
+      // Initial check
+      setTimeout(updateActiveCard, 100);
+    }
+
+    // Handle window resize
+    const handleResize = () => {
+      const stillMobile = window.innerWidth < 640;
+      if (!stillMobile && activeCardState.activeId === cardId) {
+        activeCardState.setActive(null);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      observer.disconnect();
+      unsubscribe();
+      // If this card was active, clear it
+      if (activeCardState.activeId === cardId) {
+        activeCardState.setActive(null);
+      }
+    };
+  }, [cardId]);
+
+  return { cardRef, isHovered };
+}
+
+// ============================================
 // COUNTDOWN TIMER COMPONENT
 // ============================================
 function CountdownTimer({ targetDate }: { targetDate: Date }) {
@@ -75,6 +206,8 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
 function PlanitarioHeroCard() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const cardId = "planitario-hero";
+  const { cardRef, isHovered } = useScrollHover(cardId);
 
   // March 15, 2025 event date
   const eventDate = new Date("2025-03-15T18:00:00");
@@ -87,14 +220,14 @@ function PlanitarioHeroCard() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="relative w-full"
     >
-      <a href="/planitario" className="block group">
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
+      <a href="https://planetarium.memora-experience.com" className="block group" target="_blank" rel="noopener noreferrer">
+        <div ref={cardRef} data-card-id={cardId} className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
           {/* Background Image */}
           <div className="relative h-[50vh] min-h-[320px] max-h-[450px] sm:h-[55vh] sm:min-h-[380px] sm:max-h-[550px] md:h-[50vh]">
             <img
               src="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
               alt="Cyprus Planetarium"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${isHovered ? 'scale-105' : ''}`}
             />
             {/* Gradient Overlays */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
@@ -237,6 +370,7 @@ interface CarouselCardProps {
   gradient: string;
   icon: React.ElementType;
   badge?: string;
+  cardId: string;
 }
 
 function CarouselCard({
@@ -247,15 +381,18 @@ function CarouselCard({
   gradient,
   icon: Icon,
   badge,
+  cardId,
 }: CarouselCardProps) {
+  const { cardRef, isHovered } = useScrollHover(cardId);
+
   return (
     <a href={href} className="block group flex-shrink-0 w-[75vw] sm:w-[300px]">
-      <div className="relative overflow-hidden rounded-xl h-[200px] sm:h-[240px]">
+      <div ref={cardRef} data-card-id={cardId} className="relative overflow-hidden rounded-xl h-[200px] sm:h-[240px]">
         {/* Background Image */}
         <img
           src={image}
           alt={title}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 ${isHovered ? 'scale-110' : ''}`}
         />
         <div
           className={`absolute inset-0 bg-gradient-to-t ${gradient} opacity-80`}
@@ -418,7 +555,7 @@ function NavigationCarousel() {
       >
         {carouselItems.map((item, index) => (
           <div key={index} style={{ scrollSnapAlign: "start" }}>
-            <CarouselCard {...item} />
+            <CarouselCard {...item} cardId={`carousel-card-${index}`} />
           </div>
         ))}
       </div>

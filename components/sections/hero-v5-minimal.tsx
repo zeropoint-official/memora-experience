@@ -100,7 +100,7 @@ export function HeroV5Minimal() {
         >
           <div className="flex items-center gap-8 text-sm text-slate-400">
             {[
-              { label: "Planitario", href: "#" },
+              { label: "Planitario", href: "https://planetarium.memora-experience.com" },
               { label: "Student Trips", href: "#" },
               { label: "Business Expos", href: "#" },
               { label: "Contact", href: "/contact" },

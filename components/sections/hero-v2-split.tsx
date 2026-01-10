@@ -204,6 +204,7 @@ export function HeroV2Split() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex items-center justify-center lg:justify-end"
           >
+            <a href="https://planetarium.memora-experience.com" target="_blank" rel="noopener noreferrer" className="block">
             <motion.div
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -268,6 +269,7 @@ export function HeroV2Split() {
                 </div>
               </div>
             </motion.div>
+            </a>
           </motion.div>
         </div>
       </div>

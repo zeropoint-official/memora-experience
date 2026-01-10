@@ -26,6 +26,9 @@ import {
   User,
   MessageSquare,
   CheckCircle,
+  X,
+  Lock,
+  Shield,
 } from "lucide-react";
 import Image from "next/image";
 import { GridPattern } from "@/components/ui/grid-pattern";
@@ -253,6 +256,11 @@ const faqData = [
 export default function KratikiEkthesiPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeDay, setActiveDay] = useState(0);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [selectedTicketType, setSelectedTicketType] = useState<{
+    type: string;
+    price: number;
+  } | null>(null);
 
   const heroRef = useRef(null);
   const infoRef = useRef(null);
@@ -675,26 +683,30 @@ export default function KratikiEkthesiPage() {
             </p>
 
             {/* Pricing Cards */}
-            <div className="mb-10 grid gap-6 sm:grid-cols-3">
+            <div className="mb-10 grid gap-4 sm:gap-6 sm:grid-cols-3">
               {[
-                { type: "Day Pass", price: "€15", desc: "Single day entry" },
+                { type: "Day Pass", price: 15, desc: "Single day entry" },
                 {
                   type: "Weekend Pass",
-                  price: "€35",
+                  price: 35,
                   desc: "Sat & Sun entry",
                   popular: true,
                 },
-                { type: "Full Pass", price: "€60", desc: "All 6 days entry" },
+                { type: "Full Pass", price: 60, desc: "All 6 days entry" },
               ].map((ticket, index) => (
-                <motion.div
+                <motion.button
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative rounded-2xl p-6 ${
+                  onClick={() => {
+                    setSelectedTicketType({ type: ticket.type, price: ticket.price });
+                    setIsPaymentModalOpen(true);
+                  }}
+                  className={`relative rounded-2xl p-5 sm:p-6 text-left transition-all hover:scale-105 active:scale-95 ${
                     ticket.popular
-                      ? "bg-white text-slate-900 shadow-2xl"
-                      : "bg-white/10 text-white backdrop-blur-sm"
+                      ? "bg-white text-slate-900 shadow-2xl ring-2 ring-orange-500"
+                      : "bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
                   }`}
                 >
                   {ticket.popular && (
@@ -710,35 +722,35 @@ export default function KratikiEkthesiPage() {
                     {ticket.type}
                   </p>
                   <p
-                    className={`my-2 text-4xl font-bold ${
+                    className={`my-2 text-3xl sm:text-4xl font-bold ${
                       ticket.popular ? "text-slate-900" : "text-white"
                     }`}
                   >
-                    {ticket.price}
+                    €{ticket.price}
                   </p>
                   <p
-                    className={`text-sm ${
+                    className={`text-xs sm:text-sm ${
                       ticket.popular ? "text-slate-500" : "text-white/60"
                     }`}
                   >
                     {ticket.desc}
                   </p>
-                </motion.div>
+                </motion.button>
               ))}
             </div>
 
             {/* CTA Button */}
-            <motion.a
+            <motion.button
               initial={{ opacity: 0, y: 20 }}
               animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
-              href="#"
-              className="group inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 text-xl font-bold text-slate-900 shadow-2xl transition-all hover:scale-105"
+              onClick={() => setIsPaymentModalOpen(true)}
+              className="group inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 sm:px-10 sm:py-5 text-lg sm:text-xl font-bold text-slate-900 shadow-2xl transition-all hover:scale-105 active:scale-95"
             >
-              <Ticket className="h-6 w-6" />
+              <Ticket className="h-5 w-5 sm:h-6 sm:w-6" />
               Get Tickets Now
-              <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
-            </motion.a>
+              <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 transition-transform group-hover:translate-x-1" />
+            </motion.button>
 
             {/* Notes */}
             <motion.div
@@ -1055,7 +1067,869 @@ export default function KratikiEkthesiPage() {
           </a>
         </div>
       </section>
+
+      {/* ============================================ */}
+      {/* PAYMENT MODAL */}
+      {/* ============================================ */}
+      <PaymentModal
+        isOpen={isPaymentModalOpen}
+        onClose={() => {
+          setIsPaymentModalOpen(false);
+          setSelectedTicketType(null);
+        }}
+        selectedTicketType={selectedTicketType}
+      />
     </main>
+  );
+}
+
+// ============================================
+// FLOATING LABEL INPUT COMPONENT
+// ============================================
+function FloatingInput({
+  label,
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  required = false,
+  icon: Icon,
+  maxLength,
+  pattern,
+  className = "",
+}: {
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  required?: boolean;
+  icon?: React.ElementType;
+  maxLength?: number;
+  pattern?: string;
+  className?: string;
+}) {
+  const [isFocused, setIsFocused] = useState(false);
+  const hasValue = value.length > 0;
+
+  return (
+    <div className={`relative ${className}`}>
+      <div className="relative">
+        {Icon && (
+          <Icon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors" />
+        )}
+        <input
+          type={type}
+          value={value}
+          onChange={onChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder=""
+          required={required}
+          maxLength={maxLength}
+          pattern={pattern}
+          className={`w-full rounded-xl border-2 bg-white px-4 text-slate-900 transition-all duration-200 ${
+            Icon ? "pl-12" : "pl-4"
+          } ${
+            isFocused || hasValue
+              ? "border-orange-500 bg-orange-50/30 shadow-lg shadow-orange-500/10 pt-6 pb-2"
+              : "border-slate-200 hover:border-slate-300 py-4"
+          } focus:outline-none focus:ring-2 focus:ring-orange-500/20`}
+        />
+        <label
+          className={`pointer-events-none absolute transition-all duration-200 ${
+            Icon ? "left-12" : "left-4"
+          } ${
+            isFocused || hasValue
+              ? "top-2 text-xs font-semibold text-orange-600"
+              : "top-1/2 -translate-y-1/2 text-slate-500"
+          }`}
+        >
+          {label}
+          {required && <span className="ml-1 text-orange-500">*</span>}
+        </label>
+      </div>
+    </div>
+  );
+}
+
+// ============================================
+// ANIMATED QUANTITY SELECTOR
+// ============================================
+function QuantitySelector({
+  value,
+  onChange,
+  min = 1,
+  max = 10,
+}: {
+  value: number;
+  onChange: (value: number) => void;
+  min?: number;
+  max?: number;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => onChange(Math.max(min, value - 1))}
+        disabled={value <= min}
+        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-orange-500 hover:bg-orange-50 hover:text-orange-600"
+      >
+        <span className="text-xl font-bold">−</span>
+      </motion.button>
+      <motion.div
+        key={value}
+        initial={{ scale: 1.2, color: "#f97316" }}
+        animate={{ scale: 1, color: "#0f172a" }}
+        className="flex h-12 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-orange-50 to-rose-50 border-2 border-orange-200"
+      >
+        <span className="text-2xl font-bold text-slate-900">{value}</span>
+      </motion.div>
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => onChange(Math.min(max, value + 1))}
+        disabled={value >= max}
+        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-orange-500 hover:bg-orange-50 hover:text-orange-600"
+      >
+        <span className="text-xl font-bold">+</span>
+      </motion.button>
+    </div>
+  );
+}
+
+// ============================================
+// PAYMENT MODAL COMPONENT
+// ============================================
+function PaymentModal({
+  isOpen,
+  onClose,
+  selectedTicketType,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  selectedTicketType: { type: string; price: number } | null;
+}) {
+  const [quantity, setQuantity] = useState(1);
+  const [step, setStep] = useState<"ticket" | "details" | "payment" | "success">("ticket");
+  const [internalSelectedTicketType, setInternalSelectedTicketType] = useState<{ type: string; price: number } | null>(
+    selectedTicketType
+  );
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    cardNumber: "",
+    cardName: "",
+    expiryDate: "",
+    cvv: "",
+  });
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<"card" | "paypal">("card");
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  // Update internal state when prop changes
+  useEffect(() => {
+    if (selectedTicketType) {
+      setInternalSelectedTicketType(selectedTicketType);
+      setStep("details");
+    }
+  }, [selectedTicketType]);
+
+  const ticketOptions = [
+    { type: "Day Pass", price: 15, desc: "Single day entry" },
+    { type: "Weekend Pass", price: 35, desc: "Sat & Sun entry", popular: true },
+    { type: "Full Pass", price: 60, desc: "All 6 days entry" },
+  ];
+
+  const currentTicket = internalSelectedTicketType || ticketOptions[1];
+  const subtotal = currentTicket.price * quantity;
+  const serviceFee = 2.5;
+  const total = subtotal + serviceFee;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    // Mock payment processing with animation
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setIsProcessing(false);
+    setStep("success");
+  };
+
+  const resetModal = () => {
+    setStep("ticket");
+    setQuantity(1);
+    setInternalSelectedTicketType(null);
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      cardNumber: "",
+      cardName: "",
+      expiryDate: "",
+      cvv: "",
+    });
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={step === "success" ? resetModal : onClose}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          >
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, y: 100, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 100, scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl"
+            >
+              {/* Header */}
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-gradient-to-r from-white to-orange-50/30 px-4 py-4 sm:px-6 backdrop-blur-sm">
+                <div className="flex items-center gap-3">
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg"
+                  >
+                    <Ticket className="h-5 w-5 text-white" />
+                  </motion.div>
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-900">Purchase Tickets</h2>
+                    <div className="flex items-center gap-2">
+                      <div className="flex gap-1">
+                        {["ticket", "details", "payment"].map((s, i) => (
+                          <div
+                            key={s}
+                            className={`h-1.5 rounded-full transition-all ${
+                              step === s
+                                ? "w-6 bg-orange-500"
+                                : i < ["ticket", "details", "payment"].indexOf(step)
+                                ? "w-1.5 bg-green-500"
+                                : "w-1.5 bg-slate-300"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <p className="text-xs text-slate-500">Kratiki Ekthesi 2026</p>
+                    </div>
+                  </div>
+                </div>
+                {step !== "success" && (
+                  <motion.button
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={onClose}
+                    className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                  >
+                    <X className="h-5 w-5" />
+                  </motion.button>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="p-4 sm:p-6">
+                {step === "ticket" && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="space-y-6"
+                  >
+                    <div>
+                      <h3 className="mb-4 text-lg font-semibold text-slate-900">Select Ticket Type</h3>
+                      <div className="space-y-3">
+                        {ticketOptions.map((ticket, index) => (
+                          <motion.button
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => {
+                              setInternalSelectedTicketType({ type: ticket.type, price: ticket.price });
+                              setTimeout(() => setStep("details"), 200);
+                            }}
+                            className={`group relative w-full overflow-hidden rounded-2xl border-2 p-5 text-left transition-all ${
+                              ticket.popular
+                                ? "border-orange-500 bg-gradient-to-br from-orange-50 to-rose-50 shadow-lg shadow-orange-500/20"
+                                : "border-slate-200 bg-white hover:border-orange-300 hover:shadow-md"
+                            }`}
+                          >
+                            {ticket.popular && (
+                              <motion.div
+                                animate={{ rotate: [0, 5, -5, 0] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-orange-400 to-rose-400 opacity-20 blur-xl"
+                              />
+                            )}
+                            <div className="relative flex items-start justify-between">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <p className="text-lg font-bold text-slate-900">{ticket.type}</p>
+                                  {ticket.popular && (
+                                    <motion.span
+                                      initial={{ scale: 0 }}
+                                      animate={{ scale: 1 }}
+                                      className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-2.5 py-1 text-xs font-bold text-white shadow-md"
+                                    >
+                                      <Sparkles className="h-3 w-3" />
+                                      POPULAR
+                                    </motion.span>
+                                  )}
+                                </div>
+                                <p className="text-sm text-slate-600">{ticket.desc}</p>
+                                <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
+                                  <CheckCircle className="h-3.5 w-3.5 text-green-500" />
+                                  <span>Instant confirmation</span>
+                                </div>
+                              </div>
+                              <div className="ml-4 text-right">
+                                <p className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-rose-600 bg-clip-text text-transparent">
+                                  €{ticket.price}
+                                </p>
+                                <p className="text-xs text-slate-500 mt-1">per ticket</p>
+                              </div>
+                            </div>
+                            <motion.div
+                              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-orange-500 to-rose-500"
+                              initial={{ width: 0 }}
+                              whileHover={{ width: "100%" }}
+                              transition={{ duration: 0.3 }}
+                            />
+                          </motion.button>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {step === "details" && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="space-y-6"
+                  >
+                    {/* Ticket Summary */}
+                    <motion.div
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="relative overflow-hidden rounded-2xl border-2 border-orange-200 bg-gradient-to-br from-orange-50 via-white to-rose-50 p-5 shadow-lg"
+                    >
+                      <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br from-orange-200/40 to-rose-200/40 blur-2xl" />
+                      <div className="relative">
+                        <div className="mb-4 flex items-center justify-between">
+                          <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              <Ticket className="h-5 w-5 text-orange-600" />
+                              <p className="text-lg font-bold text-slate-900">{currentTicket.type}</p>
+                            </div>
+                            <p className="text-sm text-slate-600">{currentTicket.desc}</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-rose-600 bg-clip-text text-transparent">
+                              €{currentTicket.price}
+                            </p>
+                            <p className="text-xs text-slate-500">per ticket</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between rounded-xl border-2 border-orange-100 bg-white/80 p-4 backdrop-blur-sm">
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-1">Quantity</label>
+                            <p className="text-xs text-slate-500">Select number of tickets</p>
+                          </div>
+                          <QuantitySelector value={quantity} onChange={setQuantity} />
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Customer Details */}
+                    <div>
+                      <div className="mb-4 flex items-center gap-2">
+                        <User className="h-5 w-5 text-orange-600" />
+                        <h3 className="text-lg font-semibold text-slate-900">Your Details</h3>
+                      </div>
+                      <div className="space-y-5">
+                        <FloatingInput
+                          label="Full Name"
+                          type="text"
+                          value={formData.fullName}
+                          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                          placeholder="John Smith"
+                          required
+                          icon={User}
+                        />
+                        <FloatingInput
+                          label="Email Address"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="john@example.com"
+                          required
+                          icon={Mail}
+                        />
+                        <FloatingInput
+                          label="Phone Number"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="+357 99 123 456"
+                          icon={Phone}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Order Summary */}
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                      <h4 className="mb-3 text-sm font-semibold text-slate-900">Order Summary</h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-slate-600">
+                            {currentTicket.type} × {quantity}
+                          </span>
+                          <span className="font-medium text-slate-900">€{subtotal.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-600">Service Fee</span>
+                          <span className="font-medium text-slate-900">€{serviceFee.toFixed(2)}</span>
+                        </div>
+                        <div className="border-t border-slate-200 pt-2 flex justify-between">
+                          <span className="font-semibold text-slate-900">Total</span>
+                          <span className="text-xl font-bold text-slate-900">€{total.toFixed(2)}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex gap-3">
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setStep("ticket")}
+                        className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
+                      >
+                        <ArrowRight className="h-4 w-4 rotate-180" />
+                        Back
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setStep("payment")}
+                        disabled={!formData.fullName || !formData.email}
+                        className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-4 py-3.5 font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:shadow-xl hover:shadow-orange-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Continue to Payment
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                )}
+
+                {step === "payment" && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="space-y-6"
+                  >
+                    {/* Payment Method Selection */}
+                    <div>
+                      <div className="mb-4 flex items-center gap-2">
+                        <CreditCard className="h-5 w-5 text-orange-600" />
+                        <h3 className="text-lg font-semibold text-slate-900">Payment Method</h3>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <motion.button
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setSelectedPaymentMethod("card")}
+                          className={`group relative overflow-hidden rounded-xl border-2 p-4 text-left transition-all ${
+                            selectedPaymentMethod === "card"
+                              ? "border-orange-500 bg-gradient-to-br from-orange-50 to-rose-50 shadow-lg"
+                              : "border-slate-200 bg-white hover:border-orange-300"
+                          }`}
+                        >
+                          {selectedPaymentMethod === "card" && (
+                            <motion.div
+                              layoutId="paymentMethod"
+                              className="absolute inset-0 rounded-xl bg-gradient-to-br from-orange-100/50 to-rose-100/50"
+                              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                            />
+                          )}
+                          <div className="relative">
+                            <CreditCard className={`mb-2 h-7 w-7 transition-colors ${
+                              selectedPaymentMethod === "card" ? "text-orange-600" : "text-slate-400"
+                            }`} />
+                            <p className={`text-sm font-semibold transition-colors ${
+                              selectedPaymentMethod === "card" ? "text-slate-900" : "text-slate-600"
+                            }`}>Card</p>
+                            <p className="text-xs text-slate-500 mt-1">Visa, Mastercard</p>
+                          </div>
+                          {selectedPaymentMethod === "card" && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="absolute right-2 top-2"
+                            >
+                              <CheckCircle className="h-5 w-5 text-green-500" />
+                            </motion.div>
+                          )}
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.02, y: -2 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setSelectedPaymentMethod("paypal")}
+                          className={`group relative overflow-hidden rounded-xl border-2 p-4 text-left transition-all ${
+                            selectedPaymentMethod === "paypal"
+                              ? "border-orange-500 bg-gradient-to-br from-orange-50 to-rose-50 shadow-lg"
+                              : "border-slate-200 bg-white hover:border-orange-300"
+                          }`}
+                        >
+                          {selectedPaymentMethod === "paypal" && (
+                            <motion.div
+                              layoutId="paymentMethod"
+                              className="absolute inset-0 rounded-xl bg-gradient-to-br from-orange-100/50 to-rose-100/50"
+                              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                            />
+                          )}
+                          <div className="relative">
+                            <div className="mb-2 flex h-7 w-7 items-center justify-center rounded bg-gradient-to-br from-blue-500 to-blue-600">
+                              <span className="text-xs font-bold text-white">PP</span>
+                            </div>
+                            <p className={`text-sm font-semibold transition-colors ${
+                              selectedPaymentMethod === "paypal" ? "text-slate-900" : "text-slate-600"
+                            }`}>PayPal</p>
+                            <p className="text-xs text-slate-500 mt-1">Secure & Fast</p>
+                          </div>
+                          {selectedPaymentMethod === "paypal" && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="absolute right-2 top-2"
+                            >
+                              <CheckCircle className="h-5 w-5 text-green-500" />
+                            </motion.div>
+                          )}
+                        </motion.button>
+                      </div>
+                    </div>
+
+                    {selectedPaymentMethod === "card" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="space-y-5"
+                      >
+                        {/* Card Preview */}
+                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 p-6 text-white shadow-2xl">
+                          <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
+                          <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-orange-500/20 blur-xl" />
+                          <div className="relative">
+                            <div className="mb-6 flex items-center justify-between">
+                              <div className="text-2xl font-bold">MEMORA</div>
+                              <div className="h-8 w-12 rounded bg-gradient-to-br from-orange-400 to-rose-400" />
+                            </div>
+                            <div className="mb-4 font-mono text-xl tracking-wider">
+                              {formData.cardNumber || "•••• •••• •••• ••••"}
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-xs text-white/60 mb-1">CARDHOLDER</p>
+                                <p className="text-sm font-medium uppercase">
+                                  {formData.cardName || "YOUR NAME"}
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-xs text-white/60 mb-1">EXPIRES</p>
+                                <p className="text-sm font-medium">{formData.expiryDate || "MM/YY"}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <FloatingInput
+                          label="Card Number"
+                          type="text"
+                          value={formData.cardNumber}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/\s/g, "").replace(/\D/g, "");
+                            const formatted = value.match(/.{1,4}/g)?.join(" ") || value;
+                            setFormData({ ...formData, cardNumber: formatted });
+                          }}
+                          placeholder="1234 5678 9012 3456"
+                          required
+                          icon={CreditCard}
+                          maxLength={19}
+                        />
+                        <FloatingInput
+                          label="Cardholder Name"
+                          type="text"
+                          value={formData.cardName}
+                          onChange={(e) => setFormData({ ...formData, cardName: e.target.value.toUpperCase() })}
+                          placeholder="JOHN SMITH"
+                          required
+                          icon={User}
+                        />
+                        <div className="grid grid-cols-2 gap-4">
+                          <FloatingInput
+                            label="Expiry Date"
+                            type="text"
+                            value={formData.expiryDate}
+                            onChange={(e) => {
+                              const value = e.target.value.replace(/\D/g, "");
+                              const formatted = value.length >= 2 ? `${value.slice(0, 2)}/${value.slice(2, 4)}` : value;
+                              setFormData({ ...formData, expiryDate: formatted });
+                            }}
+                            placeholder="MM/YY"
+                            required
+                            maxLength={5}
+                            className="col-span-1"
+                          />
+                          <FloatingInput
+                            label="CVV"
+                            type="text"
+                            value={formData.cvv}
+                            onChange={(e) => {
+                              const value = e.target.value.replace(/\D/g, "").slice(0, 3);
+                              setFormData({ ...formData, cvv: value });
+                            }}
+                            placeholder="123"
+                            required
+                            icon={Lock}
+                            maxLength={3}
+                            className="col-span-1"
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {selectedPaymentMethod === "paypal" && (
+                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
+                        <p className="text-slate-600">You will be redirected to PayPal to complete your payment</p>
+                      </div>
+                    )}
+
+                    {/* Security Badge */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center justify-center gap-2 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 p-4"
+                    >
+                      <motion.div
+                        animate={{ rotate: [0, 10, -10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                      >
+                        <Shield className="h-5 w-5 text-green-600" />
+                      </motion.div>
+                      <span className="text-sm font-medium text-slate-700">
+                        Secure payment encrypted with SSL
+                      </span>
+                      <Lock className="h-4 w-4 text-green-600" />
+                    </motion.div>
+
+                    {/* Order Summary */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="relative overflow-hidden rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5 shadow-lg"
+                    >
+                      <div className="absolute right-0 top-0 h-24 w-24 rounded-full bg-gradient-to-br from-orange-100 to-rose-100 blur-xl opacity-50" />
+                      <div className="relative">
+                        <div className="mb-4 flex items-center gap-2">
+                          <CreditCard className="h-5 w-5 text-slate-600" />
+                          <h4 className="text-sm font-semibold text-slate-900">Order Summary</h4>
+                        </div>
+                        <div className="space-y-3 text-sm">
+                          <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="flex items-center justify-between rounded-lg bg-white/60 p-2.5 backdrop-blur-sm"
+                          >
+                            <span className="text-slate-600">
+                              {currentTicket.type} × {quantity}
+                            </span>
+                            <span className="font-semibold text-slate-900">€{subtotal.toFixed(2)}</span>
+                          </motion.div>
+                          <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="flex items-center justify-between rounded-lg bg-white/60 p-2.5 backdrop-blur-sm"
+                          >
+                            <span className="text-slate-600">Service Fee</span>
+                            <span className="font-semibold text-slate-900">€{serviceFee.toFixed(2)}</span>
+                          </motion.div>
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="flex items-center justify-between rounded-xl border-2 border-orange-200 bg-gradient-to-r from-orange-50 to-rose-50 p-4"
+                          >
+                            <span className="text-base font-bold text-slate-900">Total</span>
+                            <span className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-rose-600 bg-clip-text text-transparent">
+                              €{total.toFixed(2)}
+                            </span>
+                          </motion.div>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Actions */}
+                    <div className="flex gap-3">
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setStep("details")}
+                        className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
+                      >
+                        <ArrowRight className="h-4 w-4 rotate-180" />
+                        Back
+                      </motion.button>
+                      <form onSubmit={handleSubmit} className="flex-1">
+                        <motion.button
+                          type="submit"
+                          disabled={
+                            isProcessing ||
+                            (selectedPaymentMethod === "card" &&
+                              (!formData.cardNumber || !formData.cardName || !formData.expiryDate || !formData.cvv))
+                          }
+                          whileHover={!isProcessing ? { scale: 1.02 } : {}}
+                          whileTap={!isProcessing ? { scale: 0.98 } : {}}
+                          className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-4 py-3.5 font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:shadow-xl hover:shadow-orange-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isProcessing ? (
+                            <>
+                              <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
+                              />
+                              <span>Processing...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Lock className="h-4 w-4" />
+                              Pay €{total.toFixed(2)}
+                              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                            </>
+                          )}
+                        </motion.button>
+                      </form>
+                    </div>
+                  </motion.div>
+                )}
+
+                {step === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="py-8 text-center"
+                  >
+                    {/* Success Animation */}
+                    <div className="relative mx-auto mb-6 h-24 w-24">
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
+                        className="absolute inset-0 flex items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-500 shadow-2xl shadow-green-500/30"
+                      >
+                        <CheckCircle className="h-12 w-12 text-white" />
+                      </motion.div>
+                      <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0] }}
+                        transition={{ delay: 0.4, duration: 0.6 }}
+                        className="absolute inset-0 rounded-full bg-green-500"
+                      />
+                    </div>
+
+                    <motion.h3
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="mb-3 text-3xl font-bold text-slate-900"
+                    >
+                      Payment Successful! 🎉
+                    </motion.h3>
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="mb-6 text-slate-600"
+                    >
+                      Your tickets have been confirmed. A confirmation email has been sent to{" "}
+                      <span className="font-semibold text-orange-600">{formData.email || "your email"}</span>
+                    </motion.p>
+
+                    {/* Ticket Details Card */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="mb-6 rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-emerald-50 p-5 text-left"
+                    >
+                      <div className="mb-4 flex items-center gap-2">
+                        <Ticket className="h-5 w-5 text-green-600" />
+                        <p className="font-semibold text-slate-900">Ticket Details</p>
+                      </div>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-slate-600">Event</span>
+                          <span className="font-medium text-slate-900">Kratiki Ekthesi 2026</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-600">Ticket Type</span>
+                          <span className="font-medium text-slate-900">{currentTicket.type}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-600">Quantity</span>
+                          <span className="font-medium text-slate-900">{quantity}</span>
+                        </div>
+                        <div className="flex justify-between border-t border-green-200 pt-2">
+                          <span className="text-slate-600">Order Number</span>
+                          <span className="font-mono font-bold text-green-600">ORD-{Date.now().toString().slice(-8)}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Actions */}
+                    <div className="flex flex-col gap-3">
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={resetModal}
+                        className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:shadow-xl hover:shadow-orange-500/40"
+                      >
+                        Done
+                      </motion.button>
+                      <motion.a
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        href="/account"
+                        className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
+                      >
+                        <Ticket className="h-4 w-4" />
+                        View My Tickets
+                      </motion.a>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
 

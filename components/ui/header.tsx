@@ -9,10 +9,10 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X, Sparkles } from "lucide-react";
+import { Menu, MoveRight, X, Sparkles, User } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 function Header1() {
@@ -24,11 +24,12 @@ function Header1() {
         },
         {
             title: "Events",
+            href: "/events",
             description: "Discover extraordinary events, unforgettable trips, and legendary nights across Cyprus.",
             items: [
                 {
                     title: "Planitario 2025",
-                    href: "/events/planitario",
+                    href: "https://planetarium.memora-experience.com",
                 },
                 {
                     title: "Student Trips",
@@ -49,20 +50,8 @@ function Header1() {
             description: "Comprehensive event solutions that bring your vision to life.",
             items: [
                 {
-                    title: "Event Planning",
-                    href: "/services/planning",
-                },
-                {
-                    title: "Venue Sourcing",
-                    href: "/services/venues",
-                },
-                {
-                    title: "Vendor Coordination",
-                    href: "/services/vendors",
-                },
-                {
-                    title: "Corporate Events",
-                    href: "/services/corporate",
+                    title: "Event Management Services",
+                    href: "/services",
                 },
                 {
                     title: "Business with Us",
@@ -76,16 +65,28 @@ function Header1() {
     const [scrolled, setScrolled] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
     const pathname = usePathname();
+    const router = useRouter();
 
     // Pages with dark hero sections that need white text
     const darkHeroPages = [
         "/",
         "/events/kratiki-ekthesi",
         "/events/planitario",
+        "/services",
+        "/business",
+        "/account",
+        "/contact",
         // Add other dark hero pages here
     ];
     
-    const hasDarkHero = darkHeroPages.some(page => pathname?.startsWith(page));
+    // Check if current path matches dark hero pages (exact match or starts with, but exclude /events itself)
+    const hasDarkHero = darkHeroPages.some(page => {
+        if (page === "/") {
+            // Only match exact "/" for homepage, not paths that start with "/"
+            return pathname === "/";
+        }
+        return pathname?.startsWith(page);
+    });
     const isHomePage = pathname === "/";
     
     // On desktop homepage, always show black text (light background)
@@ -128,7 +129,8 @@ function Header1() {
                         <NavigationMenuList className="flex justify-start gap-2 flex-row">
                             {navigationItems.map((item) => (
                                 <NavigationMenuItem key={item.title}>
-                                    {item.href ? (
+                                    {item.href && !item.items ? (
+                                        // Simple link (like Home)
                                         <Link href={item.href} legacyBehavior passHref>
                                             <NavigationMenuLink>
                                                 <Button variant="ghost" className={`transition-colors duration-300 ${
@@ -140,47 +142,113 @@ function Header1() {
                                                 </Button>
                                             </NavigationMenuLink>
                                         </Link>
-                                    ) : (
+                                    ) : item.items ? (
+                                        // Dropdown menu (Events or Services)
                                         <>
-                                            <NavigationMenuTrigger className={`font-medium text-sm transition-colors duration-300 bg-transparent border-0 shadow-none ${
-                                                shouldShowWhiteText
-                                                    ? "text-white hover:text-orange-300 hover:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-orange-300" 
-                                                    : "text-slate-700 hover:text-orange-600 hover:bg-white/50 data-[state=open]:bg-white/50 data-[state=open]:text-orange-600"
-                                            }`}>
+                                            <NavigationMenuTrigger 
+                                                className={`font-medium text-sm transition-colors duration-300 bg-transparent border-0 shadow-none ${
+                                                    shouldShowWhiteText
+                                                        ? "text-white hover:text-orange-300 hover:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-orange-300" 
+                                                        : "text-slate-700 hover:text-orange-600 hover:bg-white/50 data-[state=open]:bg-white/50 data-[state=open]:text-orange-600"
+                                                }`}
+                                                onClick={(e) => {
+                                                    // Navigate on click if href exists (dropdown opens on hover, so click navigates)
+                                                    if (item.href) {
+                                                        e.preventDefault();
+                                                        router.push(item.href);
+                                                    }
+                                                }}
+                                            >
                                                 {item.title}
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className="!w-[450px] p-4 bg-white border border-slate-200 shadow-xl">
-                                                <div className="flex flex-col lg:grid grid-cols-2 gap-4">
-                                                    <div className="flex flex-col h-full justify-between">
-                                                        <div className="flex flex-col">
-                                                            <p className="text-base font-semibold text-slate-900">{item.title}</p>
-                                                            <p className="text-slate-600 text-sm mt-1">
-                                                                {item.description}
-                                                            </p>
-                                                        </div>
-                                                        <Button size="sm" className="mt-10 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0">
-                                                            Explore Events
-                                                        </Button>
-                                                    </div>
-                                                    <div className="flex flex-col text-sm h-full justify-end">
-                                                        {item.items?.map((subItem) => (
-                                                            <Link
-                                                                href={subItem.href}
-                                                                key={subItem.title}
-                                                                legacyBehavior
-                                                                passHref
-                                                            >
-                                                                <NavigationMenuLink className="flex flex-row justify-between items-center hover:bg-slate-50 py-2 px-4 rounded transition-colors">
-                                                                    <span className="text-slate-700">{subItem.title}</span>
+                                            <NavigationMenuContent className={`bg-white border border-slate-200 shadow-xl ${
+                                                item.title === "Services" 
+                                                    ? "!w-[280px] p-3" 
+                                                    : "!w-[450px] p-4"
+                                            }`}>
+                                                {item.title === "Services" ? (
+                                                    // Compact layout for Services (only 2 links)
+                                                    <div className="flex flex-col gap-1">
+                                                        {item.items?.map((subItem) => {
+                                                            const isExternal = subItem.href.startsWith('http');
+                                                            return isExternal ? (
+                                                                <a
+                                                                    href={subItem.href}
+                                                                    key={subItem.title}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors"
+                                                                >
+                                                                    <span className="text-sm font-medium text-slate-700">{subItem.title}</span>
                                                                     <MoveRight className="w-4 h-4 text-slate-400" />
+                                                                </a>
+                                                            ) : (
+                                                                <Link
+                                                                    href={subItem.href}
+                                                                    key={subItem.title}
+                                                                    legacyBehavior
+                                                                    passHref
+                                                                >
+                                                                    <NavigationMenuLink className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors">
+                                                                        <span className="text-sm font-medium text-slate-700">{subItem.title}</span>
+                                                                        <MoveRight className="w-4 h-4 text-slate-400" />
+                                                                    </NavigationMenuLink>
+                                                                </Link>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                ) : (
+                                                    // Full layout for Events (with description and button)
+                                                    <div className="flex flex-col lg:grid grid-cols-2 gap-4">
+                                                        <div className="flex flex-col h-full justify-between">
+                                                            <div className="flex flex-col">
+                                                                <p className="text-base font-semibold text-slate-900">{item.title}</p>
+                                                                <p className="text-slate-600 text-sm mt-1">
+                                                                    {item.description}
+                                                                </p>
+                                                            </div>
+                                                            <Link href="/events" legacyBehavior passHref>
+                                                                <NavigationMenuLink asChild>
+                                                                    <Button size="sm" className="mt-10 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0">
+                                                                        Explore Events
+                                                                    </Button>
                                                                 </NavigationMenuLink>
                                                             </Link>
-                                                        ))}
+                                                        </div>
+                                                        <div className="flex flex-col text-sm h-full justify-end">
+                                                            {item.items?.map((subItem) => {
+                                                                const isExternal = subItem.href.startsWith('http');
+                                                                return isExternal ? (
+                                                                    <a
+                                                                        href={subItem.href}
+                                                                        key={subItem.title}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="flex flex-row justify-between items-center hover:bg-slate-50 py-2 px-4 rounded transition-colors"
+                                                                    >
+                                                                        <span className="text-slate-700">{subItem.title}</span>
+                                                                        <MoveRight className="w-4 h-4 text-slate-400" />
+                                                                    </a>
+                                                                ) : (
+                                                                    <Link
+                                                                        href={subItem.href}
+                                                                        key={subItem.title}
+                                                                        legacyBehavior
+                                                                        passHref
+                                                                    >
+                                                                        <NavigationMenuLink className="flex flex-row justify-between items-center hover:bg-slate-50 py-2 px-4 rounded transition-colors">
+                                                                            <span className="text-slate-700">{subItem.title}</span>
+                                                                            <MoveRight className="w-4 h-4 text-slate-400" />
+                                                                        </NavigationMenuLink>
+                                                                    </Link>
+                                                                );
+                                                            })}
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                )}
                                             </NavigationMenuContent>
                                         </>
-                                    )}
+                                    ) : null}
                                 </NavigationMenuItem>
                             ))}
                         </NavigationMenuList>
@@ -228,6 +296,19 @@ function Header1() {
                         </SignUpButton>
                     </SignedOut>
                     <SignedIn>
+                        <Link href="/account">
+                            <Button 
+                                variant="ghost" 
+                                className={`transition-colors duration-300 ${
+                                    shouldShowWhiteText
+                                        ? "text-white hover:text-orange-300 hover:bg-white/10" 
+                                        : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
+                                }`}
+                            >
+                                <User className="h-4 w-4 mr-2" />
+                                Account
+                            </Button>
+                        </Link>
                         <UserButton 
                             appearance={{
                                 elements: {
@@ -310,6 +391,12 @@ function Header1() {
                                 </SignUpButton>
                             </SignedOut>
                             <SignedIn>
+                                <Link href="/account" onClick={() => setOpen(false)}>
+                                    <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
+                                        <User className="h-4 w-4 mr-2" />
+                                        Account
+                                    </Button>
+                                </Link>
                                 <div className="flex justify-center">
                                     <UserButton 
                                         appearance={{

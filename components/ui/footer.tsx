@@ -15,7 +15,7 @@ import {
 
 const footerLinks = {
   events: [
-    { name: "Planitario 2025", href: "/planitario" },
+    { name: "Planitario 2025", href: "https://planetarium.memora-experience.com" },
     { name: "Student Trips", href: "/student-trips" },
     { name: "Corporate Events", href: "/events/corporate" },
     { name: "Festivals", href: "/events/festivals" },
@@ -168,17 +168,32 @@ export function Footer() {
                 Events
               </h4>
               <ul className="space-y-3">
-                {footerLinks.events.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="group inline-flex items-center gap-1 text-slate-400 hover:text-orange-400 transition-colors"
-                    >
-                      <span>{link.name}</span>
-                      <ArrowUpRight className="h-3 w-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                    </Link>
-                  </li>
-                ))}
+                {footerLinks.events.map((link) => {
+                  const isExternal = link.href.startsWith('http');
+                  return (
+                    <li key={link.name}>
+                      {isExternal ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-1 text-slate-400 hover:text-orange-400 transition-colors"
+                        >
+                          <span>{link.name}</span>
+                          <ArrowUpRight className="h-3 w-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="group inline-flex items-center gap-1 text-slate-400 hover:text-orange-400 transition-colors"
+                        >
+                          <span>{link.name}</span>
+                          <ArrowUpRight className="h-3 w-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 

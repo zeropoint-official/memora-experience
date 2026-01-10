@@ -13,7 +13,7 @@ const upcomingEvents = [
     stats: "March 15-16 • Nicosia",
     description: "The Ultimate Night Experience",
     imageUrl: "/Content/planitatio/The Cyprus Planetarium 2025.jpg",
-    href: "/events/planitario",
+    href: "https://planetarium.memora-experience.com",
     themeColor: "25 95% 50%", // Orange
     featured: true,
   },

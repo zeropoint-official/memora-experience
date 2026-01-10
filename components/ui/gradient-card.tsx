@@ -108,6 +108,8 @@ const GradientCard = React.forwardRef<HTMLDivElement, GradientCardProps>(
             {/* Call to Action Link */}
             <a
               href={ctaHref}
+              target={ctaHref.startsWith('http') ? '_blank' : undefined}
+              rel={ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
               className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-900"
             >
               {ctaText}

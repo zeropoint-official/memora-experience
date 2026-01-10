@@ -27,7 +27,7 @@ const navigationCards = [
     description:
       "Experience the magic of the Cyprus Planetarium. An immersive journey through the cosmos awaits you.",
     ctaText: "Learn more",
-    ctaHref: "/planitario",
+    ctaHref: "https://planetarium.memora-experience.com",
     imageUrl:
       "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400&h=400&fit=crop",
     gradient: "purple" as const,

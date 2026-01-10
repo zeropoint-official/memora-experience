@@ -155,7 +155,7 @@ const eventsForPartnership = [
     location: "Nicosia, Cyprus",
     attendance: "15,000+",
     image: "/Content/planitatio/The Cyprus Planetarium 2025.jpg",
-    href: "/events/planitario",
+    href: "https://planetarium.memora-experience.com",
   },
   {
     id: "summer-festival",

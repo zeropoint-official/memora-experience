@@ -88,10 +88,10 @@ export function HeroBlue() {
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </motion.button>
 
-          <button className="group flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-8 py-4 text-lg font-medium text-slate-900 shadow-sm transition-all hover:border-blue-300 hover:shadow-md">
+          <a href="https://planetarium.memora-experience.com" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-8 py-4 text-lg font-medium text-slate-900 shadow-sm transition-all hover:border-blue-300 hover:shadow-md">
             <span>View Planitario</span>
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </button>
+          </a>
         </motion.div>
 
         {/* Featured Event Card */}
