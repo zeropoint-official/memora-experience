@@ -1202,6 +1202,13 @@ function QuantitySelector({
 // ============================================
 // PAYMENT MODAL COMPONENT
 // ============================================
+type TicketType = {
+  type: string;
+  price: number;
+  desc: string;
+  popular?: boolean;
+};
+
 function PaymentModal({
   isOpen,
   onClose,
@@ -1213,8 +1220,8 @@ function PaymentModal({
 }) {
   const [quantity, setQuantity] = useState(1);
   const [step, setStep] = useState<"ticket" | "details" | "payment" | "success">("ticket");
-  const [internalSelectedTicketType, setInternalSelectedTicketType] = useState<{ type: string; price: number } | null>(
-    selectedTicketType
+  const [internalSelectedTicketType, setInternalSelectedTicketType] = useState<TicketType | null>(
+    selectedTicketType ? { ...selectedTicketType, desc: "", popular: false } : null
   );
   const [formData, setFormData] = useState({
     fullName: "",
@@ -1228,21 +1235,23 @@ function PaymentModal({
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<"card" | "paypal">("card");
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Update internal state when prop changes
-  useEffect(() => {
-    if (selectedTicketType) {
-      setInternalSelectedTicketType(selectedTicketType);
-      setStep("details");
-    }
-  }, [selectedTicketType]);
-
-  const ticketOptions = [
+  const ticketOptions: TicketType[] = [
     { type: "Day Pass", price: 15, desc: "Single day entry" },
     { type: "Weekend Pass", price: 35, desc: "Sat & Sun entry", popular: true },
     { type: "Full Pass", price: 60, desc: "All 6 days entry" },
   ];
 
-  const currentTicket = internalSelectedTicketType || ticketOptions[1];
+  // Update internal state when prop changes
+  useEffect(() => {
+    if (selectedTicketType) {
+      // Find matching ticket from options to get full details
+      const matchingTicket = ticketOptions.find(t => t.type === selectedTicketType.type && t.price === selectedTicketType.price);
+      setInternalSelectedTicketType(matchingTicket || { ...selectedTicketType, desc: "", popular: false });
+      setStep("details");
+    }
+  }, [selectedTicketType]);
+
+  const currentTicket: TicketType = internalSelectedTicketType || ticketOptions[1];
   const subtotal = currentTicket.price * quantity;
   const serviceFee = 2.5;
   const total = subtotal + serviceFee;
@@ -1357,7 +1366,7 @@ function PaymentModal({
                             whileHover={{ scale: 1.02, y: -2 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => {
-                              setInternalSelectedTicketType({ type: ticket.type, price: ticket.price });
+                              setInternalSelectedTicketType(ticket);
                               setTimeout(() => setStep("details"), 200);
                             }}
                             className={`group relative w-full overflow-hidden rounded-2xl border-2 p-5 text-left transition-all ${
