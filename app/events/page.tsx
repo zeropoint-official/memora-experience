@@ -40,7 +40,7 @@ const eventsData: Event[] = [
   // SPECIAL EVENTS
   {
     id: "planitario-2026",
-    title: "PLANITARIO 2026",
+    title: "Planetarium 2026",
     category: "special",
     date: "March 15-16, 2026",
     location: "Nicosia, Cyprus",
@@ -54,7 +54,7 @@ const eventsData: Event[] = [
   },
   {
     id: "kratiki-ekthesi-2026",
-    title: "Kratiki Ekthesi",
+    title: "Cyprus State Fair",
     category: "special",
     date: "May 20-25, 2026",
     location: "Nicosia, Cyprus",
@@ -164,7 +164,7 @@ const eventsData: Event[] = [
   // PAST EVENTS
   {
     id: "planitario-2025",
-    title: "PLANITARIO 2025",
+    title: "Planetarium 2025",
     category: "past",
     date: "March 15-16, 2025",
     location: "Nicosia, Cyprus",
@@ -567,7 +567,7 @@ export default function EventsPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mx-auto max-w-2xl px-4 text-base sm:text-lg text-slate-600"
             >
-              From legendary nights at Planitario to unforgettable student
+              From legendary nights at Planetarium to unforgettable student
               adventures and prestigious business events, find your next
               experience.
             </motion.p>
