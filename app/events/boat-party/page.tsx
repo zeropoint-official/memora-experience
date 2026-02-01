@@ -370,22 +370,6 @@ export default function BoatPartyPage() {
             </motion.div>
           </div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="flex flex-col items-center gap-2 text-white/50"
-            >
-              <span className="text-xs uppercase tracking-widest">Scroll</span>
-              <ChevronDown className="h-5 w-5" />
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 

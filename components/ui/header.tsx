@@ -72,6 +72,7 @@ function Header1() {
         "/",
         "/events/kratiki-ekthesi",
         "/events/planitario",
+        "/events/boat-party",
         "/services",
         "/business",
         "/account",
