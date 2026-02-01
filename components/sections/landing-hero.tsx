@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Ticket, Briefcase, Calendar, Sparkles, Star, Users, MapPin, Flame, ChevronLeft, ChevronRight, Zap, Heart, Play } from "lucide-react";
+import { ArrowRight, Ticket, Briefcase, Calendar, Sparkles, Star, Users, Flame, Heart } from "lucide-react";
 import Link from "next/link";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
@@ -253,22 +253,6 @@ function MobileHero() {
             </motion.div>
           </div>
 
-          {/* Bottom: Scroll indicator only */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="flex flex-col items-center pb-16"
-          >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-1"
-            >
-              <span className="text-[11px] text-white/60 font-medium tracking-wide">Scroll</span>
-              <ChevronLeft className="h-5 w-5 text-white/50 rotate-[-90deg]" />
-            </motion.div>
-          </motion.div>
         </div>
 
         {/* Curved transition to white section */}
@@ -350,15 +334,17 @@ function MobileHero() {
           {/* ===== CTA BUTTONS ===== */}
           <BlurFade delay={0.2} yOffset={8}>
             <div className="mt-5 flex flex-col gap-3 mx-auto max-w-sm">
-              <ShimmerButton
-                className="w-full rounded-2xl py-4 text-base shadow-xl shadow-orange-500/25"
-                shimmerColor="#ffffff"
-                shimmerDuration="2s"
-              >
-                <Ticket className="h-5 w-5" />
-                <span className="font-bold">Get Tickets Now</span>
-                <ArrowRight className="h-5 w-5" />
-              </ShimmerButton>
+              <Link href="/events">
+                <ShimmerButton
+                  className="w-full rounded-2xl py-4 text-base shadow-xl shadow-orange-500/25"
+                  shimmerColor="#ffffff"
+                  shimmerDuration="2s"
+                >
+                  <Ticket className="h-5 w-5" />
+                  <span className="font-bold">Get Tickets Now</span>
+                  <ArrowRight className="h-5 w-5" />
+                </ShimmerButton>
+              </Link>
 
               <Link href="/business">
                 <motion.button 
@@ -622,28 +608,30 @@ function DesktopHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          className="mt-12 flex flex-row items-center gap-4 pointer-events-auto"
+          className="mt-12 flex flex-col items-center gap-3 pointer-events-auto"
           initial={{ opacity: 0, filter: "blur(8px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-orange-500/25 transition-shadow hover:shadow-2xl hover:shadow-orange-500/40"
-          >
-            <Ticket className="h-5 w-5" />
-            <span>Get Tickets</span>
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </motion.button>
+          <Link href="/events">
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-10 py-5 text-xl font-bold text-white shadow-2xl shadow-orange-500/30 transition-all hover:shadow-2xl hover:shadow-orange-500/50"
+            >
+              <Ticket className="h-6 w-6" />
+              <span>Get Tickets</span>
+              <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
+            </motion.button>
+          </Link>
 
           <Link href="/business">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-slate-900 bg-white px-8 py-4 text-lg font-semibold text-slate-900 transition-all hover:bg-slate-900 hover:text-white"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/80 backdrop-blur-sm px-6 py-2.5 text-sm font-medium text-slate-600 transition-all hover:border-slate-400 hover:text-slate-900"
             >
-              <Briefcase className="h-5 w-5" />
+              <Briefcase className="h-4 w-4" />
               <span>Business with Us</span>
             </motion.button>
           </Link>

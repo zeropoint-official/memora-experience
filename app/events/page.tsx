@@ -51,6 +51,18 @@ const eventsData: Event[] = [
     featured: true,
   },
   {
+    id: "boat-party-2026",
+    title: "Summer Boat Party",
+    category: "special",
+    date: "July 20, 2026",
+    location: "Ayia Napa, Cyprus",
+    description: "Set sail for the ultimate sunset party with DJ Eirinei Sterianou - Open bar included",
+    imageUrl: "/Content/yacth1.jpg",
+    href: "/events/boat-party",
+    themeColor: "190 80% 45%",
+    badge: "Hot",
+  },
+  {
     id: "kratiki-ekthesi-2026",
     title: "Cyprus State Fair",
     category: "special",
