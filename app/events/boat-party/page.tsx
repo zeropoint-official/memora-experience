@@ -215,7 +215,7 @@ export default function BoatPartyPage() {
   const isTicketsInView = useInView(ticketsRef, { once: true, margin: "-100px" });
   const isFaqInView = useInView(faqRef, { once: true, margin: "-100px" });
 
-  const eventDate = new Date("2026-07-20T17:00:00");
+  const eventDate = new Date("2026-07-04T17:00:00");
 
   const highlights = [
     {
@@ -325,7 +325,7 @@ export default function BoatPartyPage() {
             >
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
                 <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
-                <span className="font-medium">July 20, 2026</span>
+                <span className="font-medium">July 4, 2026</span>
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
@@ -333,7 +333,7 @@ export default function BoatPartyPage() {
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
                 <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
-                <span className="font-medium">5:00 PM - 11:00 PM</span>
+                <span className="font-medium">5:00 PM - 10:00 PM</span>
               </span>
             </motion.div>
 
@@ -1523,7 +1523,7 @@ function PaymentModal({
                         </div>
                         <div className="flex justify-between">
                           <span className="text-slate-600">Date</span>
-                          <span className="font-medium text-slate-900">July 20, 2026 • 5PM</span>
+                          <span className="font-medium text-slate-900">July 4, 2026 • 5PM</span>
                         </div>
                         <div className="flex justify-between border-t border-green-200 pt-2">
                           <span className="text-slate-600">Order Number</span>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Ticket, Briefcase, Calendar, Sparkles, Star, Users, Flame, Heart } from "lucide-react";
+import { ArrowRight, Ticket, Briefcase, Sparkles, Star, Users, Heart } from "lucide-react";
 import Link from "next/link";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
@@ -14,6 +14,70 @@ import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Ripple } from "@/components/ui/ripple";
 import { useRef, useState, useEffect, useCallback } from "react";
+
+// ============================================
+// NEXT EVENT - Sleek minimal design
+// ============================================
+interface NextEventProps {
+  variant?: "light" | "dark";
+  className?: string;
+}
+
+function NextEvent({ variant = "light", className = "" }: NextEventProps) {
+  const [spotsLeft, setSpotsLeft] = useState(56);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSpotsLeft((prev) => {
+        if (prev <= 20) return 56;
+        return prev - Math.floor(Math.random() * 2 + 1);
+      });
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const isDark = variant === "dark";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: 0.5 }}
+      className={`flex items-center justify-center gap-4 ${className}`}
+    >
+      {/* Event info */}
+      <div className="flex items-center gap-2">
+        <span className={`text-xs font-medium uppercase tracking-[0.2em] ${isDark ? "text-white/40" : "text-slate-400"}`}>
+          Next
+        </span>
+        <div className={`w-8 h-px ${isDark ? "bg-white/20" : "bg-slate-200"}`} />
+        <span className={`text-sm font-medium ${isDark ? "text-white/90" : "text-slate-700"}`}>
+          Boat Party
+        </span>
+        <span className={`text-xs ${isDark ? "text-white/40" : "text-slate-400"}`}>
+          Jul 4
+        </span>
+      </div>
+
+      {/* Spots counter */}
+      <div className={`flex items-center gap-1.5 rounded-full px-3 py-1 ${
+        isDark ? "bg-white/10 backdrop-blur-sm" : "bg-orange-50"
+      }`}>
+        <motion.span
+          key={spotsLeft}
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`text-sm font-semibold tabular-nums ${isDark ? "text-orange-300" : "text-orange-600"}`}
+        >
+          {spotsLeft}
+        </motion.span>
+        <span className={`text-xs ${isDark ? "text-white/50" : "text-orange-600/70"}`}>
+          left
+        </span>
+      </div>
+    </motion.div>
+  );
+}
 
 const eventImages = [
   {
@@ -117,19 +181,7 @@ const imageVariants = {
 // MOBILE HERO - Video Background with White Grid Transition
 // ============================================
 function MobileHero() {
-  const [ticketsRemaining, setTicketsRemaining] = useState(127);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  // Simulate tickets selling (social proof urgency)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTicketsRemaining((prev) => {
-        if (prev <= 50) return 127;
-        return prev - Math.floor(Math.random() * 3 + 1);
-      });
-    }, 8000);
-    return () => clearInterval(interval);
-  }, []);
 
   // iOS Safari sometimes ignores autoplay on initial render unless we explicitly call play()
   // (even when muted + playsInline are set).
@@ -234,23 +286,10 @@ function MobileHero() {
               </h1>
             </motion.div>
 
-            {/* Event Info Pill - more breathing room */}
-            <motion.div
-              initial={{ opacity: 0, filter: "blur(8px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
-              className="mt-6"
-            >
-              <div className="inline-flex items-center gap-3 rounded-2xl bg-white/12 backdrop-blur-xl border border-white/20 px-5 py-3 shadow-2xl">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg">
-                  <Calendar className="h-5 w-5 text-white" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[11px] text-white/70 uppercase tracking-wider font-medium">Next Event</span>
-                  <span className="text-[15px] font-bold text-white">Planitario • Mar 15-16</span>
-                </div>
-              </div>
-            </motion.div>
+            {/* Next Event - Mobile */}
+            <div className="mt-8">
+              <NextEvent variant="dark" />
+            </div>
           </div>
 
         </div>
@@ -287,52 +326,9 @@ function MobileHero() {
 
         {/* Content container */}
         <div className="relative z-10 px-5 pt-6 pb-10">
-          
-          {/* ===== URGENCY BANNER ===== */}
-          <BlurFade delay={0.1} yOffset={8}>
-            <div className="relative mx-auto max-w-sm overflow-hidden rounded-2xl bg-gradient-to-r from-orange-50 via-white to-rose-50 border border-orange-100 shadow-lg shadow-orange-100/50">
-              <div className="relative p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                      className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg shadow-orange-500/30"
-                    >
-                      <Flame className="h-5 w-5 text-white" />
-                    </motion.div>
-                    <div>
-                      <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Selling fast</p>
-                      <p className="text-sm font-bold text-slate-900">
-                        Only{" "}
-                        <motion.span
-                          key={ticketsRemaining}
-                          initial={{ scale: 1.3, color: "#ea580c" }}
-                          animate={{ scale: 1, color: "#ea580c" }}
-                          className="inline-block"
-                        >
-                          {ticketsRemaining}
-                        </motion.span>
-                        {" "}tickets left!
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1.5 rounded-full bg-green-50 border border-green-200 px-3 py-1.5">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-                    </span>
-                    <span className="text-[10px] font-bold text-green-700">LIVE</span>
-                  </div>
-                </div>
-              </div>
-              {/* Animated border accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 via-rose-500 to-orange-400" />
-            </div>
-          </BlurFade>
 
           {/* ===== CTA BUTTONS ===== */}
-          <BlurFade delay={0.2} yOffset={8}>
+          <BlurFade delay={0.1} yOffset={8}>
             <div className="mt-5 flex flex-col gap-3 mx-auto max-w-sm">
               <Link href="/events">
                 <ShimmerButton
@@ -361,7 +357,7 @@ function MobileHero() {
           </BlurFade>
 
           {/* ===== STATS GRID ===== */}
-          <BlurFade delay={0.3} yOffset={8}>
+          <BlurFade delay={0.2} yOffset={8}>
             <div className="mt-8 mx-auto max-w-sm">
               <div className="grid grid-cols-3 gap-3">
                 {[
@@ -373,7 +369,7 @@ function MobileHero() {
                     key={stat.label}
                     initial={{ opacity: 0, filter: "blur(8px)" }}
                     animate={{ opacity: 1, filter: "blur(0px)" }}
-                    transition={{ delay: 0.4 + index * 0.1, duration: 0.5, ease: "easeOut" }}
+                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5, ease: "easeOut" }}
                     className={`rounded-2xl ${stat.bg} border border-slate-100 p-4 text-center shadow-sm`}
                   >
                     <div className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} shadow-md`}>
@@ -390,7 +386,7 @@ function MobileHero() {
           </BlurFade>
 
           {/* ===== TRUST FOOTER ===== */}
-          <BlurFade delay={0.5} yOffset={4}>
+          <BlurFade delay={0.4} yOffset={4}>
             <div className="mt-8 flex flex-col items-center gap-3">
               <div className="flex items-center gap-2">
                 <Heart className="h-4 w-4 text-rose-500 fill-rose-500" />
@@ -412,7 +408,7 @@ function MobileHero() {
 // ============================================
 function DesktopHero() {
   return (
-    <section className="relative hidden md:block min-h-screen w-full overflow-x-hidden overflow-y-visible bg-zinc-50">
+    <section className="relative hidden md:block min-h-screen w-full overflow-x-hidden overflow-y-visible bg-zinc-50 pt-20">
       {/* Spotlight effect */}
       <Spotlight className="z-10" fill="#f97316" />
       
@@ -587,24 +583,10 @@ function DesktopHero() {
           we transform your vision into extraordinary experiences across Cyprus.
         </motion.p>
 
-        {/* Event info badge */}
-        <motion.div
-          initial={{ opacity: 0, filter: "blur(8px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-          className="mt-6 pointer-events-auto"
-        >
-          <div className="inline-flex items-center gap-3 rounded-full border border-orange-200 bg-white/80 backdrop-blur-sm px-4 py-2 text-sm shadow-lg">
-            <span className="text-slate-500">Next Event</span>
-            <div className="h-4 w-px bg-slate-200" />
-            <span className="font-semibold text-slate-900">Planetarium Cyprus</span>
-            <div className="h-4 w-px bg-slate-200" />
-            <div className="flex items-center gap-1.5 text-slate-600">
-              <Calendar className="h-4 w-4 text-orange-500" />
-              <span className="font-medium">March 15-16</span>
-            </div>
-          </div>
-        </motion.div>
+        {/* Next Event */}
+        <div className="mt-6 pointer-events-auto">
+          <NextEvent variant="light" />
+        </div>
 
         {/* CTA Buttons */}
         <motion.div

@@ -473,7 +473,7 @@ function NavigationCarousel() {
       description:
         "Discover Kratiki Ekthesi, festivals, and unforgettable nights across Cyprus.",
       image:
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop",
+        "/Content/yacth1.jpg",
       href: "/events",
       gradient: "from-orange-600/90 to-rose-600/90",
       icon: PartyPopper,
@@ -687,11 +687,11 @@ export function SpotlightNavigation() {
 
         {/* Main Content Stack */}
         <div className="space-y-5 sm:space-y-10">
-          {/* Featured Planitario Card */}
-          <PlanitarioHeroCard />
-
           {/* Events & Student Trips Carousel */}
           <NavigationCarousel />
+
+          {/* Featured Planitario Card */}
+          <PlanitarioHeroCard />
 
           {/* Quick Links (Business, Contact, Services) */}
           <QuickLinks />
