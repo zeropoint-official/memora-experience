@@ -10,7 +10,6 @@ import {
   PartyPopper,
   Plane,
   Building2,
-  History,
 } from "lucide-react";
 import Image from "next/image";
 import { GridPattern } from "@/components/ui/grid-pattern";
@@ -62,144 +61,6 @@ const eventsData: Event[] = [
     themeColor: "190 80% 45%",
     badge: "Hot",
   },
-  {
-    id: "kratiki-ekthesi-2026",
-    title: "Cyprus State Fair",
-    category: "special",
-    date: "May 20-25, 2026",
-    location: "Nicosia, Cyprus",
-    description: "Cyprus State Fair - The biggest exhibition event of the year",
-    imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
-    href: "/events/kratiki-ekthesi",
-    themeColor: "340 80% 45%",
-    badge: "Annual",
-  },
-  {
-    id: "summer-festival-2026",
-    title: "Summer Festival",
-    category: "special",
-    date: "June 15-17, 2026",
-    location: "Limassol, Cyprus",
-    description: "Beach Party Cyprus - Three days of sun, music, and unforgettable memories",
-    imageUrl: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&h=600&fit=crop",
-    href: "/events/summer-festival",
-    themeColor: "200 80% 45%",
-    badge: "Beach Party",
-  },
-
-  // STUDENT TRIPS
-  {
-    id: "barcelona-trip-2026",
-    title: "Barcelona Trip",
-    category: "student-trip",
-    date: "April 20-25, 2026",
-    location: "Barcelona, Spain",
-    description: "Student Adventure 2026 - Explore the vibrant streets of Barcelona",
-    imageUrl: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=600&fit=crop",
-    href: "/events/barcelona",
-    themeColor: "340 80% 45%",
-    badge: "5 Days",
-  },
-  {
-    id: "rome-trip-2026",
-    title: "Rome Adventure",
-    category: "student-trip",
-    date: "May 5-10, 2026",
-    location: "Rome, Italy",
-    description: "Discover ancient history and Italian culture in the Eternal City",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=600&fit=crop",
-    href: "/events/rome",
-    themeColor: "25 90% 45%",
-    badge: "6 Days",
-  },
-  {
-    id: "paris-trip-2026",
-    title: "Paris Getaway",
-    category: "student-trip",
-    date: "September 10-15, 2026",
-    location: "Paris, France",
-    description: "The City of Lights awaits - Art, culture, and unforgettable experiences",
-    imageUrl: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=600&fit=crop",
-    href: "/events/paris",
-    themeColor: "220 80% 45%",
-    badge: "6 Days",
-  },
-
-  // BUSINESS EVENTS
-  {
-    id: "tech-summit-2026",
-    title: "Tech Summit Cyprus",
-    category: "business",
-    date: "April 10-12, 2026",
-    location: "Limassol, Cyprus",
-    description: "Connect with industry leaders and explore the future of technology",
-    imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
-    href: "/events/tech-summit",
-    themeColor: "220 80% 50%",
-    badge: "Conference",
-  },
-  {
-    id: "corporate-retreat-2026",
-    title: "Corporate Retreat",
-    category: "business",
-    date: "July 5-8, 2026",
-    location: "Paphos, Cyprus",
-    description: "Team building and strategic planning in a stunning Mediterranean setting",
-    imageUrl: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&h=600&fit=crop",
-    href: "/events/corporate-retreat",
-    themeColor: "160 70% 40%",
-    badge: "Team Building",
-  },
-  {
-    id: "business-expo-2026",
-    title: "Business Expo 2026",
-    category: "business",
-    date: "October 15-18, 2026",
-    location: "Nicosia, Cyprus",
-    description: "The largest B2B exhibition in Cyprus - Network, learn, and grow",
-    imageUrl: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=600&fit=crop",
-    href: "/events/business-expo",
-    themeColor: "25 85% 50%",
-    badge: "B2B",
-  },
-
-  // PAST EVENTS
-  {
-    id: "planitario-2025",
-    title: "Planetarium 2025",
-    category: "past",
-    date: "March 15-16, 2025",
-    location: "Nicosia, Cyprus",
-    description: "A legendary night that made history - Thank you to everyone who attended",
-    imageUrl: "/Content/planitatio/Cyprus Planetarium Lobby.jpg",
-    href: "https://planetarium.memora-experience.com",
-    themeColor: "260 70% 50%",
-    badge: "Sold Out",
-  },
-  {
-    id: "winter-gala-2024",
-    title: "Winter Gala 2024",
-    category: "past",
-    date: "December 20, 2024",
-    location: "Limassol, Cyprus",
-    description: "An elegant evening of celebration and memories",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&h=600&fit=crop",
-    href: "/events/winter-gala-2024",
-    themeColor: "200 60% 40%",
-    badge: "Completed",
-  },
-  {
-    id: "amsterdam-trip-2024",
-    title: "Amsterdam Trip 2024",
-    category: "past",
-    date: "October 5-10, 2024",
-    location: "Amsterdam, Netherlands",
-    description: "An unforgettable student adventure through the canals of Amsterdam",
-    imageUrl: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800&h=600&fit=crop",
-    href: "/events/amsterdam-2024",
-    themeColor: "25 80% 45%",
-    badge: "Completed",
-  },
 ];
 
 // ============================================
@@ -211,34 +72,27 @@ const sections = [
     title: "Special Events",
     subtitle: "Extraordinary experiences you won't want to miss",
     icon: PartyPopper,
-    gradient: "from-orange-500 to-rose-500",
-    bgGradient: "from-orange-50 to-rose-50",
+    gradient: "from-[#D4A574] to-[#C8965F]",
+    bgGradient: "from-[#D4A574]/10 to-amber-50",
   },
   {
     id: "student-trip",
     title: "Student Trips",
     subtitle: "Epic adventures designed for unforgettable memories",
     icon: Plane,
-    gradient: "from-emerald-500 to-teal-500",
-    bgGradient: "from-emerald-50 to-teal-50",
+    gradient: "from-[#D4A574] to-[#C8965F]",
+    bgGradient: "from-[#D4A574]/10 to-amber-50",
   },
   {
     id: "business",
     title: "Business Events",
     subtitle: "Professional gatherings that inspire and connect",
     icon: Building2,
-    gradient: "from-blue-500 to-indigo-500",
-    bgGradient: "from-blue-50 to-indigo-50",
-  },
-  {
-    id: "past",
-    title: "Past Events",
-    subtitle: "Relive the magic of our previous experiences",
-    icon: History,
-    gradient: "from-violet-500 to-purple-500",
-    bgGradient: "from-violet-50 to-purple-50",
+    gradient: "from-[#D4A574] to-[#C8965F]",
+    bgGradient: "from-[#D4A574]/10 to-amber-50",
   },
 ];
+
 
 // ============================================
 // EVENT CARD COMPONENT
@@ -297,7 +151,7 @@ function EventCard({ event, index }: { event: Event; index: number }) {
 
         {/* Content */}
         <div className="p-5">
-          <h3 className="mb-2 text-xl font-bold text-slate-900 transition-colors group-hover:text-orange-600">
+          <h3 className="mb-2 text-xl md:text-2xl font-semibold tracking-normal leading-tight text-slate-900 transition-colors group-hover:text-[#D4A574]">
             {event.title}
           </h3>
           <p className="mb-4 text-sm text-slate-600 line-clamp-2">
@@ -324,7 +178,7 @@ function EventCard({ event, index }: { event: Event; index: number }) {
             }}
           >
             <span className="text-sm font-semibold text-slate-700">
-              {event.category === "past" ? "View Gallery" : "View Details"}
+              View Details
             </span>
             <ArrowRight className="h-4 w-4 text-slate-600 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
@@ -380,7 +234,7 @@ function FeaturedEventCard({ event }: { event: Event }) {
         <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8">
           {/* Top */}
           <div className="flex items-start justify-between">
-            <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-orange-500/30">
+            <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#D4A574]/30">
               <Sparkles className="h-4 w-4" />
               Featured Event
             </span>
@@ -388,7 +242,7 @@ function FeaturedEventCard({ event }: { event: Event }) {
 
           {/* Bottom */}
           <div>
-            <h3 className="mb-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            <h3 className="mb-3 text-xl md:text-2xl lg:text-3xl font-medium tracking-normal leading-tight text-white">
               {event.title}
             </h3>
             <p className="mb-4 max-w-xl text-white/80">{event.description}</p>
@@ -404,7 +258,7 @@ function FeaturedEventCard({ event }: { event: Event }) {
               </span>
             </div>
 
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-xl transition-all group-hover:bg-gradient-to-r group-hover:from-orange-500 group-hover:to-rose-500 group-hover:text-white">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-xl transition-all group-hover:bg-gradient-to-r group-hover:from-[#D4A574] group-hover:to-[#C8965F] group-hover:text-white">
               Explore Event
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </span>
@@ -422,10 +276,12 @@ function EventSection({
   section,
   events,
   showFeatured = false,
+  showComingSoon = false,
 }: {
   section: typeof sections[0];
   events: Event[];
   showFeatured?: boolean;
+  showComingSoon?: boolean;
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -435,21 +291,78 @@ function EventSection({
     ? events.filter((e) => !e.featured)
     : events;
 
+  // If showing coming soon, show text message instead
+  if (showComingSoon && events.length === 0) {
+    return (
+      <section
+        ref={ref}
+        className="relative py-12 sm:py-16 md:py-20"
+      >
+        {/* Background */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${section.bgGradient} opacity-30`}
+        />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="mb-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div className="flex items-center gap-4">
+              <div
+                className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${section.gradient} shadow-lg`}
+              >
+                <section.icon className="h-7 w-7 text-white" />
+              </div>
+              <div>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+                  <span className="text-[#6B6B6B]">{section.title.split(" ")[0]}</span>{" "}
+                  <span className="text-[#D4A574]">{section.title.split(" ").slice(1).join(" ")}</span>
+                </h2>
+                <p className="text-sm sm:text-base text-slate-600">
+                  {section.subtitle}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Coming Soon Message */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col items-center justify-center py-16 px-6 rounded-2xl bg-white/60 backdrop-blur-sm border-2 border-slate-200"
+          >
+            <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${section.gradient} shadow-lg mb-6`}>
+              <section.icon className="h-8 w-8 text-white" />
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-slate-100 to-slate-50 px-6 py-3 border border-slate-200 mb-4">
+              <Sparkles className="h-5 w-5 text-slate-400" />
+              <span className="text-lg font-semibold text-slate-700">Coming Soon</span>
+            </div>
+            <p className="text-center text-slate-600 max-w-md">
+              We&apos;re working on exciting new {section.title.toLowerCase()} for you. Stay tuned!
+            </p>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
   if (events.length === 0) return null;
 
   return (
     <section
       ref={ref}
-      className={`relative py-12 sm:py-16 md:py-20 ${
-        section.id === "past" ? "bg-slate-900" : ""
-      }`}
+      className="relative py-12 sm:py-16 md:py-20"
     >
-      {/* Background for non-past sections */}
-      {section.id !== "past" && (
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${section.bgGradient} opacity-30`}
-        />
-      )}
+      {/* Background */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${section.bgGradient} opacity-30`}
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -466,18 +379,11 @@ function EventSection({
               <section.icon className="h-7 w-7 text-white" />
             </div>
             <div>
-              <h2
-                className={`text-2xl font-bold sm:text-3xl ${
-                  section.id === "past" ? "text-white" : "text-slate-900"
-                }`}
-              >
-                {section.title}
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+                <span className="text-[#6B6B6B]">{section.title.split(" ")[0]}</span>{" "}
+                <span className="text-[#D4A574]">{section.title.split(" ").slice(1).join(" ")}</span>
               </h2>
-              <p
-                className={`text-sm sm:text-base ${
-                  section.id === "past" ? "text-slate-400" : "text-slate-600"
-                }`}
-              >
+              <p className="text-sm sm:text-base text-slate-600">
                 {section.subtitle}
               </p>
             </div>
@@ -510,7 +416,6 @@ export default function EventsPage() {
   const specialEvents = eventsData.filter((e) => e.category === "special");
   const studentTrips = eventsData.filter((e) => e.category === "student-trip");
   const businessEvents = eventsData.filter((e) => e.category === "business");
-  const pastEvents = eventsData.filter((e) => e.category === "past");
 
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-zinc-50">
@@ -524,8 +429,8 @@ export default function EventsPage() {
           numSquares={30}
           maxOpacity={0.1}
         />
-        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-orange-200/40 blur-[120px]" />
-        <div className="absolute -right-40 top-60 h-[400px] w-[400px] rounded-full bg-rose-200/40 blur-[120px]" />
+        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#D4A574]/30 blur-[120px]" />
+        <div className="absolute -right-40 top-60 h-[400px] w-[400px] rounded-full bg-amber-200/40 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div ref={headerRef} className="text-center">
@@ -534,7 +439,7 @@ export default function EventsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm"
             >
               <Calendar className="h-4 w-4" />
               <span>All Events</span>
@@ -545,14 +450,12 @@ export default function EventsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-4 sm:mb-6 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 px-2"
+              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight px-2"
             >
-              Discover{" "}
-              <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-orange-600 bg-clip-text text-transparent">
-                Extraordinary
-              </span>
+              <span className="text-[#6B6B6B]">Discover</span>{" "}
+              <span className="text-[#D4A574]">Extraordinary</span>
               <br />
-              Experiences
+              <span className="text-[#D4A574]">Experiences</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -616,17 +519,12 @@ export default function EventsPage() {
 
       {/* Student Trips Section */}
       <div id="student-trip">
-        <EventSection section={sections[1]} events={studentTrips} />
+        <EventSection section={sections[1]} events={studentTrips} showComingSoon={true} />
       </div>
 
       {/* Business Events Section */}
       <div id="business">
-        <EventSection section={sections[2]} events={businessEvents} />
-      </div>
-
-      {/* Past Events Section */}
-      <div id="past">
-        <EventSection section={sections[3]} events={pastEvents} />
+        <EventSection section={sections[2]} events={businessEvents} showComingSoon={true} />
       </div>
 
       {/* CTA Section */}
@@ -639,8 +537,9 @@ export default function EventsPage() {
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <h2 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">
-              Can&apos;t find what you&apos;re looking for?
+            <h2 className="mb-4 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Can&apos;t find what you&apos;re</span>{" "}
+              <span className="text-[#D4A574]">looking for?</span>
             </h2>
             <p className="mx-auto mb-8 max-w-xl text-slate-600">
               We&apos;re always creating new experiences. Get in touch with our
@@ -649,14 +548,14 @@ export default function EventsPage() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-orange-500/25 transition-all active:scale-95 sm:hover:shadow-2xl"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-[#D4A574]/25 transition-all active:scale-95 sm:hover:shadow-2xl"
               >
                 Contact Us
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a
                 href="/"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-200 bg-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-slate-900 transition-all active:scale-95 sm:hover:border-orange-300"
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-200 bg-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium text-slate-900 transition-all active:scale-95 sm:hover:border-[#D4A574]/50"
               >
                 Back to Home
               </a>

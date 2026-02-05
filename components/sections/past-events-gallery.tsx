@@ -223,7 +223,18 @@ function EventSlider({ title, icon: Icon, iconColor, events, viewAllHref = "/exp
           <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${iconColor}`}>
             <Icon className="h-4 w-4 text-white" />
           </div>
-          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+          <h3 className="text-base font-semibold">
+            {(() => {
+              const words = title.split(" ");
+              const mid = Math.ceil(words.length / 2);
+              return (
+                <>
+                  <span className="text-[#6B6B6B]">{words.slice(0, mid).join(" ")}</span>{" "}
+                  <span className="text-[#D4A574]">{words.slice(mid).join(" ")}</span>
+                </>
+              );
+            })()}
+          </h3>
         </div>
 
         <div className="flex items-center gap-2">
@@ -297,11 +308,9 @@ export function PastEventsGallery() {
             <span>Past Memories</span>
           </span>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-900 mb-3">
-            Memories Made{" "}
-            <span className="bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
-              Across Cyprus
-            </span>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight mb-3">
+            <span className="text-[#6B6B6B]">Memories Made</span>{" "}
+            <span className="text-[#D4A574]">Across Cyprus</span>
           </h2>
 
           <p className="max-w-xl text-base sm:text-lg text-slate-600">
@@ -315,7 +324,7 @@ export function PastEventsGallery() {
             <EventSlider
               title="Featured Events"
               icon={Star}
-              iconColor="bg-gradient-to-br from-amber-500 to-orange-500"
+              iconColor="bg-gradient-to-br from-[#D4A574] to-[#C8965F]"
               events={featuredEvents}
             />
           </motion.div>

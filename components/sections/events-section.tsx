@@ -19,24 +19,13 @@ const upcomingEvents = [
   },
   {
     id: 2,
-    name: "Barcelona Trip",
-    emoji: "🇪🇸",
-    stats: "April 20-25 • Spain",
-    description: "Student Adventure 2025",
-    imageUrl: "https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=2070&auto=format&fit=crop",
-    href: "/events/barcelona",
-    themeColor: "340 80% 45%", // Rose/Pink
-    featured: false,
-  },
-  {
-    id: 3,
-    name: "Summer Festival",
-    emoji: "🎉",
-    stats: "June 15-17 • Limassol",
-    description: "Beach Party Cyprus",
-    imageUrl: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=2070&auto=format&fit=crop",
-    href: "/events/summer-festival",
-    themeColor: "200 80% 45%", // Blue
+    name: "Summer Boat Party",
+    emoji: "⛵",
+    stats: "July 20 • Ayia Napa",
+    description: "Set sail for the ultimate sunset party",
+    imageUrl: "/Content/yacth1.jpg",
+    href: "/events/boat-party",
+    themeColor: "190 80% 45%", // Cyan/Blue
     featured: false,
   },
 ];
@@ -72,13 +61,11 @@ export function EventsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+            className="mb-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight"
           >
-            Don&apos;t Miss Out
+            <span className="text-[#6B6B6B]">Don&apos;t Miss Out</span>
             <br />
-            <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-orange-600 bg-clip-text text-transparent">
-              On The Action
-            </span>
+            <span className="text-[#D4A574]">On The Action</span>
           </motion.h2>
 
           <motion.p

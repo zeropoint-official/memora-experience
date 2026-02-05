@@ -52,7 +52,7 @@ interface SparklesTextProps {
 
 export function SparklesText({
   children,
-  colors = { first: "#f97316", second: "#f43f5e" },
+  colors = { first: "#D4A574", second: "#C8965F" },
   className,
   sparklesCount = 10,
   ...props

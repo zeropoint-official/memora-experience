@@ -56,7 +56,7 @@ function ServiceCard({
               <Icon className="h-7 w-7 text-white" />
             </div>
             <div className="flex-1">
-              <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
+              <h4 className="text-lg md:text-xl lg:text-2xl font-semibold tracking-normal leading-tight text-slate-900 mb-1">
                 {title}
               </h4>
               <div className="flex items-center gap-1">
@@ -306,7 +306,7 @@ export function ServicesTimeline() {
             initial={{ opacity: 0, y: 20 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+            className="mb-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight text-slate-900"
           >
             Everything You Need
             <br />

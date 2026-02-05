@@ -101,7 +101,7 @@ function FAQItem({
     <div className="border-b border-slate-200 last:border-0">
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-orange-600"
+        className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-[#D4A574]"
       >
         <span className="text-lg font-semibold text-slate-900 pr-4">
           {question}
@@ -336,7 +336,7 @@ export default function KratikiEkthesiPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-lg"
+              className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-lg"
             >
               <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
               Cyprus State Fair 2026
@@ -347,12 +347,11 @@ export default function KratikiEkthesiPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 sm:mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white"
+              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
             >
-              Kratiki Ekthesi
-              <span className="block bg-gradient-to-r from-orange-300 to-rose-300 bg-clip-text text-transparent">
-                2026
-              </span>
+              <span className="text-white">Kratiki</span>{" "}
+              <span className="text-[#D4A574]">Ekthesi</span>
+              <span className="block text-[#D4A574]">2026</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -374,15 +373,15 @@ export default function KratikiEkthesiPage() {
               className="mb-6 sm:mb-10 flex flex-col items-center gap-2 sm:gap-3 text-white/90 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6"
             >
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
                 <span className="font-medium">May 20-25, 2026</span>
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
                 <span className="font-medium">Nicosia Fairgrounds, Cyprus</span>
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
                 <span className="font-medium">10:00 AM - 11:00 PM</span>
               </span>
             </motion.div>
@@ -411,7 +410,7 @@ export default function KratikiEkthesiPage() {
             >
               <a
                 href="#tickets"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-orange-500/30 transition-all hover:shadow-2xl active:scale-95 sm:hover:scale-105"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-[#D4A574]/30 transition-all hover:shadow-2xl active:scale-95 sm:hover:scale-105"
               >
                 <Ticket className="h-4 w-4 sm:h-5 sm:w-5" />
                 Get Tickets
@@ -458,8 +457,8 @@ export default function KratikiEkthesiPage() {
           numSquares={30}
           maxOpacity={0.1}
         />
-        <div className="absolute -left-40 top-20 h-[400px] w-[400px] rounded-full bg-orange-200/40 blur-[120px]" />
-        <div className="absolute -right-40 bottom-20 h-[400px] w-[400px] rounded-full bg-rose-200/40 blur-[120px]" />
+        <div className="absolute -left-40 top-20 h-[400px] w-[400px] rounded-full bg-[#D4A574]/30 blur-[120px]" />
+        <div className="absolute -right-40 bottom-20 h-[400px] w-[400px] rounded-full bg-amber-200/40 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -469,15 +468,13 @@ export default function KratikiEkthesiPage() {
             transition={{ duration: 0.5 }}
             className="mb-16 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
               <Star className="h-4 w-4" />
               About The Event
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
-              Cyprus&apos;s Biggest{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
-                Annual Fair
-              </span>
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Cyprus&apos;s Biggest</span>{" "}
+              <span className="text-[#D4A574]">Annual Fair</span>
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
               Kratiki Ekthesi (State Fair) is Cyprus&apos;s premier exhibition
@@ -498,7 +495,7 @@ export default function KratikiEkthesiPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
               >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg transition-transform group-hover:scale-110">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg transition-transform group-hover:scale-110">
                   <item.icon className="h-7 w-7 text-white" />
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-slate-900">
@@ -523,12 +520,13 @@ export default function KratikiEkthesiPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-medium text-orange-600">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-[#D4A574]/10 px-4 py-2 text-sm font-medium text-[#D4A574]">
               <Camera className="h-4 w-4" />
               Gallery
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl">
-              Experience the Magic
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Experience the</span>{" "}
+              <span className="text-[#D4A574]">Magic</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
               Glimpses from previous years and what awaits you at this year&apos;s fair
@@ -568,8 +566,8 @@ export default function KratikiEkthesiPage() {
       >
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-orange-500/10 blur-[120px]" />
-        <div className="absolute -right-40 bottom-40 h-[400px] w-[400px] rounded-full bg-rose-500/10 blur-[120px]" />
+        <div className="absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-[#D4A574]/10 blur-[120px]" />
+        <div className="absolute -right-40 bottom-40 h-[400px] w-[400px] rounded-full bg-amber-500/10 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -583,11 +581,9 @@ export default function KratikiEkthesiPage() {
               <Clock className="h-4 w-4" />
               Schedule
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">
-              6 Days of{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">
-                Non-Stop Action
-              </span>
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-white">6 Days of</span>{" "}
+              <span className="text-[#D4A574]">Non-Stop Action</span>
             </h2>
           </motion.div>
 
@@ -604,7 +600,7 @@ export default function KratikiEkthesiPage() {
                 onClick={() => setActiveDay(index)}
                 className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all ${
                   activeDay === index
-                    ? "bg-gradient-to-r from-orange-500 to-rose-500 text-white shadow-lg"
+                    ? "bg-gradient-to-r from-[#D4A574] to-[#C8965F] text-white shadow-lg"
                     : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
                 }`}
               >
@@ -633,8 +629,8 @@ export default function KratikiEkthesiPage() {
                   transition={{ duration: 0.3, delay: index * 0.05 }}
                   className="flex items-center gap-4 rounded-xl bg-white/5 p-4 backdrop-blur-sm transition-colors hover:bg-white/10"
                 >
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500/20 to-rose-500/20">
-                    <event.icon className="h-6 w-6 text-orange-400" />
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#D4A574]/20 to-amber-500/20">
+                    <event.icon className="h-6 w-6 text-[#D4A574]" />
                   </div>
                   <div className="flex-1">
                     <p className="font-semibold text-white">{event.title}</p>
@@ -655,7 +651,7 @@ export default function KratikiEkthesiPage() {
       <section
         id="tickets"
         ref={ticketsRef}
-        className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-rose-500 to-orange-600 py-12 sm:py-20 md:py-28"
+        className="relative overflow-hidden bg-gradient-to-br from-[#D4A574] via-[#C8965F] to-[#D4A574] py-12 sm:py-20 md:py-28"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -674,8 +670,9 @@ export default function KratikiEkthesiPage() {
             transition={{ duration: 0.5 }}
           >
             <Ticket className="mx-auto mb-6 h-16 w-16 text-white/90" />
-            <h2 className="mb-6 text-4xl font-bold text-white sm:text-5xl">
-              Get Your Tickets
+            <h2 className="mb-6 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight">
+              <span className="text-white">Get Your</span>{" "}
+              <span className="text-[#D4A574]">Tickets</span>
             </h2>
             <p className="mx-auto mb-8 max-w-2xl text-lg text-white/90">
               Don&apos;t miss out on Cyprus&apos;s biggest annual fair. Purchase
@@ -705,12 +702,12 @@ export default function KratikiEkthesiPage() {
                   }}
                   className={`relative rounded-2xl p-5 sm:p-6 text-left transition-all hover:scale-105 active:scale-95 ${
                     ticket.popular
-                      ? "bg-white text-slate-900 shadow-2xl ring-2 ring-orange-500"
+                      ? "bg-white text-slate-900 shadow-2xl ring-2 ring-[#D4A574]"
                       : "bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
                   }`}
                 >
                   {ticket.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-3 py-1 text-xs font-bold text-white">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-3 py-1 text-xs font-bold text-white">
                       POPULAR
                     </span>
                   )}
@@ -792,15 +789,13 @@ export default function KratikiEkthesiPage() {
               animate={isPartnerInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-medium text-orange-600">
-                <Handshake className="h-4 w-4" />
-                Partnership Opportunities
-              </span>
-              <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl">
-                Partner With{" "}
-                <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
-                  Kratiki Ekthesi
-                </span>
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-[#D4A574]/10 px-4 py-2 text-sm font-medium text-[#D4A574]">
+              <Handshake className="h-4 w-4" />
+              Partnership Opportunities
+            </span>
+              <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+                <span className="text-[#6B6B6B]">Partner With</span>{" "}
+                <span className="text-[#D4A574]">Kratiki Ekthesi</span>
               </h2>
               <p className="mt-6 text-lg text-slate-600">
                 Join Cyprus&apos;s biggest exhibition as a partner and connect
@@ -824,7 +819,7 @@ export default function KratikiEkthesiPage() {
                     transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
                     className="flex items-start gap-3"
                   >
-                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-500" />
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#D4A574]" />
                     <span className="text-slate-700">{benefit}</span>
                   </motion.div>
                 ))}
@@ -841,7 +836,7 @@ export default function KratikiEkthesiPage() {
                     key={index}
                     className="flex flex-col items-center rounded-xl border border-slate-200 bg-slate-50 p-4 text-center"
                   >
-                    <type.icon className="mb-2 h-6 w-6 text-orange-500" />
+                    <type.icon className="mb-2 h-6 w-6 text-[#D4A574]" />
                     <span className="text-sm font-medium text-slate-700">
                       {type.label}
                     </span>
@@ -858,10 +853,10 @@ export default function KratikiEkthesiPage() {
             >
               {formSubmitted ? (
                 <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F]">
                     <CheckCircle className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="mb-2 text-2xl font-bold text-slate-900">
+                  <h3 className="mb-2 text-xl md:text-2xl font-semibold tracking-normal leading-tight text-slate-900">
                     Thank You!
                   </h3>
                   <p className="text-slate-600">
@@ -893,7 +888,7 @@ export default function KratikiEkthesiPage() {
                           type="text"
                           required
                           placeholder="John Smith"
-                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                         />
                       </div>
                     </div>
@@ -909,7 +904,7 @@ export default function KratikiEkthesiPage() {
                           type="text"
                           required
                           placeholder="Your Company Ltd"
-                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                         />
                       </div>
                     </div>
@@ -925,7 +920,7 @@ export default function KratikiEkthesiPage() {
                           type="email"
                           required
                           placeholder="john@company.com"
-                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                         />
                       </div>
                     </div>
@@ -940,7 +935,7 @@ export default function KratikiEkthesiPage() {
                         <input
                           type="tel"
                           placeholder="+357 99 123 456"
-                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                          className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                         />
                       </div>
                     </div>
@@ -952,7 +947,7 @@ export default function KratikiEkthesiPage() {
                       </label>
                       <select
                         required
-                        className="w-full appearance-none rounded-xl border border-slate-300 bg-white py-3 pl-4 pr-10 text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full appearance-none rounded-xl border border-slate-300 bg-white py-3 pl-4 pr-10 text-slate-900 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                       >
                         <option value="">Select an option</option>
                         <option value="exhibitor">Exhibitor / Booth</option>
@@ -974,7 +969,7 @@ export default function KratikiEkthesiPage() {
                         <textarea
                           rows={4}
                           placeholder="Tell us about your company and partnership goals..."
-                          className="w-full resize-none rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                          className="w-full resize-none rounded-xl border border-slate-300 bg-white py-3 pl-12 pr-4 text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                         />
                       </div>
                     </div>
@@ -982,7 +977,7 @@ export default function KratikiEkthesiPage() {
                     {/* Submit */}
                     <button
                       type="submit"
-                      className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 py-4 text-lg font-semibold text-white shadow-lg shadow-orange-500/25 transition-all hover:shadow-xl hover:shadow-orange-500/30"
+                      className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] py-4 text-lg font-semibold text-white shadow-lg shadow-[#D4A574]/25 transition-all hover:shadow-xl hover:shadow-[#D4A574]/30"
                     >
                       Submit Inquiry
                       <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -1007,8 +1002,9 @@ export default function KratikiEkthesiPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-              Frequently Asked Questions
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Frequently Asked</span>{" "}
+              <span className="text-[#D4A574]">Questions</span>
             </h2>
             <p className="mt-4 text-lg text-slate-600">
               Everything you need to know about Kratiki Ekthesi
@@ -1044,7 +1040,7 @@ export default function KratikiEkthesiPage() {
               Still have questions?{" "}
               <a
                 href="/contact"
-                className="font-semibold text-orange-600 hover:text-orange-700"
+                className="font-semibold text-[#D4A574] hover:text-[#C8965F]"
               >
                 Contact us
               </a>
@@ -1060,7 +1056,7 @@ export default function KratikiEkthesiPage() {
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <a
             href="/events"
-            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-orange-600"
+            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-[#D4A574]"
           >
             <ArrowRight className="h-4 w-4 rotate-180" />
             Back to All Events
@@ -1866,7 +1862,7 @@ function PaymentModal({
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="mb-3 text-3xl font-bold text-slate-900"
+                      className="mb-3 text-xl md:text-2xl lg:text-3xl font-medium tracking-normal leading-tight text-slate-900"
                     >
                       Payment Successful! 🎉
                     </motion.h3>
@@ -1912,25 +1908,14 @@ function PaymentModal({
                     </motion.div>
 
                     {/* Actions */}
-                    <div className="flex flex-col gap-3">
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={resetModal}
-                        className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:shadow-xl hover:shadow-orange-500/40"
-                      >
-                        Done
-                      </motion.button>
-                      <motion.a
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        href="/account"
-                        className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
-                      >
-                        <Ticket className="h-4 w-4" />
-                        View My Tickets
-                      </motion.a>
-                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={resetModal}
+                      className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-orange-500/30 transition-all hover:shadow-xl hover:shadow-orange-500/40"
+                    >
+                      Done
+                    </motion.button>
                   </motion.div>
                 )}
               </div>

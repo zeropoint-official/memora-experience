@@ -101,7 +101,18 @@ const GradientCard = React.forwardRef<HTMLDivElement, GradientCardProps>(
 
             {/* Title and Description */}
             <div className="flex-grow">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">{title}</h3>
+              <h3 className="text-2xl font-bold mb-2">
+                {(() => {
+                  const words = title.split(" ");
+                  const mid = Math.ceil(words.length / 2);
+                  return (
+                    <>
+                      <span className="text-[#6B6B6B]">{words.slice(0, mid).join(" ")}</span>{" "}
+                      <span className="text-[#D4A574]">{words.slice(mid).join(" ")}</span>
+                    </>
+                  );
+                })()}
+              </h3>
               <p className="text-slate-600 max-w-xs">{description}</p>
             </div>
 

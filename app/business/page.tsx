@@ -60,7 +60,7 @@ const partnershipTypes = [
       "Social media promotion",
       "Speaking opportunities",
     ],
-    color: "from-orange-500 to-rose-500",
+    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "exhibitor",
@@ -74,7 +74,7 @@ const partnershipTypes = [
       "Lead generation",
       "Product demonstrations",
     ],
-    color: "from-blue-500 to-indigo-500",
+    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "vendor",
@@ -88,7 +88,7 @@ const partnershipTypes = [
       "Brand exposure",
       "Revenue opportunities",
     ],
-    color: "from-emerald-500 to-teal-500",
+    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "media",
@@ -102,7 +102,7 @@ const partnershipTypes = [
       "Cross-promotion",
       "Exclusive interviews",
     ],
-    color: "from-violet-500 to-purple-500",
+    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "entertainment",
@@ -116,7 +116,7 @@ const partnershipTypes = [
       "Portfolio building",
       "Networking",
     ],
-    color: "from-pink-500 to-rose-500",
+    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "services",
@@ -130,7 +130,7 @@ const partnershipTypes = [
       "Industry recognition",
       "B2B networking",
     ],
-    color: "from-amber-500 to-orange-500",
+    color: "from-[#D4A574] to-[#C8965F]",
   },
 ];
 
@@ -255,7 +255,7 @@ function FAQItem({
     <div className="border-b border-slate-200 last:border-0">
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between py-3 sm:py-4 md:py-5 text-left transition-colors active:text-orange-600 sm:hover:text-orange-600"
+        className="flex w-full items-center justify-between py-3 sm:py-4 md:py-5 text-left transition-colors active:text-[#D4A574] sm:hover:text-[#D4A574]"
       >
         <span className="pr-3 sm:pr-4 text-base sm:text-lg font-semibold text-slate-900">
           {question}
@@ -354,8 +354,8 @@ export default function BusinessPage() {
       >
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-orange-500/10 blur-[120px]" />
-        <div className="absolute -right-40 bottom-20 h-[500px] w-[500px] rounded-full bg-rose-500/10 blur-[120px]" />
+        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#D4A574]/10 blur-[120px]" />
+        <div className="absolute -right-40 bottom-20 h-[500px] w-[500px] rounded-full bg-amber-500/10 blur-[120px]" />
         <GridPattern
           className="absolute inset-0 z-0 opacity-20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
           width={50}
@@ -371,7 +371,7 @@ export default function BusinessPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-lg"
+              className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-2 text-sm font-semibold text-white shadow-lg"
             >
               <Handshake className="h-4 w-4" />
               Partnership Opportunities
@@ -382,12 +382,10 @@ export default function BusinessPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 sm:mb-6 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white px-2"
+              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight px-2"
             >
-              Partner With Cyprus&apos;s
-              <span className="block bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">
-                Premier Event Company
-              </span>
+              <span className="text-white">Partner With Cyprus&apos;s</span>
+              <span className="block text-[#D4A574]">Premier Event Company</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -414,7 +412,7 @@ export default function BusinessPage() {
                   key={index}
                   className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur-sm"
                 >
-                  <stat.icon className="mx-auto mb-2 sm:mb-3 h-6 w-6 sm:h-8 sm:w-8 text-orange-400" />
+                  <stat.icon className="mx-auto mb-2 sm:mb-3 h-6 w-6 sm:h-8 sm:w-8 text-[#D4A574]" />
                   <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
                   <p className="text-xs sm:text-sm text-slate-400">{stat.label}</p>
                 </div>
@@ -429,7 +427,7 @@ export default function BusinessPage() {
             >
               <a
                 href="#inquiry"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-orange-500/30 transition-all hover:scale-105 hover:shadow-2xl"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-[#D4A574]/30 transition-all hover:scale-105 hover:shadow-2xl"
               >
                 Start Your Partnership
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -443,7 +441,7 @@ export default function BusinessPage() {
       {/* WHY PARTNER WITH US SECTION */}
       {/* ============================================ */}
       <section ref={whyRef} className="relative overflow-hidden bg-zinc-50 py-12 sm:py-20 md:py-28">
-        <div className="absolute -right-40 top-40 h-[400px] w-[400px] rounded-full bg-orange-200/40 blur-[120px]" />
+        <div className="absolute -right-40 top-40 h-[400px] w-[400px] rounded-full bg-[#D4A574]/30 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -453,15 +451,13 @@ export default function BusinessPage() {
             transition={{ duration: 0.5 }}
             className="mb-16 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
               <Star className="h-4 w-4" />
               Why Memora
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
-              Why Partner{" "}
-              <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
-                With Us
-              </span>
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Why Partner</span>{" "}
+              <span className="text-[#D4A574]">With Us</span>
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
               For over a decade, Memora Experience has been at the forefront of
@@ -480,10 +476,10 @@ export default function BusinessPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg transition-transform group-hover:scale-110">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg transition-transform group-hover:scale-110">
                   <reason.icon className="h-7 w-7 text-white" />
                 </div>
-                <h3 className="mb-2 text-xl font-bold text-slate-900">
+                <h3 className="mb-2 text-xl md:text-2xl font-semibold tracking-normal leading-tight text-slate-900">
                   {reason.title}
                 </h3>
                 <p className="text-slate-600">{reason.description}</p>
@@ -532,12 +528,13 @@ export default function BusinessPage() {
             transition={{ duration: 0.5 }}
             className="mb-16 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-medium text-orange-600">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-[#D4A574]/10 px-4 py-2 text-sm font-medium text-[#D4A574]">
               <Handshake className="h-4 w-4" />
               Partnership Options
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl">
-              Find Your Perfect Partnership
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Find Your Perfect</span>{" "}
+              <span className="text-[#D4A574]">Partnership</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
               We offer diverse partnership opportunities tailored to your
@@ -560,7 +557,7 @@ export default function BusinessPage() {
                 >
                   <type.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <h3 className="mb-2 text-lg sm:text-xl font-bold text-slate-900">
+                <h3 className="mb-2 text-lg md:text-xl font-semibold tracking-normal leading-tight text-slate-900">
                   {type.title}
                 </h3>
                 <p className="mb-3 sm:mb-4 text-sm sm:text-base text-slate-600">{type.description}</p>
@@ -570,7 +567,7 @@ export default function BusinessPage() {
                       key={i}
                       className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-600"
                     >
-                      <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 text-orange-500" />
+                      <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 text-[#D4A574]" />
                       {benefit}
                     </li>
                   ))}
@@ -587,7 +584,7 @@ export default function BusinessPage() {
       <section
         id="inquiry"
         ref={formRef}
-        className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-rose-500 to-orange-600 py-12 sm:py-20 md:py-28"
+        className="relative overflow-hidden bg-gradient-to-br from-[#D4A574] via-[#C8965F] to-[#D4A574] py-12 sm:py-20 md:py-28"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -607,8 +604,9 @@ export default function BusinessPage() {
             className="text-center"
           >
             <Sparkles className="mx-auto mb-6 h-12 w-12 text-white/90" />
-            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
-              Start Your Partnership Journey
+            <h2 className="mb-4 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight">
+              <span className="text-white">Start Your Partnership</span>{" "}
+              <span className="text-white/95">Journey</span>
             </h2>
             <p className="mx-auto mb-10 max-w-2xl text-lg text-white/90">
               Fill out the form below and our partnership team will get back to
@@ -624,7 +622,7 @@ export default function BusinessPage() {
           >
             {formSubmitted ? (
               <div className="rounded-2xl bg-white p-8 text-center shadow-2xl sm:p-12">
-                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500">
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F]">
                   <CheckCircle className="h-10 w-10 text-white" />
                 </div>
                 <h3 className="mb-4 text-2xl font-bold text-slate-900">
@@ -637,7 +635,7 @@ export default function BusinessPage() {
                 </p>
                 <a
                   href="/"
-                  className="inline-flex items-center gap-2 text-orange-600 font-semibold hover:text-orange-700"
+                  className="inline-flex items-center gap-2 text-[#D4A574] font-semibold hover:text-[#C8965F]"
                 >
                   <ArrowRight className="h-4 w-4 rotate-180" />
                   Back to Home
@@ -663,7 +661,7 @@ export default function BusinessPage() {
                         type="text"
                         required
                         placeholder="John Smith"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                       />
                     </div>
                   </div>
@@ -679,7 +677,7 @@ export default function BusinessPage() {
                         type="text"
                         required
                         placeholder="Your Company Ltd"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                       />
                     </div>
                   </div>
@@ -695,7 +693,7 @@ export default function BusinessPage() {
                         type="email"
                         required
                         placeholder="john@company.com"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                       />
                     </div>
                   </div>
@@ -710,7 +708,7 @@ export default function BusinessPage() {
                       <input
                         type="tel"
                         placeholder="+357 99 123 456"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                       />
                     </div>
                   </div>
@@ -721,7 +719,7 @@ export default function BusinessPage() {
                       Interested Event <span className="text-slate-400 font-normal">(optional)</span>
                     </label>
                     <select
-                      className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                      className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                     >
                       <option value="">Select an event (optional)</option>
                       <option value="kratiki-ekthesi">
@@ -746,7 +744,7 @@ export default function BusinessPage() {
                     </label>
                     <select
                       required
-                      className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                      className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                     >
                       <option value="">Select partnership type</option>
                       <option value="sponsor">Event Sponsor</option>
@@ -788,7 +786,7 @@ export default function BusinessPage() {
                         required
                         rows={4}
                         placeholder="Tell us about your company, partnership goals, and what you hope to achieve..."
-                        className="w-full resize-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                        className="w-full resize-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
                       />
                     </div>
                   </div>
@@ -797,7 +795,7 @@ export default function BusinessPage() {
                   <div className="sm:col-span-2">
                     <button
                       type="submit"
-                      className="group flex w-full items-center justify-center gap-2 rounded-lg sm:rounded-xl bg-gradient-to-r from-orange-500 to-rose-500 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-lg shadow-orange-500/25 transition-all active:scale-95 sm:hover:shadow-xl sm:hover:shadow-orange-500/30"
+                      className="group flex w-full items-center justify-center gap-2 rounded-lg sm:rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] py-3 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-lg shadow-[#D4A574]/25 transition-all active:scale-95 sm:hover:shadow-xl sm:hover:shadow-[#D4A574]/30"
                     >
                       Submit Partnership Inquiry
                       <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
@@ -817,7 +815,7 @@ export default function BusinessPage() {
         ref={eventsRef}
         className="relative overflow-hidden bg-slate-900 py-12 sm:py-20 md:py-28"
       >
-        <div className="absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-orange-500/10 blur-[120px]" />
+        <div className="absolute -left-40 top-40 h-[400px] w-[400px] rounded-full bg-[#D4A574]/10 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -831,7 +829,7 @@ export default function BusinessPage() {
               <Calendar className="h-4 w-4" />
               Available Events
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight text-white">
               Events Open for Partnership
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
@@ -859,13 +857,13 @@ export default function BusinessPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 left-4">
-                    <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">
+                    <span className="rounded-full bg-[#D4A574] px-3 py-1 text-xs font-semibold text-white">
                       {event.attendance} expected
                     </span>
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="mb-2 font-bold text-white">{event.title}</h3>
+                  <h3 className="mb-2 text-xl md:text-2xl font-semibold tracking-normal leading-tight text-white">{event.title}</h3>
                   <div className="space-y-1 text-sm text-slate-400">
                     <p className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
@@ -895,12 +893,13 @@ export default function BusinessPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm font-medium text-orange-600 shadow-sm">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
               <Quote className="h-4 w-4" />
               Partner Stories
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl">
-              What Our Partners Say
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">What Our Partners</span>{" "}
+              <span className="text-[#D4A574]">Say</span>
             </h2>
           </motion.div>
 
@@ -914,12 +913,12 @@ export default function BusinessPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
               >
-                <Quote className="mb-4 h-8 w-8 text-orange-200" />
+                <Quote className="mb-4 h-8 w-8 text-[#D4A574]/30" />
                 <p className="mb-6 text-slate-600 italic">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500 text-lg font-bold text-white">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F] text-lg font-bold text-white">
                     {testimonial.author.charAt(0)}
                   </div>
                   <div>
@@ -949,8 +948,9 @@ export default function BusinessPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-              Partnership FAQ
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Partnership</span>{" "}
+              <span className="text-[#D4A574]">FAQ</span>
             </h2>
             <p className="mt-4 text-lg text-slate-600">
               Common questions about partnering with Memora
@@ -986,7 +986,7 @@ export default function BusinessPage() {
               Have more questions?{" "}
               <a
                 href="/contact"
-                className="font-semibold text-orange-600 hover:text-orange-700"
+                className="font-semibold text-[#D4A574] hover:text-[#C8965F]"
               >
                 Contact our team
               </a>
@@ -1002,7 +1002,7 @@ export default function BusinessPage() {
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <a
             href="/"
-            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-orange-600"
+            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-[#D4A574]"
           >
             <ArrowRight className="h-4 w-4 rotate-180" />
             Back to Home

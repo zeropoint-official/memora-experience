@@ -103,8 +103,9 @@ export function NavigationCardsSection() {
             <Sparkles className="h-4 w-4" />
             <span>Explore Memora</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900">
-            Where Would You Like to Go?
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+            <span className="text-[#6B6B6B]">Where Would You Like to</span>{" "}
+            <span className="text-[#D4A574]">Go?</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
             Navigate through our experiences and find what excites you most.

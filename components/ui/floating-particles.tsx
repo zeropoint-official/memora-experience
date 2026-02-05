@@ -16,7 +16,7 @@ interface Particle {
 export function FloatingParticles({
   className,
   quantity = 30,
-  colors = ["#f97316", "#f43f5e", "#8b5cf6", "#06b6d4"],
+  colors = ["#D4A574", "#C8965F", "#8b5cf6", "#06b6d4"],
 }: {
   className?: string;
   quantity?: number;

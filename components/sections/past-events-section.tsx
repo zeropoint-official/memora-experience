@@ -171,7 +171,7 @@ export function PastEventsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 text-center"
+            className="mb-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight text-slate-900 text-center"
           >
             <LayoutGroup>
               <motion.span layout className="flex whitespace-pre flex-col sm:flex-row items-baseline justify-center gap-2">

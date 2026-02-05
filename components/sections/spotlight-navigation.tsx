@@ -15,7 +15,6 @@ import {
   Wrench,
   ChevronLeft,
   ChevronRight,
-  History,
 } from "lucide-react";
 
 // ============================================
@@ -265,7 +264,7 @@ function PlanitarioHeroCard() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.3 }}
-                className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg shadow-amber-500/30"
+                className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#E8C9A0] to-[#D4A574] px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg shadow-[#D4A574]/30"
               >
                 <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-white text-white" />
                 <span className="text-xs sm:text-sm font-bold text-white">
@@ -311,7 +310,7 @@ function PlanitarioHeroCard() {
                 animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
                 transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
               >
-                <h3 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3 tracking-tight">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-medium tracking-normal leading-tight text-white mb-2 sm:mb-3">
                   Planitario
                   <span className="bg-gradient-to-r from-purple-300 to-cyan-300 bg-clip-text text-transparent">
                     {" "}
@@ -471,13 +470,13 @@ function NavigationCarousel() {
     {
       title: "Events",
       description:
-        "Discover Kratiki Ekthesi, festivals, and unforgettable nights across Cyprus.",
+        "Discover Planetarium, Boat Party, and unforgettable nights across Cyprus.",
       image:
         "/Content/yacth1.jpg",
       href: "/events",
-      gradient: "from-orange-600/90 to-rose-600/90",
+      gradient: "from-[#D4A574]/90 to-[#C8965F]/90",
       icon: PartyPopper,
-      badge: "12 Upcoming",
+      badge: "2 Upcoming",
     },
     {
       title: "Student Trips",
@@ -488,18 +487,7 @@ function NavigationCarousel() {
       href: "/student-trips",
       gradient: "from-emerald-600/90 to-teal-600/90",
       icon: Plane,
-      badge: "New Destinations",
-    },
-    {
-      title: "Past Events",
-      description:
-        "Relive the magic. Browse our gallery of legendary events and unforgettable moments.",
-      image:
-        "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=400&fit=crop",
-      href: "/past-events",
-      gradient: "from-violet-600/90 to-purple-600/90",
-      icon: History,
-      badge: "50+ Events",
+      badge: "Coming Soon",
     },
   ];
 
@@ -548,16 +536,21 @@ function NavigationCarousel() {
       </div>
 
       {/* Carousel */}
-      <div
-        ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 -mx-5 px-5 sm:-mx-0 sm:px-0"
-        style={{ scrollSnapType: "x mandatory" }}
-      >
-        {carouselItems.map((item, index) => (
-          <div key={index} style={{ scrollSnapAlign: "start" }}>
-            <CarouselCard {...item} cardId={`carousel-card-${index}`} />
-          </div>
-        ))}
+      <div className="-mx-5 sm:-mx-0">
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 pl-5 pr-5 sm:pl-0 sm:pr-0 scroll-pl-5 sm:scroll-pl-0"
+          style={{ scrollSnapType: "x mandatory" }}
+        >
+          {carouselItems.map((item, index) => (
+            <div 
+              key={index} 
+              style={{ scrollSnapAlign: "start" }}
+            >
+              <CarouselCard {...item} cardId={`carousel-card-${index}`} />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Scroll Indicator (Mobile) */}
@@ -566,7 +559,7 @@ function NavigationCarousel() {
           <div
             key={index}
             className={`h-1.5 rounded-full transition-all ${
-              index === 0 ? "w-6 bg-orange-500" : "w-1.5 bg-slate-300"
+              index === 0 ? "w-6 bg-[#D4A574]" : "w-1.5 bg-slate-300"
             }`}
           />
         ))}
@@ -596,16 +589,8 @@ function QuickLinks() {
       description: "Get Help",
       icon: Phone,
       href: "/contact",
-      color: "from-rose-500 to-pink-500",
-      bgHover: "hover:bg-rose-50",
-    },
-    {
-      title: "Services",
-      description: "What We Offer",
-      icon: Wrench,
-      href: "/services",
-      color: "from-amber-500 to-orange-500",
-      bgHover: "hover:bg-amber-50",
+      color: "from-[#D4A574] to-[#C8965F]",
+      bgHover: "hover:bg-[#FAF7F2]",
     },
   ];
 
@@ -657,11 +642,11 @@ function QuickLinks() {
 // ============================================
 export function SpotlightNavigation() {
   return (
-    <section className="relative w-full overflow-hidden bg-slate-50 py-6 sm:py-12 lg:py-16">
+    <section className="relative w-full overflow-hidden bg-[#FAFAFA] py-6 sm:py-12 lg:py-16">
       {/* Background decorations */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 via-slate-50 to-slate-100" />
       <div className="absolute -left-40 top-0 h-80 w-80 rounded-full bg-purple-200/30 blur-[120px]" />
-      <div className="absolute -right-40 bottom-0 h-80 w-80 rounded-full bg-orange-200/30 blur-[120px]" />
+      <div className="absolute -right-40 bottom-0 h-80 w-80 rounded-full bg-[#E8C9A0]/30 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Section Header - More compact on mobile */}
@@ -672,12 +657,13 @@ export function SpotlightNavigation() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-4 sm:mb-8 flex items-center gap-2 sm:gap-3"
         >
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg">
             <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
           </div>
           <div>
-            <h2 className="text-lg sm:text-2xl font-bold text-slate-900">
-              Explore Memora
+            <h2 className="text-lg md:text-xl lg:text-2xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Explore</span>{" "}
+              <span className="text-[#D4A574]">Memora</span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 hidden sm:block">
               Find your next adventure
@@ -693,7 +679,7 @@ export function SpotlightNavigation() {
           {/* Featured Planitario Card */}
           <PlanitarioHeroCard />
 
-          {/* Quick Links (Business, Contact, Services) */}
+          {/* Quick Links (Business, Contact) */}
           <QuickLinks />
         </div>
       </div>

@@ -26,7 +26,7 @@ export function Ripple({
       {Array.from({ length: numCircles }, (_, i) => (
         <motion.span
           key={i}
-          className="absolute rounded-full border border-orange-500/20 bg-orange-500/5"
+          className="absolute rounded-full border border-[#D4A574]/20 bg-[#D4A574]/5"
           style={{
             width: mainCircleSize + i * 70,
             height: mainCircleSize + i * 70,

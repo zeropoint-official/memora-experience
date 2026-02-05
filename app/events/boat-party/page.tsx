@@ -98,7 +98,7 @@ function FAQItem({
     <div className="border-b border-slate-200 last:border-0">
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-cyan-600"
+        className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-[#D4A574]"
       >
         <span className="text-lg font-semibold text-slate-900 pr-4">
           {question}
@@ -285,7 +285,7 @@ export default function BoatPartyPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-lg"
+              className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-lg"
             >
               <Anchor className="h-3 w-3 sm:h-4 sm:w-4" />
               Summer Boat Party 2026
@@ -296,12 +296,10 @@ export default function BoatPartyPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 sm:mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white"
+              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
             >
-              Ayia Napa
-              <span className="block bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                Boat Party
-              </span>
+              <span className="text-white">Ayia Napa</span>
+              <span className="block text-[#D4A574]">Boat Party</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -312,7 +310,7 @@ export default function BoatPartyPage() {
               className="mb-6 sm:mb-8 px-2 text-base sm:text-lg md:text-xl text-white/80"
             >
               The ultimate summer experience. Dance under the sunset with{" "}
-              <span className="font-semibold text-cyan-300">DJ Eirinei Sterianou</span>{" "}
+              <span className="font-semibold text-[#D4A574]">DJ Eirinei Sterianou</span>{" "}
               spinning the hottest pop & house tracks.
             </motion.p>
 
@@ -324,15 +322,15 @@ export default function BoatPartyPage() {
               className="mb-6 sm:mb-10 flex flex-col items-center gap-2 sm:gap-3 text-white/90 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-6"
             >
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
                 <span className="font-medium">July 4, 2026</span>
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
                 <span className="font-medium">Ayia Napa Marina, Cyprus</span>
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
                 <span className="font-medium">5:00 PM - 10:00 PM</span>
               </span>
             </motion.div>
@@ -361,7 +359,7 @@ export default function BoatPartyPage() {
             >
               <a
                 href="#tickets"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-cyan-500/30 transition-all hover:shadow-2xl active:scale-95 sm:hover:scale-105"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-[#D4A574]/30 transition-all hover:shadow-2xl active:scale-95 sm:hover:scale-105"
               >
                 <Ticket className="h-4 w-4 sm:h-5 sm:w-5" />
                 Get Tickets
@@ -385,8 +383,8 @@ export default function BoatPartyPage() {
           numSquares={30}
           maxOpacity={0.1}
         />
-        <div className="absolute -left-40 top-20 h-[400px] w-[400px] rounded-full bg-cyan-200/40 blur-[120px]" />
-        <div className="absolute -right-40 bottom-20 h-[400px] w-[400px] rounded-full bg-blue-200/40 blur-[120px]" />
+        <div className="absolute -left-40 top-20 h-[400px] w-[400px] rounded-full bg-[#D4A574]/30 blur-[120px]" />
+        <div className="absolute -right-40 bottom-20 h-[400px] w-[400px] rounded-full bg-amber-200/40 blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -396,15 +394,13 @@ export default function BoatPartyPage() {
             transition={{ duration: 0.5 }}
             className="mb-16 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-white px-4 py-2 text-sm font-medium text-cyan-600 shadow-sm">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
               <Waves className="h-4 w-4" />
               About The Party
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
-              The Ultimate{" "}
-              <span className="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
-                Summer Experience
-              </span>
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">The Ultimate</span>{" "}
+              <span className="text-[#D4A574]">Summer Experience</span>
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
               Set sail from Ayia Napa on a stunning luxury yacht for an unforgettable
@@ -421,11 +417,11 @@ export default function BoatPartyPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-16 mx-auto max-w-2xl"
           >
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 p-1">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] p-1">
               <div className="rounded-[22px] bg-white p-6 sm:p-8">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
                   <div className="relative">
-                    <div className="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 shadow-xl ring-4 ring-white">
+                    <div className="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-xl ring-4 ring-white">
                       <Image
                         src="/Content/DJ.png"
                         alt="DJ Eirinei Sterianou"
@@ -436,22 +432,22 @@ export default function BoatPartyPage() {
                     <motion.div
                       animate={{ scale: [1, 1.2, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
-                      className="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg"
+                      className="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] text-white shadow-lg"
                     >
                       <Music className="h-4 w-4" />
                     </motion.div>
                   </div>
                   <div className="text-center sm:text-left">
-                    <p className="text-sm font-medium text-cyan-600 uppercase tracking-wider mb-1">Featured DJ</p>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2">Eirinei Sterianou</h3>
+                    <p className="text-sm font-medium text-[#D4A574] uppercase tracking-wider mb-1">Featured DJ</p>
+                    <h3 className="text-xl md:text-2xl font-semibold tracking-normal leading-tight text-slate-900 mb-2">Eirinei Sterianou</h3>
                     <p className="text-slate-600">
                       One of Cyprus&apos;s most exciting DJs, known for her electrifying
                       sets blending pop anthems with deep house grooves.
                     </p>
                     <div className="mt-3 flex items-center justify-center sm:justify-start gap-2">
-                      <span className="rounded-full bg-cyan-100 px-3 py-1 text-xs font-medium text-cyan-700">Pop</span>
-                      <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700">House</span>
-                      <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700">Deep House</span>
+                      <span className="rounded-full bg-[#D4A574]/10 px-3 py-1 text-xs font-medium text-[#D4A574]">Pop</span>
+                      <span className="rounded-full bg-[#D4A574]/20 px-3 py-1 text-xs font-medium text-[#C8965F]">House</span>
+                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700">Deep House</span>
                     </div>
                   </div>
                 </div>
@@ -469,7 +465,7 @@ export default function BoatPartyPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
               >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 shadow-lg transition-transform group-hover:scale-110">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg transition-transform group-hover:scale-110">
                   <item.icon className="h-7 w-7 text-white" />
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-slate-900">
@@ -494,12 +490,13 @@ export default function BoatPartyPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-medium text-cyan-600">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-[#D4A574]/10 px-4 py-2 text-sm font-medium text-[#D4A574]">
               <Sparkles className="h-4 w-4" />
               Gallery
             </span>
-            <h2 className="mt-6 text-3xl font-bold text-slate-900 sm:text-4xl">
-              What Awaits You
+            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">What Awaits</span>{" "}
+              <span className="text-[#D4A574]">You</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
               Get a taste of the incredible experience that awaits
@@ -535,7 +532,7 @@ export default function BoatPartyPage() {
       <section
         id="tickets"
         ref={ticketsRef}
-        className="relative overflow-hidden bg-gradient-to-br from-cyan-500 via-blue-500 to-cyan-600 py-12 sm:py-20 md:py-28"
+        className="relative overflow-hidden bg-gradient-to-br from-[#D4A574] via-[#C8965F] to-[#D4A574] py-12 sm:py-20 md:py-28"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -554,8 +551,9 @@ export default function BoatPartyPage() {
             transition={{ duration: 0.5 }}
           >
             <Ticket className="mx-auto mb-6 h-16 w-16 text-white/90" />
-            <h2 className="mb-6 text-4xl font-bold text-white sm:text-5xl">
-              Get Your Tickets
+            <h2 className="mb-6 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight">
+              <span className="text-white">Get Your</span>{" "}
+              <span className="text-[#D4A574]">Tickets</span>
             </h2>
             <p className="mx-auto mb-8 max-w-2xl text-lg text-white/90">
               Secure your spot on the boat. Both packages include boat cruise,
@@ -591,7 +589,7 @@ export default function BoatPartyPage() {
                   ],
                 },
               ].map((ticket, index) => (
-                <motion.button
+                  <motion.button
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
@@ -602,12 +600,12 @@ export default function BoatPartyPage() {
                   }}
                   className={`relative rounded-2xl p-5 sm:p-6 text-left transition-all hover:scale-105 active:scale-95 ${
                     ticket.popular
-                      ? "bg-white text-slate-900 shadow-2xl ring-2 ring-cyan-300"
+                      ? "bg-white text-slate-900 shadow-2xl ring-2 ring-[#D4A574]"
                       : "bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
                   }`}
                 >
                   {ticket.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-3 py-1 text-xs font-bold text-white flex items-center gap-1">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-3 py-1 text-xs font-bold text-white flex items-center gap-1">
                       <Crown className="h-3 w-3" />
                       VIP
                     </span>
@@ -636,7 +634,7 @@ export default function BoatPartyPage() {
                   <ul className={`space-y-2 text-xs sm:text-sm ${ticket.popular ? "text-slate-600" : "text-white/80"}`}>
                     {ticket.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2">
-                        <CheckCircle className={`h-4 w-4 ${ticket.popular ? "text-cyan-500" : "text-cyan-300"}`} />
+                        <CheckCircle className={`h-4 w-4 ${ticket.popular ? "text-[#D4A574]" : "text-white/70"}`} />
                         {feature}
                       </li>
                     ))}
@@ -694,8 +692,9 @@ export default function BoatPartyPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-              Frequently Asked Questions
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+              <span className="text-[#6B6B6B]">Frequently Asked</span>{" "}
+              <span className="text-[#D4A574]">Questions</span>
             </h2>
             <p className="mt-4 text-lg text-slate-600">
               Everything you need to know about the boat party
@@ -731,7 +730,7 @@ export default function BoatPartyPage() {
               Still have questions?{" "}
               <a
                 href="/contact"
-                className="font-semibold text-cyan-600 hover:text-cyan-700"
+                className="font-semibold text-[#D4A574] hover:text-[#C8965F]"
               >
                 Contact us
               </a>
@@ -747,7 +746,7 @@ export default function BoatPartyPage() {
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <a
             href="/events"
-            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-cyan-600"
+            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-[#D4A574]"
           >
             <ArrowRight className="h-4 w-4 rotate-180" />
             Back to All Events
@@ -816,21 +815,21 @@ function FloatingInput({
             Icon ? "pl-12" : "pl-4"
           } ${
             isFocused || hasValue
-              ? "border-cyan-500 bg-cyan-50/30 shadow-lg shadow-cyan-500/10 pt-6 pb-2"
+              ? "border-[#D4A574] bg-[#D4A574]/5 shadow-lg shadow-[#D4A574]/10 pt-6 pb-2"
               : "border-slate-200 hover:border-slate-300 py-4"
-          } focus:outline-none focus:ring-2 focus:ring-cyan-500/20`}
+          } focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20`}
         />
         <label
           className={`pointer-events-none absolute transition-all duration-200 ${
             Icon ? "left-12" : "left-4"
           } ${
             isFocused || hasValue
-              ? "top-2 text-xs font-semibold text-cyan-600"
+              ? "top-2 text-xs font-semibold text-[#D4A574]"
               : "top-1/2 -translate-y-1/2 text-slate-500"
           }`}
         >
           {label}
-          {required && <span className="ml-1 text-cyan-500">*</span>}
+          {required && <span className="ml-1 text-[#D4A574]">*</span>}
         </label>
       </div>
     </div>
@@ -858,15 +857,15 @@ function QuantitySelector({
         whileTap={{ scale: 0.9 }}
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-cyan-500 hover:bg-cyan-50 hover:text-cyan-600"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:bg-[#D4A574]/10 hover:text-[#D4A574]"
       >
         <span className="text-xl font-bold">−</span>
       </motion.button>
       <motion.div
         key={value}
-        initial={{ scale: 1.2, color: "#06b6d4" }}
+        initial={{ scale: 1.2, color: "#D4A574" }}
         animate={{ scale: 1, color: "#0f172a" }}
-        className="flex h-12 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-200"
+        className="flex h-12 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574]/10 to-amber-50 border-2 border-[#D4A574]/30"
       >
         <span className="text-2xl font-bold text-slate-900">{value}</span>
       </motion.div>
@@ -875,7 +874,7 @@ function QuantitySelector({
         whileTap={{ scale: 0.9 }}
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-cyan-500 hover:bg-cyan-50 hover:text-cyan-600"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:bg-[#D4A574]/10 hover:text-[#D4A574]"
       >
         <span className="text-xl font-bold">+</span>
       </motion.button>
@@ -982,12 +981,12 @@ function PaymentModal({
               className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl"
             >
               {/* Header */}
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-gradient-to-r from-white to-cyan-50/30 px-4 py-4 sm:px-6 backdrop-blur-sm">
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-gradient-to-r from-white to-[#D4A574]/10 px-4 py-4 sm:px-6 backdrop-blur-sm">
                 <div className="flex items-center gap-3">
                   <motion.div
                     animate={{ rotate: [0, 10, -10, 0] }}
                     transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 shadow-lg"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg"
                   >
                     <Ticket className="h-5 w-5 text-white" />
                   </motion.div>
@@ -1000,7 +999,7 @@ function PaymentModal({
                             key={s}
                             className={`h-1.5 rounded-full transition-all ${
                               step === s
-                                ? "w-6 bg-cyan-500"
+                                ? "w-6 bg-[#D4A574]"
                                 : i < ["ticket", "details", "payment"].indexOf(step)
                                 ? "w-1.5 bg-green-500"
                                 : "w-1.5 bg-slate-300"
@@ -1049,15 +1048,15 @@ function PaymentModal({
                             }}
                             className={`group relative w-full overflow-hidden rounded-2xl border-2 p-5 text-left transition-all ${
                               ticket.popular
-                                ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-blue-50 shadow-lg shadow-cyan-500/20"
-                                : "border-slate-200 bg-white hover:border-cyan-300 hover:shadow-md"
+                                ? "border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-amber-50 shadow-lg shadow-[#D4A574]/20"
+                                : "border-slate-200 bg-white hover:border-[#D4A574]/50 hover:shadow-md"
                             }`}
                           >
                             {ticket.popular && (
                               <motion.div
                                 animate={{ rotate: [0, 5, -5, 0] }}
                                 transition={{ duration: 2, repeat: Infinity }}
-                                className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-cyan-400 to-blue-400 opacity-20 blur-xl"
+                                className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-[#D4A574] to-amber-400 opacity-20 blur-xl"
                               />
                             )}
                             <div className="relative flex items-start justify-between">
@@ -1068,7 +1067,7 @@ function PaymentModal({
                                     <motion.span
                                       initial={{ scale: 0 }}
                                       animate={{ scale: 1 }}
-                                      className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 px-2.5 py-1 text-xs font-bold text-white shadow-md"
+                                      className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-2.5 py-1 text-xs font-bold text-white shadow-md"
                                     >
                                       <Crown className="h-3 w-3" />
                                       VIP
@@ -1082,14 +1081,14 @@ function PaymentModal({
                                 </div>
                               </div>
                               <div className="ml-4 text-right">
-                                <p className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                                <p className="text-3xl font-bold bg-gradient-to-r from-[#D4A574] to-[#C8965F] bg-clip-text text-transparent">
                                   €{ticket.price}
                                 </p>
                                 <p className="text-xs text-slate-500 mt-1">per person</p>
                               </div>
                             </div>
                             <motion.div
-                              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500"
+                              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#D4A574] to-[#C8965F]"
                               initial={{ width: 0 }}
                               whileHover={{ width: "100%" }}
                               transition={{ duration: 0.3 }}
@@ -1111,26 +1110,26 @@ function PaymentModal({
                     <motion.div
                       initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="relative overflow-hidden rounded-2xl border-2 border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-blue-50 p-5 shadow-lg"
+                      className="relative overflow-hidden rounded-2xl border-2 border-[#D4A574]/30 bg-gradient-to-br from-[#D4A574]/10 via-white to-amber-50 p-5 shadow-lg"
                     >
-                      <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br from-cyan-200/40 to-blue-200/40 blur-2xl" />
+                      <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br from-[#D4A574]/20 to-amber-200/40 blur-2xl" />
                       <div className="relative">
                         <div className="mb-4 flex items-center justify-between">
                           <div>
                             <div className="flex items-center gap-2 mb-1">
-                              <Ticket className="h-5 w-5 text-cyan-600" />
+                              <Ticket className="h-5 w-5 text-[#D4A574]" />
                               <p className="text-lg font-bold text-slate-900">{currentTicket.type}</p>
                             </div>
                             <p className="text-sm text-slate-600">{currentTicket.desc}</p>
                           </div>
                           <div className="text-right">
-                            <p className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                            <p className="text-2xl font-bold bg-gradient-to-r from-[#D4A574] to-[#C8965F] bg-clip-text text-transparent">
                               €{currentTicket.price}
                             </p>
                             <p className="text-xs text-slate-500">per person</p>
                           </div>
                         </div>
-                        <div className="flex items-center justify-between rounded-xl border-2 border-cyan-100 bg-white/80 p-4 backdrop-blur-sm">
+                        <div className="flex items-center justify-between rounded-xl border-2 border-[#D4A574]/20 bg-white/80 p-4 backdrop-blur-sm">
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-1">Quantity</label>
                             <p className="text-xs text-slate-500">Select number of tickets</p>
@@ -1143,7 +1142,7 @@ function PaymentModal({
                     {/* Customer Details */}
                     <div>
                       <div className="mb-4 flex items-center gap-2">
-                        <User className="h-5 w-5 text-cyan-600" />
+                        <User className="h-5 w-5 text-[#D4A574]" />
                         <h3 className="text-lg font-semibold text-slate-900">Your Details</h3>
                       </div>
                       <div className="space-y-5">
@@ -1210,7 +1209,7 @@ function PaymentModal({
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setStep("payment")}
                         disabled={!formData.fullName || !formData.email}
-                        className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-3.5 font-semibold text-white shadow-lg shadow-cyan-500/30 transition-all hover:shadow-xl hover:shadow-cyan-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-3.5 font-semibold text-white shadow-lg shadow-[#D4A574]/30 transition-all hover:shadow-xl hover:shadow-[#D4A574]/40 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Continue to Payment
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -1228,7 +1227,7 @@ function PaymentModal({
                     {/* Payment Method Selection */}
                     <div>
                       <div className="mb-4 flex items-center gap-2">
-                        <CreditCard className="h-5 w-5 text-cyan-600" />
+                        <CreditCard className="h-5 w-5 text-[#D4A574]" />
                         <h3 className="text-lg font-semibold text-slate-900">Payment Method</h3>
                       </div>
                       <div className="grid grid-cols-2 gap-3">
@@ -1238,13 +1237,13 @@ function PaymentModal({
                           onClick={() => setSelectedPaymentMethod("card")}
                           className={`group relative overflow-hidden rounded-xl border-2 p-4 text-left transition-all ${
                             selectedPaymentMethod === "card"
-                              ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-blue-50 shadow-lg"
-                              : "border-slate-200 bg-white hover:border-cyan-300"
+                              ? "border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-amber-50 shadow-lg"
+                              : "border-slate-200 bg-white hover:border-[#D4A574]/50"
                           }`}
                         >
                           <div className="relative">
                             <CreditCard className={`mb-2 h-7 w-7 transition-colors ${
-                              selectedPaymentMethod === "card" ? "text-cyan-600" : "text-slate-400"
+                              selectedPaymentMethod === "card" ? "text-[#D4A574]" : "text-slate-400"
                             }`} />
                             <p className={`text-sm font-semibold transition-colors ${
                               selectedPaymentMethod === "card" ? "text-slate-900" : "text-slate-600"
@@ -1267,8 +1266,8 @@ function PaymentModal({
                           onClick={() => setSelectedPaymentMethod("paypal")}
                           className={`group relative overflow-hidden rounded-xl border-2 p-4 text-left transition-all ${
                             selectedPaymentMethod === "paypal"
-                              ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-blue-50 shadow-lg"
-                              : "border-slate-200 bg-white hover:border-cyan-300"
+                              ? "border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-amber-50 shadow-lg"
+                              : "border-slate-200 bg-white hover:border-[#D4A574]/50"
                           }`}
                         >
                           <div className="relative">
@@ -1300,13 +1299,13 @@ function PaymentModal({
                         className="space-y-5"
                       >
                         {/* Card Preview */}
-                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-600 via-blue-700 to-cyan-800 p-6 text-white shadow-2xl">
+                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 p-6 text-white shadow-2xl">
                           <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
-                          <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-cyan-500/20 blur-xl" />
+                          <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-[#D4A574]/20 blur-xl" />
                           <div className="relative">
                             <div className="mb-6 flex items-center justify-between">
                               <div className="text-2xl font-bold">MEMORA</div>
-                              <div className="h-8 w-12 rounded bg-gradient-to-br from-cyan-400 to-blue-400" />
+                              <div className="h-8 w-12 rounded bg-gradient-to-br from-[#D4A574] to-[#C8965F]" />
                             </div>
                             <div className="mb-4 font-mono text-xl tracking-wider">
                               {formData.cardNumber || "•••• •••• •••• ••••"}
@@ -1439,7 +1438,7 @@ function PaymentModal({
                           }
                           whileHover={!isProcessing ? { scale: 1.02 } : {}}
                           whileTap={!isProcessing ? { scale: 0.98 } : {}}
-                          className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-3.5 font-semibold text-white shadow-lg shadow-cyan-500/30 transition-all hover:shadow-xl hover:shadow-cyan-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-3.5 font-semibold text-white shadow-lg shadow-[#D4A574]/30 transition-all hover:shadow-xl hover:shadow-[#D4A574]/40 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isProcessing ? (
                             <>
@@ -1484,7 +1483,7 @@ function PaymentModal({
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="mb-3 text-3xl font-bold text-slate-900"
+                      className="mb-3 text-xl md:text-2xl lg:text-3xl font-medium tracking-normal leading-tight text-slate-900"
                     >
                       You&apos;re Onboard! 🚢
                     </motion.h3>
@@ -1495,7 +1494,7 @@ function PaymentModal({
                       className="mb-6 text-slate-600"
                     >
                       Your tickets have been confirmed. A confirmation email has been sent to{" "}
-                      <span className="font-semibold text-cyan-600">{formData.email || "your email"}</span>
+                      <span className="font-semibold text-[#D4A574]">{formData.email || "your email"}</span>
                     </motion.p>
 
                     <motion.div
@@ -1532,25 +1531,14 @@ function PaymentModal({
                       </div>
                     </motion.div>
 
-                    <div className="flex flex-col gap-3">
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={resetModal}
-                        className="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3.5 font-semibold text-white shadow-lg shadow-cyan-500/30 transition-all hover:shadow-xl hover:shadow-cyan-500/40"
-                      >
-                        Done
-                      </motion.button>
-                      <motion.a
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        href="/account"
-                        className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
-                      >
-                        <Ticket className="h-4 w-4" />
-                        View My Tickets
-                      </motion.a>
-                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={resetModal}
+                      className="w-full rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#D4A574]/30 transition-all hover:shadow-xl hover:shadow-[#D4A574]/40"
+                    >
+                      Done
+                    </motion.button>
                   </motion.div>
                 )}
               </div>

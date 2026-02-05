@@ -66,7 +66,18 @@ function ServiceCard({
 
       {/* Content */}
       <div className="p-6">
-        <h3 className="mb-2 text-xl font-bold text-slate-900">{title}</h3>
+        <h3 className="mb-2 text-xl font-bold">
+          {(() => {
+            const words = title.split(" ");
+            const mid = Math.ceil(words.length / 2);
+            return (
+              <>
+                <span className="text-[#6B6B6B]">{words.slice(0, mid).join(" ")}</span>{" "}
+                <span className="text-[#D4A574]">{words.slice(mid).join(" ")}</span>
+              </>
+            );
+          })()}
+        </h3>
         <p className="mb-4 text-sm text-slate-600 leading-relaxed">{description}</p>
 
         {/* Features */}
@@ -168,13 +179,11 @@ export function LandingServices() {
             initial={{ opacity: 0, y: 20 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl"
+            className="mb-4 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight"
           >
-            Everything You Need
+            <span className="text-[#6B6B6B]">Everything You Need</span>
             <br />
-            <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-orange-600 bg-clip-text text-transparent">
-              Under One Roof
-            </span>
+            <span className="text-[#D4A574]">Under One Roof</span>
           </motion.h2>
 
           <motion.p

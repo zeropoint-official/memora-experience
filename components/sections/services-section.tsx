@@ -105,8 +105,17 @@ function ServiceCard({
           </div>
 
           {/* Title */}
-          <h3 className="mb-3 text-2xl font-bold text-slate-900">
-            {service.title}
+          <h3 className="mb-3 text-xl md:text-2xl font-semibold tracking-normal leading-tight">
+            {(() => {
+              const words = service.title.split(" ");
+              const mid = Math.ceil(words.length / 2);
+              return (
+                <>
+                  <span className="text-[#6B6B6B]">{words.slice(0, mid).join(" ")}</span>{" "}
+                  <span className="text-[#D4A574]">{words.slice(mid).join(" ")}</span>
+                </>
+              );
+            })()}
           </h3>
 
           {/* Description */}
@@ -173,13 +182,11 @@ export function ServicesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+            className="mb-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight"
           >
-            Services Tailored
+            <span className="text-[#6B6B6B]">Services Tailored</span>
             <br />
-            <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-orange-600 bg-clip-text text-transparent">
-              For Every Event
-            </span>
+            <span className="text-[#D4A574]">For Every Event</span>
           </motion.h2>
 
           <motion.p
@@ -215,8 +222,9 @@ export function ServicesSection() {
           <div className="relative z-10 flex flex-col items-center gap-8 lg:flex-row lg:justify-between">
             {/* Text */}
             <div className="text-center lg:text-left">
-              <h3 className="mb-2 text-2xl font-bold text-slate-900 lg:text-3xl">
-                Events We&apos;ve Brought to Life
+              <h3 className="mb-2 text-xl md:text-2xl lg:text-3xl font-medium tracking-normal leading-tight">
+                <span className="text-[#6B6B6B]">Events We&apos;ve Brought to</span>{" "}
+                <span className="text-[#D4A574]">Life</span>
               </h3>
               <p className="max-w-md text-slate-600">
                 From legendary Planitario nights to unforgettable student

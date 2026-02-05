@@ -32,7 +32,7 @@ export function CTASection() {
   return (
     <section ref={ref} className="relative overflow-hidden py-20 lg:py-28">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-rose-500 to-orange-600" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#D4A574] via-[#C8965F] to-[#B8874A]" />
       
       {/* Animated overlay pattern */}
       <div className="absolute inset-0 opacity-30">
@@ -110,12 +110,12 @@ export function CTASection() {
         {/* Headline */}
         <motion.h2
           variants={itemVariants}
-          className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6"
         >
-          <span className="hidden sm:inline">Let's Create Your Next</span>
-          <span className="sm:hidden">Create Your Next</span>
+          <span className="hidden sm:inline text-white">Let's Create Your Next</span>
+          <span className="sm:hidden text-white">Create Your Next</span>
           <br />
-          <span className="relative inline-block">
+          <span className="relative inline-block text-white/95">
             Unforgettable Memory
             <motion.svg
               className="absolute -bottom-2 left-0 w-full"
@@ -155,7 +155,7 @@ export function CTASection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-orange-600 shadow-xl shadow-black/20 transition-all hover:shadow-2xl hover:shadow-black/30"
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-lg font-semibold text-[#D4A574] shadow-xl shadow-black/20 transition-all hover:shadow-2xl hover:shadow-black/30"
             >
               <Rocket className="h-5 w-5" />
               <span>Explore Events</span>

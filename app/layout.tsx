@@ -31,11 +31,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className="bg-white" style={{ colorScheme: 'light' }}>
+      <html lang="en" className="bg-[#FAFAFA]" style={{ colorScheme: 'light' }}>
         <body
-          className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased bg-white`}
+          className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased bg-[#FAFAFA]`}
           style={{ 
-            backgroundColor: '#ffffff',
+            backgroundColor: '#FAFAFA',
             fontFamily: 'var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif'
           }}
         >

@@ -106,24 +106,23 @@ export function AnimatedTestimonials({
           <motion.div variants={itemVariants} className="flex flex-col justify-center">
             <div className="space-y-4 md:space-y-6">
               {badgeText && (
-                <div className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium bg-gradient-to-r from-orange-100 to-rose-100 text-orange-600 border border-orange-200">
-                  <Star className="mr-2 h-3 w-3 md:h-4 md:w-4 fill-orange-500 text-orange-500" />
+                <div className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium bg-gradient-to-r from-[#FAF7F2] to-[#FAF7F2] text-[#D4A574] border border-[#E8C9A0]">
+                  <Star className="mr-2 h-3 w-3 md:h-4 md:w-4 fill-[#D4A574] text-[#D4A574]" />
                   <span>{badgeText}</span>
                 </div>
               )}
 
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-                {title.split(" ").map((word, i) => (
-                  <span key={i}>
-                    {i === title.split(" ").length - 1 ? (
-                      <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
-                        {word}
-                      </span>
-                    ) : (
-                      word + " "
-                    )}
-                  </span>
-                ))}
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight sm:text-5xl">
+                {(() => {
+                  const words = title.split(" ");
+                  const mid = Math.ceil(words.length / 2);
+                  return (
+                    <>
+                      <span className="text-[#6B6B6B]">{words.slice(0, mid).join(" ")}</span>{" "}
+                      <span className="text-[#D4A574]">{words.slice(mid).join(" ")}</span>
+                    </>
+                  );
+                })()}
               </h2>
 
               <p className="max-w-[600px] text-slate-600 text-base md:text-lg leading-relaxed">{subtitle}</p>

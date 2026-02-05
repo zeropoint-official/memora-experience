@@ -20,7 +20,7 @@ export function ShimmerButton({
   shimmerColor = "#ffffff",
   shimmerSize = "0.1em",
   shimmerDuration = "2s",
-  background = "linear-gradient(135deg, #f97316 0%, #f43f5e 100%)",
+  background = "linear-gradient(135deg, #D4A574 0%, #C8965F 100%)",
   onClick,
 }: ShimmerButtonProps) {
   return (

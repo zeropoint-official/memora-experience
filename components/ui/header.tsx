@@ -9,11 +9,11 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X, Sparkles, User } from "lucide-react";
+import { Menu, MoveRight, X, Sparkles, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 function Header1() {
     const navigationItems = [
@@ -25,33 +25,15 @@ function Header1() {
         {
             title: "Events",
             href: "/events",
-            description: "Discover extraordinary events, unforgettable trips, and legendary nights across Cyprus.",
+            description: "Discover extraordinary events and legendary nights across Cyprus.",
             items: [
                 {
-                    title: "Planitario 2025",
+                    title: "Planetarium",
                     href: "https://planetarium.memora-experience.com",
                 },
                 {
-                    title: "Student Trips",
-                    href: "/events/student-trips",
-                },
-                {
-                    title: "Corporate Events",
-                    href: "/events/corporate",
-                },
-                {
-                    title: "Festivals",
-                    href: "/events/festivals",
-                },
-            ],
-        },
-        {
-            title: "Services",
-            description: "Comprehensive event solutions that bring your vision to life.",
-            items: [
-                {
-                    title: "Event Management Services",
-                    href: "/services",
+                    title: "Boat Party",
+                    href: "/events/boat-party",
                 },
                 {
                     title: "Business with Us",
@@ -73,9 +55,7 @@ function Header1() {
         "/events/kratiki-ekthesi",
         "/events/planitario",
         "/events/boat-party",
-        "/services",
         "/business",
-        "/account",
         "/contact",
         // Add other dark hero pages here
     ];
@@ -120,7 +100,9 @@ function Header1() {
             className={`w-full z-50 fixed top-0 left-0 transition-all duration-300 ${
                 scrolled 
                     ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/50" 
-                    : "bg-transparent"
+                    : isHomePage && isDesktop 
+                        ? "bg-white border-b border-slate-200/50"
+                        : "bg-transparent"
             }`}
         >
             <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center px-4 sm:px-6 lg:px-8">
@@ -136,8 +118,8 @@ function Header1() {
                                             <NavigationMenuLink>
                                                 <Button variant="ghost" className={`transition-colors duration-300 ${
                                                     shouldShowWhiteText
-                                                        ? "text-white hover:text-orange-300 hover:bg-white/10" 
-                                                        : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
+                                                        ? "text-white hover:text-[#E8C9A0] hover:bg-white/10" 
+                                                        : "text-slate-700 hover:text-[#D4A574] hover:bg-white/50"
                                                 }`}>
                                                     {item.title}
                                                 </Button>
@@ -149,8 +131,8 @@ function Header1() {
                                             <NavigationMenuTrigger 
                                                 className={`font-medium text-sm transition-colors duration-300 bg-transparent border-0 shadow-none ${
                                                     shouldShowWhiteText
-                                                        ? "text-white hover:text-orange-300 hover:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-orange-300" 
-                                                        : "text-slate-700 hover:text-orange-600 hover:bg-white/50 data-[state=open]:bg-white/50 data-[state=open]:text-orange-600"
+                                                        ? "text-white hover:text-[#E8C9A0] hover:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-[#E8C9A0]" 
+                                                        : "text-slate-700 hover:text-[#D4A574] hover:bg-white/50 data-[state=open]:bg-white/50 data-[state=open]:text-[#D4A574]"
                                                 }`}
                                                 onClick={(e) => {
                                                     // Navigate on click if href exists (dropdown opens on hover, so click navigates)
@@ -162,13 +144,15 @@ function Header1() {
                                             >
                                                 {item.title}
                                             </NavigationMenuTrigger>
-                                            <NavigationMenuContent className={`bg-white border border-slate-200 shadow-xl ${
-                                                item.title === "Services" 
-                                                    ? "!w-[280px] p-3" 
-                                                    : "!w-[450px] p-4"
-                                            }`}>
-                                                {item.title === "Services" ? (
-                                                    // Compact layout for Services (only 2 links)
+                                            <NavigationMenuContent className="bg-white border border-slate-200 shadow-xl !w-[320px] p-4">
+                                                {/* Full layout for Events (with description and button) */}
+                                                <div className="flex flex-col gap-4">
+                                                    <div className="flex flex-col">
+                                                        <p className="text-base font-semibold text-slate-900">{item.title}</p>
+                                                        <p className="text-slate-600 text-sm mt-1">
+                                                            {item.description}
+                                                        </p>
+                                                    </div>
                                                     <div className="flex flex-col gap-1">
                                                         {item.items?.map((subItem) => {
                                                             const isExternal = subItem.href.startsWith('http');
@@ -198,55 +182,14 @@ function Header1() {
                                                             );
                                                         })}
                                                     </div>
-                                                ) : (
-                                                    // Full layout for Events (with description and button)
-                                                    <div className="flex flex-col lg:grid grid-cols-2 gap-4">
-                                                        <div className="flex flex-col h-full justify-between">
-                                                            <div className="flex flex-col">
-                                                                <p className="text-base font-semibold text-slate-900">{item.title}</p>
-                                                                <p className="text-slate-600 text-sm mt-1">
-                                                                    {item.description}
-                                                                </p>
-                                                            </div>
-                                                            <Link href="/events" legacyBehavior passHref>
-                                                                <NavigationMenuLink asChild>
-                                                                    <Button size="sm" className="mt-10 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0">
-                                                                        Explore Events
-                                                                    </Button>
-                                                                </NavigationMenuLink>
-                                                            </Link>
-                                                        </div>
-                                                        <div className="flex flex-col text-sm h-full justify-end">
-                                                            {item.items?.map((subItem) => {
-                                                                const isExternal = subItem.href.startsWith('http');
-                                                                return isExternal ? (
-                                                                    <a
-                                                                        href={subItem.href}
-                                                                        key={subItem.title}
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        className="flex flex-row justify-between items-center hover:bg-slate-50 py-2 px-4 rounded transition-colors"
-                                                                    >
-                                                                        <span className="text-slate-700">{subItem.title}</span>
-                                                                        <MoveRight className="w-4 h-4 text-slate-400" />
-                                                                    </a>
-                                                                ) : (
-                                                                    <Link
-                                                                        href={subItem.href}
-                                                                        key={subItem.title}
-                                                                        legacyBehavior
-                                                                        passHref
-                                                                    >
-                                                                        <NavigationMenuLink className="flex flex-row justify-between items-center hover:bg-slate-50 py-2 px-4 rounded transition-colors">
-                                                                            <span className="text-slate-700">{subItem.title}</span>
-                                                                            <MoveRight className="w-4 h-4 text-slate-400" />
-                                                                        </NavigationMenuLink>
-                                                                    </Link>
-                                                                );
-                                                            })}
-                                                        </div>
-                                                    </div>
-                                                )}
+                                                    <Link href="/events" legacyBehavior passHref>
+                                                        <NavigationMenuLink asChild>
+                                                            <Button size="sm" className="mt-2 bg-gradient-to-r from-[#D4A574] to-[#C8965F] hover:from-[#C8965F] hover:to-[#B8874A] text-white border-0">
+                                                                View All Events
+                                                            </Button>
+                                                        </NavigationMenuLink>
+                                                    </Link>
+                                                </div>
                                             </NavigationMenuContent>
                                         </>
                                     ) : null}
@@ -257,67 +200,43 @@ function Header1() {
                 </div>
                 
                 {/* Logo - Center on desktop, Left on mobile */}
-                <div className="flex lg:justify-center flex-1 lg:flex-none">
+                <div className="flex lg:justify-center flex-1 lg:flex-none relative z-10">
                     <Link href="/" className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-orange-500 transition-colors duration-300" />
-                        <p className={`font-bold text-xl transition-colors duration-300 ${
-                            shouldShowWhiteText ? "text-white" : "text-slate-900"
-                        }`}>Memora Experience</p>
+                        <div className="relative drop-shadow-lg drop-shadow-[0_0_8px_rgba(212,165,116,0.4)]">
+                            <Image 
+                                src="/Content/Memora logo.png" 
+                                alt="Memora Experience Logo" 
+                                width={150} 
+                                height={50}
+                                className="h-10 md:h-11 w-auto object-contain"
+                                style={{ 
+                                    opacity: 1,
+                                    filter: 'none',
+                                    imageRendering: 'crisp-edges'
+                                }}
+                                priority
+                            />
+                        </div>
                     </Link>
                 </div>
                 
                 {/* Desktop Actions - Right (hidden on mobile) */}
-                <div className="hidden lg:flex justify-end w-full gap-3">
+                <div className="hidden lg:flex justify-end w-full">
                     <Link href="/contact">
-                        <Button variant="ghost" className={`transition-colors duration-300 ${
+                        <Button className={`group relative overflow-hidden transition-all duration-300 ${
                             shouldShowWhiteText
-                                ? "text-white hover:text-orange-300 hover:bg-white/10" 
-                                : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
+                                ? "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/40" 
+                                : "bg-gradient-to-r from-[#D4A574] to-[#C8965F] hover:from-[#C8965F] hover:to-[#B8874A] text-white border-0 shadow-lg shadow-[#D4A574]/25 hover:shadow-xl hover:shadow-[#D4A574]/40"
                         }`}>
-                            Contact Us
+                            <Mail className="h-4 w-4 mr-2 transition-transform duration-300 group-hover:scale-110" />
+                            <span className="font-semibold">Contact Us</span>
+                            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                                shouldShowWhiteText 
+                                    ? "bg-gradient-to-r from-white/10 to-white/5" 
+                                    : "bg-gradient-to-r from-white/20 to-transparent"
+                            }`} />
                         </Button>
                     </Link>
-                    <div className={`transition-colors duration-300 ${
-                        shouldShowWhiteText ? "border-r border-white/30" : "border-r border-slate-300/50"
-                    }`}></div>
-                    <SignedOut>
-                        <SignInButton mode="modal">
-                            <Button variant="outline" className={`transition-all duration-300 ${
-                                shouldShowWhiteText
-                                    ? "border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/50" 
-                                    : "border-slate-300 bg-white/80 backdrop-blur-sm text-slate-700 hover:bg-white hover:border-orange-300 hover:text-orange-600"
-                            }`}>
-                                Sign in
-                            </Button>
-                        </SignInButton>
-                        <SignUpButton mode="modal">
-                            <Button className="bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0 shadow-lg shadow-orange-500/25">
-                                Get Started
-                            </Button>
-                        </SignUpButton>
-                    </SignedOut>
-                    <SignedIn>
-                        <Link href="/account">
-                            <Button 
-                                variant="ghost" 
-                                className={`transition-colors duration-300 ${
-                                    shouldShowWhiteText
-                                        ? "text-white hover:text-orange-300 hover:bg-white/10" 
-                                        : "text-slate-700 hover:text-orange-600 hover:bg-white/50"
-                                }`}
-                            >
-                                <User className="h-4 w-4 mr-2" />
-                                Account
-                            </Button>
-                        </Link>
-                        <UserButton 
-                            appearance={{
-                                elements: {
-                                    avatarBox: "h-9 w-9",
-                                },
-                            }}
-                        />
-                    </SignedIn>
                 </div>
                 
                 {/* Mobile Menu Button - Only visible on mobile */}
@@ -347,7 +266,7 @@ function Header1() {
                                     {item.href ? (
                                         <Link
                                             href={item.href}
-                                            className="flex justify-between items-center text-slate-700 hover:text-orange-600 transition-colors"
+                                            className="flex justify-between items-center text-slate-700 hover:text-[#D4A574] transition-colors"
                                             onClick={() => setOpen(false)}
                                         >
                                             <span className="text-lg font-medium">{item.title}</span>
@@ -357,57 +276,47 @@ function Header1() {
                                         <p className="text-lg font-semibold text-slate-900">{item.title}</p>
                                     )}
                                     {item.items &&
-                                        item.items.map((subItem) => (
-                                            <Link
-                                                key={subItem.title}
-                                                href={subItem.href}
-                                                className="flex justify-between items-center text-slate-600 hover:text-orange-600 transition-colors py-1"
-                                                onClick={() => setOpen(false)}
-                                            >
-                                                <span className="text-muted-foreground">
-                                                    {subItem.title}
-                                                </span>
-                                                <MoveRight className="w-4 h-4 stroke-1 text-slate-400" />
-                                            </Link>
-                                        ))}
+                                        item.items.map((subItem) => {
+                                            const isExternal = subItem.href.startsWith('http');
+                                            return isExternal ? (
+                                                <a
+                                                    key={subItem.title}
+                                                    href={subItem.href}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex justify-between items-center text-slate-600 hover:text-[#D4A574] transition-colors py-1"
+                                                    onClick={() => setOpen(false)}
+                                                >
+                                                    <span className="text-muted-foreground">
+                                                        {subItem.title}
+                                                    </span>
+                                                    <MoveRight className="w-4 h-4 stroke-1 text-slate-400" />
+                                                </a>
+                                            ) : (
+                                                <Link
+                                                    key={subItem.title}
+                                                    href={subItem.href}
+                                                    className="flex justify-between items-center text-slate-600 hover:text-[#D4A574] transition-colors py-1"
+                                                    onClick={() => setOpen(false)}
+                                                >
+                                                    <span className="text-muted-foreground">
+                                                        {subItem.title}
+                                                    </span>
+                                                    <MoveRight className="w-4 h-4 stroke-1 text-slate-400" />
+                                                </Link>
+                                            );
+                                        })}
                                 </div>
                             </div>
                         ))}
                         <div className="flex flex-col gap-3 pt-4 border-t border-slate-200">
                             <Link href="/contact" onClick={() => setOpen(false)}>
-                                <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
-                                    Contact Us
+                                <Button className="group relative w-full overflow-hidden bg-gradient-to-r from-[#D4A574] to-[#C8965F] hover:from-[#C8965F] hover:to-[#B8874A] text-white border-0 shadow-lg shadow-[#D4A574]/25 hover:shadow-xl hover:shadow-[#D4A574]/40 transition-all duration-300">
+                                    <Mail className="h-4 w-4 mr-2 transition-transform duration-300 group-hover:scale-110" />
+                                    <span className="font-semibold">Contact Us</span>
+                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-white/20 to-transparent" />
                                 </Button>
                             </Link>
-                            <SignedOut>
-                                <SignInButton mode="modal">
-                                    <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
-                                        Sign in
-                                    </Button>
-                                </SignInButton>
-                                <SignUpButton mode="modal">
-                                    <Button className="w-full bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white border-0">
-                                        Get Started
-                                    </Button>
-                                </SignUpButton>
-                            </SignedOut>
-                            <SignedIn>
-                                <Link href="/account" onClick={() => setOpen(false)}>
-                                    <Button variant="outline" className="w-full border-slate-300 text-slate-700 hover:bg-slate-50">
-                                        <User className="h-4 w-4 mr-2" />
-                                        Account
-                                    </Button>
-                                </Link>
-                                <div className="flex justify-center">
-                                    <UserButton 
-                                        appearance={{
-                                            elements: {
-                                                avatarBox: "h-10 w-10",
-                                            },
-                                        }}
-                                    />
-                                </div>
-                            </SignedIn>
                         </div>
                     </div>
                 </div>

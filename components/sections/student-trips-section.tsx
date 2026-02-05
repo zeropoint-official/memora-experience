@@ -18,44 +18,19 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const trips = [
-  {
-    id: 1,
-    destination: "Barcelona",
-    country: "Spain",
-    image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&h=400&fit=crop",
-    dates: "April 10-13, 2025",
-    price: "€449",
-    originalPrice: "€549",
-    spotsLeft: 12,
-    rating: 4.9,
-    features: ["3 Nights Hotel", "Party Pass", "City Tour", "Beach Day"],
-  },
-  {
-    id: 2,
-    destination: "Amsterdam",
-    country: "Netherlands",
-    image: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&h=400&fit=crop",
-    dates: "May 1-4, 2025",
-    price: "€399",
-    originalPrice: "€479",
-    spotsLeft: 8,
-    rating: 4.8,
-    features: ["3 Nights Hostel", "Canal Cruise", "Museum Pass", "Nightlife Tour"],
-  },
-  {
-    id: 3,
-    destination: "Prague",
-    country: "Czech Republic",
-    image: "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=600&h=400&fit=crop",
-    dates: "May 15-18, 2025",
-    price: "€349",
-    originalPrice: "€429",
-    spotsLeft: 15,
-    rating: 4.9,
-    features: ["3 Nights Hotel", "Pub Crawl", "Castle Tour", "Day Trip"],
-  },
-];
+// Coming Soon placeholder - no trips available yet
+const trips: Array<{
+  id: number;
+  destination: string;
+  country: string;
+  image: string;
+  dates: string;
+  price: string;
+  originalPrice: string;
+  spotsLeft: number;
+  rating: number;
+  features: string[];
+}> = [];
 
 const whatsIncluded = [
   { icon: Bed, text: "3-Night Accommodation" },
@@ -134,7 +109,7 @@ function TripCard({ trip, index }: { trip: typeof trips[0]; index: number }) {
 
             {/* Destination overlay */}
             <div className="absolute bottom-4 left-4">
-              <h3 className="text-2xl font-bold text-white">{trip.destination}</h3>
+              <h3 className="text-xl md:text-2xl font-semibold tracking-normal leading-tight text-white">{trip.destination}</h3>
               <div className="flex items-center gap-1.5 text-white/80 text-sm">
                 <MapPin className="h-3.5 w-3.5" />
                 <span>{trip.country}</span>
@@ -216,13 +191,11 @@ export function StudentTripsSection() {
 
           <motion.h2
             variants={itemVariants}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-5"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-5"
           >
-            3-Day Trips That
+            <span className="text-[#6B6B6B]">3-Day Trips That</span>
             <br />
-            <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
-              Change Everything
-            </span>
+            <span className="text-[#D4A574]">Change Everything</span>
           </motion.h2>
 
           <motion.p
@@ -253,15 +226,33 @@ export function StudentTripsSection() {
           ))}
         </motion.div>
 
-        {/* Trip Cards */}
-        <motion.div
-          variants={containerVariants}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-        >
-          {trips.map((trip, index) => (
-            <TripCard key={trip.id} trip={trip} index={index} />
-          ))}
-        </motion.div>
+        {/* Trip Cards or Coming Soon */}
+        {trips.length > 0 ? (
+          <motion.div
+            variants={containerVariants}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
+            {trips.map((trip, index) => (
+              <TripCard key={trip.id} trip={trip} index={index} />
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center justify-center py-20 px-6 rounded-2xl bg-white/60 backdrop-blur-sm border-2 border-slate-200"
+          >
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 shadow-lg mb-6">
+              <Plane className="h-8 w-8 text-white" />
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-100 to-teal-100 px-6 py-3 border border-emerald-200 mb-4">
+              <Sparkles className="h-5 w-5 text-emerald-600" />
+              <span className="text-lg font-semibold text-emerald-700">Coming Soon</span>
+            </div>
+            <p className="text-center text-slate-600 max-w-md">
+              We&apos;re working on exciting new student trips for you. Stay tuned!
+            </p>
+          </motion.div>
+        )}
 
         {/* Bottom CTA */}
         <motion.div

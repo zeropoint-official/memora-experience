@@ -126,8 +126,8 @@ export function AboutSection() {
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Gradient orbs */}
-        <div className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-orange-100/50 blur-[120px]" />
-        <div className="absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-rose-100/50 blur-[120px]" />
+        <div className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-[#FAF7F2]/50 blur-[120px]" />
+        <div className="absolute -right-32 bottom-1/4 h-96 w-96 rounded-full bg-[#FAF7F2]/50 blur-[120px]" />
         
         {/* Subtle grid pattern */}
         <div 
@@ -149,7 +149,7 @@ export function AboutSection() {
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
             variants={itemVariants}
-            className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-medium text-orange-600"
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E8C9A0] bg-[#FAF7F2] px-4 py-2 text-sm font-medium text-[#D4A574]"
           >
             <Sparkles className="h-4 w-4" />
             <span>About Memora</span>
@@ -157,14 +157,14 @@ export function AboutSection() {
 
           <motion.h2
             variants={itemVariants}
-            className="mb-5 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl"
+            className="mb-5 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight"
           >
-            Crafting{" "}
-            <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-orange-600 bg-clip-text text-transparent">
-              Unforgettable
-            </span>
+            <span className="text-[#6B6B6B]">Crafting</span>{" "}
+            <span className="text-[#D4A574]">Unforgettable</span>
             <br />
-            Moments in Cyprus
+            <span className="text-[#6B6B6B]">Moments</span>{" "}
+            <span className="text-[#6B6B6B]">in</span>{" "}
+            <span className="text-[#D4A574]">Cyprus</span>
           </motion.h2>
 
           <motion.p
@@ -187,7 +187,7 @@ export function AboutSection() {
             <div className="flex items-center justify-between gap-2">
               {stats.map((stat, index) => (
                 <div key={stat.label} className="flex flex-1 flex-col items-center text-center">
-                  <div className="mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-rose-500 shadow-md shadow-orange-500/20">
+                  <div className="mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-md shadow-[#D4A574]/20">
                     <stat.icon className="h-4 w-4 text-white" />
                   </div>
                   <div className="text-lg font-bold text-slate-900">
@@ -209,15 +209,15 @@ export function AboutSection() {
             <motion.div
               key={stat.label}
               variants={statVariants}
-              className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-6 shadow-lg shadow-slate-100/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-100/50 hover:border-orange-200"
+              className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-6 shadow-lg shadow-slate-100/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#FAF7F2]/50 hover:border-[#E8C9A0]"
             >
               {/* Icon */}
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg shadow-orange-500/20 transition-transform duration-300 group-hover:scale-110">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg shadow-[#D4A574]/20 transition-transform duration-300 group-hover:scale-110">
                 <stat.icon className="h-5 w-5 text-white" />
               </div>
               
               {/* Value */}
-              <div className="mb-1 text-3xl font-bold text-slate-900">
+              <div className="mb-1 text-3xl font-bold text-slate-900 leading-tight">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </div>
               
@@ -226,7 +226,7 @@ export function AboutSection() {
               <p className="text-xs text-slate-500">{stat.description}</p>
 
               {/* Hover accent */}
-              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-orange-500/10 to-rose-500/10 blur-2xl transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-[#D4A574]/10 to-[#C8965F]/10 blur-2xl transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
             </motion.div>
           ))}
         </motion.div>
@@ -251,7 +251,7 @@ export function AboutSection() {
                   
                   {/* Floating badge */}
                   <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/95 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 shadow-lg">
-                    <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-rose-500">
+                    <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F]">
                       <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white" />
                     </div>
                     <div>
@@ -274,7 +274,7 @@ export function AboutSection() {
                 </motion.div>
 
                 {/* Decorative element */}
-                <div className="absolute -left-4 -top-4 h-16 w-16 rounded-full bg-gradient-to-br from-orange-400 to-rose-400 opacity-20 blur-xl" />
+                <div className="absolute -left-4 -top-4 h-16 w-16 rounded-full bg-gradient-to-br from-[#E8C9A0] to-[#D4A574] opacity-20 blur-xl" />
               </div>
             </motion.div>
 
@@ -282,7 +282,7 @@ export function AboutSection() {
             <motion.div
               variants={itemVariants}
             >
-              <h3 className="mb-4 text-2xl font-bold text-slate-900 sm:text-3xl">
+              <h3 className="mb-4 text-xl md:text-2xl lg:text-3xl font-medium tracking-normal leading-tight text-slate-900">
                 Our Story
               </h3>
               <p className="mb-6 text-slate-600 leading-relaxed">
@@ -298,9 +298,9 @@ export function AboutSection() {
               </p>
 
               {/* Mission statement */}
-              <div className="relative overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-br from-orange-50 to-rose-50 p-6">
+              <div className="relative overflow-hidden rounded-2xl border border-[#E8C9A0] bg-gradient-to-br from-[#FAF7F2] to-[#FAF7F2] p-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg shadow-orange-500/20">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg shadow-[#D4A574]/20">
                     <Target className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -314,7 +314,7 @@ export function AboutSection() {
                 </div>
                 
                 {/* Decorative gradient */}
-                <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-orange-300/30 to-rose-300/30 blur-3xl" />
+                <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-[#E8C9A0]/30 to-[#D4A574]/30 blur-3xl" />
               </div>
             </motion.div>
           </div>

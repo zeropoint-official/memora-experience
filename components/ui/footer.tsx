@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Sparkles,
   MapPin,
@@ -22,10 +23,6 @@ const footerLinks = {
     { name: "All Events", href: "/events" },
   ],
   services: [
-    { name: "Event Planning", href: "/services/planning" },
-    { name: "Venue Sourcing", href: "/services/venues" },
-    { name: "Vendor Coordination", href: "/services/vendors" },
-    { name: "Corporate Solutions", href: "/services/corporate" },
     { name: "Business with Us", href: "/business" },
   ],
   company: [
@@ -73,8 +70,8 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-slate-900">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-orange-500/10 blur-[120px]" />
-        <div className="absolute -right-40 -bottom-40 h-80 w-80 rounded-full bg-rose-500/10 blur-[120px]" />
+        <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-[#D4A574]/10 blur-[120px]" />
+        <div className="absolute -right-40 -bottom-40 h-80 w-80 rounded-full bg-[#C8965F]/10 blur-[120px]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -98,11 +95,21 @@ export function Footer() {
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
               {/* Logo and tagline */}
               <div className="max-w-md">
-                <Link href="/" className="inline-flex items-center gap-2 mb-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-500 shadow-lg shadow-orange-500/25">
-                    <Sparkles className="h-5 w-5 text-white" />
+                <Link href="/" className="inline-flex items-center mb-4">
+                  <div className="relative drop-shadow-lg drop-shadow-[0_0_8px_rgba(212,165,116,0.4)]">
+                    <Image 
+                      src="/Content/Memora logo.png" 
+                      alt="Memora Experience Logo" 
+                      width={170} 
+                      height={57}
+                      className="h-12 md:h-14 w-auto object-contain"
+                      style={{ 
+                        opacity: 1,
+                        filter: 'none',
+                        imageRendering: 'crisp-edges'
+                      }}
+                    />
                   </div>
-                  <span className="text-2xl font-bold text-white">Memora Experience</span>
                 </Link>
                 <p className="text-slate-400 leading-relaxed mb-6">
                   Cyprus's premier event experience company. From electrifying Planitario nights 
@@ -116,7 +123,7 @@ export function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-400 transition-all hover:bg-gradient-to-br hover:from-orange-500 hover:to-rose-500 hover:text-white hover:shadow-lg hover:shadow-orange-500/25"
+                      className="group flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-400 transition-all hover:bg-gradient-to-br hover:from-[#D4A574] hover:to-[#C8965F] hover:text-white hover:shadow-lg hover:shadow-[#D4A574]/25"
                     >
                       <social.icon className="h-5 w-5" />
                     </a>
@@ -131,7 +138,7 @@ export function Footer() {
                 </h4>
                 <a
                   href="mailto:hello@memoraexperience.com"
-                  className="group flex items-center gap-3 text-slate-300 hover:text-orange-400 transition-colors"
+                  className="group flex items-center gap-3 text-slate-300 hover:text-[#E8C9A0] transition-colors"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800 group-hover:bg-slate-700 transition-colors">
                     <Mail className="h-5 w-5" />
@@ -140,7 +147,7 @@ export function Footer() {
                 </a>
                 <a
                   href="tel:+35799123456"
-                  className="group flex items-center gap-3 text-slate-300 hover:text-orange-400 transition-colors"
+                  className="group flex items-center gap-3 text-slate-300 hover:text-[#E8C9A0] transition-colors"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800 group-hover:bg-slate-700 transition-colors">
                     <Phone className="h-5 w-5" />
