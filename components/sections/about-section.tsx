@@ -1,87 +1,12 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import {
   Sparkles,
-  Users,
-  Calendar,
-  MapPin,
-  Trophy,
   Target,
   Zap,
 } from "lucide-react";
-
-// Animated counter component
-function AnimatedCounter({ 
-  value, 
-  suffix = "", 
-  prefix = "" 
-}: { 
-  value: number; 
-  suffix?: string;
-  prefix?: string;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      const duration = 2000;
-      const startTime = Date.now();
-      const animate = () => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Easing function for smooth animation
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        setDisplayValue(Math.floor(value * easeOut));
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        }
-      };
-      requestAnimationFrame(animate);
-    }
-  }, [isInView, value]);
-
-  return (
-    <span ref={ref}>
-      {prefix}{displayValue.toLocaleString()}{suffix}
-    </span>
-  );
-}
-
-// Stats data
-const stats = [
-  {
-    icon: Calendar,
-    value: 50,
-    suffix: "+",
-    label: "Events Hosted",
-    description: "Unforgettable experiences",
-  },
-  {
-    icon: Users,
-    value: 10000,
-    suffix: "+",
-    label: "Happy Attendees",
-    description: "Across all our events",
-  },
-  {
-    icon: MapPin,
-    value: 15,
-    suffix: "+",
-    label: "Unique Venues",
-    description: "Across Cyprus & Europe",
-  },
-  {
-    icon: Trophy,
-    value: 5,
-    suffix: "★",
-    label: "Average Rating",
-    description: "From verified reviews",
-  },
-];
 
 // Animation variants for staggered effects
 const containerVariants = {
@@ -96,15 +21,6 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, filter: "blur(8px)" },
-  visible: {
-    opacity: 1,
-    filter: "blur(0px)",
-    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
-  },
-};
-
-const statVariants = {
   hidden: { opacity: 0, filter: "blur(8px)" },
   visible: {
     opacity: 1,
@@ -177,59 +93,6 @@ export function AboutSection() {
             into reality.
           </motion.p>
         </div>
-
-        {/* Stats - Mobile Compact Card */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-10 md:hidden"
-        >
-          <div className="relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-4 shadow-lg shadow-slate-100/50">
-            <div className="flex items-center justify-between gap-2">
-              {stats.map((stat, index) => (
-                <div key={stat.label} className="flex flex-1 flex-col items-center text-center">
-                  <div className="mb-1.5 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-md shadow-[#D4A574]/20">
-                    <stat.icon className="h-4 w-4 text-white" />
-                  </div>
-                  <div className="text-lg font-bold text-slate-900">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <p className="text-[10px] font-medium text-slate-600 leading-tight">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Stats Grid - Desktop */}
-        <motion.div
-          variants={containerVariants}
-          className="mt-14 hidden md:grid grid-cols-2 gap-6 lg:grid-cols-4"
-        >
-          {stats.map((stat) => (
-            <motion.div
-              key={stat.label}
-              variants={statVariants}
-              className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-6 shadow-lg shadow-slate-100/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#FAF7F2]/50 hover:border-[#E8C9A0]"
-            >
-              {/* Icon */}
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg shadow-[#D4A574]/20 transition-transform duration-300 group-hover:scale-110">
-                <stat.icon className="h-5 w-5 text-white" />
-              </div>
-              
-              {/* Value */}
-              <div className="mb-1 text-3xl font-bold text-slate-900 leading-tight">
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              </div>
-              
-              {/* Label */}
-              <p className="text-sm font-semibold text-slate-700">{stat.label}</p>
-              <p className="text-xs text-slate-500">{stat.description}</p>
-
-              {/* Hover accent */}
-              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-[#D4A574]/10 to-[#C8965F]/10 blur-2xl transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-            </motion.div>
-          ))}
-        </motion.div>
 
         {/* Story Section */}
         <motion.div variants={itemVariants} className="mt-16 lg:mt-24">

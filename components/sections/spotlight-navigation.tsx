@@ -489,6 +489,17 @@ function NavigationCarousel() {
       icon: Plane,
       badge: "Coming Soon",
     },
+    {
+      title: "Business Events",
+      description:
+        "Professional gatherings and corporate experiences tailored for your business needs.",
+      image:
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=400&fit=crop",
+      href: "/business",
+      gradient: "from-blue-600/90 to-indigo-600/90",
+      icon: Building2,
+      badge: "Coming Soon",
+    },
   ];
 
   const ref = useRef(null);
@@ -606,8 +617,8 @@ function QuickLinks() {
         Quick Links
       </h3>
 
-      {/* Links Grid */}
-      <div className="grid grid-cols-3 gap-3">
+      {/* Links Grid - Optimized for 2 buttons */}
+      <div className="grid grid-cols-2 gap-4 sm:gap-6">
         {links.map((link, index) => (
           <motion.a
             key={index}
@@ -615,18 +626,18 @@ function QuickLinks() {
             initial={{ opacity: 0, filter: "blur(8px)" }}
             animate={isInView ? { opacity: 1, filter: "blur(0px)" } : {}}
             transition={{ delay: 0.5 + index * 0.1, duration: 0.5, ease: "easeOut" }}
-            className={`group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 text-center transition-all hover:border-slate-300 hover:shadow-lg ${link.bgHover}`}
+            className={`group flex flex-col items-center justify-center gap-4 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 text-center transition-all hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 ${link.bgHover}`}
           >
             <div
-              className={`flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-gradient-to-br ${link.color} shadow-lg transition-transform group-hover:scale-110`}
+              className={`flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-gradient-to-br ${link.color} shadow-lg transition-transform group-hover:scale-110 group-hover:shadow-xl`}
             >
-              <link.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+              <link.icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
             </div>
-            <div>
-              <p className="font-semibold text-slate-900 text-sm sm:text-base">
+            <div className="space-y-1">
+              <p className="font-semibold text-slate-900 text-base sm:text-lg">
                 {link.title}
               </p>
-              <p className="text-xs text-slate-500 hidden sm:block">
+              <p className="text-xs sm:text-sm text-slate-500">
                 {link.description}
               </p>
             </div>

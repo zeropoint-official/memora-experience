@@ -156,6 +156,7 @@ function Header1() {
                                                     <div className="flex flex-col gap-1">
                                                         {item.items?.map((subItem) => {
                                                             const isExternal = subItem.href.startsWith('http');
+                                                            const isBusinessLink = subItem.title === "Business with Us";
                                                             return isExternal ? (
                                                                 <a
                                                                     href={subItem.href}
@@ -164,8 +165,8 @@ function Header1() {
                                                                     rel="noopener noreferrer"
                                                                     className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors"
                                                                 >
-                                                                    <span className="text-sm font-medium text-slate-700">{subItem.title}</span>
-                                                                    <MoveRight className="w-4 h-4 text-slate-400" />
+                                                                    <span className={`text-sm font-medium ${isBusinessLink ? "text-[#D4A574]" : "text-slate-700"}`}>{subItem.title}</span>
+                                                                    <MoveRight className={`w-4 h-4 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
                                                                 </a>
                                                             ) : (
                                                                 <Link
@@ -175,8 +176,8 @@ function Header1() {
                                                                     passHref
                                                                 >
                                                                     <NavigationMenuLink className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors">
-                                                                        <span className="text-sm font-medium text-slate-700">{subItem.title}</span>
-                                                                        <MoveRight className="w-4 h-4 text-slate-400" />
+                                                                        <span className={`text-sm font-medium ${isBusinessLink ? "text-[#D4A574]" : "text-slate-700"}`}>{subItem.title}</span>
+                                                                        <MoveRight className={`w-4 h-4 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
                                                                     </NavigationMenuLink>
                                                                 </Link>
                                                             );
@@ -278,31 +279,32 @@ function Header1() {
                                     {item.items &&
                                         item.items.map((subItem) => {
                                             const isExternal = subItem.href.startsWith('http');
+                                            const isBusinessLink = subItem.title === "Business with Us";
                                             return isExternal ? (
                                                 <a
                                                     key={subItem.title}
                                                     href={subItem.href}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="flex justify-between items-center text-slate-600 hover:text-[#D4A574] transition-colors py-1"
+                                                    className={`flex justify-between items-center transition-colors py-1 ${isBusinessLink ? "text-[#D4A574] hover:text-[#C8965F]" : "text-slate-600 hover:text-[#D4A574]"}`}
                                                     onClick={() => setOpen(false)}
                                                 >
-                                                    <span className="text-muted-foreground">
+                                                    <span className={isBusinessLink ? "font-medium" : "text-muted-foreground"}>
                                                         {subItem.title}
                                                     </span>
-                                                    <MoveRight className="w-4 h-4 stroke-1 text-slate-400" />
+                                                    <MoveRight className={`w-4 h-4 stroke-1 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
                                                 </a>
                                             ) : (
                                                 <Link
                                                     key={subItem.title}
                                                     href={subItem.href}
-                                                    className="flex justify-between items-center text-slate-600 hover:text-[#D4A574] transition-colors py-1"
+                                                    className={`flex justify-between items-center transition-colors py-1 ${isBusinessLink ? "text-[#D4A574] hover:text-[#C8965F]" : "text-slate-600 hover:text-[#D4A574]"}`}
                                                     onClick={() => setOpen(false)}
                                                 >
-                                                    <span className="text-muted-foreground">
+                                                    <span className={isBusinessLink ? "font-medium" : "text-muted-foreground"}>
                                                         {subItem.title}
                                                     </span>
-                                                    <MoveRight className="w-4 h-4 stroke-1 text-slate-400" />
+                                                    <MoveRight className={`w-4 h-4 stroke-1 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
                                                 </Link>
                                             );
                                         })}

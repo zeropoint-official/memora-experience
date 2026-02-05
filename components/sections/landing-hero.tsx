@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Star, Users, Heart, ExternalLink } from "lucide-react";
+import { ArrowRight, Sparkles, Star, Users, Heart, ExternalLink, Calendar, Trophy } from "lucide-react";
+import { FaUsers, FaCalendarCheck, FaStar } from "react-icons/fa";
 import Link from "next/link";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
@@ -515,18 +516,18 @@ function MobileHero() {
             <div className="mt-8 mx-auto max-w-sm">
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { value: "10K+", label: "Guests", icon: Users, gradient: "from-[#D4A574] to-[#C8965F]", bg: "bg-[#FAF7F2]" },
-                  { value: "50+", label: "Events", icon: Sparkles, gradient: "from-[#D4A574] to-[#B8874A]", bg: "bg-[#FAF7F2]" },
-                  { value: "5.0", label: "Rating", icon: Star, gradient: "from-[#D4A574] to-[#C8965F]", bg: "bg-[#FAF7F2]" },
+                  { value: "10K+", label: "Guests", icon: FaUsers, gradient: "from-[#D4A574] to-[#C8965F]", bg: "bg-[#FAF7F2]" },
+                  { value: "5", label: "Events", icon: FaCalendarCheck, gradient: "from-[#D4A574] to-[#B8874A]", bg: "bg-[#FAF7F2]" },
+                  { value: "5.0", label: "Rating", icon: FaStar, gradient: "from-[#D4A574] to-[#C8965F]", bg: "bg-[#FAF7F2]" },
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
                     initial={{ opacity: 0, filter: "blur(8px)" }}
                     animate={{ opacity: 1, filter: "blur(0px)" }}
                     transition={{ delay: 0.3 + index * 0.1, duration: 0.5, ease: "easeOut" }}
-                    className={`rounded-2xl ${stat.bg} border border-slate-100 p-4 text-center shadow-sm`}
+                    className={`group rounded-2xl ${stat.bg} border border-slate-100 p-4 text-center shadow-sm transition-all hover:shadow-md hover:border-slate-200`}
                   >
-                    <div className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} shadow-md`}>
+                    <div className={`mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} shadow-md transition-transform group-hover:scale-110 group-hover:shadow-lg`}>
                       <stat.icon className="h-5 w-5 text-white" />
                     </div>
                     <p className="text-xl font-bold text-slate-900">{stat.value}</p>
@@ -763,6 +764,54 @@ function DesktopHero() {
               <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-slate-300 transition-colors group-hover:bg-[#D4A574]" />
             </span>
           </Link>
+        </motion.div>
+
+        {/* Stats Grid - Desktop */}
+        <motion.div
+          className="mt-16 pointer-events-auto"
+          initial={{ opacity: 0, filter: "blur(8px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
+        >
+          <div className="flex justify-center">
+            <div className="grid grid-cols-3 gap-6 max-w-md">
+              {[
+                { value: "10K+", label: "Guests", icon: FaUsers, gradient: "from-[#D4A574] to-[#C8965F]", bg: "bg-[#FAF7F2]" },
+                { value: "5", label: "Events", icon: FaCalendarCheck, gradient: "from-[#D4A574] to-[#B8874A]", bg: "bg-[#FAF7F2]" },
+                { value: "5.0", label: "Rating", icon: FaStar, gradient: "from-[#D4A574] to-[#C8965F]", bg: "bg-[#FAF7F2]" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 + index * 0.1, duration: 0.5, ease: "easeOut" }}
+                  className={`group rounded-2xl ${stat.bg} border border-slate-100 p-5 text-center shadow-sm transition-all hover:shadow-md hover:border-slate-200`}
+                >
+                  <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${stat.gradient} shadow-md transition-transform group-hover:scale-110 group-hover:shadow-lg`}>
+                    <stat.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Trust Footer - Desktop */}
+          <motion.div
+            className="mt-8 flex flex-col items-center gap-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1, duration: 0.5 }}
+          >
+            <div className="flex items-center gap-2">
+              <Heart className="h-4 w-4 text-[#D4A574] fill-[#D4A574]" />
+              <span className="text-sm font-medium text-slate-500">Trusted by 10,000+ event-goers across Cyprus</span>
+            </div>
+            <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#E8C9A0] via-[#D4A574] to-[#E8C9A0]" />
+          </motion.div>
         </motion.div>
       </div>
 
