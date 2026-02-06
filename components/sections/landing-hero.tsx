@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+
+
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { useRef, useState, useEffect } from "react";
@@ -126,7 +126,6 @@ const eventImages = [
 // MOBILE HERO — video bg + clean white section
 // ============================================
 function MobileHero() {
-  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -213,15 +212,16 @@ function MobileHero() {
             transition={{ delay: 0.7, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="flex flex-col items-center gap-5 pb-4"
           >
-            <Link href="/events" onClick={(e) => { e.preventDefault(); router.push("/events"); }} className="w-full max-w-xs">
+            {/* FIX: Use <a> tags for reliable full-page navigation (Next.js Link SPA nav fails on homepage due to Clerk session state) */}
+            <a href="/events" className="w-full max-w-xs">
               <TicketButton size="md" className="w-full" />
-            </Link>
-            <Link href="/business" onClick={(e) => { e.preventDefault(); router.push("/business"); }} className="group flex items-center gap-1">
+            </a>
+            <a href="/business" className="group flex items-center gap-1">
               <span className="text-[13px] font-medium text-white/50 transition-colors group-hover:text-white/80">
                 Business with us
               </span>
               <ArrowUpRight className="h-3 w-3 text-white/30 transition-colors group-hover:text-white/60" />
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>
@@ -258,7 +258,6 @@ function MobileHero() {
 // DESKTOP HERO — clean with parallax images
 // ============================================
 function DesktopHero() {
-  const router = useRouter();
   return (
     <section className="relative hidden md:block min-h-screen w-full overflow-x-hidden overflow-y-visible bg-[#FAF8F5] pt-20">
       {/* Single subtle warm glow */}
@@ -402,16 +401,17 @@ function DesktopHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <Link href="/events" onClick={(e) => { e.preventDefault(); router.push("/events"); }}>
+          {/* FIX: Use <a> tags for reliable full-page navigation (Next.js Link SPA nav fails on homepage due to Clerk session state) */}
+          <a href="/events">
             <TicketButton size="lg" />
-          </Link>
+          </a>
 
-          <Link href="/business" onClick={(e) => { e.preventDefault(); router.push("/business"); }} className="group mt-2 flex items-center gap-1.5">
+          <a href="/business" className="group mt-2 flex items-center gap-1.5">
             <span className="text-sm font-medium text-slate-400 transition-colors group-hover:text-[#D4A574]">
               Business with us
             </span>
             <ArrowUpRight className="h-3.5 w-3.5 text-slate-300 transition-colors group-hover:text-[#D4A574]" />
-          </Link>
+          </a>
         </motion.div>
 
         {/* Stats — inline, minimal */}

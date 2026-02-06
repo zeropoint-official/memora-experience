@@ -90,11 +90,6 @@ const Floating = ({
         ref={containerRef}
         className={cn("absolute top-0 left-0 w-full h-full", className)}
         {...props}
-        // #region agent log
-        onClick={(e) => {
-          fetch('http://127.0.0.1:7244/ingest/e1906a4b-ef88-46e4-99b4-2054bf7a986c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'parallax-floating.tsx:container',message:'Floating container received CLICK',data:{target:(e.target as HTMLElement).tagName,className:(e.target as HTMLElement).className?.slice?.(0,50),clientY:e.clientY,isInHeaderZone:e.clientY<80},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H1'})}).catch(()=>{});
-        }}
-        // #endregion
       >
         {children}
       </div>

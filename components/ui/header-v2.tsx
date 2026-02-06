@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -224,15 +223,15 @@ function DesktopDropdown({
                 {item.items?.map((subItem, idx) => {
                   const isExternal = subItem.external || subItem.href.startsWith("http");
                   const isBusinessLink = subItem.title === "Business with Us";
-                  const Comp = isExternal ? "a" : Link;
-                  const extraProps = isExternal
-                    ? { target: "_blank", rel: "noopener noreferrer" }
+                  // FIX: Use <a> for all links (SPA nav fails on homepage)
+                  const extraProps = (subItem.external || subItem.href.startsWith("http"))
+                    ? { target: "_blank" as const, rel: "noopener noreferrer" }
                     : {};
                   return (
-                    <Comp
+                    <a
                       key={subItem.title}
                       href={subItem.href}
-                      {...(extraProps as Record<string, string>)}
+                      {...extraProps}
                       onClick={() => setOpen(false)}
                       className={cn(
                         "group/item flex items-center gap-3 rounded-xl px-3 py-3 transition-all duration-200",
@@ -271,20 +270,20 @@ function DesktopDropdown({
                           </span>
                         )}
                       </div>
-                    </Comp>
+                    </a>
                   );
                 })}
               </div>
               {/* Footer CTA */}
               <div className="border-t border-slate-100 p-3">
-                <Link
+                <a
                   href="/events"
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-center gap-2 rounded-xl bg-[#D4A574] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#C8965F] hover:shadow-md active:scale-[0.98]"
                 >
                   View All Events
                   <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>
@@ -310,7 +309,7 @@ function DesktopNavLink({
 
   return (
     <div className="relative">
-      <Link
+      <a
         href={item.href}
         className={cn(
           "relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
@@ -321,7 +320,7 @@ function DesktopNavLink({
         )}
       >
         {item.title}
-      </Link>
+      </a>
       {isActive && (
         <motion.div
           layoutId="nav-active-dot"
@@ -465,7 +464,8 @@ function MobileMenu({
                                   subItem.href.startsWith("http");
                                 const isBusinessLink =
                                   subItem.title === "Business with Us";
-                                const Comp = isExternal ? "a" : Link;
+                                // FIX: Use <a> tags for all links (SPA nav via Link fails on homepage due to Clerk session state)
+                                const Comp = "a";
                                 const extraProps = isExternal
                                   ? {
                                       target: "_blank",
@@ -531,8 +531,8 @@ function MobileMenu({
                       </AnimatePresence>
                     </div>
                   ) : (
-                    // Simple link
-                    <Link
+                    // Simple link — use <a> for reliable full-page navigation
+                    <a
                       href={item.href}
                       onClick={onClose}
                       className="flex items-center justify-between py-5"
@@ -541,21 +541,21 @@ function MobileMenu({
                         {item.title}
                       </span>
                       <ArrowRight className="h-5 w-5 text-slate-400" />
-                    </Link>
+                    </a>
                   )}
                 </motion.div>
               ))}
 
               {/* Mobile CTA */}
               <motion.div variants={itemVariants} className="mt-8">
-                <Link
+                <a
                   href="/contact"
                   onClick={onClose}
                   className="flex items-center justify-center gap-2.5 rounded-2xl bg-[#D4A574] px-6 py-4 text-base font-semibold text-white shadow-lg shadow-[#D4A574]/20 transition-all active:scale-[0.98] hover:bg-[#C8965F]"
                 >
                   <Mail className="h-5 w-5" />
                   Contact Us
-                </Link>
+                </a>
               </motion.div>
 
               {/* Mobile footer accent */}
@@ -607,27 +607,9 @@ export function HeaderV2() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
-    const headerEl = document.querySelector("header");
-    const onHeaderNavCapture = (ev: MouseEvent) => {
-      const tgt = ev.target as HTMLElement;
-      const anchor = tgt.closest("a");
-      const href = anchor?.getAttribute("href") || "";
-      const isInternal = href.startsWith("/") && !href.startsWith("//");
-      if (isInternal && window.location.pathname === "/") {
-        ev.preventDefault();
-        window.location.assign(href);
-      }
-    };
-
-    if (headerEl) {
-      headerEl.addEventListener("click", onHeaderNavCapture, true);
-    }
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
-      if (headerEl) {
-        headerEl.removeEventListener("click", onHeaderNavCapture, true);
-      }
     };
   }, []);
 
@@ -677,7 +659,7 @@ export function HeaderV2() {
           </nav>
 
           {/* ─── Center: Logo ─── */}
-          <Link
+          <a
             href="/"
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:static lg:translate-x-0 lg:translate-y-0 lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
           >
@@ -696,11 +678,11 @@ export function HeaderV2() {
                 priority
               />
             </motion.div>
-          </Link>
+          </a>
 
           {/* ─── Right: Desktop CTA ─── */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link
+            <a
               href="/contact"
               className={cn(
                 "group relative flex items-center gap-2 overflow-hidden rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-300",
@@ -711,7 +693,7 @@ export function HeaderV2() {
             >
               <Mail className="h-4 w-4 transition-transform group-hover:scale-110" />
               <span>Contact Us</span>
-            </Link>
+            </a>
           </div>
 
           {/* ─── Mobile: Hamburger ─── */}
