@@ -45,7 +45,7 @@ const eventsData: Event[] = [
     date: "July 20, 2026",
     location: "Ayia Napa, Cyprus",
     description:
-      "Set sail for the ultimate sunset party with DJ Eirinei Sterianou — Open bar included.",
+      "Set sail for the ultimate sunset party with DJ Englezos & DJ MrUnknown — Open bar included.",
     imageUrl: "/Content/yacth1.jpg",
     href: "/events/boat-party",
     badge: "Hot",
@@ -164,7 +164,7 @@ function FeaturedEventCard({ event }: { event: Event }) {
         className="relative block overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-slate-300/40 hover:-translate-y-1"
       >
         {/* Image */}
-        <div className="relative aspect-[21/9] sm:aspect-[2.4/1] overflow-hidden">
+        <div className="relative aspect-[4/3] sm:aspect-[2.4/1] overflow-hidden">
           <Image
             src={event.imageUrl}
             alt={event.title}
