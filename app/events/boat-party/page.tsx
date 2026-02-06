@@ -10,13 +10,9 @@ import {
   Ticket,
   Users,
   Music,
-  Sparkles,
   ChevronDown,
-  Star,
   CreditCard,
   Anchor,
-  Waves,
-  Wine,
   Crown,
   Mail,
   Phone,
@@ -25,10 +21,10 @@ import {
   X,
   Lock,
   Shield,
-  Sun,
+  UtensilsCrossed,
+  PartyPopper,
 } from "lucide-react";
 import Image from "next/image";
-import { GridPattern } from "@/components/ui/grid-pattern";
 
 // ============================================
 // COUNTDOWN TIMER COMPONENT
@@ -95,17 +91,17 @@ function FAQItem({
   onClick: () => void;
 }) {
   return (
-    <div className="border-b border-slate-200 last:border-0">
+    <div className="border-b border-slate-100 last:border-0">
       <button
         onClick={onClick}
         className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-[#D4A574]"
       >
-        <span className="text-lg font-semibold text-slate-900 pr-4">
+        <span className="text-base sm:text-lg font-medium text-slate-900 pr-4">
           {question}
         </span>
         <ChevronDown
-          className={`h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
+          className={`h-5 w-5 flex-shrink-0 transition-all duration-300 ${
+            isOpen ? "rotate-180 text-[#D4A574]" : "text-slate-400"
           }`}
         />
       </button>
@@ -130,29 +126,53 @@ function FAQItem({
 // GALLERY DATA
 // ============================================
 const galleryImages = [
+  { src: "/Content/yacth1.jpg", alt: "Yacht party deck" },
+  { src: "/Content/yacth2.avif", alt: "Sunset boat party" },
+  { src: "/Content/yacth3.png", alt: "Luxury yacht interior" },
+  { src: "/Content/yacth4.jpg", alt: "Boat party atmosphere" },
+  { src: "/Content/yacth5.webp", alt: "Mediterranean cruise" },
+  { src: "/Content/yacth6.jpg", alt: "Party on the sea" },
+];
+
+// ============================================
+// TIMELINE DATA
+// ============================================
+const timelineEvents = [
   {
-    src: "/Content/yacth1.jpg",
-    alt: "Yacht party deck",
+    time: "4:30 PM",
+    title: "Boarding Begins",
+    description: "Arrive at Ayia Napa Marina for check-in and boarding. Grab your welcome drink and find your spot.",
+    icon: Anchor,
   },
   {
-    src: "/Content/yacth2.avif",
-    alt: "Sunset boat party",
+    time: "5:00 PM",
+    title: "Departure & DJ Englezos",
+    description: "We set sail! DJ Englezos kicks off the party with 1.5 hours of the best pop & house tracks as the sun starts to set.",
+    icon: Music,
   },
   {
-    src: "/Content/yacth3.png",
-    alt: "Luxury yacht interior",
+    time: "6:30 PM",
+    title: "Mystery Dance Show",
+    description: "A surprise performance from our talented dancers — an unforgettable show you won't want to miss.",
+    icon: PartyPopper,
   },
   {
-    src: "/Content/yacth4.jpg",
-    alt: "Boat party atmosphere",
+    time: "7:00 PM",
+    title: "Finger Foods Served",
+    description: "Delicious finger foods served on deck. Refuel and enjoy the Mediterranean views.",
+    icon: UtensilsCrossed,
   },
   {
-    src: "/Content/yacth5.webp",
-    alt: "Mediterranean cruise",
+    time: "7:30 PM",
+    title: "DJ MrUnknown Takes Over",
+    description: "The energy goes up a notch as DJ MrUnknown brings the heat for the final stretch of the night.",
+    icon: Music,
   },
   {
-    src: "/Content/yacth6.jpg",
-    alt: "Party on the sea",
+    time: "10:00 PM",
+    title: "Return to Marina",
+    description: "We dock back at Ayia Napa Marina. The memories stay with you forever.",
+    icon: Anchor,
   },
 ];
 
@@ -163,17 +183,22 @@ const faqData = [
   {
     question: "What time does the boat depart?",
     answer:
-      "The boat departs at 5:00 PM sharp from Ayia Napa Marina. Please arrive at least 30 minutes early (4:30 PM) for check-in and boarding. Late arrivals cannot be accommodated once the boat has left.",
+      "The boat departs at 5:00 PM sharp from Ayia Napa Marina. Please arrive at 4:30 PM for check-in and boarding. Late arrivals cannot be accommodated once the boat has left.",
   },
   {
-    question: "What's included in the Open Bar package?",
+    question: "What's included in the Normal ticket?",
     answer:
-      "The Open Bar package (€70) includes unlimited beer, wine, vodka, rum, and whiskey mixed drinks, plus soft drinks and water for the duration of the cruise. Premium spirits and champagne are available at additional cost.",
+      "The Normal ticket (€80) includes the full boat cruise, open bar with standard drinks (beer, wine, spirits, soft drinks & water), finger foods, DJ entertainment, and all shows and performances.",
   },
   {
-    question: "What's included in the VIP Open Bar?",
+    question: "What's included in the VIP ticket?",
     answer:
-      "The VIP Open Bar package (€130) includes everything in the standard package PLUS premium spirits (Grey Goose, Hendricks Gin, premium whiskeys), champagne, exclusive VIP deck access with private bar, priority boarding, and a dedicated server.",
+      "The VIP ticket (€130) includes everything in the Normal ticket PLUS a premium open bar (top-shelf spirits, champagne), your own dedicated service, a spot close to the DJ, VIP couch seating, and priority boarding.",
+  },
+  {
+    question: "Can I buy premium drinks with a Normal ticket?",
+    answer:
+      "Yes! Normal ticket holders can purchase premium drinks at an additional cost throughout the cruise. You still get the standard open bar included in your ticket.",
   },
   {
     question: "Is there a dress code?",
@@ -205,40 +230,21 @@ export default function BoatPartyPage() {
 
   const heroRef = useRef(null);
   const infoRef = useRef(null);
+  const timelineRef = useRef(null);
   const galleryRef = useRef(null);
   const ticketsRef = useRef(null);
   const faqRef = useRef(null);
 
   const isHeroInView = useInView(heroRef, { once: true });
   const isInfoInView = useInView(infoRef, { once: true, margin: "-100px" });
+  const isTimelineInView = useInView(timelineRef, { once: true, margin: "-100px" });
   const isGalleryInView = useInView(galleryRef, { once: true, margin: "-100px" });
   const isTicketsInView = useInView(ticketsRef, { once: true, margin: "-100px" });
   const isFaqInView = useInView(faqRef, { once: true, margin: "-100px" });
 
   const eventDate = new Date("2026-07-04T17:00:00");
 
-  const highlights = [
-    {
-      icon: Anchor,
-      title: "Luxury Yacht",
-      description: "Cruise on a stunning 30-meter yacht with multiple decks",
-    },
-    {
-      icon: Music,
-      title: "Live DJ Set",
-      description: "Eirinei Sterianou spinning the best pop & house tracks",
-    },
-    {
-      icon: Wine,
-      title: "Open Bar",
-      description: "Unlimited drinks throughout the entire cruise",
-    },
-    {
-      icon: Sun,
-      title: "Sunset Views",
-      description: "Witness the magical Ayia Napa sunset from the sea",
-    },
-  ];
+  // highlights removed — replaced with editorial layout below
 
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-white">
@@ -258,23 +264,7 @@ export default function BoatPartyPage() {
             className="object-cover"
             priority
           />
-          {/* Gradient Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/50 via-transparent to-blue-900/50" />
-        </div>
-
-        {/* Animated Waves Effect */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
-          <motion.div
-            animate={{ x: [0, -100, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-0 left-0 right-0 h-20"
-            style={{
-              background: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23ffffff' opacity='.3'%3E%3C/path%3E%3C/svg%3E\") repeat-x",
-              backgroundSize: "1200px 120px",
-              width: "200%",
-            }}
-          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
         </div>
 
         {/* Content */}
@@ -285,10 +275,10 @@ export default function BoatPartyPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-white shadow-lg"
+              className="mb-4 sm:mb-6 inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-white/15 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-white/90"
             >
               <Anchor className="h-3 w-3 sm:h-4 sm:w-4" />
-              Summer Boat Party 2026
+              Summer 2026
             </motion.div>
 
             {/* Title */}
@@ -296,10 +286,10 @@ export default function BoatPartyPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
+              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight text-white"
             >
-              <span className="text-white">Ayia Napa</span>
-              <span className="block text-[#D4A574]">Boat Party</span>
+              Ayia Napa{" "}
+              <span className="text-[#D4A574]">Boat Party</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -307,11 +297,9 @@ export default function BoatPartyPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6 sm:mb-8 px-2 text-base sm:text-lg md:text-xl text-white/80"
+              className="mb-6 sm:mb-8 px-2 text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto"
             >
-              The ultimate summer experience. Dance under the sunset with{" "}
-              <span className="font-semibold text-[#D4A574]">DJ Eirinei Sterianou</span>{" "}
-              spinning the hottest pop & house tracks.
+              Two DJs, dance shows, drone coverage, finger foods, open bar — all on a luxury yacht under the Ayia Napa sunset.
             </motion.p>
 
             {/* Date & Location */}
@@ -331,7 +319,7 @@ export default function BoatPartyPage() {
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
                 <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
-                <span className="font-medium">5:00 PM - 10:00 PM</span>
+                <span className="font-medium">5:00 PM – 10:00 PM</span>
               </span>
             </motion.div>
 
@@ -342,7 +330,7 @@ export default function BoatPartyPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mb-6 sm:mb-10 flex flex-col items-center"
             >
-              <p className="mb-3 sm:mb-4 text-xs sm:text-sm uppercase tracking-wider text-white/60">
+              <p className="mb-3 sm:mb-4 text-xs sm:text-sm uppercase tracking-wider text-white/50">
                 Set sail in
               </p>
               <div className="flex justify-center">
@@ -350,130 +338,211 @@ export default function BoatPartyPage() {
               </div>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA — ticket-shaped button */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto sm:flex-row sm:justify-center"
             >
-              <a
-                href="#tickets"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-xl shadow-[#D4A574]/30 transition-all hover:shadow-2xl active:scale-95 sm:hover:scale-105"
-              >
-                <Ticket className="h-4 w-4 sm:h-5 sm:w-5" />
-                Get Tickets
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
+              <a href="#tickets">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group relative inline-block cursor-pointer"
+                >
+                  <div
+                    className="relative bg-[#D4A574] transition-colors group-hover:bg-[#C8965F]"
+                    style={{
+                      borderRadius: "14px",
+                      clipPath: `polygon(
+                        0 0, 100% 0,
+                        100% calc(50% - 9px), calc(100% - 4.5px) 50%, 100% calc(50% + 9px),
+                        100% 100%, 0 100%,
+                        0 calc(50% + 9px), 4.5px 50%, 0 calc(50% - 9px)
+                      )`,
+                    }}
+                  >
+                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" style={{ borderRadius: "14px 14px 0 0" }} />
+                    <div className="relative flex items-center justify-center gap-2.5 px-10 py-4">
+                      <span className="text-base font-semibold text-white tracking-wide">
+                        Get Tickets
+                      </span>
+                      <ArrowRight className="h-[18px] w-[18px] text-white/80 transition-transform group-hover:translate-x-0.5" />
+                    </div>
+                  </div>
+                </motion.div>
               </a>
             </motion.div>
           </div>
-
         </div>
       </section>
 
       {/* ============================================ */}
-      {/* EVENT INFO SECTION */}
+      {/* EVENT INFO SECTION — editorial layout */}
       {/* ============================================ */}
-      <section ref={infoRef} className="relative overflow-hidden bg-zinc-50 py-12 sm:py-20 md:py-28">
-        {/* Background */}
-        <GridPattern
-          className="absolute inset-0 z-0 opacity-30 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
-          width={50}
-          height={50}
-          numSquares={30}
-          maxOpacity={0.1}
-        />
-        <div className="absolute -left-40 top-20 h-[400px] w-[400px] rounded-full bg-[#D4A574]/30 blur-[120px]" />
-        <div className="absolute -right-40 bottom-20 h-[400px] w-[400px] rounded-full bg-amber-200/40 blur-[120px]" />
+      <section ref={infoRef} className="relative overflow-hidden bg-[#FAF8F5] py-16 sm:py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          {/* Top: description + feature image */}
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center mb-20">
+            {/* Left — text */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInfoInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
+                About The Party
+              </p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900 leading-tight">
+                The ultimate sunset cruise{" "}
+                <span className="text-[#D4A574]">experience</span>
+              </h2>
+              <p className="mt-5 text-slate-600 leading-relaxed">
+                Set sail from Ayia Napa Marina on a luxury 30-meter yacht. Two incredible DJ sets,
+                live dance shows, professional photographers, drone coverage, finger foods, and an
+                open bar — all while the sun sets over the Mediterranean.
+              </p>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
+              {/* Inline features — simple text, no cards */}
+              <div className="mt-8 space-y-4">
+                {[
+                  "Two DJ sets by Englezos & MrUnknown",
+                  "Dance shows from talented performers",
+                  "Professional photographers & drone coverage",
+                  "Open bar & finger foods for everyone",
+                  "5-hour cruise on a luxury yacht",
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="h-1.5 w-1.5 rounded-full bg-[#D4A574] flex-shrink-0" />
+                    <span className="text-sm text-slate-700">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right — image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInfoInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="relative aspect-[4/3] overflow-hidden rounded-2xl"
+            >
+              <Image
+                src="/Content/yacth3.png"
+                alt="Luxury yacht experience"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
+
+          {/* DJs — clean lineup strip */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInfoInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="mb-16 text-center"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mx-auto max-w-3xl"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
-              <Waves className="h-4 w-4" />
-              About The Party
-            </span>
-            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">The Ultimate</span>{" "}
-              <span className="text-[#D4A574]">Summer Experience</span>
-            </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
-              Set sail from Ayia Napa on a stunning luxury yacht for an unforgettable
-              sunset cruise. Dance to the beats of <strong>DJ Eirinei Sterianou</strong> as
-              she spins the best pop and house tracks while you enjoy unlimited drinks
-              and the breathtaking Mediterranean views.
+            <p className="mb-6 text-center text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
+              Lineup
             </p>
-          </motion.div>
-
-          {/* DJ Feature */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInfoInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-16 mx-auto max-w-2xl"
-          >
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] p-1">
-              <div className="rounded-[22px] bg-white p-6 sm:p-8">
-                <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <div className="relative">
-                    <div className="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-xl ring-4 ring-white">
-                      <Image
-                        src="/Content/DJ.png"
-                        alt="DJ Eirinei Sterianou"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] text-white shadow-lg"
-                    >
-                      <Music className="h-4 w-4" />
-                    </motion.div>
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <p className="text-sm font-medium text-[#D4A574] uppercase tracking-wider mb-1">Featured DJ</p>
-                    <h3 className="text-xl md:text-2xl font-semibold tracking-normal leading-tight text-slate-900 mb-2">Eirinei Sterianou</h3>
-                    <p className="text-slate-600">
-                      One of Cyprus&apos;s most exciting DJs, known for her electrifying
-                      sets blending pop anthems with deep house grooves.
-                    </p>
-                    <div className="mt-3 flex items-center justify-center sm:justify-start gap-2">
-                      <span className="rounded-full bg-[#D4A574]/10 px-3 py-1 text-xs font-medium text-[#D4A574]">Pop</span>
-                      <span className="rounded-full bg-[#D4A574]/20 px-3 py-1 text-xs font-medium text-[#C8965F]">House</span>
-                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700">Deep House</span>
-                    </div>
-                  </div>
+            <div className="divide-y divide-slate-100">
+              {/* DJ Englezos */}
+              <div className="flex items-center justify-between py-5">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Englezos</h3>
+                  <p className="text-sm text-slate-500 mt-0.5">Pop · House</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium text-slate-900">5:00 PM</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Opening set · 1.5h</p>
+                </div>
+              </div>
+              {/* Mystery Show */}
+              <div className="flex items-center justify-between py-5">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Dance Show</h3>
+                  <p className="text-sm text-slate-500 mt-0.5">Mystery performance</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium text-slate-900">6:30 PM</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Live dancers</p>
+                </div>
+              </div>
+              {/* DJ MrUnknown */}
+              <div className="flex items-center justify-between py-5">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">MrUnknown</h3>
+                  <p className="text-sm text-slate-500 mt-0.5">House · Deep House</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium text-slate-900">7:30 PM</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Closing set</p>
                 </div>
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Highlights Grid */}
-          <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {highlights.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInfoInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
-              >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg transition-transform group-hover:scale-110">
-                  <item.icon className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="mb-2 text-xl font-bold text-slate-900">
-                  {item.title}
-                </h3>
-                <p className="text-slate-600">{item.description}</p>
-              </motion.div>
-            ))}
+      {/* ============================================ */}
+      {/* TIMELINE SECTION */}
+      {/* ============================================ */}
+      <section ref={timelineRef} className="relative bg-white py-16 sm:py-24 md:py-32">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isTimelineInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="mb-14 text-center"
+          >
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
+              Schedule
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              Event{" "}
+              <span className="text-[#D4A574]">Timeline</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-slate-600">
+              Here&apos;s how the evening unfolds
+            </p>
+          </motion.div>
+
+          {/* Timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-slate-200" />
+
+            <div className="space-y-8 sm:space-y-10">
+              {timelineEvents.map((event, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isTimelineInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="relative flex gap-5 sm:gap-6"
+                >
+                  {/* Icon dot */}
+                  <div className="relative z-10 flex h-12 w-12 sm:h-16 sm:w-16 flex-shrink-0 items-center justify-center rounded-xl bg-[#D4A574] text-white shadow-sm">
+                    <event.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 pt-1 sm:pt-2">
+                    <p className="text-xs font-medium uppercase tracking-wider text-[#D4A574] mb-1">
+                      {event.time}
+                    </p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-1">
+                      {event.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {event.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -481,7 +550,7 @@ export default function BoatPartyPage() {
       {/* ============================================ */}
       {/* PHOTO GALLERY SECTION */}
       {/* ============================================ */}
-      <section ref={galleryRef} className="relative bg-white py-12 sm:py-20 md:py-28">
+      <section ref={galleryRef} className="relative bg-[#FAF8F5] py-16 sm:py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -490,12 +559,11 @@ export default function BoatPartyPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-[#D4A574]/10 px-4 py-2 text-sm font-medium text-[#D4A574]">
-              <Sparkles className="h-4 w-4" />
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
               Gallery
-            </span>
-            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">What Awaits</span>{" "}
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              What Awaits{" "}
               <span className="text-[#D4A574]">You</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
@@ -504,22 +572,22 @@ export default function BoatPartyPage() {
           </motion.div>
 
           {/* Gallery Grid */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {galleryImages.map((image, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={isGalleryInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
                 className="group relative aspect-[4/3] overflow-hidden rounded-2xl"
               >
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </motion.div>
             ))}
           </div>
@@ -527,141 +595,120 @@ export default function BoatPartyPage() {
       </section>
 
       {/* ============================================ */}
-      {/* TICKETS CTA SECTION */}
+      {/* TICKETS SECTION */}
       {/* ============================================ */}
       <section
         id="tickets"
         ref={ticketsRef}
-        className="relative overflow-hidden bg-gradient-to-br from-[#D4A574] via-[#C8965F] to-[#D4A574] py-12 sm:py-20 md:py-28"
+        className="relative bg-white py-16 sm:py-24 md:py-32"
       >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
+            className="text-center"
           >
-            <Ticket className="mx-auto mb-6 h-16 w-16 text-white/90" />
-            <h2 className="mb-6 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight">
-              <span className="text-white">Get Your</span>{" "}
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
+              Tickets
+            </p>
+            <h2 className="mb-4 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              Get Your{" "}
               <span className="text-[#D4A574]">Tickets</span>
             </h2>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-white/90">
-              Secure your spot on the boat. Both packages include boat cruise,
-              DJ entertainment, and drinks.
+            <p className="mx-auto mb-10 max-w-2xl text-lg text-slate-600">
+              Both packages include the full boat cruise, DJ sets, dance shows, photographer & drone coverage, and finger foods.
             </p>
 
             {/* Pricing Cards */}
-            <div className="mb-10 grid gap-4 sm:gap-6 sm:grid-cols-2">
-              {[
-                {
-                  type: "Open Bar",
-                  price: 70,
-                  desc: "Unlimited standard drinks",
-                  features: [
-                    "Beer, wine & spirits",
-                    "Soft drinks & water",
-                    "Main deck access",
-                    "6-hour cruise",
-                  ],
-                },
-                {
-                  type: "VIP Open Bar",
-                  price: 130,
-                  desc: "Premium experience",
-                  popular: true,
-                  features: [
-                    "All standard drinks",
-                    "Premium spirits",
-                    "Champagne service",
-                    "VIP deck access",
-                    "Priority boarding",
-                    "Dedicated server",
-                  ],
-                },
-              ].map((ticket, index) => (
-                  <motion.button
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  onClick={() => {
-                    setSelectedTicketType({ type: ticket.type, price: ticket.price });
-                    setIsPaymentModalOpen(true);
-                  }}
-                  className={`relative rounded-2xl p-5 sm:p-6 text-left transition-all hover:scale-105 active:scale-95 ${
-                    ticket.popular
-                      ? "bg-white text-slate-900 shadow-2xl ring-2 ring-[#D4A574]"
-                      : "bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
-                  }`}
-                >
-                  {ticket.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-3 py-1 text-xs font-bold text-white flex items-center gap-1">
-                      <Crown className="h-3 w-3" />
-                      VIP
-                    </span>
-                  )}
-                  <p
-                    className={`text-sm font-medium ${
-                      ticket.popular ? "text-slate-600" : "text-white/70"
-                    }`}
-                  >
-                    {ticket.type}
-                  </p>
-                  <p
-                    className={`my-2 text-3xl sm:text-4xl font-bold ${
-                      ticket.popular ? "text-slate-900" : "text-white"
-                    }`}
-                  >
-                    €{ticket.price}
-                  </p>
-                  <p
-                    className={`text-xs sm:text-sm mb-4 ${
-                      ticket.popular ? "text-slate-500" : "text-white/60"
-                    }`}
-                  >
-                    {ticket.desc}
-                  </p>
-                  <ul className={`space-y-2 text-xs sm:text-sm ${ticket.popular ? "text-slate-600" : "text-white/80"}`}>
-                    {ticket.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <CheckCircle className={`h-4 w-4 ${ticket.popular ? "text-[#D4A574]" : "text-white/70"}`} />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.button>
-              ))}
-            </div>
+            <div className="mb-10 grid gap-5 sm:grid-cols-2">
+              {/* Normal Ticket */}
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                onClick={() => {
+                  setSelectedTicketType({ type: "Normal", price: 80 });
+                  setIsPaymentModalOpen(true);
+                }}
+                className="group rounded-2xl border border-slate-100 bg-white p-6 sm:p-8 text-left shadow-sm transition-all hover:shadow-lg hover:border-[#D4A574]/30"
+              >
+                <p className="text-sm font-medium text-slate-500 mb-1">Normal</p>
+                <p className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-2">
+                  €80
+                </p>
+                <p className="text-sm text-slate-500 mb-5">per person</p>
+                <ul className="space-y-3 text-sm text-slate-600 text-left">
+                  {[
+                    "Standard open bar (beer, wine, spirits, soft drinks)",
+                    "Finger foods included",
+                    "Can purchase premium drinks on board",
+                    "Full DJ sets & dance shows",
+                    "Photographer & drone coverage",
+                    "5-hour sunset cruise",
+                  ].map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#D4A574]" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-3 text-sm font-semibold text-white transition-colors group-hover:bg-[#D4A574]">
+                  Select Normal
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </motion.button>
 
-            {/* CTA Button */}
-            <motion.button
-              initial={{ opacity: 0, y: 20 }}
-              animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              onClick={() => setIsPaymentModalOpen(true)}
-              className="group inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 sm:px-10 sm:py-5 text-lg sm:text-xl font-bold text-slate-900 shadow-2xl transition-all hover:scale-105 active:scale-95"
-            >
-              <Ticket className="h-5 w-5 sm:h-6 sm:w-6" />
-              Book Your Spot
-              <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 transition-transform group-hover:translate-x-1" />
-            </motion.button>
+              {/* VIP Ticket */}
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                onClick={() => {
+                  setSelectedTicketType({ type: "VIP", price: 130 });
+                  setIsPaymentModalOpen(true);
+                }}
+                className="group relative rounded-2xl border-2 border-[#D4A574] bg-white p-6 sm:p-8 text-left shadow-sm transition-all hover:shadow-lg"
+              >
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#D4A574] px-3 py-1 text-xs font-semibold text-white flex items-center gap-1">
+                  <Crown className="h-3 w-3" />
+                  VIP
+                </span>
+                <p className="text-sm font-medium text-slate-500 mb-1">VIP</p>
+                <p className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-2">
+                  €130
+                </p>
+                <p className="text-sm text-slate-500 mb-5">per person</p>
+                <ul className="space-y-3 text-sm text-slate-600 text-left">
+                  {[
+                    "Premium open bar (top-shelf spirits, champagne)",
+                    "Finger foods included",
+                    "Your own dedicated service",
+                    "Spot close to the DJ",
+                    "VIP couch seating",
+                    "Priority boarding",
+                    "Full DJ sets & dance shows",
+                    "Photographer & drone coverage",
+                  ].map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#D4A574]" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#D4A574] py-3 text-sm font-semibold text-white transition-colors group-hover:bg-[#C8965F]">
+                  Select VIP
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </motion.button>
+            </div>
 
             {/* Notes */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isTicketsInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-white/70"
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap justify-center gap-6 text-sm text-slate-500"
             >
               <span className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
@@ -673,7 +720,7 @@ export default function BoatPartyPage() {
               </span>
               <span className="flex items-center gap-2">
                 <Anchor className="h-4 w-4" />
-                Departs 5PM
+                Departs 5 PM
               </span>
             </motion.div>
           </motion.div>
@@ -683,7 +730,7 @@ export default function BoatPartyPage() {
       {/* ============================================ */}
       {/* FAQ SECTION */}
       {/* ============================================ */}
-      <section ref={faqRef} className="relative bg-zinc-50 py-12 sm:py-20 md:py-28">
+      <section ref={faqRef} className="relative bg-[#FAF8F5] py-16 sm:py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -692,8 +739,11 @@ export default function BoatPartyPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">Frequently Asked</span>{" "}
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
+              FAQ
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              Frequently Asked{" "}
               <span className="text-[#D4A574]">Questions</span>
             </h2>
             <p className="mt-4 text-lg text-slate-600">
@@ -706,7 +756,7 @@ export default function BoatPartyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+            className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8"
           >
             {faqData.map((item, index) => (
               <FAQItem
@@ -730,7 +780,7 @@ export default function BoatPartyPage() {
               Still have questions?{" "}
               <a
                 href="/contact"
-                className="font-semibold text-[#D4A574] hover:text-[#C8965F]"
+                className="font-semibold text-[#D4A574] hover:text-[#C8965F] transition-colors"
               >
                 Contact us
               </a>
@@ -742,7 +792,7 @@ export default function BoatPartyPage() {
       {/* ============================================ */}
       {/* BACK TO EVENTS */}
       {/* ============================================ */}
-      <section className="border-t border-slate-200 bg-white py-12">
+      <section className="border-t border-slate-100 bg-[#FAF8F5] py-12">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <a
             href="/events"
@@ -811,11 +861,11 @@ function FloatingInput({
           placeholder=""
           required={required}
           maxLength={maxLength}
-          className={`w-full rounded-xl border-2 bg-white px-4 text-slate-900 transition-all duration-200 ${
+          className={`w-full rounded-xl border bg-white px-4 text-slate-900 transition-all duration-200 ${
             Icon ? "pl-12" : "pl-4"
           } ${
             isFocused || hasValue
-              ? "border-[#D4A574] bg-[#D4A574]/5 shadow-lg shadow-[#D4A574]/10 pt-6 pb-2"
+              ? "border-[#D4A574] shadow-sm pt-6 pb-2"
               : "border-slate-200 hover:border-slate-300 py-4"
           } focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20`}
         />
@@ -824,7 +874,7 @@ function FloatingInput({
             Icon ? "left-12" : "left-4"
           } ${
             isFocused || hasValue
-              ? "top-2 text-xs font-semibold text-[#D4A574]"
+              ? "top-2 text-xs font-medium text-[#D4A574]"
               : "top-1/2 -translate-y-1/2 text-slate-500"
           }`}
         >
@@ -852,32 +902,23 @@ function QuantitySelector({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+      <button
         onClick={() => onChange(Math.max(min, value - 1))}
         disabled={value <= min}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:bg-[#D4A574]/10 hover:text-[#D4A574]"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:text-[#D4A574]"
       >
         <span className="text-xl font-bold">−</span>
-      </motion.button>
-      <motion.div
-        key={value}
-        initial={{ scale: 1.2, color: "#D4A574" }}
-        animate={{ scale: 1, color: "#0f172a" }}
-        className="flex h-12 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574]/10 to-amber-50 border-2 border-[#D4A574]/30"
-      >
+      </button>
+      <div className="flex h-12 w-16 items-center justify-center rounded-xl border border-[#D4A574]/30 bg-[#D4A574]/5">
         <span className="text-2xl font-bold text-slate-900">{value}</span>
-      </motion.div>
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+      </div>
+      <button
         onClick={() => onChange(Math.min(max, value + 1))}
         disabled={value >= max}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:bg-[#D4A574]/10 hover:text-[#D4A574]"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:text-[#D4A574]"
       >
         <span className="text-xl font-bold">+</span>
-      </motion.button>
+      </button>
     </div>
   );
 }
@@ -919,8 +960,8 @@ function PaymentModal({
   const [isProcessing, setIsProcessing] = useState(false);
 
   const ticketOptions: TicketType[] = [
-    { type: "Open Bar", price: 70, desc: "Unlimited standard drinks" },
-    { type: "VIP Open Bar", price: 130, desc: "Premium experience", popular: true },
+    { type: "Normal", price: 80, desc: "Standard open bar + finger foods" },
+    { type: "VIP", price: 130, desc: "Premium open bar + VIP perks", popular: true },
   ];
 
   useEffect(() => {
@@ -981,17 +1022,13 @@ function PaymentModal({
               className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl"
             >
               {/* Header */}
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-gradient-to-r from-white to-[#D4A574]/10 px-4 py-4 sm:px-6 backdrop-blur-sm">
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white px-4 py-4 sm:px-6">
                 <div className="flex items-center gap-3">
-                  <motion.div
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg"
-                  >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4A574] shadow-sm">
                     <Ticket className="h-5 w-5 text-white" />
-                  </motion.div>
+                  </div>
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900">Purchase Tickets</h2>
+                    <h2 className="text-lg font-semibold text-slate-900">Purchase Tickets</h2>
                     <div className="flex items-center gap-2">
                       <div className="flex gap-1">
                         {["ticket", "details", "payment"].map((s, i) => (
@@ -1002,7 +1039,7 @@ function PaymentModal({
                                 ? "w-6 bg-[#D4A574]"
                                 : i < ["ticket", "details", "payment"].indexOf(step)
                                 ? "w-1.5 bg-green-500"
-                                : "w-1.5 bg-slate-300"
+                                : "w-1.5 bg-slate-200"
                             }`}
                           />
                         ))}
@@ -1012,14 +1049,12 @@ function PaymentModal({
                   </div>
                 </div>
                 {step !== "success" && (
-                  <motion.button
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
+                  <button
                     onClick={onClose}
                     className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
                   >
                     <X className="h-5 w-5" />
-                  </motion.button>
+                  </button>
                 )}
               </div>
 
@@ -1035,65 +1070,39 @@ function PaymentModal({
                       <h3 className="mb-4 text-lg font-semibold text-slate-900">Select Package</h3>
                       <div className="space-y-3">
                         {ticketOptions.map((ticket, index) => (
-                          <motion.button
+                          <button
                             key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
                             onClick={() => {
                               setInternalSelectedTicketType(ticket);
                               setTimeout(() => setStep("details"), 200);
                             }}
-                            className={`group relative w-full overflow-hidden rounded-2xl border-2 p-5 text-left transition-all ${
+                            className={`relative w-full overflow-hidden rounded-2xl border p-5 text-left transition-all hover:shadow-md ${
                               ticket.popular
-                                ? "border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-amber-50 shadow-lg shadow-[#D4A574]/20"
-                                : "border-slate-200 bg-white hover:border-[#D4A574]/50 hover:shadow-md"
+                                ? "border-[#D4A574] bg-[#D4A574]/5"
+                                : "border-slate-200 bg-white hover:border-[#D4A574]/50"
                             }`}
                           >
-                            {ticket.popular && (
-                              <motion.div
-                                animate={{ rotate: [0, 5, -5, 0] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                                className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-[#D4A574] to-amber-400 opacity-20 blur-xl"
-                              />
-                            )}
-                            <div className="relative flex items-start justify-between">
+                            <div className="flex items-start justify-between">
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-2">
-                                  <p className="text-lg font-bold text-slate-900">{ticket.type}</p>
+                                  <p className="text-lg font-semibold text-slate-900">{ticket.type}</p>
                                   {ticket.popular && (
-                                    <motion.span
-                                      initial={{ scale: 0 }}
-                                      animate={{ scale: 1 }}
-                                      className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-2.5 py-1 text-xs font-bold text-white shadow-md"
-                                    >
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-[#D4A574] px-2.5 py-1 text-xs font-semibold text-white">
                                       <Crown className="h-3 w-3" />
                                       VIP
-                                    </motion.span>
+                                    </span>
                                   )}
                                 </div>
                                 <p className="text-sm text-slate-600">{ticket.desc}</p>
-                                <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
-                                  <CheckCircle className="h-3.5 w-3.5 text-green-500" />
-                                  <span>Instant confirmation</span>
-                                </div>
                               </div>
                               <div className="ml-4 text-right">
-                                <p className="text-3xl font-bold bg-gradient-to-r from-[#D4A574] to-[#C8965F] bg-clip-text text-transparent">
+                                <p className="text-3xl font-semibold text-slate-900">
                                   €{ticket.price}
                                 </p>
                                 <p className="text-xs text-slate-500 mt-1">per person</p>
                               </div>
                             </div>
-                            <motion.div
-                              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#D4A574] to-[#C8965F]"
-                              initial={{ width: 0 }}
-                              whileHover={{ width: "100%" }}
-                              transition={{ duration: 0.3 }}
-                            />
-                          </motion.button>
+                          </button>
                         ))}
                       </div>
                     </div>
@@ -1107,37 +1116,30 @@ function PaymentModal({
                     className="space-y-6"
                   >
                     {/* Ticket Summary */}
-                    <motion.div
-                      initial={{ scale: 0.95, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      className="relative overflow-hidden rounded-2xl border-2 border-[#D4A574]/30 bg-gradient-to-br from-[#D4A574]/10 via-white to-amber-50 p-5 shadow-lg"
-                    >
-                      <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-gradient-to-br from-[#D4A574]/20 to-amber-200/40 blur-2xl" />
-                      <div className="relative">
-                        <div className="mb-4 flex items-center justify-between">
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <Ticket className="h-5 w-5 text-[#D4A574]" />
-                              <p className="text-lg font-bold text-slate-900">{currentTicket.type}</p>
-                            </div>
-                            <p className="text-sm text-slate-600">{currentTicket.desc}</p>
+                    <div className="rounded-2xl border border-[#D4A574]/20 bg-[#D4A574]/5 p-5">
+                      <div className="mb-4 flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Ticket className="h-5 w-5 text-[#D4A574]" />
+                            <p className="text-lg font-semibold text-slate-900">{currentTicket.type}</p>
                           </div>
-                          <div className="text-right">
-                            <p className="text-2xl font-bold bg-gradient-to-r from-[#D4A574] to-[#C8965F] bg-clip-text text-transparent">
-                              €{currentTicket.price}
-                            </p>
-                            <p className="text-xs text-slate-500">per person</p>
-                          </div>
+                          <p className="text-sm text-slate-600">{currentTicket.desc}</p>
                         </div>
-                        <div className="flex items-center justify-between rounded-xl border-2 border-[#D4A574]/20 bg-white/80 p-4 backdrop-blur-sm">
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-1">Quantity</label>
-                            <p className="text-xs text-slate-500">Select number of tickets</p>
-                          </div>
-                          <QuantitySelector value={quantity} onChange={setQuantity} />
+                        <div className="text-right">
+                          <p className="text-2xl font-semibold text-slate-900">
+                            €{currentTicket.price}
+                          </p>
+                          <p className="text-xs text-slate-500">per person</p>
                         </div>
                       </div>
-                    </motion.div>
+                      <div className="flex items-center justify-between rounded-xl border border-[#D4A574]/20 bg-white p-4">
+                        <div>
+                          <label className="block text-sm font-medium text-slate-700 mb-1">Quantity</label>
+                          <p className="text-xs text-slate-500">Select number of tickets</p>
+                        </div>
+                        <QuantitySelector value={quantity} onChange={setQuantity} />
+                      </div>
+                    </div>
 
                     {/* Customer Details */}
                     <div>
@@ -1145,7 +1147,7 @@ function PaymentModal({
                         <User className="h-5 w-5 text-[#D4A574]" />
                         <h3 className="text-lg font-semibold text-slate-900">Your Details</h3>
                       </div>
-                      <div className="space-y-5">
+                      <div className="space-y-4">
                         <FloatingInput
                           label="Full Name"
                           type="text"
@@ -1173,7 +1175,7 @@ function PaymentModal({
                     </div>
 
                     {/* Order Summary */}
-                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                    <div className="rounded-xl border border-slate-100 bg-[#FAF8F5] p-4">
                       <h4 className="mb-3 text-sm font-semibold text-slate-900">Order Summary</h4>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
@@ -1188,32 +1190,28 @@ function PaymentModal({
                         </div>
                         <div className="border-t border-slate-200 pt-2 flex justify-between">
                           <span className="font-semibold text-slate-900">Total</span>
-                          <span className="text-xl font-bold text-slate-900">€{total.toFixed(2)}</span>
+                          <span className="text-xl font-semibold text-slate-900">€{total.toFixed(2)}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Actions */}
                     <div className="flex gap-3">
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                      <button
                         onClick={() => setStep("ticket")}
-                        className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
+                        className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
                       >
                         <ArrowRight className="h-4 w-4 rotate-180" />
                         Back
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                      </button>
+                      <button
                         onClick={() => setStep("payment")}
                         disabled={!formData.fullName || !formData.email}
-                        className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-3.5 font-semibold text-white shadow-lg shadow-[#D4A574]/30 transition-all hover:shadow-xl hover:shadow-[#D4A574]/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#D4A574] px-4 py-3.5 font-semibold text-white transition-all hover:bg-[#C8965F] disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Continue to Payment
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </motion.button>
+                        <ArrowRight className="h-4 w-4" />
+                      </button>
                     </div>
                   </motion.div>
                 )}
@@ -1231,64 +1229,40 @@ function PaymentModal({
                         <h3 className="text-lg font-semibold text-slate-900">Payment Method</h3>
                       </div>
                       <div className="grid grid-cols-2 gap-3">
-                        <motion.button
-                          whileHover={{ scale: 1.02, y: -2 }}
-                          whileTap={{ scale: 0.98 }}
+                        <button
                           onClick={() => setSelectedPaymentMethod("card")}
-                          className={`group relative overflow-hidden rounded-xl border-2 p-4 text-left transition-all ${
+                          className={`relative rounded-xl border p-4 text-left transition-all ${
                             selectedPaymentMethod === "card"
-                              ? "border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-amber-50 shadow-lg"
+                              ? "border-[#D4A574] bg-[#D4A574]/5"
                               : "border-slate-200 bg-white hover:border-[#D4A574]/50"
                           }`}
                         >
-                          <div className="relative">
-                            <CreditCard className={`mb-2 h-7 w-7 transition-colors ${
-                              selectedPaymentMethod === "card" ? "text-[#D4A574]" : "text-slate-400"
-                            }`} />
-                            <p className={`text-sm font-semibold transition-colors ${
-                              selectedPaymentMethod === "card" ? "text-slate-900" : "text-slate-600"
-                            }`}>Card</p>
-                            <p className="text-xs text-slate-500 mt-1">Visa, Mastercard</p>
-                          </div>
+                          <CreditCard className={`mb-2 h-7 w-7 transition-colors ${
+                            selectedPaymentMethod === "card" ? "text-[#D4A574]" : "text-slate-400"
+                          }`} />
+                          <p className="text-sm font-semibold text-slate-900">Card</p>
+                          <p className="text-xs text-slate-500 mt-1">Visa, Mastercard</p>
                           {selectedPaymentMethod === "card" && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="absolute right-2 top-2"
-                            >
-                              <CheckCircle className="h-5 w-5 text-green-500" />
-                            </motion.div>
+                            <CheckCircle className="absolute right-2 top-2 h-5 w-5 text-green-500" />
                           )}
-                        </motion.button>
-                        <motion.button
-                          whileHover={{ scale: 1.02, y: -2 }}
-                          whileTap={{ scale: 0.98 }}
+                        </button>
+                        <button
                           onClick={() => setSelectedPaymentMethod("paypal")}
-                          className={`group relative overflow-hidden rounded-xl border-2 p-4 text-left transition-all ${
+                          className={`relative rounded-xl border p-4 text-left transition-all ${
                             selectedPaymentMethod === "paypal"
-                              ? "border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-amber-50 shadow-lg"
+                              ? "border-[#D4A574] bg-[#D4A574]/5"
                               : "border-slate-200 bg-white hover:border-[#D4A574]/50"
                           }`}
                         >
-                          <div className="relative">
-                            <div className="mb-2 flex h-7 w-7 items-center justify-center rounded bg-gradient-to-br from-blue-500 to-blue-600">
-                              <span className="text-xs font-bold text-white">PP</span>
-                            </div>
-                            <p className={`text-sm font-semibold transition-colors ${
-                              selectedPaymentMethod === "paypal" ? "text-slate-900" : "text-slate-600"
-                            }`}>PayPal</p>
-                            <p className="text-xs text-slate-500 mt-1">Secure & Fast</p>
+                          <div className="mb-2 flex h-7 w-7 items-center justify-center rounded bg-blue-500">
+                            <span className="text-xs font-bold text-white">PP</span>
                           </div>
+                          <p className="text-sm font-semibold text-slate-900">PayPal</p>
+                          <p className="text-xs text-slate-500 mt-1">Secure & Fast</p>
                           {selectedPaymentMethod === "paypal" && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="absolute right-2 top-2"
-                            >
-                              <CheckCircle className="h-5 w-5 text-green-500" />
-                            </motion.div>
+                            <CheckCircle className="absolute right-2 top-2 h-5 w-5 text-green-500" />
                           )}
-                        </motion.button>
+                        </button>
                       </div>
                     </div>
 
@@ -1296,29 +1270,28 @@ function PaymentModal({
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
-                        className="space-y-5"
+                        className="space-y-4"
                       >
                         {/* Card Preview */}
-                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 p-6 text-white shadow-2xl">
-                          <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
-                          <div className="absolute bottom-0 left-0 h-24 w-24 rounded-full bg-[#D4A574]/20 blur-xl" />
+                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 p-6 text-white shadow-xl">
+                          <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-white/5 blur-2xl" />
                           <div className="relative">
                             <div className="mb-6 flex items-center justify-between">
                               <div className="text-2xl font-bold">MEMORA</div>
-                              <div className="h-8 w-12 rounded bg-gradient-to-br from-[#D4A574] to-[#C8965F]" />
+                              <div className="h-8 w-12 rounded bg-[#D4A574]" />
                             </div>
                             <div className="mb-4 font-mono text-xl tracking-wider">
                               {formData.cardNumber || "•••• •••• •••• ••••"}
                             </div>
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="text-xs text-white/60 mb-1">CARDHOLDER</p>
+                                <p className="text-xs text-white/50 mb-1">CARDHOLDER</p>
                                 <p className="text-sm font-medium uppercase">
                                   {formData.cardName || "YOUR NAME"}
                                 </p>
                               </div>
                               <div>
-                                <p className="text-xs text-white/60 mb-1">EXPIRES</p>
+                                <p className="text-xs text-white/50 mb-1">EXPIRES</p>
                                 <p className="text-sm font-medium">{formData.expiryDate || "MM/YY"}</p>
                               </div>
                             </div>
@@ -1378,26 +1351,22 @@ function PaymentModal({
                     )}
 
                     {selectedPaymentMethod === "paypal" && (
-                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center">
+                      <div className="rounded-xl border border-slate-100 bg-[#FAF8F5] p-6 text-center">
                         <p className="text-slate-600">You will be redirected to PayPal to complete your payment</p>
                       </div>
                     )}
 
                     {/* Security Badge */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center justify-center gap-2 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 p-4"
-                    >
+                    <div className="flex items-center justify-center gap-2 rounded-xl border border-green-200 bg-green-50 p-4">
                       <Shield className="h-5 w-5 text-green-600" />
                       <span className="text-sm font-medium text-slate-700">
                         Secure payment encrypted with SSL
                       </span>
                       <Lock className="h-4 w-4 text-green-600" />
-                    </motion.div>
+                    </div>
 
                     {/* Order Summary */}
-                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                    <div className="rounded-xl border border-slate-100 bg-[#FAF8F5] p-4">
                       <h4 className="mb-3 text-sm font-semibold text-slate-900">Order Summary</h4>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
@@ -1412,33 +1381,29 @@ function PaymentModal({
                         </div>
                         <div className="border-t border-slate-200 pt-2 flex justify-between">
                           <span className="font-semibold text-slate-900">Total</span>
-                          <span className="text-xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">€{total.toFixed(2)}</span>
+                          <span className="text-xl font-semibold text-slate-900">€{total.toFixed(2)}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Actions */}
                     <div className="flex gap-3">
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                      <button
                         onClick={() => setStep("details")}
-                        className="flex items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-400 hover:bg-slate-50"
+                        className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
                       >
                         <ArrowRight className="h-4 w-4 rotate-180" />
                         Back
-                      </motion.button>
+                      </button>
                       <form onSubmit={handleSubmit} className="flex-1">
-                        <motion.button
+                        <button
                           type="submit"
                           disabled={
                             isProcessing ||
                             (selectedPaymentMethod === "card" &&
                               (!formData.cardNumber || !formData.cardName || !formData.expiryDate || !formData.cvv))
                           }
-                          whileHover={!isProcessing ? { scale: 1.02 } : {}}
-                          whileTap={!isProcessing ? { scale: 0.98 } : {}}
-                          className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-3.5 font-semibold text-white shadow-lg shadow-[#D4A574]/30 transition-all hover:shadow-xl hover:shadow-[#D4A574]/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#D4A574] px-4 py-3.5 font-semibold text-white transition-all hover:bg-[#C8965F] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isProcessing ? (
                             <>
@@ -1453,10 +1418,9 @@ function PaymentModal({
                             <>
                               <Lock className="h-4 w-4" />
                               Pay €{total.toFixed(2)}
-                              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                             </>
                           )}
-                        </motion.button>
+                        </button>
                       </form>
                     </div>
                   </motion.div>
@@ -1468,14 +1432,14 @@ function PaymentModal({
                     animate={{ opacity: 1, scale: 1 }}
                     className="py-8 text-center"
                   >
-                    <div className="relative mx-auto mb-6 h-24 w-24">
+                    <div className="relative mx-auto mb-6 h-20 w-20">
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
-                        className="absolute inset-0 flex items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-500 shadow-2xl shadow-green-500/30"
+                        className="absolute inset-0 flex items-center justify-center rounded-full bg-green-500 shadow-lg"
                       >
-                        <CheckCircle className="h-12 w-12 text-white" />
+                        <CheckCircle className="h-10 w-10 text-white" />
                       </motion.div>
                     </div>
 
@@ -1483,7 +1447,7 @@ function PaymentModal({
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="mb-3 text-xl md:text-2xl lg:text-3xl font-medium tracking-normal leading-tight text-slate-900"
+                      className="mb-3 text-xl md:text-2xl font-semibold text-slate-900"
                     >
                       You&apos;re Onboard! 🚢
                     </motion.h3>
@@ -1501,7 +1465,7 @@ function PaymentModal({
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="mb-6 rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-emerald-50 p-5 text-left"
+                      className="mb-6 rounded-2xl border border-green-200 bg-green-50 p-5 text-left"
                     >
                       <div className="mb-4 flex items-center gap-2">
                         <Ticket className="h-5 w-5 text-green-600" />
@@ -1522,23 +1486,21 @@ function PaymentModal({
                         </div>
                         <div className="flex justify-between">
                           <span className="text-slate-600">Date</span>
-                          <span className="font-medium text-slate-900">July 4, 2026 • 5PM</span>
+                          <span className="font-medium text-slate-900">July 4, 2026 · 5 PM</span>
                         </div>
                         <div className="flex justify-between border-t border-green-200 pt-2">
                           <span className="text-slate-600">Order Number</span>
-                          <span className="font-mono font-bold text-green-600">BP-{Date.now().toString().slice(-8)}</span>
+                          <span className="font-mono font-semibold text-green-600">BP-{Date.now().toString().slice(-8)}</span>
                         </div>
                       </div>
                     </motion.div>
 
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                    <button
                       onClick={resetModal}
-                      className="w-full rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#D4A574]/30 transition-all hover:shadow-xl hover:shadow-[#D4A574]/40"
+                      className="w-full rounded-xl bg-[#D4A574] px-6 py-3.5 font-semibold text-white transition-all hover:bg-[#C8965F]"
                     >
                       Done
-                    </motion.button>
+                    </button>
                   </motion.div>
                 )}
               </div>

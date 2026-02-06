@@ -5,11 +5,10 @@ import {
     NavigationMenu,
     NavigationMenuContent,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X, Sparkles, Mail } from "lucide-react";
+import { Menu, MoveRight, X, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -48,61 +47,53 @@ function Header1() {
     const [isDesktop, setIsDesktop] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
+    const isHomePage = pathname === "/";
+    
+    // Fix for homepage navigation issue: use programmatic navigation
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        const isExternal = href.startsWith("http");
+        if (isHomePage && !isExternal) {
+            e.preventDefault();
+            router.push(href);
+        }
+    };
 
-    // Pages with dark hero sections that need white text
+    // Pages with dark hero sections that need white text (mobile only for homepage)
     const darkHeroPages = [
         "/",
         "/events/kratiki-ekthesi",
         "/events/planitario",
         "/events/boat-party",
         "/business",
-        "/contact",
-        // Add other dark hero pages here
     ];
     
-    // Check if current path matches dark hero pages (exact match or starts with, but exclude /events itself)
     const hasDarkHero = darkHeroPages.some(page => {
-        if (page === "/") {
-            // Only match exact "/" for homepage, not paths that start with "/"
-            return pathname === "/";
-        }
+        if (page === "/") return pathname === "/";
         return pathname?.startsWith(page);
     });
-    const isHomePage = pathname === "/";
-    
-    // On desktop homepage, always show black text (light background)
-    // On mobile homepage, show white text when at top (dark video background)
-    // On other dark hero pages, show white text when at top
     const shouldShowWhiteText = !scrolled && hasDarkHero && !(isHomePage && isDesktop);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-
-        const handleResize = () => {
-            setIsDesktop(window.innerWidth >= 768); // md breakpoint
-        };
-
-        // Check initial size
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        const handleResize = () => setIsDesktop(window.innerWidth >= 768);
         handleResize();
-
         window.addEventListener("scroll", handleScroll);
         window.addEventListener("resize", handleResize);
+
         return () => {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-    
+
     return (
         <header 
             className={`w-full z-50 fixed top-0 left-0 transition-all duration-300 ${
                 scrolled 
                     ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/50" 
-                    : isHomePage && isDesktop 
-                        ? "bg-white border-b border-slate-200/50"
-                        : "bg-transparent"
+                    : hasDarkHero && !(isHomePage && isDesktop)
+                        ? "bg-transparent"
+                        : "bg-white/95 backdrop-blur-md border-b border-slate-200/50"
             }`}
         >
             <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center px-4 sm:px-6 lg:px-8">
@@ -113,20 +104,16 @@ function Header1() {
                             {navigationItems.map((item) => (
                                 <NavigationMenuItem key={item.title}>
                                     {item.href && !item.items ? (
-                                        // Simple link (like Home)
-                                        <Link href={item.href} legacyBehavior passHref>
-                                            <NavigationMenuLink>
-                                                <Button variant="ghost" className={`transition-colors duration-300 ${
-                                                    shouldShowWhiteText
-                                                        ? "text-white hover:text-[#E8C9A0] hover:bg-white/10" 
-                                                        : "text-slate-700 hover:text-[#D4A574] hover:bg-white/50"
-                                                }`}>
-                                                    {item.title}
-                                                </Button>
-                                            </NavigationMenuLink>
-                                        </Link>
+                                        <Button variant="ghost" asChild className={`transition-colors duration-300 ${
+                                            shouldShowWhiteText
+                                                ? "text-white hover:text-[#E8C9A0] hover:bg-white/10" 
+                                                : "text-slate-700 hover:text-[#D4A574] hover:bg-white/50"
+                                        }`}>
+                                            <Link href={item.href} onClick={(e) => handleNavClick(e, item.href)}>
+                                                {item.title}
+                                            </Link>
+                                        </Button>
                                     ) : item.items ? (
-                                        // Dropdown menu (Events or Services)
                                         <>
                                             <NavigationMenuTrigger 
                                                 className={`font-medium text-sm transition-colors duration-300 bg-transparent border-0 shadow-none ${
@@ -134,18 +121,10 @@ function Header1() {
                                                         ? "text-white hover:text-[#E8C9A0] hover:bg-white/10 data-[state=open]:bg-white/10 data-[state=open]:text-[#E8C9A0]" 
                                                         : "text-slate-700 hover:text-[#D4A574] hover:bg-white/50 data-[state=open]:bg-white/50 data-[state=open]:text-[#D4A574]"
                                                 }`}
-                                                onClick={(e) => {
-                                                    // Navigate on click if href exists (dropdown opens on hover, so click navigates)
-                                                    if (item.href) {
-                                                        e.preventDefault();
-                                                        router.push(item.href);
-                                                    }
-                                                }}
                                             >
                                                 {item.title}
                                             </NavigationMenuTrigger>
                                             <NavigationMenuContent className="bg-white border border-slate-200 shadow-xl !w-[320px] p-4">
-                                                {/* Full layout for Events (with description and button) */}
                                                 <div className="flex flex-col gap-4">
                                                     <div className="flex flex-col">
                                                         <p className="text-base font-semibold text-slate-900">{item.title}</p>
@@ -157,39 +136,38 @@ function Header1() {
                                                         {item.items?.map((subItem) => {
                                                             const isExternal = subItem.href.startsWith('http');
                                                             const isBusinessLink = subItem.title === "Business with Us";
-                                                            return isExternal ? (
-                                                                <a
-                                                                    href={subItem.href}
-                                                                    key={subItem.title}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors"
-                                                                >
-                                                                    <span className={`text-sm font-medium ${isBusinessLink ? "text-[#D4A574]" : "text-slate-700"}`}>{subItem.title}</span>
-                                                                    <MoveRight className={`w-4 h-4 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
-                                                                </a>
-                                                            ) : (
+                                                            if (isExternal) {
+                                                                return (
+                                                                    <a
+                                                                        href={subItem.href}
+                                                                        key={subItem.title}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors"
+                                                                    >
+                                                                        <span className={`text-sm font-medium ${isBusinessLink ? "text-[#D4A574]" : "text-slate-700"}`}>{subItem.title}</span>
+                                                                        <MoveRight className={`w-4 h-4 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
+                                                                    </a>
+                                                                );
+                                                            }
+                                                            return (
                                                                 <Link
                                                                     href={subItem.href}
                                                                     key={subItem.title}
-                                                                    legacyBehavior
-                                                                    passHref
+                                                                    className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors"
+                                                                    onClick={(e) => handleNavClick(e, subItem.href)}
                                                                 >
-                                                                    <NavigationMenuLink className="flex flex-row justify-between items-center hover:bg-slate-50 py-2.5 px-3 rounded transition-colors">
-                                                                        <span className={`text-sm font-medium ${isBusinessLink ? "text-[#D4A574]" : "text-slate-700"}`}>{subItem.title}</span>
-                                                                        <MoveRight className={`w-4 h-4 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
-                                                                    </NavigationMenuLink>
+                                                                    <span className={`text-sm font-medium ${isBusinessLink ? "text-[#D4A574]" : "text-slate-700"}`}>{subItem.title}</span>
+                                                                    <MoveRight className={`w-4 h-4 ${isBusinessLink ? "text-[#D4A574]" : "text-slate-400"}`} />
                                                                 </Link>
                                                             );
                                                         })}
                                                     </div>
-                                                    <Link href="/events" legacyBehavior passHref>
-                                                        <NavigationMenuLink asChild>
-                                                            <Button size="sm" className="mt-2 bg-gradient-to-r from-[#D4A574] to-[#C8965F] hover:from-[#C8965F] hover:to-[#B8874A] text-white border-0">
-                                                                View All Events
-                                                            </Button>
-                                                        </NavigationMenuLink>
-                                                    </Link>
+                                                    <Button size="sm" asChild className="mt-2 bg-[#D4A574] hover:bg-[#C8965F] text-white border-0">
+                                                        <Link href="/events" onClick={(e) => handleNavClick(e, "/events")}>
+                                                            View All Events
+                                                        </Link>
+                                                    </Button>
                                                 </div>
                                             </NavigationMenuContent>
                                         </>
@@ -202,7 +180,7 @@ function Header1() {
                 
                 {/* Logo - Center on desktop, Left on mobile */}
                 <div className="flex lg:justify-center flex-1 lg:flex-none relative z-10">
-                    <Link href="/" className="flex items-center gap-2">
+                    <Link href="/" className="flex items-center gap-2" onClick={(e) => handleNavClick(e, "/")}>
                         <div className="relative drop-shadow-lg drop-shadow-[0_0_8px_rgba(212,165,116,0.4)]">
                             <Image 
                                 src="/Content/Memora logo.png" 
@@ -221,26 +199,21 @@ function Header1() {
                     </Link>
                 </div>
                 
-                {/* Desktop Actions - Right (hidden on mobile) */}
+                {/* Desktop Actions - Right */}
                 <div className="hidden lg:flex justify-end w-full">
-                    <Link href="/contact">
-                        <Button className={`group relative overflow-hidden transition-all duration-300 ${
-                            shouldShowWhiteText
-                                ? "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/40" 
-                                : "bg-gradient-to-r from-[#D4A574] to-[#C8965F] hover:from-[#C8965F] hover:to-[#B8874A] text-white border-0 shadow-lg shadow-[#D4A574]/25 hover:shadow-xl hover:shadow-[#D4A574]/40"
-                        }`}>
-                            <Mail className="h-4 w-4 mr-2 transition-transform duration-300 group-hover:scale-110" />
+                    <Button asChild className={`transition-all duration-300 ${
+                        shouldShowWhiteText
+                            ? "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/40" 
+                            : "bg-[#D4A574] hover:bg-[#C8965F] text-white border-0"
+                    }`}>
+                        <Link href="/contact" onClick={(e) => handleNavClick(e, '/contact')}>
+                            <Mail className="h-4 w-4 mr-2" />
                             <span className="font-semibold">Contact Us</span>
-                            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                                shouldShowWhiteText 
-                                    ? "bg-gradient-to-r from-white/10 to-white/5" 
-                                    : "bg-gradient-to-r from-white/20 to-transparent"
-                            }`} />
-                        </Button>
-                    </Link>
+                        </Link>
+                    </Button>
                 </div>
                 
-                {/* Mobile Menu Button - Only visible on mobile */}
+                {/* Mobile Menu Button */}
                 <div className="flex lg:hidden items-center justify-end">
                     <Button 
                         variant="ghost" 
@@ -268,7 +241,7 @@ function Header1() {
                                         <Link
                                             href={item.href}
                                             className="flex justify-between items-center text-slate-700 hover:text-[#D4A574] transition-colors"
-                                            onClick={() => setOpen(false)}
+                                            onClick={(e) => { handleNavClick(e, item.href); setOpen(false); }}
                                         >
                                             <span className="text-lg font-medium">{item.title}</span>
                                             <MoveRight className="w-4 h-4 stroke-1 text-slate-400" />
@@ -299,7 +272,7 @@ function Header1() {
                                                     key={subItem.title}
                                                     href={subItem.href}
                                                     className={`flex justify-between items-center transition-colors py-1 ${isBusinessLink ? "text-[#D4A574] hover:text-[#C8965F]" : "text-slate-600 hover:text-[#D4A574]"}`}
-                                                    onClick={() => setOpen(false)}
+                                                    onClick={(e) => { handleNavClick(e, subItem.href); setOpen(false); }}
                                                 >
                                                     <span className={isBusinessLink ? "font-medium" : "text-muted-foreground"}>
                                                         {subItem.title}
@@ -312,13 +285,12 @@ function Header1() {
                             </div>
                         ))}
                         <div className="flex flex-col gap-3 pt-4 border-t border-slate-200">
-                            <Link href="/contact" onClick={() => setOpen(false)}>
-                                <Button className="group relative w-full overflow-hidden bg-gradient-to-r from-[#D4A574] to-[#C8965F] hover:from-[#C8965F] hover:to-[#B8874A] text-white border-0 shadow-lg shadow-[#D4A574]/25 hover:shadow-xl hover:shadow-[#D4A574]/40 transition-all duration-300">
-                                    <Mail className="h-4 w-4 mr-2 transition-transform duration-300 group-hover:scale-110" />
+                            <Button asChild className="w-full bg-[#D4A574] hover:bg-[#C8965F] text-white border-0 transition-colors">
+                                <Link href="/contact" onClick={(e) => { handleNavClick(e, '/contact'); setOpen(false); }}>
+                                    <Mail className="h-4 w-4 mr-2" />
                                     <span className="font-semibold">Contact Us</span>
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-white/20 to-transparent" />
-                                </Button>
-                            </Link>
+                                </Link>
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -328,4 +300,3 @@ function Header1() {
 }
 
 export { Header1 };
-

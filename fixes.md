@@ -1,45 +1,47 @@
-On events card, replace image with boarpaty
-Header fix (remove transparent header so text is not hidden from hero images)
+#On events card, replace image with boarpaty
+#Header fix (remove transparent header so text is not hidden from hero images)
+#Logo change - Color Hue Web
+#boat party 4 july 5-10 
+
+#get your ticket button should be ticket 
+
+#Business with us button improve 
+
+#events page replace place of boat with planetarium - homepage put planetarium below 
+
+#remove memories made across cyprus and stats below 
+
+#reviews google or remove 
+
+#remove past events
+
+#Trips page upcoming preview 
+
+#remove sample events removal 
+
+
+coundoun anymation - next event
+Remove login - ask to get info on ticket 
+remove cards from about us 
+Events - rating stats  AI Refinmend Icons
+edit forms to be sponcor vendor specific - move on homepage
+
+
+
+
+
+Planetarium 3-4 October 10AM - 2AM / 10AM - 12AM
 
 Hero images desktop mode (Hero reimagination using heigsfield AI)
 
 (In case we keep desktop hero) First image party, Sea, 2Boat, Mountain, 2Planetarium
 
-Logo change - Color Hue Web
-
-coundoun anymation - next event
-
-boat party 4 july 5-10 
-
-get your ticket button should be ticket 
-
-Business with us button improve 
-
-Events - rating stats  AI Refinmend Icons
-
-Planetarium 3-4 October 10AM - 2AM / 10AM - 12AM
 
 
-events page replace place of boat with planetarium - homepage put planetarium below 
-
-
-remove past events
-
-Trips page upcoming preview 
-
-remove sample events removal 
-
-edit forms to be sponcor vendor specific - move on homepage
-
-remove memories made across cyprus and stats below 
-
-reviews google or remove 
 
 main sponcor location
 
-remove cards from about us 
 
-Remove login - ask to get info on ticket 
 
 
 #BOAT

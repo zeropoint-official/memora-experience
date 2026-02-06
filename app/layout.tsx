@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import { Header1 } from "@/components/ui/header";
+import { HeaderV2 } from "@/components/ui/header-v2";
 import { Footer } from "@/components/ui/footer";
 
 const spaceGrotesk = Space_Grotesk({
@@ -39,7 +39,7 @@ export default function RootLayout({
             fontFamily: 'var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif'
           }}
         >
-          <Header1 />
+          <HeaderV2 />
           {children}
           <Footer />
         </body>

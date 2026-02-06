@@ -4,21 +4,13 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   Mail,
   Phone,
   MapPin,
-  Clock,
-  MessageSquare,
-  User,
-  Building2,
-  CheckCircle,
   ChevronDown,
-  Sparkles,
-  Send,
-  Globe,
-  Calendar,
+  CheckCircle,
 } from "lucide-react";
-import { GridPattern } from "@/components/ui/grid-pattern";
 
 // ============================================
 // FAQ DATA
@@ -52,7 +44,7 @@ const faqData = [
 ];
 
 // ============================================
-// FAQ ACCORDION COMPONENT
+// FAQ ACCORDION
 // ============================================
 function FAQItem({
   question,
@@ -66,17 +58,17 @@ function FAQItem({
   onClick: () => void;
 }) {
   return (
-    <div className="border-b border-slate-200 last:border-0">
+    <div className="border-b border-slate-100 last:border-0">
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between py-3 sm:py-4 md:py-5 text-left transition-colors active:text-[#D4A574] sm:hover:text-[#D4A574]"
+        className="flex w-full items-center justify-between py-4 sm:py-5 text-left transition-colors hover:text-[#C8965F]"
       >
-        <span className="pr-3 sm:pr-4 text-base sm:text-lg font-semibold text-slate-900">
+        <span className="pr-4 text-[15px] sm:text-base font-medium text-slate-900">
           {question}
         </span>
         <ChevronDown
-          className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
+          className={`h-4 w-4 flex-shrink-0 text-slate-300 transition-transform duration-300 ${
+            isOpen ? "rotate-180 text-[#D4A574]" : ""
           }`}
         />
       </button>
@@ -89,7 +81,7 @@ function FAQItem({
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-3 sm:pb-4 md:pb-5 text-sm sm:text-base leading-relaxed text-slate-600">
+            <p className="pb-4 sm:pb-5 text-sm sm:text-[15px] leading-relaxed text-slate-500">
               {answer}
             </p>
           </motion.div>
@@ -105,273 +97,158 @@ function FAQItem({
 const contactMethods = [
   {
     icon: Mail,
-    title: "Email Us",
-    description: "Send us an email anytime",
+    title: "Email",
     contact: "hello@memoraexperience.com",
     href: "mailto:hello@memoraexperience.com",
-    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     icon: Phone,
-    title: "Call Us",
-    description: "Speak with our team",
+    title: "Phone",
     contact: "+357 99 123 456",
     href: "tel:+35799123456",
-    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     icon: MapPin,
-    title: "Visit Us",
-    description: "Come see us in person",
+    title: "Location",
     contact: "Nicosia, Cyprus",
     href: "https://maps.google.com/?q=Nicosia+Cyprus",
-    color: "from-[#D4A574] to-[#C8965F]",
-  },
-  {
-    icon: Clock,
-    title: "Business Hours",
-    description: "When we're available",
-    contact: "Mon-Fri: 9AM-6PM",
-    href: "#",
-    color: "from-[#D4A574] to-[#C8965F]",
   },
 ];
 
 // ============================================
-// MAIN PAGE COMPONENT
+// MAIN PAGE
 // ============================================
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const heroRef = useRef(null);
-  const methodsRef = useRef(null);
   const formRef = useRef(null);
   const faqRef = useRef(null);
 
   const isHeroInView = useInView(heroRef, { once: true });
-  const isMethodsInView = useInView(methodsRef, { once: true, margin: "-100px" });
-  const isFormInView = useInView(formRef, { once: true, margin: "-100px" });
-  const isFaqInView = useInView(faqRef, { once: true, margin: "-100px" });
-
-  const stats = [
-    { value: "24-48h", label: "Response Time", icon: Clock },
-    { value: "100%", label: "Response Rate", icon: CheckCircle },
-    { value: "500+", label: "Happy Clients", icon: User },
-    { value: "10+", label: "Years Experience", icon: Calendar },
-  ];
+  const isFormInView = useInView(formRef, { once: true, margin: "-80px" });
+  const isFaqInView = useInView(faqRef, { once: true, margin: "-80px" });
 
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-white">
-      {/* ============================================ */}
-      {/* HERO SECTION */}
-      {/* ============================================ */}
+    <main className="relative min-h-screen w-full bg-[#FAF8F5]">
+      {/* ——— HERO ——— */}
       <section
         ref={heroRef}
-        className="relative overflow-hidden bg-slate-900 pb-20 pt-32 sm:pb-28 sm:pt-40"
+        className="relative overflow-hidden pb-10 pt-28 sm:pb-16 sm:pt-36 md:pb-20 md:pt-44"
       >
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#D4A574]/10 blur-[120px]" />
-        <div className="absolute -right-40 bottom-20 h-[500px] w-[500px] rounded-full bg-amber-500/10 blur-[120px]" />
-        <GridPattern
-          className="absolute inset-0 z-0 opacity-20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
-          width={50}
-          height={50}
-          numSquares={30}
-          maxOpacity={0.1}
-        />
+        {/* Subtle glow */}
+        <div className="absolute left-1/2 top-1/3 -translate-x-1/2 h-[400px] w-[600px] rounded-full bg-[#E8C9A0]/10 blur-[120px] pointer-events-none" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            {/* Label */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-2 text-sm font-semibold text-white shadow-lg"
+              className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]"
             >
-              <MessageSquare className="h-4 w-4" />
-              Get in Touch
-            </motion.div>
+              Contact
+            </motion.p>
 
             {/* Title */}
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight px-2"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-5 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1] text-slate-900"
             >
-              <span className="text-white">We&apos;d Love to</span>
-              <span className="block text-[#D4A574]">Hear From You</span>
+              We&apos;d Love to{" "}
+              <span className="text-[#C8965F]">Hear From You</span>
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mx-auto mb-8 sm:mb-12 max-w-3xl px-4 text-base sm:text-lg md:text-xl text-slate-300"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mx-auto max-w-lg text-sm sm:text-base text-slate-500 leading-relaxed"
             >
-              Have a question about our events? Need help planning your next experience?
-              Our team is here to help and ready to assist you.
+              Have a question about our events? Need help planning your next
+              experience? Our team is here to help.
             </motion.p>
 
-            {/* Stats */}
+            {/* Contact quick links */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-8 sm:mb-12 grid grid-cols-2 gap-3 sm:gap-6 sm:grid-cols-4"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-8 flex flex-wrap items-center justify-center gap-5 sm:gap-8"
             >
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur-sm"
+              {contactMethods.map((method) => (
+                <a
+                  key={method.title}
+                  href={method.href}
+                  target={method.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    method.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="group flex items-center gap-2.5 text-sm text-slate-500 transition-colors hover:text-[#C8965F]"
                 >
-                  <stat.icon className="mx-auto mb-2 sm:mb-3 h-6 w-6 sm:h-8 sm:w-8 text-[#D4A574]" />
-                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs sm:text-sm text-slate-400">{stat.label}</p>
-                </div>
+                  <method.icon className="h-4 w-4 text-slate-300 transition-colors group-hover:text-[#D4A574]" />
+                  <span className="font-medium">{method.contact}</span>
+                </a>
               ))}
             </motion.div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <a
-                href="#contact-form"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-[#D4A574]/30 transition-all hover:scale-105 hover:shadow-2xl"
-              >
-                Send Us a Message
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </a>
-            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* CONTACT METHODS SECTION */}
-      {/* ============================================ */}
-      <section ref={methodsRef} className="relative overflow-hidden bg-zinc-50 py-12 sm:py-20 md:py-28">
-        <div className="absolute -right-40 top-40 h-[400px] w-[400px] rounded-full bg-[#D4A574]/30 blur-[120px]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isMethodsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="mb-16 text-center"
-          >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
-              <Phone className="h-4 w-4" />
-              Contact Options
-            </span>
-            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">Choose Your Preferred</span>{" "}
-              <span className="text-[#D4A574]">Contact Method</span>
-            </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
-              Reach out to us through any of these channels. We&apos;re here to help
-              and respond promptly to all inquiries.
-            </p>
-          </motion.div>
-
-          {/* Contact Method Cards */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {contactMethods.map((method, index) => (
-              <motion.a
-                key={index}
-                href={method.href}
-                target={method.href.startsWith("http") ? "_blank" : undefined}
-                rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isMethodsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div
-                  className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${method.color} shadow-lg transition-transform group-hover:scale-110`}
-                >
-                  <method.icon className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="mb-2 text-xl md:text-2xl font-semibold tracking-normal leading-tight text-slate-900">
-                  {method.title}
-                </h3>
-                <p className="mb-3 text-sm text-slate-600">{method.description}</p>
-                <p className="text-base font-semibold text-slate-900">{method.contact}</p>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* CONTACT FORM SECTION */}
-      {/* ============================================ */}
+      {/* ——— CONTACT FORM ——— */}
       <section
         id="contact-form"
         ref={formRef}
-        className="relative overflow-hidden bg-gradient-to-br from-[#D4A574] via-[#C8965F] to-[#D4A574] py-12 sm:py-20 md:py-28"
+        className="relative py-10 sm:py-16 md:py-20"
       >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={isFormInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-center"
+            className="mb-8 text-center"
           >
-            <Sparkles className="mx-auto mb-6 h-12 w-12 text-white/90" />
-            <h2 className="mb-4 text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight">
-              <span className="text-white">Send Us a</span>{" "}
-              <span className="text-white/95">Message</span>
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574] mb-3">
+              MESSAGE
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">
+              Send Us a Message
             </h2>
-            <p className="mx-auto mb-10 max-w-2xl text-lg text-white/90">
-              Fill out the form below and we&apos;ll get back to you as soon as
-              possible, usually within 24-48 hours.
+            <p className="mt-3 text-sm text-slate-500">
+              Fill out the form and we&apos;ll get back to you within 24-48
+              hours.
             </p>
           </motion.div>
 
-          {/* Form */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={isFormInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
             {formSubmitted ? (
-              <div className="rounded-2xl bg-white p-8 text-center shadow-2xl sm:p-12">
-                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F]">
-                  <CheckCircle className="h-10 w-10 text-white" />
+              <div className="rounded-2xl bg-white border border-slate-100 p-8 text-center sm:p-12">
+                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#FAF8F5]">
+                  <CheckCircle className="h-7 w-7 text-[#D4A574]" />
                 </div>
-                <h3 className="mb-4 text-2xl font-bold text-slate-900">
-                  Thank You for Contacting Us!
+                <h3 className="mb-3 text-xl font-semibold text-slate-900">
+                  Thank You!
                 </h3>
-                <p className="mb-6 text-slate-600">
-                  We&apos;ve received your message and will get back to you within
-                  24-48 business hours. We appreciate your patience.
+                <p className="mb-6 text-sm text-slate-500 leading-relaxed">
+                  We&apos;ve received your message and will get back to you
+                  within 24-48 business hours.
                 </p>
                 <a
                   href="/"
-                  className="inline-flex items-center gap-2 text-[#D4A574] font-semibold hover:text-[#C8965F]"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#D4A574] hover:text-[#C8965F]"
                 >
-                  <ArrowRight className="h-4 w-4 rotate-180" />
+                  <ArrowRight className="h-3.5 w-3.5 rotate-180" />
                   Back to Home
                 </a>
               </div>
@@ -381,114 +258,109 @@ export default function ContactPage() {
                   e.preventDefault();
                   setFormSubmitted(true);
                 }}
-                className="rounded-xl sm:rounded-2xl bg-white p-4 sm:p-6 md:p-8 shadow-2xl"
+                className="rounded-2xl bg-white border border-slate-100 p-5 sm:p-8 shadow-sm"
               >
-                <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+                <div className="grid gap-5 sm:grid-cols-2">
                   {/* Full Name */}
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-slate-700">
-                      Full Name *
+                    <label className="mb-1.5 block text-sm font-medium text-slate-700">
+                      Full Name
                     </label>
-                    <div className="relative">
-                      <User className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="text"
-                        required
-                        placeholder="John Smith"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      required
+                      placeholder="John Smith"
+                      className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-300 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]/30"
+                    />
                   </div>
 
                   {/* Email */}
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-slate-700">
-                      Email Address *
+                    <label className="mb-1.5 block text-sm font-medium text-slate-700">
+                      Email Address
                     </label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="email"
-                        required
-                        placeholder="john@example.com"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
-                      />
-                    </div>
+                    <input
+                      type="email"
+                      required
+                      placeholder="john@example.com"
+                      className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-300 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]/30"
+                    />
                   </div>
 
                   {/* Phone */}
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-slate-700">
-                      Phone Number <span className="text-slate-400 font-normal">(optional)</span>
+                    <label className="mb-1.5 block text-sm font-medium text-slate-700">
+                      Phone{" "}
+                      <span className="text-slate-300 font-normal">
+                        (optional)
+                      </span>
                     </label>
-                    <div className="relative">
-                      <Phone className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="tel"
-                        placeholder="+357 99 123 456"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
-                      />
-                    </div>
+                    <input
+                      type="tel"
+                      placeholder="+357 99 123 456"
+                      className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-300 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]/30"
+                    />
                   </div>
 
                   {/* Subject */}
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-slate-700">
-                      Subject *
+                    <label className="mb-1.5 block text-sm font-medium text-slate-700">
+                      Subject
                     </label>
                     <select
                       required
-                      className="w-full appearance-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-3 sm:pl-4 pr-8 sm:pr-10 text-sm sm:text-base text-slate-900 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
+                      className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]/30"
                     >
                       <option value="">Select a subject</option>
                       <option value="general">General Inquiry</option>
                       <option value="student-trips">Student Trips</option>
-                      <option value="sponsorship">Sponsorship / Partnership</option>
-                      <option value="business">Business / Corporate Events</option>
+                      <option value="sponsorship">
+                        Sponsorship / Partnership
+                      </option>
+                      <option value="business">
+                        Business / Corporate Events
+                      </option>
                       <option value="events">Event Information</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
 
-                  {/* Company (Full Width) */}
+                  {/* Company */}
                   <div className="sm:col-span-2">
-                    <label className="mb-2 block text-sm font-medium text-slate-700">
-                      Company / Organization <span className="text-slate-400 font-normal">(optional)</span>
+                    <label className="mb-1.5 block text-sm font-medium text-slate-700">
+                      Company{" "}
+                      <span className="text-slate-300 font-normal">
+                        (optional)
+                      </span>
                     </label>
-                    <div className="relative">
-                      <Building2 className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="text"
-                        placeholder="Your Company Ltd"
-                        className="w-full rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      placeholder="Your Company Ltd"
+                      className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-300 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]/30"
+                    />
                   </div>
 
-                  {/* Message (Full Width) */}
+                  {/* Message */}
                   <div className="sm:col-span-2">
-                    <label className="mb-2 block text-sm font-medium text-slate-700">
-                      Message *
+                    <label className="mb-1.5 block text-sm font-medium text-slate-700">
+                      Message
                     </label>
-                    <div className="relative">
-                      <MessageSquare className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
-                      <textarea
-                        required
-                        rows={5}
-                        placeholder="Tell us how we can help you..."
-                        className="w-full resize-none rounded-lg sm:rounded-xl border border-slate-300 bg-white py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm sm:text-base text-slate-900 placeholder-slate-400 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
-                      />
-                    </div>
+                    <textarea
+                      required
+                      rows={5}
+                      placeholder="Tell us how we can help you..."
+                      className="w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-300 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]/30"
+                    />
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Submit */}
                   <div className="sm:col-span-2">
                     <button
                       type="submit"
-                      className="group flex w-full items-center justify-center gap-2 rounded-lg sm:rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] py-3 sm:py-4 text-base sm:text-lg font-semibold text-white shadow-lg shadow-[#D4A574]/25 transition-all active:scale-95 sm:hover:shadow-xl sm:hover:shadow-[#D4A574]/30"
+                      className="group flex w-full items-center justify-center gap-2 rounded-xl bg-[#D4A574] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C8965F]"
                     >
                       Send Message
-                      <Send className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </button>
                   </div>
                 </div>
@@ -498,33 +370,29 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* FAQ SECTION */}
-      {/* ============================================ */}
-      <section ref={faqRef} className="relative bg-white py-12 sm:py-20 md:py-28">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
+      {/* ——— FAQ ——— */}
+      <section ref={faqRef} className="relative bg-white py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+          {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="mb-12 text-center"
+            className="mb-10 text-center"
           >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">Frequently Asked</span>{" "}
-              <span className="text-[#D4A574]">Questions</span>
-            </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Common questions about contacting Memora Experience
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574] mb-3">
+              FAQ
             </p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 tracking-tight">
+              Frequently Asked Questions
+            </h2>
           </motion.div>
 
-          {/* FAQ Accordion */}
+          {/* Accordion */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
           >
             {faqData.map((item, index) => (
               <FAQItem
@@ -532,52 +400,50 @@ export default function ContactPage() {
                 question={item.question}
                 answer={item.answer}
                 isOpen={openFaq === index}
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                onClick={() =>
+                  setOpenFaq(openFaq === index ? null : index)
+                }
               />
             ))}
           </motion.div>
 
-          {/* Contact CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
+          {/* Bottom link */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isFaqInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-10 text-center"
+            className="mt-10 text-center text-sm text-slate-400"
           >
-            <p className="text-slate-600">
-              Still have questions?{" "}
-              <a
-                href="#contact-form"
-                className="font-semibold text-[#D4A574] hover:text-[#C8965F]"
-              >
-                Send us a message
-              </a>{" "}
-              or{" "}
-              <a
-                href="tel:+35799123456"
-                className="font-semibold text-[#D4A574] hover:text-[#C8965F]"
-              >
-                call us directly
-              </a>
-            </p>
-          </motion.div>
+            Still have questions?{" "}
+            <a
+              href="#contact-form"
+              className="font-medium text-[#D4A574] hover:text-[#C8965F]"
+            >
+              Send us a message
+            </a>{" "}
+            or{" "}
+            <a
+              href="tel:+35799123456"
+              className="font-medium text-[#D4A574] hover:text-[#C8965F]"
+            >
+              call us directly
+            </a>
+          </motion.p>
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* BACK LINK */}
-      {/* ============================================ */}
-      <section className="border-t border-slate-200 bg-zinc-50 py-12">
+      {/* ——— BACK LINK ——— */}
+      <div className="border-t border-slate-100 bg-[#FAF8F5] py-10">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <a
             href="/"
-            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-[#D4A574]"
+            className="group inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-[#C8965F]"
           >
-            <ArrowRight className="h-4 w-4 rotate-180" />
+            <ArrowRight className="h-3.5 w-3.5 rotate-180 transition-transform group-hover:-translate-x-0.5" />
             Back to Home
           </a>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

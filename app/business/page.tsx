@@ -8,7 +8,6 @@ import {
   Users,
   TrendingUp,
   Award,
-  Star,
   ShoppingBag,
   Utensils,
   Camera,
@@ -26,16 +25,16 @@ import {
   Target,
   Eye,
   Megaphone,
-  Sparkles,
   Quote,
   Globe,
   Briefcase,
   Tag,
   Store,
   Send,
+  ArrowUpRight,
 } from "lucide-react";
 import Image from "next/image";
-import { GridPattern } from "@/components/ui/grid-pattern";
+import Link from "next/link";
 
 // ============================================
 // PARTNER LOGOS
@@ -65,7 +64,6 @@ const partnershipTypes = [
       "Social media promotion",
       "Speaking opportunities",
     ],
-    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "exhibitor",
@@ -79,7 +77,6 @@ const partnershipTypes = [
       "Lead generation",
       "Product demonstrations",
     ],
-    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "vendor",
@@ -93,7 +90,6 @@ const partnershipTypes = [
       "Brand exposure",
       "Revenue opportunities",
     ],
-    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "media",
@@ -107,7 +103,6 @@ const partnershipTypes = [
       "Cross-promotion",
       "Exclusive interviews",
     ],
-    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "entertainment",
@@ -121,7 +116,6 @@ const partnershipTypes = [
       "Portfolio building",
       "Networking",
     ],
-    color: "from-[#D4A574] to-[#C8965F]",
   },
   {
     id: "services",
@@ -135,10 +129,8 @@ const partnershipTypes = [
       "Industry recognition",
       "B2B networking",
     ],
-    color: "from-[#D4A574] to-[#C8965F]",
   },
 ];
-
 
 // ============================================
 // TESTIMONIALS
@@ -224,17 +216,17 @@ function FAQItem({
   onClick: () => void;
 }) {
   return (
-    <div className="border-b border-slate-200 last:border-0">
+    <div className="border-b border-slate-100 last:border-0">
       <button
         onClick={onClick}
-        className="flex w-full items-center justify-between py-3 sm:py-4 md:py-5 text-left transition-colors active:text-[#D4A574] sm:hover:text-[#D4A574]"
+        className="flex w-full items-center justify-between py-4 sm:py-5 text-left transition-colors hover:text-[#D4A574]"
       >
-        <span className="pr-3 sm:pr-4 text-base sm:text-lg font-semibold text-slate-900">
+        <span className="pr-4 text-base sm:text-lg font-medium text-slate-900">
           {question}
         </span>
         <ChevronDown
-          className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 text-slate-400 transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
+          className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-all duration-300 ${
+            isOpen ? "rotate-180 text-[#D4A574]" : "text-slate-400"
           }`}
         />
       </button>
@@ -247,7 +239,9 @@ function FAQItem({
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-3 sm:pb-4 md:pb-5 text-sm sm:text-base leading-relaxed text-slate-600">{answer}</p>
+            <p className="pb-4 sm:pb-5 text-sm sm:text-base leading-relaxed text-slate-500">
+              {answer}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -281,10 +275,10 @@ export default function BusinessPage() {
   const isFaqInView = useInView(faqRef, { once: true, margin: "-100px" });
 
   const stats = [
-    { value: "100K+", label: "Annual Attendees", icon: Users },
-    { value: "50+", label: "Events Organized", icon: Calendar },
-    { value: "500+", label: "Happy Partners", icon: Handshake },
-    { value: "95%", label: "Partner Retention", icon: TrendingUp },
+    { value: "100K+", label: "Annual Attendees" },
+    { value: "50+", label: "Events Organized" },
+    { value: "500+", label: "Happy Partners" },
+    { value: "95%", label: "Partner Retention" },
   ];
 
   const whyReasons = [
@@ -321,42 +315,33 @@ export default function BusinessPage() {
       {/* ============================================ */}
       <section
         ref={heroRef}
-        className="relative overflow-hidden bg-slate-900 pb-20 pt-32 sm:pb-28 sm:pt-40"
+        className="relative overflow-hidden bg-slate-900 pb-16 pt-32 sm:pb-20 sm:pt-36"
       >
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-[#D4A574]/10 blur-[120px]" />
-        <div className="absolute -right-40 bottom-20 h-[500px] w-[500px] rounded-full bg-amber-500/10 blur-[120px]" />
-        <GridPattern
-          className="absolute inset-0 z-0 opacity-20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
-          width={50}
-          height={50}
-          numSquares={30}
-          maxOpacity={0.1}
-        />
+        {/* Subtle background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800" />
+        <div className="absolute left-1/2 top-1/3 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-[#D4A574]/8 blur-[160px]" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            {/* Badge */}
-            <motion.div
+            {/* Label */}
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-4 py-2 text-sm font-semibold text-white shadow-lg"
+              className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]"
             >
-              <Handshake className="h-4 w-4" />
               Partnership Opportunities
-            </motion.div>
+            </motion.p>
 
             {/* Title */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 sm:mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight px-2"
+              className="mb-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1] text-white"
             >
-              <span className="text-white">Partner With Cyprus&apos;s</span>
-              <span className="block text-[#D4A574]">Premier Event Company</span>
+              Partner With Cyprus&apos;s{" "}
+              <span className="text-[#D4A574]">Premier Event Company</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -364,44 +349,45 @@ export default function BusinessPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mx-auto mb-8 sm:mb-12 max-w-3xl px-4 text-base sm:text-lg md:text-xl text-slate-300"
+              className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-slate-400"
             >
               Join forces with Memora Experience and connect your brand with
               hundreds of thousands of engaged attendees across Cyprus&apos;s
               most anticipated events.
             </motion.p>
 
-            {/* Stats */}
+            {/* Stats — inline row */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-8 sm:mb-12 grid grid-cols-2 gap-3 sm:gap-6 sm:grid-cols-4"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mb-10 flex items-center justify-center gap-6 sm:gap-10 flex-wrap"
             >
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur-sm"
-                >
-                  <stat.icon className="mx-auto mb-2 sm:mb-3 h-6 w-6 sm:h-8 sm:w-8 text-[#D4A574]" />
-                  <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
-                  <p className="text-xs sm:text-sm text-slate-400">{stat.label}</p>
+              {stats.map((stat, i, arr) => (
+                <div key={stat.label} className="flex items-center gap-6 sm:gap-10">
+                  <div className="text-center">
+                    <p className="text-xl sm:text-2xl font-semibold text-white">{stat.value}</p>
+                    <p className="text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.15em] text-slate-500 mt-0.5">
+                      {stat.label}
+                    </p>
+                  </div>
+                  {i < arr.length - 1 && <div className="hidden sm:block h-8 w-px bg-white/10" />}
                 </div>
               ))}
             </motion.div>
 
             {/* CTA */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
             >
               <a
                 href="#inquiry"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4A574] to-[#C8965F] px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-[#D4A574]/30 transition-all hover:scale-105 hover:shadow-2xl"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#D4A574] px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#C8965F]"
               >
                 Start Your Partnership
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4" />
               </a>
             </motion.div>
           </div>
@@ -411,26 +397,22 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* WHY PARTNER WITH US SECTION */}
       {/* ============================================ */}
-      <section ref={whyRef} className="relative overflow-hidden bg-zinc-50 py-12 sm:py-20 md:py-28">
-        <div className="absolute -right-40 top-40 h-[400px] w-[400px] rounded-full bg-[#D4A574]/30 blur-[120px]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section ref={whyRef} className="relative bg-[#FAF8F5] py-16 sm:py-24 md:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isWhyInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="mb-16 text-center"
+            className="mb-14 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
-              <Star className="h-4 w-4" />
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
               Why Memora
-            </span>
-            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">Why Partner</span>{" "}
-              <span className="text-[#D4A574]">With Us</span>
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              Why Partner <span className="text-[#D4A574]">With Us</span>
             </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
+            <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-500">
               For over a decade, Memora Experience has been at the forefront of
               event excellence in Cyprus. Our partners don&apos;t just get
               visibility—they get results.
@@ -438,22 +420,22 @@ export default function BusinessPage() {
           </motion.div>
 
           {/* Why Cards */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {whyReasons.map((reason, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isWhyInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group rounded-2xl border border-slate-100 bg-white p-6 transition-all hover:shadow-md"
               >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4A574] to-[#C8965F] shadow-lg transition-transform group-hover:scale-110">
-                  <reason.icon className="h-7 w-7 text-white" />
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[#F5EDE4]">
+                  <reason.icon className="h-5 w-5 text-[#D4A574]" />
                 </div>
-                <h3 className="mb-2 text-xl md:text-2xl font-semibold tracking-normal leading-tight text-slate-900">
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">
                   {reason.title}
                 </h3>
-                <p className="text-slate-600">{reason.description}</p>
+                <p className="text-sm text-slate-500 leading-relaxed">{reason.description}</p>
               </motion.div>
             ))}
           </div>
@@ -465,14 +447,14 @@ export default function BusinessPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-16"
           >
-            <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-slate-400">
+            <p className="mb-8 text-center text-[11px] font-medium uppercase tracking-[0.2em] text-slate-400">
               Trusted by leading brands
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
               {partnerLogos.map((logo, index) => (
                 <div
                   key={index}
-                  className="relative h-12 w-24 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+                  className="relative h-10 w-20 opacity-40 grayscale transition-all hover:opacity-80 hover:grayscale-0"
                 >
                   <Image
                     src={logo}
@@ -490,55 +472,51 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* PARTNERSHIP TYPES SECTION */}
       {/* ============================================ */}
-      <section ref={typesRef} className="relative bg-white py-12 sm:py-20 md:py-28">
+      <section ref={typesRef} className="relative bg-white py-16 sm:py-24 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isTypesInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="mb-16 text-center"
+            className="mb-14 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-[#D4A574]/10 px-4 py-2 text-sm font-medium text-[#D4A574]">
-              <Handshake className="h-4 w-4" />
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
               Partnership Options
-            </span>
-            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">Find Your Perfect</span>{" "}
-              <span className="text-[#D4A574]">Partnership</span>
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              Find Your Perfect <span className="text-[#D4A574]">Partnership</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
+            <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-500">
               We offer diverse partnership opportunities tailored to your
               business goals and budget.
             </p>
           </motion.div>
 
           {/* Partnership Type Cards */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {partnershipTypes.map((type, index) => (
               <motion.div
                 key={type.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isTypesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group rounded-xl sm:rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="group rounded-2xl border border-slate-100 bg-white p-5 sm:p-6 transition-all hover:shadow-md"
               >
-                <div
-                  className={`mb-3 sm:mb-4 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br ${type.color} shadow-lg`}
-                >
-                  <type.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#F5EDE4]">
+                  <type.icon className="h-5 w-5 text-[#D4A574]" />
                 </div>
-                <h3 className="mb-2 text-lg md:text-xl font-semibold tracking-normal leading-tight text-slate-900">
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">
                   {type.title}
                 </h3>
-                <p className="mb-3 sm:mb-4 text-sm sm:text-base text-slate-600">{type.description}</p>
-                <ul className="space-y-1.5 sm:space-y-2">
+                <p className="mb-4 text-sm text-slate-500 leading-relaxed">{type.description}</p>
+                <ul className="space-y-2">
                   {type.benefits.map((benefit, i) => (
                     <li
                       key={i}
-                      className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-600"
+                      className="flex items-center gap-2 text-sm text-slate-600"
                     >
-                      <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0 text-[#D4A574]" />
+                      <CheckCircle className="h-3.5 w-3.5 flex-shrink-0 text-[#D4A574]" />
                       {benefit}
                     </li>
                   ))}
@@ -555,59 +533,43 @@ export default function BusinessPage() {
       <section
         id="inquiry"
         ref={formRef}
-        className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 sm:py-24 md:py-32"
+        className="relative bg-[#FAF8F5] py-16 sm:py-24 md:py-28"
       >
-        {/* Ambient Background Elements */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -left-40 top-20 h-[600px] w-[600px] rounded-full bg-[#D4A574]/8 blur-[150px]" />
-          <div className="absolute -right-40 bottom-20 h-[500px] w-[500px] rounded-full bg-amber-500/6 blur-[120px]" />
-          <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4A574]/5 blur-[100px]" />
-        </div>
-
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-
-        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isFormInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-12 text-center"
+            transition={{ duration: 0.5 }}
+            className="mb-10 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-[#D4A574]/10 px-4 py-2 text-sm font-medium text-[#D4A574] backdrop-blur-sm">
-              <Handshake className="h-4 w-4" />
-              Partnership Inquiry
-            </span>
-            <h2 className="mt-6 text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              Start Your Partnership Journey
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
+              Get Started
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              Start Your <span className="text-[#D4A574]">Partnership Journey</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+            <p className="mx-auto mt-4 max-w-xl text-base sm:text-lg text-slate-500">
               Fill out the form below and our partnership team will get back to you within 24-48 hours.
             </p>
           </motion.div>
 
           {/* Main Content Grid */}
           <div className="grid gap-8 lg:grid-cols-5">
-            {/* Left Info Panel */}
+            {/* Left Info Panel — desktop only */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={isFormInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="hidden lg:col-span-2 lg:block"
             >
-              <div className="sticky top-8 space-y-6">
+              <div className="sticky top-28 space-y-5">
                 {/* Info Card */}
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-                  <h3 className="mb-4 text-lg font-semibold text-white">
+                <div className="rounded-2xl border border-slate-100 bg-white p-6">
+                  <h3 className="mb-4 text-base font-semibold text-slate-900">
                     Why Partner With Memora?
                   </h3>
-                  <ul className="space-y-4">
+                  <ul className="space-y-3.5">
                     {[
                       { icon: Globe, text: "Access to 100,000+ annual attendees" },
                       { icon: MapPin, text: "Premium locations across Cyprus" },
@@ -615,48 +577,35 @@ export default function BusinessPage() {
                       { icon: Briefcase, text: "Dedicated partnership manager" },
                     ].map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#D4A574]/20">
+                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[#F5EDE4]">
                           <item.icon className="h-4 w-4 text-[#D4A574]" />
                         </div>
-                        <span className="pt-1 text-sm text-slate-300">{item.text}</span>
+                        <span className="pt-1 text-sm text-slate-600">{item.text}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 {/* Quick Contact */}
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-                  <h3 className="mb-4 text-lg font-semibold text-white">
+                <div className="rounded-2xl border border-slate-100 bg-white p-6">
+                  <h3 className="mb-3 text-base font-semibold text-slate-900">
                     Prefer to Talk?
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <a
                       href="mailto:partners@memoraexperience.com"
-                      className="flex items-center gap-3 text-sm text-slate-300 transition-colors hover:text-[#D4A574]"
+                      className="flex items-center gap-2.5 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                     >
                       <Mail className="h-4 w-4" />
                       partners@memoraexperience.com
                     </a>
                     <a
                       href="tel:+35799123456"
-                      className="flex items-center gap-3 text-sm text-slate-300 transition-colors hover:text-[#D4A574]"
+                      className="flex items-center gap-2.5 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                     >
                       <Phone className="h-4 w-4" />
                       +357 99 123 456
                     </a>
-                  </div>
-                </div>
-
-                {/* Trust Badge */}
-                <div className="rounded-2xl bg-gradient-to-br from-[#D4A574]/20 to-[#C8965F]/10 p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#D4A574]">
-                      <CheckCircle className="h-6 w-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold text-white">500+</p>
-                      <p className="text-sm text-slate-300">Happy Partners</p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -664,63 +613,63 @@ export default function BusinessPage() {
 
             {/* Form Card */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isFormInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
               className="lg:col-span-3"
             >
               {formSubmitted ? (
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm sm:p-12">
+                <div className="rounded-2xl border border-slate-100 bg-white p-8 text-center sm:p-12">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F]"
+                    className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#F5EDE4]"
                   >
-                    <CheckCircle className="h-10 w-10 text-white" />
+                    <CheckCircle className="h-8 w-8 text-[#D4A574]" />
                   </motion.div>
-                  <h3 className="mb-4 text-2xl font-bold text-white">
+                  <h3 className="mb-3 text-xl font-semibold text-slate-900">
                     Thank You for Your Interest!
                   </h3>
-                  <p className="mb-8 text-slate-400">
+                  <p className="mb-6 text-slate-500">
                     We&apos;ve received your {activeTab === "vendor" ? "vendor application" : "sponsorship inquiry"} and
                     will get back to you within 24-48 business hours.
                   </p>
-                  <a
+                  <Link
                     href="/"
-                    className="inline-flex items-center gap-2 text-[#D4A574] font-semibold transition-colors hover:text-[#C8965F]"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[#D4A574] transition-colors hover:text-[#C8965F]"
                   >
                     <ArrowRight className="h-4 w-4 rotate-180" />
                     Back to Home
-                  </a>
+                  </Link>
                 </div>
               ) : (
-                <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-sm">
-                  {/* Enhanced Tabs */}
-                  <div className="border-b border-white/10 bg-white/5 p-2">
-                    <div className="flex gap-2">
+                <div className="rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden">
+                  {/* Tabs */}
+                  <div className="border-b border-slate-100 bg-[#FAF8F5] p-1.5">
+                    <div className="flex gap-1">
                       <button
                         type="button"
                         onClick={() => setActiveTab("vendor")}
-                        className={`group relative flex flex-1 items-center justify-center gap-2.5 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-300 ${
+                        className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all ${
                           activeTab === "vendor"
-                            ? "bg-gradient-to-r from-[#D4A574] to-[#C8965F] text-white shadow-lg shadow-[#D4A574]/25"
-                            : "text-slate-400 hover:bg-white/5 hover:text-white"
+                            ? "bg-white text-slate-900 shadow-sm"
+                            : "text-slate-500 hover:text-slate-700"
                         }`}
                       >
-                        <Store className={`h-4 w-4 transition-transform ${activeTab === "vendor" ? "scale-110" : "group-hover:scale-105"}`} />
+                        <Store className="h-4 w-4" />
                         <span>Vendor Application</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setActiveTab("sponsor")}
-                        className={`group relative flex flex-1 items-center justify-center gap-2.5 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-300 ${
+                        className={`flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all ${
                           activeTab === "sponsor"
-                            ? "bg-gradient-to-r from-[#D4A574] to-[#C8965F] text-white shadow-lg shadow-[#D4A574]/25"
-                            : "text-slate-400 hover:bg-white/5 hover:text-white"
+                            ? "bg-white text-slate-900 shadow-sm"
+                            : "text-slate-500 hover:text-slate-700"
                         }`}
                       >
-                        <Megaphone className={`h-4 w-4 transition-transform ${activeTab === "sponsor" ? "scale-110" : "group-hover:scale-105"}`} />
+                        <Megaphone className="h-4 w-4" />
                         <span>Sponsorship Inquiry</span>
                       </button>
                     </div>
@@ -737,46 +686,43 @@ export default function BusinessPage() {
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={activeTab}
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
+                        exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
                       >
                         {/* Context Text */}
-                        <p className="mb-6 text-sm text-slate-400">
+                        <p className="mb-6 text-sm text-slate-500">
                           {activeTab === "vendor"
                             ? "Interested in showcasing your products or services at our events? Fill out the form below."
                             : "Looking for brand exposure and partnership opportunities? Let us know how we can collaborate."}
                         </p>
 
-                        {/* Hidden field for tab selection */}
                         <input type="hidden" name="type" value={activeTab} />
 
-                        <div className="space-y-5">
+                        <div className="space-y-4">
                           {/* Row 1: Name & Email */}
                           <div className="grid gap-4 sm:grid-cols-2">
                             <div>
-                              <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-slate-300">
-                                <User className="h-3.5 w-3.5 text-slate-500" />
+                              <label className="mb-1.5 block text-sm font-medium text-slate-700">
                                 Full Name <span className="text-[#D4A574]">*</span>
                               </label>
                               <input
                                 type="text"
                                 required
                                 placeholder="John Smith"
-                                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-500 transition-all duration-200 focus:border-[#D4A574]/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
+                                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]"
                               />
                             </div>
                             <div>
-                              <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-slate-300">
-                                <Mail className="h-3.5 w-3.5 text-slate-500" />
+                              <label className="mb-1.5 block text-sm font-medium text-slate-700">
                                 Email Address <span className="text-[#D4A574]">*</span>
                               </label>
                               <input
                                 type="email"
                                 required
                                 placeholder="john@example.com"
-                                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-500 transition-all duration-200 focus:border-[#D4A574]/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
+                                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]"
                               />
                             </div>
                           </div>
@@ -784,28 +730,26 @@ export default function BusinessPage() {
                           {/* Row 2: Phone & Company */}
                           <div className="grid gap-4 sm:grid-cols-2">
                             <div>
-                              <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-slate-300">
-                                <Phone className="h-3.5 w-3.5 text-slate-500" />
+                              <label className="mb-1.5 block text-sm font-medium text-slate-700">
                                 Phone Number
-                                <span className="font-normal text-slate-500">(optional)</span>
+                                <span className="ml-1 font-normal text-slate-400">(optional)</span>
                               </label>
                               <input
                                 type="tel"
                                 placeholder="+357 99 123 456"
-                                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-500 transition-all duration-200 focus:border-[#D4A574]/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
+                                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]"
                               />
                             </div>
                             <div>
-                              <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-slate-300">
-                                <Building2 className="h-3.5 w-3.5 text-slate-500" />
+                              <label className="mb-1.5 block text-sm font-medium text-slate-700">
                                 {activeTab === "vendor" ? "Business Name" : "Company Name"}
-                                {activeTab === "sponsor" && <span className="text-[#D4A574]">*</span>}
+                                {activeTab === "sponsor" && <span className="text-[#D4A574]"> *</span>}
                               </label>
                               <input
                                 type="text"
                                 required={activeTab === "sponsor"}
                                 placeholder={activeTab === "vendor" ? "Your Business Name" : "Your Company Ltd"}
-                                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-500 transition-all duration-200 focus:border-[#D4A574]/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
+                                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]"
                               />
                             </div>
                           </div>
@@ -814,32 +758,30 @@ export default function BusinessPage() {
                           {activeTab === "vendor" && (
                             <div className="grid gap-4 sm:grid-cols-2">
                               <div>
-                                <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-slate-300">
-                                  <Tag className="h-3.5 w-3.5 text-slate-500" />
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">
                                   Vendor Category <span className="text-[#D4A574]">*</span>
                                 </label>
                                 <select
                                   required
-                                  className="w-full appearance-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white transition-all duration-200 focus:border-[#D4A574]/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
+                                  className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]"
                                 >
-                                  <option value="" className="bg-slate-800">Select category</option>
+                                  <option value="">Select category</option>
                                   {vendorCategories.map((cat) => (
-                                    <option key={cat} value={cat.toLowerCase().replace(/ /g, "-")} className="bg-slate-800">
+                                    <option key={cat} value={cat.toLowerCase().replace(/ /g, "-")}>
                                       {cat}
                                     </option>
                                   ))}
                                 </select>
                               </div>
                               <div>
-                                <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-slate-300">
-                                  <MapPin className="h-3.5 w-3.5 text-slate-500" />
+                                <label className="mb-1.5 block text-sm font-medium text-slate-700">
                                   Interested Event
                                 </label>
-                                <select className="w-full appearance-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white transition-all duration-200 focus:border-[#D4A574]/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20">
-                                  <option value="" className="bg-slate-800">Any / All Events</option>
-                                  <option value="kratiki-ekthesi" className="bg-slate-800">Kratiki Ekthesi 2026</option>
-                                  <option value="planitario" className="bg-slate-800">Planitario 2026</option>
-                                  <option value="summer-festival" className="bg-slate-800">Summer Festival 2026</option>
+                                <select className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]">
+                                  <option value="">Any / All Events</option>
+                                  <option value="kratiki-ekthesi">Kratiki Ekthesi 2026</option>
+                                  <option value="planitario">Planitario 2026</option>
+                                  <option value="summer-festival">Summer Festival 2026</option>
                                 </select>
                               </div>
                             </div>
@@ -847,10 +789,9 @@ export default function BusinessPage() {
 
                           {/* Row 4: Message */}
                           <div>
-                            <label className="mb-2 flex items-center gap-1.5 text-sm font-medium text-slate-300">
-                              <MessageSquare className="h-3.5 w-3.5 text-slate-500" />
+                            <label className="mb-1.5 block text-sm font-medium text-slate-700">
                               {activeTab === "vendor" ? "Tell us about your products/services" : "Describe your partnership goals"}
-                              <span className="text-[#D4A574]">*</span>
+                              <span className="text-[#D4A574]"> *</span>
                             </label>
                             <textarea
                               required
@@ -860,27 +801,23 @@ export default function BusinessPage() {
                                   ? "Describe what you'd like to offer at our events, your experience, and any special requirements..."
                                   : "Tell us about your brand, target audience, and what you hope to achieve through this partnership..."
                               }
-                              className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-500 transition-all duration-200 focus:border-[#D4A574]/50 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20"
+                              className="w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]"
                             />
                           </div>
 
                           {/* Submit Button */}
                           <button
                             type="submit"
-                            className="group relative mt-2 flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#D4A574] to-[#C8965F] py-4 text-base font-semibold text-white shadow-lg shadow-[#D4A574]/25 transition-all duration-300 hover:shadow-xl hover:shadow-[#D4A574]/30 active:scale-[0.98]"
+                            className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-[#D4A574] py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#C8965F]"
                           >
-                            <span className="relative z-10">
-                              {activeTab === "vendor" ? "Submit Application" : "Submit Inquiry"}
-                            </span>
-                            <Send className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                            {/* Shimmer effect */}
-                            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                            {activeTab === "vendor" ? "Submit Application" : "Submit Inquiry"}
+                            <Send className="h-4 w-4" />
                           </button>
 
                           {/* Privacy Note */}
-                          <p className="text-center text-xs text-slate-500">
+                          <p className="text-center text-xs text-slate-400">
                             By submitting, you agree to our{" "}
-                            <a href="#" className="text-slate-400 underline hover:text-[#D4A574]">
+                            <a href="#" className="underline hover:text-[#D4A574]">
                               Privacy Policy
                             </a>
                             . We&apos;ll never share your information.
@@ -898,36 +835,36 @@ export default function BusinessPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isFormInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 grid gap-4 sm:grid-cols-2 lg:hidden"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-6 grid gap-4 sm:grid-cols-2 lg:hidden"
           >
-            <div className="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-              <h3 className="mb-3 text-sm font-semibold text-white">Quick Contact</h3>
-              <div className="space-y-2.5">
+            <div className="rounded-xl border border-slate-100 bg-white p-5">
+              <h3 className="mb-2.5 text-sm font-semibold text-slate-900">Quick Contact</h3>
+              <div className="space-y-2">
                 <a
                   href="mailto:partners@memoraexperience.com"
-                  className="flex items-center gap-2.5 text-sm text-slate-300 transition-colors hover:text-[#D4A574]"
+                  className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                 >
                   <Mail className="h-4 w-4" />
                   partners@memoraexperience.com
                 </a>
                 <a
                   href="tel:+35799123456"
-                  className="flex items-center gap-2.5 text-sm text-slate-300 transition-colors hover:text-[#D4A574]"
+                  className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                 >
                   <Phone className="h-4 w-4" />
                   +357 99 123 456
                 </a>
               </div>
             </div>
-            <div className="rounded-xl bg-gradient-to-br from-[#D4A574]/20 to-[#C8965F]/10 p-5">
+            <div className="rounded-xl border border-slate-100 bg-white p-5">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4A574]">
-                  <CheckCircle className="h-5 w-5 text-white" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F5EDE4]">
+                  <CheckCircle className="h-5 w-5 text-[#D4A574]" />
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-white">500+</p>
-                  <p className="text-xs text-slate-300">Happy Partners</p>
+                  <p className="text-lg font-semibold text-slate-900">500+</p>
+                  <p className="text-xs text-slate-500">Happy Partners</p>
                 </div>
               </div>
             </div>
@@ -938,7 +875,7 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* TESTIMONIALS SECTION */}
       {/* ============================================ */}
-      <section ref={testimonialsRef} className="relative bg-zinc-50 py-12 sm:py-20 md:py-28">
+      <section ref={testimonialsRef} className="relative bg-white py-16 sm:py-24 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
@@ -947,39 +884,37 @@ export default function BusinessPage() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4A574]/30 bg-white px-4 py-2 text-sm font-medium text-[#D4A574] shadow-sm">
-              <Quote className="h-4 w-4" />
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
               Partner Stories
-            </span>
-            <h2 className="mt-6 text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">What Our Partners</span>{" "}
-              <span className="text-[#D4A574]">Say</span>
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              What Our Partners <span className="text-[#D4A574]">Say</span>
             </h2>
           </motion.div>
 
           {/* Testimonial Cards */}
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isTestimonialsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="rounded-2xl border border-slate-100 bg-white p-6"
               >
-                <Quote className="mb-4 h-8 w-8 text-[#D4A574]/30" />
-                <p className="mb-6 text-slate-600 italic">
+                <Quote className="mb-4 h-6 w-6 text-[#D4A574]/30" />
+                <p className="mb-6 text-sm sm:text-base text-slate-600 leading-relaxed italic">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#D4A574] to-[#C8965F] text-lg font-bold text-white">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5EDE4] text-sm font-semibold text-[#D4A574]">
                     {testimonial.author.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">
+                    <p className="text-sm font-semibold text-slate-900">
                       {testimonial.author}
                     </p>
-                    <p className="text-sm text-slate-500">
+                    <p className="text-xs text-slate-500">
                       {testimonial.role}, {testimonial.company}
                     </p>
                   </div>
@@ -993,20 +928,22 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* FAQ SECTION */}
       {/* ============================================ */}
-      <section ref={faqRef} className="relative bg-white py-12 sm:py-20 md:py-28">
+      <section ref={faqRef} className="relative bg-[#FAF8F5] py-16 sm:py-24 md:py-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="mb-12 text-center"
+            className="mb-10 text-center"
           >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-              <span className="text-[#6B6B6B]">Partnership</span>{" "}
-              <span className="text-[#D4A574]">FAQ</span>
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574]">
+              FAQ
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-slate-900">
+              Partnership <span className="text-[#D4A574]">FAQ</span>
             </h2>
-            <p className="mt-4 text-lg text-slate-600">
+            <p className="mt-3 text-base sm:text-lg text-slate-500">
               Common questions about partnering with Memora
             </p>
           </motion.div>
@@ -1016,7 +953,6 @@ export default function BusinessPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
           >
             {faqData.map((item, index) => (
               <FAQItem
@@ -1036,14 +972,14 @@ export default function BusinessPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-10 text-center"
           >
-            <p className="text-slate-600">
+            <p className="text-slate-500">
               Have more questions?{" "}
-              <a
+              <Link
                 href="/contact"
-                className="font-semibold text-[#D4A574] hover:text-[#C8965F]"
+                className="font-medium text-[#D4A574] hover:text-[#C8965F] transition-colors"
               >
                 Contact our team
-              </a>
+              </Link>
             </p>
           </motion.div>
         </div>
@@ -1052,18 +988,17 @@ export default function BusinessPage() {
       {/* ============================================ */}
       {/* BACK LINK */}
       {/* ============================================ */}
-      <section className="border-t border-slate-200 bg-zinc-50 py-12">
+      <section className="border-t border-slate-100 bg-[#FAF8F5] py-10">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <a
+          <Link
             href="/"
-            className="inline-flex items-center gap-2 text-slate-600 transition-colors hover:text-[#D4A574]"
+            className="inline-flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
           >
             <ArrowRight className="h-4 w-4 rotate-180" />
             Back to Home
-          </a>
+          </Link>
         </div>
       </section>
     </main>
   );
 }
-
