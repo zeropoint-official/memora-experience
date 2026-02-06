@@ -163,38 +163,36 @@ function FeaturedEventCard({ event }: { event: Event }) {
         href={event.href}
         className="relative block overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-slate-300/40 hover:-translate-y-1"
       >
-        {/* Image */}
-        <div className="relative aspect-[4/3] sm:aspect-[2.4/1] overflow-hidden">
-          <Image
-            src={event.imageUrl}
-            alt={event.title}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            sizes="(max-width: 768px) 100vw, 100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-        </div>
+        {/* Background image — always fills container */}
+        <Image
+          src={event.imageUrl}
+          alt={event.title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          sizes="(max-width: 768px) 100vw, 100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8">
+        {/* Content — relative so it determines card height on mobile */}
+        <div className="relative flex flex-col justify-between p-5 pt-10 sm:p-8 sm:pt-8 sm:aspect-[2.4/1]">
           {/* Top: label */}
-          <div>
+          <div className="mb-auto">
             <span className="inline-block rounded-full bg-white/90 backdrop-blur-sm px-3.5 py-1.5 text-xs font-semibold text-slate-800">
               Featured
             </span>
           </div>
 
           {/* Bottom */}
-          <div>
+          <div className="mt-32 sm:mt-0">
             <h3 className="mb-2 text-xl sm:text-2xl lg:text-3xl font-semibold text-white tracking-tight">
               {event.title}
             </h3>
-            <p className="mb-4 max-w-xl text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className="mb-3 max-w-xl text-sm sm:text-base text-white/70 leading-relaxed">
               {event.description}
             </p>
 
-            <div className="mb-5 flex flex-wrap items-center gap-4 text-sm text-white/50">
+            <div className="mb-4 flex flex-wrap items-center gap-4 text-sm text-white/50">
               <span>{event.date}</span>
               <span>·</span>
               <span>{event.location}</span>

@@ -65,19 +65,16 @@ function FeaturedCard() {
         rel="noopener noreferrer"
       >
         <div className="relative overflow-hidden rounded-2xl">
-          {/* Image */}
-          <div className="relative aspect-[16/9] sm:aspect-[2/1]">
-            <img
-              src="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
-              alt="Cyprus Planetarium"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            />
-            {/* Simple dark gradient from bottom */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5" />
-          </div>
+          {/* Background image — always fills container */}
+          <img
+            src="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
+            alt="Cyprus Planetarium"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5" />
 
-          {/* Content overlay — bottom */}
-          <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+          {/* Content — relative so it determines card height on mobile */}
+          <div className="relative flex flex-col justify-end p-5 pt-44 sm:p-8 sm:pt-0 sm:aspect-[2.2/1]">
             {/* Top row: label + countdown */}
             <div className="flex items-center gap-3 mb-3 sm:mb-4">
               <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-[#E8C9A0]">
@@ -95,7 +92,7 @@ function FeaturedCard() {
             </h3>
 
             {/* Date & location */}
-            <div className="flex items-center gap-4 text-[13px] text-white/60 mb-5 sm:mb-6">
+            <div className="flex items-center gap-4 text-[13px] text-white/60 mb-4 sm:mb-5">
               <span className="flex items-center gap-1.5">
                 <Calendar className="h-3.5 w-3.5" />
                 Oct 3–4, 2026
