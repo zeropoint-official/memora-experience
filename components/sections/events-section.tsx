@@ -10,7 +10,7 @@ const upcomingEvents = [
     id: 1,
     name: "PLANITARIO 2025",
     emoji: "🚀",
-    stats: "March 15-16 • Nicosia",
+    stats: "October 9-10 • Nicosia",
     description: "The Ultimate Night Experience",
     imageUrl: "/Content/planitatio/The Cyprus Planetarium 2025.jpg",
     href: "https://planetarium.memora-experience.com",

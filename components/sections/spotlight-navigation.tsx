@@ -88,14 +88,14 @@ function FeaturedCard() {
 
             {/* Title */}
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-white tracking-tight mb-2 sm:mb-3">
-              Planitario 2026
+              Planitario 2025
             </h3>
 
             {/* Date & location */}
             <div className="flex items-center gap-4 text-[13px] text-white/60 mb-4 sm:mb-5">
               <span className="flex items-center gap-1.5">
                 <Calendar className="h-3.5 w-3.5" />
-                Oct 3–4, 2026
+                Oct 9-10, 2025
               </span>
               <span className="flex items-center gap-1.5">
                 <MapPin className="h-3.5 w-3.5" />

@@ -56,13 +56,13 @@ export function HeroV4Bento() {
                 <Star className="h-4 w-4" />
                 <span>Featured Event</span>
               </div>
-              <h2 className="text-4xl font-bold">PLANITARIO 2025</h2>
+              <h2 className="text-4xl font-bold">PLANITARIO 2025 (Oct 9-10)</h2>
               <p className="mt-2 text-lg text-white/80">The Ultimate 2-Day Festival Experience</p>
               
               <div className="mt-6 flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  <span>March 15-16</span>
+                  <span>October 9-10</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />

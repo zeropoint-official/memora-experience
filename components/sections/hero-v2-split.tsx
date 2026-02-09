@@ -237,7 +237,7 @@ export function HeroV2Split() {
 
               {/* Content Section - Pure White */}
               <div className="bg-white p-5">
-                <h3 className="mb-1 text-xl font-bold text-slate-900">PLANITARIO 2025</h3>
+                <h3 className="mb-1 text-xl font-bold text-slate-900">PLANITARIO 2025 (Oct 9-10)</h3>
                 <p className="mb-4 text-sm text-slate-500">The Ultimate Night Experience</p>
 
                 {/* Location & Date */}
@@ -248,7 +248,7 @@ export function HeroV2Split() {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Calendar className="h-4 w-4 text-slate-400" />
-                    <span>March 15-16</span>
+                    <span>October 9-10</span>
                   </div>
                 </div>
 

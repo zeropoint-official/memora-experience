@@ -3,7 +3,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Sparkles, Rocket, Phone } from "lucide-react";
-import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -151,7 +150,7 @@ export function CTASection() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link href="/events">
+          <a href="/events">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -161,9 +160,9 @@ export function CTASection() {
               <span>Explore Events</span>
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </motion.button>
-          </Link>
+          </a>
 
-          <Link href="/contact">
+          <a href="/contact">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -172,7 +171,7 @@ export function CTASection() {
               <Phone className="h-5 w-5" />
               <span>Get in Touch</span>
             </motion.button>
-          </Link>
+          </a>
         </motion.div>
 
         {/* Trust indicators */}

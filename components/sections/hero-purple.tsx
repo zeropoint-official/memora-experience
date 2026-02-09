@@ -108,14 +108,14 @@ export function HeroPurple() {
                   <Sparkles className="h-8 w-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">PLANITARIO 2025</h3>
+                  <h3 className="text-xl font-bold text-slate-900">PLANITARIO 2025 (Oct 9-10)</h3>
                   <p className="text-slate-500">The Ultimate Night Experience</p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-purple-500" />
-                  <span>March 15-16</span>
+                  <span>October 9-10</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-purple-500" />

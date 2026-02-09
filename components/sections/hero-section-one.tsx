@@ -107,7 +107,7 @@ export function HeroSectionOne() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-slate-900">
-                    PLANITARIO 2025
+                    PLANITARIO 2025 (Oct 9-10)
                   </h3>
                   <p className="text-slate-500">
                     The Ultimate Night Experience
@@ -117,7 +117,7 @@ export function HeroSectionOne() {
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-orange-500" />
-                  <span>March 15-16</span>
+                  <span>October 9-10</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-orange-500" />

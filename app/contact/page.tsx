@@ -19,7 +19,7 @@ const faqData = [
   {
     question: "How quickly will I receive a response?",
     answer:
-      "We aim to respond to all inquiries within 24-48 business hours. For urgent matters, please call us directly at +357 99 123 456.",
+      "We aim to respond to all inquiries within 24-48 business hours. For urgent matters, please call us directly at 99116020.",
   },
   {
     question: "Do you offer virtual consultations?",
@@ -98,14 +98,14 @@ const contactMethods = [
   {
     icon: Mail,
     title: "Email",
-    contact: "hello@memoraexperience.com",
-    href: "mailto:hello@memoraexperience.com",
+    contact: "info@memora-experience.com",
+    href: "mailto:info@memora-experience.com",
   },
   {
     icon: Phone,
     title: "Phone",
-    contact: "+357 99 123 456",
-    href: "tel:+35799123456",
+    contact: "99116020",
+    href: "tel:99116020",
   },
   {
     icon: MapPin,
@@ -297,7 +297,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       type="tel"
-                      placeholder="+357 99 123 456"
+                      placeholder="99116020"
                       className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-300 transition-colors focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]/30"
                     />
                   </div>
@@ -423,7 +423,7 @@ export default function ContactPage() {
             </a>{" "}
             or{" "}
             <a
-              href="tel:+35799123456"
+              href="tel:99116020"
               className="font-medium text-[#D4A574] hover:text-[#C8965F]"
             >
               call us directly

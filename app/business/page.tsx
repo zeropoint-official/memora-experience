@@ -593,18 +593,18 @@ export default function BusinessPage() {
                   </h3>
                   <div className="space-y-2.5">
                     <a
-                      href="mailto:partners@memoraexperience.com"
+                      href="mailto:info@memora-experience.com"
                       className="flex items-center gap-2.5 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                     >
                       <Mail className="h-4 w-4" />
-                      partners@memoraexperience.com
+                      info@memora-experience.com
                     </a>
                     <a
-                      href="tel:+35799123456"
+                      href="tel:99116020"
                       className="flex items-center gap-2.5 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                     >
                       <Phone className="h-4 w-4" />
-                      +357 99 123 456
+                      99116020
                     </a>
                   </div>
                 </div>
@@ -736,7 +736,7 @@ export default function BusinessPage() {
                               </label>
                               <input
                                 type="tel"
-                                placeholder="+357 99 123 456"
+                                placeholder="99116020"
                                 className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]"
                               />
                             </div>
@@ -780,7 +780,7 @@ export default function BusinessPage() {
                                 <select className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 transition-all focus:border-[#D4A574] focus:outline-none focus:ring-1 focus:ring-[#D4A574]">
                                   <option value="">Any / All Events</option>
                                   <option value="kratiki-ekthesi">Kratiki Ekthesi 2026</option>
-                                  <option value="planitario">Planitario 2026</option>
+                                  <option value="planitario">Planitario 2025</option>
                                   <option value="summer-festival">Summer Festival 2026</option>
                                 </select>
                               </div>
@@ -842,18 +842,18 @@ export default function BusinessPage() {
               <h3 className="mb-2.5 text-sm font-semibold text-slate-900">Quick Contact</h3>
               <div className="space-y-2">
                 <a
-                  href="mailto:partners@memoraexperience.com"
+                  href="mailto:info@memora-experience.com"
                   className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                 >
                   <Mail className="h-4 w-4" />
-                  partners@memoraexperience.com
+                  info@memora-experience.com
                 </a>
                 <a
-                  href="tel:+35799123456"
+                  href="tel:99116020"
                   className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-[#D4A574]"
                 >
                   <Phone className="h-4 w-4" />
-                  +357 99 123 456
+                  99116020
                 </a>
               </div>
             </div>

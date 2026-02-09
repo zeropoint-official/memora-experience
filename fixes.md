@@ -60,11 +60,11 @@ open bar premium  - own service - dj spot - vip seats - priority boarding - fing
 find a feature for the boat party (show)
 
 timing
-- bparding 30mins
-- fist dj 1.5 hour
+- boarding 30mins
+- fist dj 1.5 hour (englezos)
 - mystery show
 - finger foods (7pm)
-- second dj 
+- second dj (MrUknown)
 
 
 

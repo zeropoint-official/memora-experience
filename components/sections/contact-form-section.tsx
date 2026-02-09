@@ -160,7 +160,7 @@ export function ContactFormSection() {
                           </label>
                           <input
                             type="tel"
-                            placeholder="+357 99 123 456"
+                            placeholder="99116020"
                             className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-300 transition-all focus:border-[#D4A574]/50 focus:ring-1 focus:ring-[#D4A574]/20 focus:outline-none"
                           />
                         </div>
@@ -206,7 +206,7 @@ export function ContactFormSection() {
                             >
                               <option value="">Any / All Events</option>
                               <option value="kratiki-ekthesi">Kratiki Ekthesi 2026</option>
-                              <option value="planitario">Planitario 2026</option>
+                              <option value="planitario">Planitario 2025</option>
                               <option value="summer-festival">Summer Festival 2026</option>
                             </select>
                           </div>
@@ -265,19 +265,19 @@ export function ContactFormSection() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8"
         >
           <a
-            href="mailto:partners@memoraexperience.com"
+            href="mailto:info@memora-experience.com"
             className="group flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-[#D4A574]"
           >
             <Mail className="h-3.5 w-3.5" />
-            partners@memoraexperience.com
+            info@memora-experience.com
           </a>
           <span className="hidden sm:block h-3.5 w-px bg-slate-200" />
           <a
-            href="tel:+35799123456"
+            href="tel:99116020"
             className="group flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-[#D4A574]"
           >
             <Phone className="h-3.5 w-3.5" />
-            +357 99 123 456
+            99116020
           </a>
         </motion.div>
       </div>

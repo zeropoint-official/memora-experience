@@ -126,10 +126,8 @@ function FAQItem({
 // GALLERY DATA
 // ============================================
 const galleryImages = [
-  { src: "/Content/yacth1.jpg", alt: "Yacht party deck" },
   { src: "/Content/yacth2.avif", alt: "Sunset boat party" },
   { src: "/Content/yacth3.png", alt: "Luxury yacht interior" },
-  { src: "/Content/yacth4.jpg", alt: "Boat party atmosphere" },
   { src: "/Content/yacth5.webp", alt: "Mediterranean cruise" },
   { src: "/Content/yacth6.jpg", alt: "Party on the sea" },
 ];
@@ -141,13 +139,13 @@ const timelineEvents = [
   {
     time: "4:30 PM",
     title: "Boarding Begins",
-    description: "Arrive at Ayia Napa Marina for check-in and boarding. Grab your welcome drink and find your spot.",
+    description: "Arrive at Protaras - Ayianapa for check-in and boarding. Grab your welcome drink and find your spot.",
     icon: Anchor,
   },
   {
     time: "5:00 PM",
-    title: "Departure & DJ Englezos",
-    description: "We set sail! DJ Englezos kicks off the party with 1.5 hours of the best pop & house tracks as the sun starts to set.",
+    title: "Departure & DJ Kritikos",
+    description: "We set sail! DJ Kritikos kicks off the party with 1.5 hours of the best pop & house tracks as the sun starts to set.",
     icon: Music,
   },
   {
@@ -171,7 +169,7 @@ const timelineEvents = [
   {
     time: "10:00 PM",
     title: "Return to Marina",
-    description: "We dock back at Ayia Napa Marina. The memories stay with you forever.",
+    description: "We dock back at Protaras - Ayianapa. The memories stay with you forever.",
     icon: Anchor,
   },
 ];
@@ -183,17 +181,17 @@ const faqData = [
   {
     question: "What time does the boat depart?",
     answer:
-      "The boat departs at 5:00 PM sharp from Ayia Napa Marina. Please arrive at 4:30 PM for check-in and boarding. Late arrivals cannot be accommodated once the boat has left.",
+      "The boat departs at 5:00 PM sharp from Protaras - Ayianapa. Please arrive at 4:30 PM for check-in and boarding. Late arrivals cannot be accommodated once the boat has left.",
   },
   {
     question: "What's included in the Normal ticket?",
     answer:
-      "The Normal ticket (€80) includes the full boat cruise, open bar with standard drinks (beer, wine, spirits, soft drinks & water), finger foods, DJ entertainment, and all shows and performances.",
+      "The Normal ticket (€89) includes the full boat cruise, open bar with standard drinks (beer, wine, spirits, soft drinks & water), finger foods, DJ entertainment, and all shows and performances.",
   },
   {
     question: "What's included in the VIP ticket?",
     answer:
-      "The VIP ticket (€130) includes everything in the Normal ticket PLUS a premium open bar (top-shelf spirits, champagne), your own dedicated service, a spot close to the DJ, VIP couch seating, and priority boarding.",
+      "The VIP ticket (€125) includes everything in the Normal ticket PLUS a premium open bar (top-shelf spirits, champagne), your own dedicated service, a spot close to the DJ, VIP couch seating, and priority boarding.",
   },
   {
     question: "Can I buy premium drinks with a Normal ticket?",
@@ -315,7 +313,7 @@ export default function BoatPartyPage() {
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
-                <span className="font-medium">Ayia Napa Marina, Cyprus</span>
+                <span className="font-medium">Protaras - Ayianapa</span>
               </span>
               <span className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
                 <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-[#D4A574]" />
@@ -398,7 +396,7 @@ export default function BoatPartyPage() {
                 <span className="text-[#D4A574]">experience</span>
               </h2>
               <p className="mt-5 text-slate-600 leading-relaxed">
-                Set sail from Ayia Napa Marina on a luxury 30-meter yacht. Two incredible DJ sets,
+                Set sail from Protaras - Ayianapa on a luxury 30-meter yacht. Two incredible DJ sets,
                 live dance shows, professional photographers, drone coverage, finger foods, and an
                 open bar — all while the sun sets over the Mediterranean.
               </p>
@@ -406,7 +404,7 @@ export default function BoatPartyPage() {
               {/* Inline features — simple text, no cards */}
               <div className="mt-8 space-y-4">
                 {[
-                  "Two DJ sets by Englezos & MrUnknown",
+                  "Two DJ sets by Kritikos & MrUnknown",
                   "Dance shows from talented performers",
                   "Professional photographers & drone coverage",
                   "Open bar & finger foods for everyone",
@@ -447,10 +445,10 @@ export default function BoatPartyPage() {
               Lineup
             </p>
             <div className="divide-y divide-slate-100">
-              {/* DJ Englezos */}
+              {/* DJ Kritikos */}
               <div className="flex items-center justify-between py-5">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Englezos</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Kritikos</h3>
                   <p className="text-sm text-slate-500 mt-0.5">Pop · House</p>
                 </div>
                 <div className="text-right">
@@ -572,7 +570,7 @@ export default function BoatPartyPage() {
           </motion.div>
 
           {/* Gallery Grid */}
-          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 max-w-4xl mx-auto">
             {galleryImages.map((image, index) => (
               <motion.div
                 key={index}
@@ -628,14 +626,14 @@ export default function BoatPartyPage() {
                 animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 onClick={() => {
-                  setSelectedTicketType({ type: "Normal", price: 80 });
+                  setSelectedTicketType({ type: "Normal", price: 89 });
                   setIsPaymentModalOpen(true);
                 }}
                 className="group rounded-2xl border border-slate-100 bg-white p-6 sm:p-8 text-left shadow-sm transition-all hover:shadow-lg hover:border-[#D4A574]/30"
               >
                 <p className="text-sm font-medium text-slate-500 mb-1">Normal</p>
                 <p className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-2">
-                  €80
+                  €89
                 </p>
                 <p className="text-sm text-slate-500 mb-5">per person</p>
                 <ul className="space-y-3 text-sm text-slate-600 text-left">
@@ -665,7 +663,7 @@ export default function BoatPartyPage() {
                 animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 onClick={() => {
-                  setSelectedTicketType({ type: "VIP", price: 130 });
+                  setSelectedTicketType({ type: "VIP", price: 125 });
                   setIsPaymentModalOpen(true);
                 }}
                 className="group relative rounded-2xl border-2 border-[#D4A574] bg-white p-6 sm:p-8 text-left shadow-sm transition-all hover:shadow-lg"
@@ -676,7 +674,7 @@ export default function BoatPartyPage() {
                 </span>
                 <p className="text-sm font-medium text-slate-500 mb-1">VIP</p>
                 <p className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-2">
-                  €130
+                  €125
                 </p>
                 <p className="text-sm text-slate-500 mb-5">per person</p>
                 <ul className="space-y-3 text-sm text-slate-600 text-left">
@@ -960,8 +958,8 @@ function PaymentModal({
   const [isProcessing, setIsProcessing] = useState(false);
 
   const ticketOptions: TicketType[] = [
-    { type: "Normal", price: 80, desc: "Standard open bar + finger foods" },
-    { type: "VIP", price: 130, desc: "Premium open bar + VIP perks", popular: true },
+    { type: "Normal", price: 89, desc: "Standard open bar + finger foods" },
+    { type: "VIP", price: 125, desc: "Premium open bar + VIP perks", popular: true },
   ];
 
   useEffect(() => {
