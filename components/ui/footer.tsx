@@ -204,9 +204,14 @@ export function Footer() {
             <p className="text-sm text-slate-500">
               © {new Date().getFullYear()} Memora Experience. All rights reserved.
             </p>
-            <p className="text-sm text-slate-500">
-              Made by <span className="text-[#D4A574]">Zeropoint Labs</span>
-            </p>
+            <a
+              href="https://zeropoint-labs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-slate-500 hover:text-[#D4A574] transition-colors"
+            >
+              Made by <span className="text-[#D4A574] hover:text-[#E8C9A0]">Zeropoint Labs</span>
+            </a>
           </motion.div>
         </motion.div>
       </div>
