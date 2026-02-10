@@ -213,7 +213,7 @@ export function SpotlightNavigation() {
       title: "Student Trips",
       description: "Epic 3-day adventures designed for students.",
       image: "https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=600&h=400&fit=crop",
-      href: "/student-trips",
+      href: "#",
       badge: "Coming Soon",
     },
   ];

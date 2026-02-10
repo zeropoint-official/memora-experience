@@ -42,10 +42,10 @@ const eventsData: Event[] = [
     id: "boat-party-2026",
     title: "Summer Boat Party",
     category: "special",
-    date: "July 20, 2026",
-    location: "Ayia Napa, Cyprus",
+    date: "July 4, 2026",
+    location: "Protaras - Ayianapa",
     description:
-      "Set sail for the ultimate sunset party with DJ Englezos & DJ MrUnknown — Open bar included.",
+      "Set sail for the ultimate sunset party with DJ Kritikos & DJ MrUnknown — Open bar included.",
     imageUrl: "/Content/yacth1.jpg",
     href: "/events/boat-party",
     badge: "Hot",

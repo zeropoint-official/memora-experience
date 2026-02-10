@@ -259,17 +259,13 @@ export function StudentTripsSection() {
           variants={itemVariants}
           className="mt-12 lg:mt-16 text-center"
         >
-          <Link href="/student-trips">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-8 py-4 text-lg font-semibold text-white shadow-xl shadow-emerald-500/25 transition-shadow hover:shadow-2xl hover:shadow-emerald-500/40"
-            >
-              <Sparkles className="h-5 w-5" />
-              <span>View All Student Trips</span>
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </motion.button>
-          </Link>
+          <motion.button
+            disabled
+            className="group inline-flex items-center gap-2 rounded-full bg-slate-300 px-8 py-4 text-lg font-semibold text-white cursor-not-allowed"
+          >
+            <Sparkles className="h-5 w-5" />
+            <span>Coming Soon</span>
+          </motion.button>
           <p className="mt-4 text-sm text-slate-500">
             Early bird discounts available • Group booking perks • Flexible payment plans
           </p>

@@ -33,13 +33,13 @@ const navigationCards = [
     gradient: "purple" as const,
   },
   {
-    badgeText: "Adventure Awaits",
+    badgeText: "Coming Soon",
     badgeColor: "#10B981", // Green
     title: "Student Trips",
     description:
       "Epic 3-day adventures designed for students. Create unforgettable memories with friends across stunning destinations.",
-    ctaText: "View trips",
-    ctaHref: "/student-trips",
+    ctaText: "Coming Soon",
+    ctaHref: "#",
     imageUrl:
       "https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=400&h=400&fit=crop",
     gradient: "green" as const,

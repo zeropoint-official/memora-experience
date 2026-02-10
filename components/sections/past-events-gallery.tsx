@@ -335,7 +335,7 @@ export function PastEventsGallery() {
               icon={Plane}
               iconColor="bg-gradient-to-br from-emerald-500 to-teal-500"
               events={studentTrips}
-              viewAllHref="/student-trips"
+              viewAllHref="#"
             />
           </motion.div>
 
