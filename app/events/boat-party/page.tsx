@@ -144,8 +144,8 @@ const timelineEvents = [
   },
   {
     time: "5:00 PM",
-    title: "Departure & DJ Kritikos",
-    description: "We set sail! DJ Kritikos kicks off the party with 1.5 hours of the best pop & house tracks as the sun starts to set.",
+    title: "Departure & DJ Truenoo",
+    description: "We set sail! DJ Truenoo kicks off the party with 1.5 hours of the best pop & house tracks as the sun starts to set.",
     icon: Music,
   },
   {
@@ -162,8 +162,8 @@ const timelineEvents = [
   },
   {
     time: "7:30 PM",
-    title: "DJ MrUnknown Takes Over",
-    description: "The energy goes up a notch as DJ MrUnknown brings the heat for the final stretch of the night.",
+    title: "DJ Viera Takes Over",
+    description: "The energy goes up a notch as DJ Viera brings the heat for the final stretch of the night.",
     icon: Music,
   },
   {
@@ -404,7 +404,7 @@ export default function BoatPartyPage() {
               {/* Inline features — simple text, no cards */}
               <div className="mt-8 space-y-4">
                 {[
-                  "Two DJ sets by Kritikos & MrUnknown",
+                  "Two DJ sets by Truenoo & Viera",
                   "Dance shows from talented performers",
                   "Professional photographers & drone coverage",
                   "Open bar & finger foods for everyone",
@@ -445,10 +445,10 @@ export default function BoatPartyPage() {
               Lineup
             </p>
             <div className="divide-y divide-slate-100">
-              {/* DJ Kritikos */}
+              {/* DJ Truenoo */}
               <div className="flex items-center justify-between py-5">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Kritikos</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Truenoo</h3>
                   <p className="text-sm text-slate-500 mt-0.5">Pop · House</p>
                 </div>
                 <div className="text-right">
@@ -467,10 +467,10 @@ export default function BoatPartyPage() {
                   <p className="text-xs text-slate-400 mt-0.5">Live dancers</p>
                 </div>
               </div>
-              {/* DJ MrUnknown */}
+              {/* DJ Viera */}
               <div className="flex items-center justify-between py-5">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">MrUnknown</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Viera</h3>
                   <p className="text-sm text-slate-500 mt-0.5">House · Deep House</p>
                 </div>
                 <div className="text-right">

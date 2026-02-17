@@ -45,7 +45,7 @@ const eventsData: Event[] = [
     date: "July 4, 2026",
     location: "Protaras - Ayianapa",
     description:
-      "Set sail for the ultimate sunset party with DJ Kritikos & DJ MrUnknown — Open bar included.",
+      "Set sail for the ultimate sunset party with DJ Truenoo & DJ Viera — Open bar included.",
     imageUrl: "/Content/yacth1.jpg",
     href: "/events/boat-party",
     badge: "Hot",
