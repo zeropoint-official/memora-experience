@@ -48,7 +48,7 @@ function useCountdown(targetDate: Date) {
 function FeaturedCard() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const eventDate = new Date("2026-10-03T10:00:00");
+  const eventDate = new Date("2026-10-10T10:00:00");
   const countdown = useCountdown(eventDate);
 
   return (
@@ -88,14 +88,14 @@ function FeaturedCard() {
 
             {/* Title */}
             <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-white tracking-tight mb-2 sm:mb-3">
-              Planitario 2025
+              Planitario 2026
             </h3>
 
             {/* Date & location */}
             <div className="flex items-center gap-4 text-[13px] text-white/60 mb-4 sm:mb-5">
               <span className="flex items-center gap-1.5">
                 <Calendar className="h-3.5 w-3.5" />
-                Oct 9-10, 2025
+                Oct 10-11, 2026
               </span>
               <span className="flex items-center gap-1.5">
                 <MapPin className="h-3.5 w-3.5" />

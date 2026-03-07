@@ -29,7 +29,7 @@ const eventsData: Event[] = [
     id: "planitario-2026",
     title: "Planetarium 2026",
     category: "special",
-    date: "October 9-10, 2025",
+    date: "October 10-11, 2026",
     location: "Nicosia, Cyprus",
     description:
       "The Ultimate Night Experience — Cyprus' most anticipated event returns with an unforgettable show.",

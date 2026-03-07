@@ -155,7 +155,7 @@ export function HeroV1Spotlight() {
                   </motion.div>
                   
                   <h3 className="text-3xl font-bold text-white sm:text-4xl">
-                    PLANITARIO 2025 (Oct 9-10)
+                    PLANITARIO 2026 (Oct 10-11)
                   </h3>
                   <p className="text-lg text-white/80">
                     The Ultimate Night Experience
@@ -164,7 +164,7 @@ export function HeroV1Spotlight() {
                   <div className="flex flex-wrap items-center gap-4 text-sm text-white/70">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-orange-400" />
-                      <span>October 9-10, 2025</span>
+                      <span>October 10-11, 2026</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-orange-400" />

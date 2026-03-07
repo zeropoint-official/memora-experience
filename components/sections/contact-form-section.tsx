@@ -206,7 +206,7 @@ export function ContactFormSection() {
                             >
                               <option value="">Any / All Events</option>
                               <option value="kratiki-ekthesi">Kratiki Ekthesi 2026</option>
-                              <option value="planitario">Planitario 2025</option>
+                              <option value="planitario">Planitario 2026</option>
                               <option value="summer-festival">Summer Festival 2026</option>
                             </select>
                           </div>

@@ -30,7 +30,7 @@ edit forms to be sponcor vendor specific - move on homepage
 
 
 
-Planetarium 3-4 October 10AM - 2AM / 10AM - 12AM
+Planetarium 10-11 October 10AM - 2AM / 10AM - 12AM
 
 Hero images desktop mode (Hero reimagination using heigsfield AI)
 

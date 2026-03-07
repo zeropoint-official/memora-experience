@@ -8,9 +8,9 @@ import { Sparkles, Calendar, ArrowRight } from "lucide-react";
 const upcomingEvents = [
   {
     id: 1,
-    name: "PLANITARIO 2025",
+    name: "PLANITARIO 2026",
     emoji: "🚀",
-    stats: "October 9-10 • Nicosia",
+    stats: "October 10-11 • Nicosia",
     description: "The Ultimate Night Experience",
     imageUrl: "/Content/planitatio/The Cyprus Planetarium 2025.jpg",
     href: "https://planetarium.memora-experience.com",
