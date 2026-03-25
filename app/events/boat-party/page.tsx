@@ -7,22 +7,16 @@ import {
   MapPin,
   Clock,
   ArrowRight,
-  Ticket,
   Users,
   Music,
   ChevronDown,
-  CreditCard,
   Anchor,
   Crown,
-  Mail,
   Phone,
-  User,
   CheckCircle,
-  X,
-  Lock,
-  Shield,
   UtensilsCrossed,
   PartyPopper,
+  ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -189,9 +183,9 @@ const faqData = [
       "The Normal ticket (€89) includes the full boat cruise, open bar with standard drinks (beer, wine, spirits, soft drinks & water), finger foods, DJ entertainment, and all shows and performances.",
   },
   {
-    question: "What's included in the VIP ticket?",
+    question: "How do I get the VIP experience?",
     answer:
-      "The VIP ticket (€125) includes everything in the Normal ticket PLUS a premium open bar (top-shelf spirits, champagne), your own dedicated service, a spot close to the DJ, VIP couch seating, and priority boarding.",
+      "First purchase a regular ticket, then call us at +357 96 751375 to reserve your VIP upgrade. VIP includes everything in the regular ticket plus a premium open bar (top-shelf spirits, champagne), your own dedicated service, a spot close to the DJ, VIP couch seating, and priority boarding. VIP spots are limited.",
   },
   {
     question: "Can I buy premium drinks with a Normal ticket?",
@@ -220,11 +214,6 @@ const faqData = [
 // ============================================
 export default function BoatPartyPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  const [selectedTicketType, setSelectedTicketType] = useState<{
-    type: string;
-    price: number;
-  } | null>(null);
 
   const heroRef = useRef(null);
   const infoRef = useRef(null);
@@ -615,106 +604,81 @@ export default function BoatPartyPage() {
               <span className="text-[#D4A574]">Tickets</span>
             </h2>
             <p className="mx-auto mb-10 max-w-2xl text-lg text-slate-600">
-              Both packages include the full boat cruise, DJ sets, dance shows, photographer & drone coverage, and finger foods.
+              Includes the full boat cruise, two DJ sets, dance shows, photographer & drone coverage, open bar, and finger foods.
             </p>
 
-            {/* Pricing Cards */}
-            <div className="mb-10 grid gap-5 sm:grid-cols-2">
-              {/* Normal Ticket */}
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                onClick={() => {
-                  setSelectedTicketType({ type: "Normal", price: 89 });
-                  setIsPaymentModalOpen(true);
-                }}
-                className="group rounded-2xl border border-slate-100 bg-white p-6 sm:p-8 text-left shadow-sm transition-all hover:shadow-lg hover:border-[#D4A574]/30"
+            {/* Ticket Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mx-auto max-w-lg rounded-2xl border border-slate-100 bg-white p-6 sm:p-8 text-left shadow-sm"
+            >
+              <p className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-2">
+                €89
+              </p>
+              <p className="text-sm text-slate-500 mb-6">per person</p>
+              <ul className="space-y-3 text-sm text-slate-600 mb-6">
+                {[
+                  "Standard open bar (beer, wine, spirits, soft drinks)",
+                  "Finger foods included",
+                  "Can purchase premium drinks on board",
+                  "Full DJ sets & dance shows",
+                  "Photographer & drone coverage",
+                  "5-hour sunset cruise",
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#D4A574]" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <button
+                disabled
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 py-3.5 text-sm font-semibold text-white opacity-80 cursor-not-allowed"
               >
-                <p className="text-sm font-medium text-slate-500 mb-1">Normal</p>
-                <p className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-2">
-                  €89
-                </p>
-                <p className="text-sm text-slate-500 mb-5">per person</p>
-                <ul className="space-y-3 text-sm text-slate-600 text-left">
-                  {[
-                    "Standard open bar (beer, wine, spirits, soft drinks)",
-                    "Finger foods included",
-                    "Can purchase premium drinks on board",
-                    "Full DJ sets & dance shows",
-                    "Photographer & drone coverage",
-                    "5-hour sunset cruise",
-                  ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#D4A574]" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-3 text-sm font-semibold text-white transition-colors group-hover:bg-[#D4A574]">
-                  Select Normal
-                  <ArrowRight className="h-4 w-4" />
-                </div>
-              </motion.button>
+                <ExternalLink className="h-4 w-4" />
+                Buy Tickets — Coming Soon
+              </button>
+              <p className="mt-2 text-center text-xs text-slate-400">
+                Online ticket sales opening soon
+              </p>
+            </motion.div>
 
-              {/* VIP Ticket */}
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                onClick={() => {
-                  setSelectedTicketType({ type: "VIP", price: 125 });
-                  setIsPaymentModalOpen(true);
-                }}
-                className="group relative rounded-2xl border-2 border-[#D4A574] bg-white p-6 sm:p-8 text-left shadow-sm transition-all hover:shadow-lg"
+            {/* VIP Upgrade Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isTicketsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="mx-auto mt-5 max-w-lg rounded-xl border border-[#D4A574]/20 bg-[#D4A574]/5 p-5 sm:p-6"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Crown className="h-4 w-4 text-[#D4A574]" />
+                <p className="text-sm font-semibold text-slate-900">Want the VIP experience?</p>
+              </div>
+              <p className="text-sm text-slate-600 mb-3">
+                Upgrade to VIP for premium open bar (top-shelf spirits, champagne), dedicated service, seating close to the DJ, VIP couch area, and priority boarding. First purchase a regular ticket, then call us to reserve your VIP spot.
+              </p>
+              <a
+                href="tel:+35796751375"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#D4A574] transition-colors hover:text-[#C8965F]"
               >
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#D4A574] px-3 py-1 text-xs font-semibold text-white flex items-center gap-1">
-                  <Crown className="h-3 w-3" />
-                  VIP
-                </span>
-                <p className="text-sm font-medium text-slate-500 mb-1">VIP</p>
-                <p className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-2">
-                  €125
-                </p>
-                <p className="text-sm text-slate-500 mb-5">per person</p>
-                <ul className="space-y-3 text-sm text-slate-600 text-left">
-                  {[
-                    "Premium open bar (top-shelf spirits, champagne)",
-                    "Finger foods included",
-                    "Your own dedicated service",
-                    "Spot close to the DJ",
-                    "VIP couch seating",
-                    "Priority boarding",
-                    "Full DJ sets & dance shows",
-                    "Photographer & drone coverage",
-                  ].map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircle className="h-4 w-4 mt-0.5 flex-shrink-0 text-[#D4A574]" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-[#D4A574] py-3 text-sm font-semibold text-white transition-colors group-hover:bg-[#C8965F]">
-                  Select VIP
-                  <ArrowRight className="h-4 w-4" />
-                </div>
-              </motion.button>
-            </div>
+                <Phone className="h-4 w-4" />
+                +357 96 751375
+              </a>
+              <p className="mt-1 text-xs text-slate-500">VIP spots are limited</p>
+            </motion.div>
 
             {/* Notes */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isTicketsInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap justify-center gap-6 text-sm text-slate-500"
+              className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-slate-500"
             >
               <span className="flex items-center gap-2">
                 <Users className="h-4 w-4" />
                 18+ Only
-              </span>
-              <span className="flex items-center gap-2">
-                <CreditCard className="h-4 w-4" />
-                Secure payment
               </span>
               <span className="flex items-center gap-2">
                 <Anchor className="h-4 w-4" />
@@ -802,710 +766,6 @@ export default function BoatPartyPage() {
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* PAYMENT MODAL */}
-      {/* ============================================ */}
-      <PaymentModal
-        isOpen={isPaymentModalOpen}
-        onClose={() => {
-          setIsPaymentModalOpen(false);
-          setSelectedTicketType(null);
-        }}
-        selectedTicketType={selectedTicketType}
-      />
     </main>
-  );
-}
-
-// ============================================
-// FLOATING LABEL INPUT COMPONENT
-// ============================================
-function FloatingInput({
-  label,
-  type = "text",
-  value,
-  onChange,
-  required = false,
-  icon: Icon,
-  maxLength,
-  className = "",
-}: {
-  label: string;
-  type?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  required?: boolean;
-  icon?: React.ElementType;
-  maxLength?: number;
-  pattern?: string;
-  className?: string;
-}) {
-  const [isFocused, setIsFocused] = useState(false);
-  const hasValue = value.length > 0;
-
-  return (
-    <div className={`relative ${className}`}>
-      <div className="relative">
-        {Icon && (
-          <Icon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors" />
-        )}
-        <input
-          type={type}
-          value={value}
-          onChange={onChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder=""
-          required={required}
-          maxLength={maxLength}
-          className={`w-full rounded-xl border bg-white px-4 text-slate-900 transition-all duration-200 ${
-            Icon ? "pl-12" : "pl-4"
-          } ${
-            isFocused || hasValue
-              ? "border-[#D4A574] shadow-sm pt-6 pb-2"
-              : "border-slate-200 hover:border-slate-300 py-4"
-          } focus:outline-none focus:ring-2 focus:ring-[#D4A574]/20`}
-        />
-        <label
-          className={`pointer-events-none absolute transition-all duration-200 ${
-            Icon ? "left-12" : "left-4"
-          } ${
-            isFocused || hasValue
-              ? "top-2 text-xs font-medium text-[#D4A574]"
-              : "top-1/2 -translate-y-1/2 text-slate-500"
-          }`}
-        >
-          {label}
-          {required && <span className="ml-1 text-[#D4A574]">*</span>}
-        </label>
-      </div>
-    </div>
-  );
-}
-
-// ============================================
-// ANIMATED QUANTITY SELECTOR
-// ============================================
-function QuantitySelector({
-  value,
-  onChange,
-  min = 1,
-  max = 10,
-}: {
-  value: number;
-  onChange: (value: number) => void;
-  min?: number;
-  max?: number;
-}) {
-  return (
-    <div className="flex items-center gap-3">
-      <button
-        onClick={() => onChange(Math.max(min, value - 1))}
-        disabled={value <= min}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:text-[#D4A574]"
-      >
-        <span className="text-xl font-bold">−</span>
-      </button>
-      <div className="flex h-12 w-16 items-center justify-center rounded-xl border border-[#D4A574]/30 bg-[#D4A574]/5">
-        <span className="text-2xl font-bold text-slate-900">{value}</span>
-      </div>
-      <button
-        onClick={() => onChange(Math.min(max, value + 1))}
-        disabled={value >= max}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:border-[#D4A574] hover:text-[#D4A574]"
-      >
-        <span className="text-xl font-bold">+</span>
-      </button>
-    </div>
-  );
-}
-
-// ============================================
-// PAYMENT MODAL COMPONENT
-// ============================================
-type TicketType = {
-  type: string;
-  price: number;
-  desc: string;
-  popular?: boolean;
-};
-
-function PaymentModal({
-  isOpen,
-  onClose,
-  selectedTicketType,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  selectedTicketType: { type: string; price: number } | null;
-}) {
-  const [quantity, setQuantity] = useState(1);
-  const [step, setStep] = useState<"ticket" | "details" | "payment" | "success">("ticket");
-  const [internalSelectedTicketType, setInternalSelectedTicketType] = useState<TicketType | null>(
-    selectedTicketType ? { ...selectedTicketType, desc: "", popular: false } : null
-  );
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    cardNumber: "",
-    cardName: "",
-    expiryDate: "",
-    cvv: "",
-  });
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<"card" | "paypal">("card");
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const ticketOptions: TicketType[] = [
-    { type: "Normal", price: 89, desc: "Standard open bar + finger foods" },
-    { type: "VIP", price: 125, desc: "Premium open bar + VIP perks", popular: true },
-  ];
-
-  useEffect(() => {
-    if (selectedTicketType) {
-      const matchingTicket = ticketOptions.find(t => t.type === selectedTicketType.type && t.price === selectedTicketType.price);
-      setInternalSelectedTicketType(matchingTicket || { ...selectedTicketType, desc: "", popular: false });
-      setStep("details");
-    }
-  }, [selectedTicketType]);
-
-  const currentTicket: TicketType = internalSelectedTicketType || ticketOptions[0];
-  const subtotal = currentTicket.price * quantity;
-  const serviceFee = 3.5;
-  const total = subtotal + serviceFee;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsProcessing(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsProcessing(false);
-    setStep("success");
-  };
-
-  const resetModal = () => {
-    setStep("ticket");
-    setQuantity(1);
-    setInternalSelectedTicketType(null);
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      cardNumber: "",
-      cardName: "",
-      expiryDate: "",
-      cvv: "",
-    });
-    onClose();
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={step === "success" ? resetModal : onClose}
-            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 100, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 100, scale: 0.95 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-white shadow-2xl"
-            >
-              {/* Header */}
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white px-4 py-4 sm:px-6">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4A574] shadow-sm">
-                    <Ticket className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-semibold text-slate-900">Purchase Tickets</h2>
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-1">
-                        {["ticket", "details", "payment"].map((s, i) => (
-                          <div
-                            key={s}
-                            className={`h-1.5 rounded-full transition-all ${
-                              step === s
-                                ? "w-6 bg-[#D4A574]"
-                                : i < ["ticket", "details", "payment"].indexOf(step)
-                                ? "w-1.5 bg-green-500"
-                                : "w-1.5 bg-slate-200"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <p className="text-xs text-slate-500">Boat Party 2026</p>
-                    </div>
-                  </div>
-                </div>
-                {step !== "success" && (
-                  <button
-                    onClick={onClose}
-                    className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                )}
-              </div>
-
-              {/* Content */}
-              <div className="p-4 sm:p-6">
-                {step === "ticket" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="space-y-6"
-                  >
-                    <div>
-                      <h3 className="mb-4 text-lg font-semibold text-slate-900">Select Package</h3>
-                      <div className="space-y-3">
-                        {ticketOptions.map((ticket, index) => (
-                          <button
-                            key={index}
-                            onClick={() => {
-                              setInternalSelectedTicketType(ticket);
-                              setTimeout(() => setStep("details"), 200);
-                            }}
-                            className={`relative w-full overflow-hidden rounded-2xl border p-5 text-left transition-all hover:shadow-md ${
-                              ticket.popular
-                                ? "border-[#D4A574] bg-[#D4A574]/5"
-                                : "border-slate-200 bg-white hover:border-[#D4A574]/50"
-                            }`}
-                          >
-                            <div className="flex items-start justify-between">
-                              <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-2">
-                                  <p className="text-lg font-semibold text-slate-900">{ticket.type}</p>
-                                  {ticket.popular && (
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-[#D4A574] px-2.5 py-1 text-xs font-semibold text-white">
-                                      <Crown className="h-3 w-3" />
-                                      VIP
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-sm text-slate-600">{ticket.desc}</p>
-                              </div>
-                              <div className="ml-4 text-right">
-                                <p className="text-3xl font-semibold text-slate-900">
-                                  €{ticket.price}
-                                </p>
-                                <p className="text-xs text-slate-500 mt-1">per person</p>
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {step === "details" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="space-y-6"
-                  >
-                    {/* Ticket Summary */}
-                    <div className="rounded-2xl border border-[#D4A574]/20 bg-[#D4A574]/5 p-5">
-                      <div className="mb-4 flex items-center justify-between">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <Ticket className="h-5 w-5 text-[#D4A574]" />
-                            <p className="text-lg font-semibold text-slate-900">{currentTicket.type}</p>
-                          </div>
-                          <p className="text-sm text-slate-600">{currentTicket.desc}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-2xl font-semibold text-slate-900">
-                            €{currentTicket.price}
-                          </p>
-                          <p className="text-xs text-slate-500">per person</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between rounded-xl border border-[#D4A574]/20 bg-white p-4">
-                        <div>
-                          <label className="block text-sm font-medium text-slate-700 mb-1">Quantity</label>
-                          <p className="text-xs text-slate-500">Select number of tickets</p>
-                        </div>
-                        <QuantitySelector value={quantity} onChange={setQuantity} />
-                      </div>
-                    </div>
-
-                    {/* Customer Details */}
-                    <div>
-                      <div className="mb-4 flex items-center gap-2">
-                        <User className="h-5 w-5 text-[#D4A574]" />
-                        <h3 className="text-lg font-semibold text-slate-900">Your Details</h3>
-                      </div>
-                      <div className="space-y-4">
-                        <FloatingInput
-                          label="Full Name"
-                          type="text"
-                          value={formData.fullName}
-                          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          required
-                          icon={User}
-                        />
-                        <FloatingInput
-                          label="Email Address"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          required
-                          icon={Mail}
-                        />
-                        <FloatingInput
-                          label="Phone Number"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          icon={Phone}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Order Summary */}
-                    <div className="rounded-xl border border-slate-100 bg-[#FAF8F5] p-4">
-                      <h4 className="mb-3 text-sm font-semibold text-slate-900">Order Summary</h4>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">
-                            {currentTicket.type} × {quantity}
-                          </span>
-                          <span className="font-medium text-slate-900">€{subtotal.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Service Fee</span>
-                          <span className="font-medium text-slate-900">€{serviceFee.toFixed(2)}</span>
-                        </div>
-                        <div className="border-t border-slate-200 pt-2 flex justify-between">
-                          <span className="font-semibold text-slate-900">Total</span>
-                          <span className="text-xl font-semibold text-slate-900">€{total.toFixed(2)}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => setStep("ticket")}
-                        className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
-                      >
-                        <ArrowRight className="h-4 w-4 rotate-180" />
-                        Back
-                      </button>
-                      <button
-                        onClick={() => setStep("payment")}
-                        disabled={!formData.fullName || !formData.email}
-                        className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#D4A574] px-4 py-3.5 font-semibold text-white transition-all hover:bg-[#C8965F] disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        Continue to Payment
-                        <ArrowRight className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-
-                {step === "payment" && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="space-y-6"
-                  >
-                    {/* Payment Method Selection */}
-                    <div>
-                      <div className="mb-4 flex items-center gap-2">
-                        <CreditCard className="h-5 w-5 text-[#D4A574]" />
-                        <h3 className="text-lg font-semibold text-slate-900">Payment Method</h3>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <button
-                          onClick={() => setSelectedPaymentMethod("card")}
-                          className={`relative rounded-xl border p-4 text-left transition-all ${
-                            selectedPaymentMethod === "card"
-                              ? "border-[#D4A574] bg-[#D4A574]/5"
-                              : "border-slate-200 bg-white hover:border-[#D4A574]/50"
-                          }`}
-                        >
-                          <CreditCard className={`mb-2 h-7 w-7 transition-colors ${
-                            selectedPaymentMethod === "card" ? "text-[#D4A574]" : "text-slate-400"
-                          }`} />
-                          <p className="text-sm font-semibold text-slate-900">Card</p>
-                          <p className="text-xs text-slate-500 mt-1">Visa, Mastercard</p>
-                          {selectedPaymentMethod === "card" && (
-                            <CheckCircle className="absolute right-2 top-2 h-5 w-5 text-green-500" />
-                          )}
-                        </button>
-                        <button
-                          onClick={() => setSelectedPaymentMethod("paypal")}
-                          className={`relative rounded-xl border p-4 text-left transition-all ${
-                            selectedPaymentMethod === "paypal"
-                              ? "border-[#D4A574] bg-[#D4A574]/5"
-                              : "border-slate-200 bg-white hover:border-[#D4A574]/50"
-                          }`}
-                        >
-                          <div className="mb-2 flex h-7 w-7 items-center justify-center rounded bg-blue-500">
-                            <span className="text-xs font-bold text-white">PP</span>
-                          </div>
-                          <p className="text-sm font-semibold text-slate-900">PayPal</p>
-                          <p className="text-xs text-slate-500 mt-1">Secure & Fast</p>
-                          {selectedPaymentMethod === "paypal" && (
-                            <CheckCircle className="absolute right-2 top-2 h-5 w-5 text-green-500" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    {selectedPaymentMethod === "card" && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="space-y-4"
-                      >
-                        {/* Card Preview */}
-                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 p-6 text-white shadow-xl">
-                          <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-white/5 blur-2xl" />
-                          <div className="relative">
-                            <div className="mb-6 flex items-center justify-between">
-                              <div className="text-2xl font-bold">MEMORA</div>
-                              <div className="h-8 w-12 rounded bg-[#D4A574]" />
-                            </div>
-                            <div className="mb-4 font-mono text-xl tracking-wider">
-                              {formData.cardNumber || "•••• •••• •••• ••••"}
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="text-xs text-white/50 mb-1">CARDHOLDER</p>
-                                <p className="text-sm font-medium uppercase">
-                                  {formData.cardName || "YOUR NAME"}
-                                </p>
-                              </div>
-                              <div>
-                                <p className="text-xs text-white/50 mb-1">EXPIRES</p>
-                                <p className="text-sm font-medium">{formData.expiryDate || "MM/YY"}</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <FloatingInput
-                          label="Card Number"
-                          type="text"
-                          value={formData.cardNumber}
-                          onChange={(e) => {
-                            const value = e.target.value.replace(/\s/g, "").replace(/\D/g, "");
-                            const formatted = value.match(/.{1,4}/g)?.join(" ") || value;
-                            setFormData({ ...formData, cardNumber: formatted });
-                          }}
-                          required
-                          icon={CreditCard}
-                          maxLength={19}
-                        />
-                        <FloatingInput
-                          label="Cardholder Name"
-                          type="text"
-                          value={formData.cardName}
-                          onChange={(e) => setFormData({ ...formData, cardName: e.target.value.toUpperCase() })}
-                          required
-                          icon={User}
-                        />
-                        <div className="grid grid-cols-2 gap-4">
-                          <FloatingInput
-                            label="Expiry Date"
-                            type="text"
-                            value={formData.expiryDate}
-                            onChange={(e) => {
-                              const value = e.target.value.replace(/\D/g, "");
-                              const formatted = value.length >= 2 ? `${value.slice(0, 2)}/${value.slice(2, 4)}` : value;
-                              setFormData({ ...formData, expiryDate: formatted });
-                            }}
-                            required
-                            maxLength={5}
-                            className="col-span-1"
-                          />
-                          <FloatingInput
-                            label="CVV"
-                            type="text"
-                            value={formData.cvv}
-                            onChange={(e) => {
-                              const value = e.target.value.replace(/\D/g, "").slice(0, 3);
-                              setFormData({ ...formData, cvv: value });
-                            }}
-                            required
-                            icon={Lock}
-                            maxLength={3}
-                            className="col-span-1"
-                          />
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {selectedPaymentMethod === "paypal" && (
-                      <div className="rounded-xl border border-slate-100 bg-[#FAF8F5] p-6 text-center">
-                        <p className="text-slate-600">You will be redirected to PayPal to complete your payment</p>
-                      </div>
-                    )}
-
-                    {/* Security Badge */}
-                    <div className="flex items-center justify-center gap-2 rounded-xl border border-green-200 bg-green-50 p-4">
-                      <Shield className="h-5 w-5 text-green-600" />
-                      <span className="text-sm font-medium text-slate-700">
-                        Secure payment encrypted with SSL
-                      </span>
-                      <Lock className="h-4 w-4 text-green-600" />
-                    </div>
-
-                    {/* Order Summary */}
-                    <div className="rounded-xl border border-slate-100 bg-[#FAF8F5] p-4">
-                      <h4 className="mb-3 text-sm font-semibold text-slate-900">Order Summary</h4>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">
-                            {currentTicket.type} × {quantity}
-                          </span>
-                          <span className="font-medium text-slate-900">€{subtotal.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Service Fee</span>
-                          <span className="font-medium text-slate-900">€{serviceFee.toFixed(2)}</span>
-                        </div>
-                        <div className="border-t border-slate-200 pt-2 flex justify-between">
-                          <span className="font-semibold text-slate-900">Total</span>
-                          <span className="text-xl font-semibold text-slate-900">€{total.toFixed(2)}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => setStep("details")}
-                        className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3.5 font-medium text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50"
-                      >
-                        <ArrowRight className="h-4 w-4 rotate-180" />
-                        Back
-                      </button>
-                      <form onSubmit={handleSubmit} className="flex-1">
-                        <button
-                          type="submit"
-                          disabled={
-                            isProcessing ||
-                            (selectedPaymentMethod === "card" &&
-                              (!formData.cardNumber || !formData.cardName || !formData.expiryDate || !formData.cvv))
-                          }
-                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#D4A574] px-4 py-3.5 font-semibold text-white transition-all hover:bg-[#C8965F] disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {isProcessing ? (
-                            <>
-                              <motion.div
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                                className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
-                              />
-                              <span>Processing...</span>
-                            </>
-                          ) : (
-                            <>
-                              <Lock className="h-4 w-4" />
-                              Pay €{total.toFixed(2)}
-                            </>
-                          )}
-                        </button>
-                      </form>
-                    </div>
-                  </motion.div>
-                )}
-
-                {step === "success" && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="py-8 text-center"
-                  >
-                    <div className="relative mx-auto mb-6 h-20 w-20">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.2, type: "spring", bounce: 0.5 }}
-                        className="absolute inset-0 flex items-center justify-center rounded-full bg-green-500 shadow-lg"
-                      >
-                        <CheckCircle className="h-10 w-10 text-white" />
-                      </motion.div>
-                    </div>
-
-                    <motion.h3
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="mb-3 text-xl md:text-2xl font-semibold text-slate-900"
-                    >
-                      You&apos;re Onboard! 🚢
-                    </motion.h3>
-                    <motion.p
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                      className="mb-6 text-slate-600"
-                    >
-                      Your tickets have been confirmed. A confirmation email has been sent to{" "}
-                      <span className="font-semibold text-[#D4A574]">{formData.email || "your email"}</span>
-                    </motion.p>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 }}
-                      className="mb-6 rounded-2xl border border-green-200 bg-green-50 p-5 text-left"
-                    >
-                      <div className="mb-4 flex items-center gap-2">
-                        <Ticket className="h-5 w-5 text-green-600" />
-                        <p className="font-semibold text-slate-900">Ticket Details</p>
-                      </div>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Event</span>
-                          <span className="font-medium text-slate-900">Ayia Napa Boat Party 2026</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Package</span>
-                          <span className="font-medium text-slate-900">{currentTicket.type}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Quantity</span>
-                          <span className="font-medium text-slate-900">{quantity}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Date</span>
-                          <span className="font-medium text-slate-900">July 4, 2026 · 5 PM</span>
-                        </div>
-                        <div className="flex justify-between border-t border-green-200 pt-2">
-                          <span className="text-slate-600">Order Number</span>
-                          <span className="font-mono font-semibold text-green-600">BP-{Date.now().toString().slice(-8)}</span>
-                        </div>
-                      </div>
-                    </motion.div>
-
-                    <button
-                      onClick={resetModal}
-                      className="w-full rounded-xl bg-[#D4A574] px-6 py-3.5 font-semibold text-white transition-all hover:bg-[#C8965F]"
-                    >
-                      Done
-                    </button>
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
   );
 }
