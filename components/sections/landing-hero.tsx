@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 
 import { TextRotate } from "@/components/ui/text-rotate";
+import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { useRef, useState, useEffect } from "react";
 
 // ============================================
@@ -109,6 +110,17 @@ function TicketButton({ className = "", size = "md" }: TicketButtonProps) {
   );
 }
 
+// ============================================
+// EVENT IMAGES for desktop parallax
+// ============================================
+const eventImages = [
+  { url: "/Content/planitatio/The Cyprus Planetarium 2025.jpg", alt: "Cyprus Planetarium" },
+  { url: "/Content/planitatio/Cyprus Planetarium Lobby.jpg", alt: "Planetarium Lobby" },
+  { url: "/Content/planitatio/Cyprus Planetarium Cosmonaut Astronaut.jpg", alt: "Cosmonaut Experience" },
+  { url: "/Content/yacth1.jpg", alt: "Boat Party" },
+  { url: "/Content/yacth4.jpg", alt: "Yacht Sunset" },
+  { url: "/Content/planitatio/image.png", alt: "Planitario Event" },
+];
 
 // ============================================
 // MOBILE HERO — video bg + clean white section
@@ -170,7 +182,7 @@ function MobileHero() {
           disableRemotePlayback
           className="absolute inset-0 h-full w-full object-cover pointer-events-none"
           style={{ objectFit: "cover" }}
-          src="/0326.mp4"
+          src="https://pub-aa0fd8d68b214268a209deacc9084bf2.r2.dev/0326.mp4"
         />
 
         {/* Dark overlay */}
@@ -265,55 +277,97 @@ function MobileHero() {
 }
 
 // ============================================
-// DESKTOP HERO — video bg
+// DESKTOP HERO — clean with parallax images
 // ============================================
 function DesktopHero() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.setAttribute("muted", "");
-    video.setAttribute("playsinline", "");
-    video.removeAttribute("controls");
-    video.controls = false;
-    const p = video.play();
-    if (p && typeof p.catch === "function") p.catch(() => {});
-  }, []);
-
   return (
-    <section className="relative hidden md:block min-h-screen w-full overflow-hidden">
-      {/* Video background */}
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster="/Content/planitatio/The Cyprus Planetarium 2025.jpg"
-        controls={false}
-        disablePictureInPicture
-        disableRemotePlayback
-        className="absolute inset-0 h-full w-full object-cover pointer-events-none"
-        style={{ objectFit: "cover" }}
-        src="/0326.mp4"
-      />
+    <section className="relative hidden md:block min-h-screen w-full overflow-x-hidden overflow-y-visible bg-[#FAF8F5] pt-20">
+      {/* Single subtle warm glow */}
+      <div className="absolute left-1/2 top-1/3 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-[#E8C9A0]/15 blur-[140px] pointer-events-none" />
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+      {/* Parallax floating images */}
+      <Floating sensitivity={-0.5} className="h-full z-10">
+        {/* Top left — small */}
+        <FloatingElement depth={0.5} className="top-[26%] left-[5%]">
+          <motion.img
+            src={eventImages[0].url}
+            alt={eventImages[0].alt}
+            className="w-28 h-28 object-cover rounded-2xl shadow-lg shadow-slate-200/60 hover:scale-105 transition-transform duration-300 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          />
+        </FloatingElement>
+
+        {/* Top left — larger */}
+        <FloatingElement depth={1} className="top-[12%] left-[12%]">
+          <motion.img
+            src={eventImages[1].url}
+            alt={eventImages[1].alt}
+            className="w-52 h-40 object-cover rounded-2xl shadow-lg shadow-slate-200/60 hover:scale-105 transition-transform duration-300 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+          />
+        </FloatingElement>
+
+        {/* Bottom left — large */}
+        <FloatingElement depth={2} className="top-[68%] left-[6%]">
+          <motion.img
+            src={eventImages[2].url}
+            alt={eventImages[2].alt}
+            className="w-56 h-56 object-cover rounded-2xl shadow-lg shadow-slate-200/60 hover:scale-105 transition-transform duration-300 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+          />
+        </FloatingElement>
+
+        {/* Top right */}
+        <FloatingElement depth={1.5} className="top-[10%] left-[78%]">
+          <motion.img
+            src={eventImages[3].url}
+            alt={eventImages[3].alt}
+            className="w-56 h-44 object-cover rounded-2xl shadow-lg shadow-slate-200/60 hover:scale-105 transition-transform duration-300 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.1 }}
+          />
+        </FloatingElement>
+
+        {/* Right middle — small */}
+        <FloatingElement depth={0.8} className="top-[44%] left-[88%]">
+          <motion.img
+            src={eventImages[4].url}
+            alt={eventImages[4].alt}
+            className="w-32 h-32 object-cover rounded-2xl shadow-lg shadow-slate-200/60 hover:scale-105 transition-transform duration-300 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.3 }}
+          />
+        </FloatingElement>
+
+        {/* Bottom right — large */}
+        <FloatingElement depth={1.2} className="top-[65%] left-[75%]">
+          <motion.img
+            src={eventImages[5].url}
+            alt={eventImages[5].alt}
+            className="w-64 h-64 object-cover rounded-2xl shadow-lg shadow-slate-200/60 hover:scale-105 transition-transform duration-300 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+          />
+        </FloatingElement>
+      </Floating>
 
       {/* Main content */}
-      <div className="relative z-20 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+      <div className="relative z-20 mx-auto flex min-h-screen max-w-4xl flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pointer-events-none pt-20">
         {/* Small label */}
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-[#E8C9A0]"
+          className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-[#D4A574] pointer-events-auto"
         >
           Cyprus Event Experiences
         </motion.p>
@@ -327,12 +381,12 @@ function DesktopHero() {
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1]">
             <span className="flex w-full items-baseline justify-center whitespace-nowrap translate-x-1">
-              <span className="shrink-0 text-white/90">Create&nbsp;</span>
+              <span className="shrink-0 text-slate-900">Create&nbsp;</span>
               <span className="inline-flex min-w-[10ch] items-baseline justify-start overflow-visible pb-1">
                 <TextRotate
                   texts={["Legendary", "Memorable", "Spectacular", "Fantastic"]}
                   mainClassName="inline-flex items-baseline justify-start whitespace-nowrap [&>div]:pb-2 [&>div]:overflow-visible"
-                  elementLevelClassName="text-[#E8C9A0]"
+                  elementLevelClassName="text-[#C8965F]"
                   staggerDuration={0.03}
                   staggerFrom="last"
                   rotationInterval={2500}
@@ -341,14 +395,14 @@ function DesktopHero() {
               </span>
             </span>
           </h1>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] text-white/90 mt-1">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] text-slate-900 mt-1">
             Moments
           </h1>
         </motion.div>
 
         {/* Subtitle */}
         <motion.p
-          className="mt-7 max-w-lg text-center text-base lg:text-lg text-white/60 leading-relaxed"
+          className="mt-7 max-w-lg text-center text-base lg:text-lg text-slate-500 leading-relaxed"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -358,13 +412,13 @@ function DesktopHero() {
         </motion.p>
 
         {/* Next Event */}
-        <div className="mt-6">
-          <NextEvent variant="dark" />
+        <div className="mt-6 pointer-events-auto">
+          <NextEvent variant="light" />
         </div>
 
         {/* CTA */}
         <motion.div
-          className="mt-10 flex flex-col items-center gap-4"
+          className="mt-10 flex flex-col items-center gap-4 pointer-events-auto"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -375,16 +429,16 @@ function DesktopHero() {
           </a>
 
           <a href="/business" className="group mt-2 flex items-center gap-1.5">
-            <span className="text-sm font-medium text-white/50 transition-colors group-hover:text-white/80">
+            <span className="text-sm font-medium text-slate-400 transition-colors group-hover:text-[#D4A574]">
               Business with us
             </span>
-            <ArrowUpRight className="h-3.5 w-3.5 text-white/30 transition-colors group-hover:text-white/60" />
+            <ArrowUpRight className="h-3.5 w-3.5 text-slate-300 transition-colors group-hover:text-[#D4A574]" />
           </a>
         </motion.div>
 
         {/* Stats — inline, minimal */}
         <motion.div
-          className="mt-16"
+          className="mt-16 pointer-events-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
@@ -397,17 +451,20 @@ function DesktopHero() {
             ].map((stat, i, arr) => (
               <div key={stat.label} className="flex items-center gap-10">
                 <div className="text-center">
-                  <p className="text-2xl font-semibold text-white">{stat.value}</p>
-                  <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-white/40 mt-1">
+                  <p className="text-2xl font-semibold text-slate-900">{stat.value}</p>
+                  <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-slate-400 mt-1">
                     {stat.label}
                   </p>
                 </div>
-                {i < arr.length - 1 && <div className="h-8 w-px bg-white/20" />}
+                {i < arr.length - 1 && <div className="h-8 w-px bg-slate-200" />}
               </div>
             ))}
           </div>
         </motion.div>
       </div>
+
+      {/* Bottom fade to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF8F5] to-transparent z-30 pointer-events-none" />
     </section>
   );
 }
