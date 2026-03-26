@@ -136,14 +136,39 @@ function MobileHero() {
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
-    const p = video.play();
-    if (p && typeof p.catch === "function") p.catch(() => {});
+    video.setAttribute("x5-playsinline", "");
+    video.setAttribute("x5-video-player-type", "h5");
+    video.removeAttribute("controls");
+    video.controls = false;
+
+    const tryPlay = () => {
+      const p = video.play();
+      if (p && typeof p.catch === "function") {
+        p.catch(() => {
+          // Retry on user interaction if autoplay blocked
+          const handler = () => {
+            video.play().catch(() => {});
+            document.removeEventListener("touchstart", handler);
+            document.removeEventListener("click", handler);
+          };
+          document.addEventListener("touchstart", handler, { once: true });
+          document.addEventListener("click", handler, { once: true });
+        });
+      }
+    };
+
+    if (video.readyState >= 2) {
+      tryPlay();
+    } else {
+      video.addEventListener("loadeddata", tryPlay, { once: true });
+    }
   }, []);
 
   return (
     <section className="relative w-full overflow-hidden md:hidden">
       {/* ——— VIDEO HERO ——— */}
       <div className="relative min-h-[88svh] w-full overflow-hidden">
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           ref={videoRef}
           autoPlay
@@ -155,13 +180,10 @@ function MobileHero() {
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover pointer-events-none"
           style={{ objectFit: "cover" }}
-        >
-          <source src="/backround-video.webm" type="video/webm" />
-          <source src="/background-video.webm" type="video/webm" />
-          <source src="/bg-video.mp4" type="video/mp4" />
-        </video>
+          src="https://pub-aa0fd8d68b214268a209deacc9084bf2.r2.dev/0326.mp4"
+        />
 
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
